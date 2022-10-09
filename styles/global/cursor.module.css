@@ -1,0 +1,73 @@
+@keyframes awesomeCursor {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(3);
+    }
+    100% {
+      transform: scale(1);
+    }
+}
+@keyframes awesomeRound {
+    0% {
+      transform: scale(1);
+      background: inherit;
+    }
+    50% {
+      transform: scale(3);
+      background: white;
+    }
+    100% {
+      transform: scale(1);
+      background: inherit;
+    }
+}
+
+
+.funCursor {
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    animation: awesomeCursor 1s infinite;
+    z-index: 999;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+.round, .roundB {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  pointer-events: none;
+  z-index: -1;
+  background: white;
+  animation: awesomeRound 1s infinite;
+}
+.round {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.roundB {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+.round::after, .roundB::after {
+  position: absolute;
+  width: 25%;
+  height: 25%;
+  background: white;
+  border-radius: 100%;
+  content: "";
+  animation: awesomeRound 1s 0.5s infinite;
+}
+
+@media (max-width: 768px) {
+  .funCursor {
+    display: none;
+  }
+}

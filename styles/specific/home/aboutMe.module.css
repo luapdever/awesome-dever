@@ -1,0 +1,51 @@
+.aboutMe {
+    margin-top: 150px;
+    position: relative;
+    /* height: 100vh; */
+}
+
+.aboutMe>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: #111111;
+    position: sticky;   
+    top: 0;
+}
+.aboutMe>div:nth-child(1) {
+    flex-direction: column;
+    background: url("../../../src/assets/img/icons/DEVER.svg") fixed no-repeat center,
+        rgba(0, 0, 0, 0.93);
+    background-blend-mode: darken;
+}
+.aboutMe>div:nth-child(1)>h1 {
+    height: calc(100% - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.aboutMe>div:nth-child(1)>div {
+    height: 100px;
+    text-align: center;
+    position: relative;
+    bottom: 30px;
+}
+.aboutMe .presentation {
+    background-image: radial-gradient(circle, #110068, #0d1137);
+}
+.aboutMe .formation {
+    background-image: radial-gradient(circle, #077b8a, #00515c);
+}
+.aboutMe .skills {
+    /* left: -100%; */
+    background-image: radial-gradient(circle, #2b0b30, #320d38);
+}
+.aboutMe .experiences {
+    /* bottom: 100%; */
+    background-image: radial-gradient(circle, #110068, #0d1137);
+}
+.aboutMe .spare {
+    background-image: radial-gradient(circle, #0d1137, #000000);
+}

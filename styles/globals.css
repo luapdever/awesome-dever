@@ -1,0 +1,220 @@
+:root {
+  --color-primary: #110068;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Gemunu Libre";
+  font-size: 1.1em;
+  scroll-behavior: smooth;
+}
+
+html {
+  cursor: url(../src/assets/img/icons/cursor2.png) 12 12, auto;
+}
+
+body {
+  color: white;
+  background: url("../src//assets/img/awesome/laravel_vue.svg") fixed no-repeat
+      center,
+    var(--color-primary);
+  background-blend-mode: darken;
+  overflow-x: hidden;
+}
+
+a, .link {
+  color: inherit;
+  text-decoration: none;
+  cursor: url(../src/assets/img/icons/cursor-link.png) 12 12, auto;
+}
+.link:hover {
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: awesomeButton 0.5s infinite;
+}
+
+.link:hover::before, .link:hover::after {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  content: "";
+  transform-origin: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  animation: awesomeButton 0.5s infinite;
+}
+.link:hover::before {
+  top: 0;
+  right: 0;
+}
+.link:hover::after {
+  top: 10px;
+  right: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.code {
+  background: #fafafa;
+  border-radius: 5px;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+/*============ Containers  =================================================================*/
+
+.container {
+  margin: 2rem 0;
+}
+
+.main {
+  min-height: calc(100vh - 100px);
+  padding: 4rem 2%;
+}
+
+.grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 800px;
+}
+
+.card {
+  margin: 1rem;
+  padding: 1.5rem;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  max-width: 300px;
+}
+
+.card:hover,
+.card:focus,
+.card:active {
+  color: #0070f3;
+  border-color: #0070f3;
+}
+
+.card h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.card p {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+/* .logo {
+  height: 1em;
+  margin-left: 0.5rem;
+} */
+/*============ Buttons  =================================================================*/
+
+button, .button {
+  border: 1px solid white;
+  color: white;
+  background: none;
+  padding: 15px 18px;
+  cursor: url(../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button:hover, .button:hover {
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: awesomeButton 0.5s infinite;
+}
+
+button:hover::before, button:hover::after, .button:hover::before, .button:hover::after {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  content: "";
+  transform-origin: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  animation: awesomeButton 0.5s infinite;
+}
+button:hover::before, .button:hover::before {
+  top: 0;
+  right: 0;
+}
+button:hover::after, .button:hover::after {
+  top: 10px;
+  right: 10px;
+}
+
+/*============ Custom Styles  =================================================================*/
+
+.img-responsive {
+  width: 100%;
+  height: auto;
+}
+
+/*============ Custom Scrollbar =================================================================*/
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+	background: #555;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #110068;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 10px 0;
+  }
+}
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+  .card,
+  .footer {
+    border-color: #222;
+  }
+  .code {
+    background: #111;
+  }
+  .logo img {
+    filter: invert(1);
+  }
+}
