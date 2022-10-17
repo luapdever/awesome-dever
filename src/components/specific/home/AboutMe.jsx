@@ -4,6 +4,10 @@ import { FaChevronDown } from "react-icons/fa";
 import gsap from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Presentation from "./about/Presentation";
+import Formations from "./about/Formations";
+import Skills from "./about/Skills";
+import SpareTime from "./about/SpareTime";
+import Link from "next/link";
 
 function AboutMe() {
   const awContainer = useRef();
@@ -13,6 +17,7 @@ function AboutMe() {
   const skills = useRef();
   const experiences = useRef();
   const spare = useRef();
+  const bigFooter = useRef();
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -36,15 +41,25 @@ function AboutMe() {
       },
     });
     
-    gsap.to(experiences.current, {
-      xPercent: -100,
+    gsap.to(formation.current, {
+      opacity: 0,
       scrollTrigger: {
-        trigger: experiences.current,
-        start: "300px top",
-        scrub: 2,
-        snap: [0, 0.8]
+        trigger: bigFooter.current,
+        start: "top center",
+        end: "bottom bottom",
+        scrub: true,
       },
     });
+    
+    // gsap.to(skills.current, {
+    //   xPercent: -100,
+    //   scrollTrigger: {
+    //     trigger: skills.current,
+    //     start: "100px top",
+    //     scrub: 2,
+    //     snap: [0, 0.8]
+    //   },
+    // });
   }, []);
 
   return (
@@ -62,15 +77,18 @@ function AboutMe() {
       </div>
       <div ref={formation} className={styles.formation}>
         <h1>Formations</h1>
+        <Formations />
       </div>
       <div ref={skills} className={styles.skills}>
-        <h1>Skills</h1>
-      </div>
-      <div ref={experiences} className={styles.experiences}>
-        <h1>Experiences</h1>
+        <Skills />
       </div>
       <div ref={spare} className={styles.spare}>
-        <h1>Spare time 🏄</h1>
+        <SpareTime />
+      </div>
+      <div ref={bigFooter} className={styles.bigFooter}>
+        <Link href={"/my-portfolio"}>
+          <button className={styles.bigBtn}>See my portfolio</button>
+        </Link>
       </div>
     </div>
   );

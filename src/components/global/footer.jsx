@@ -7,16 +7,12 @@ function TheFooter() {
   return (
     <>
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={"logo"}>
-            <Image src={dever} alt="Dever logo" width={100} height={16} />
-          </span>
-        </a>
+        <div>
+          Social medias
+        </div>
+        <div>
+          &copy; Copyright 2022
+        </div>
       </footer>
     </>
   );

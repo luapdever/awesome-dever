@@ -35,6 +35,7 @@ function PartOverview() {
             <a
               href="https://three.luap-dever.me"
               target={"_blank"}
+              rel="noreferrer"
             >
               3D View
             </a>
@@ -49,6 +50,7 @@ function PartOverview() {
 										key={"Skill "+index}
 										href={"https://www.google.com/search?q="+skill.search}
 										target={"_blank"}
+                    rel="noreferrer"
 									>
 										{skill.label}
 									</a>

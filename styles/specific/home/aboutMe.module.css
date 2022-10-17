@@ -1,6 +1,7 @@
 .aboutMe {
+    width: 100%;
     margin-top: 150px;
-    position: relative;
+    /* overflow-x: hidden; */
     /* height: 100vh; */
 }
 
@@ -34,18 +35,47 @@
 }
 .aboutMe .presentation {
     background-image: radial-gradient(circle, #110068, #0d1137);
+    z-index: 4;
 }
 .aboutMe .formation {
+    flex-direction: column;
+    gap: 50px;
+    padding: 5%;
     background-image: radial-gradient(circle, #077b8a, #00515c);
+    z-index: 5;
 }
 .aboutMe .skills {
     /* left: -100%; */
     background-image: radial-gradient(circle, #2b0b30, #320d38);
+    z-index: 6;
 }
-.aboutMe .experiences {
-    /* bottom: 100%; */
+/* .aboutMe .experiences {
     background-image: radial-gradient(circle, #110068, #0d1137);
-}
+    z-index: 7;
+} */
 .aboutMe .spare {
     background-image: radial-gradient(circle, #0d1137, #000000);
+    z-index: 8;
+}
+.aboutMe .bigFooter {
+    background-image: radial-gradient(circle, #110068, #0d1137);
+    z-index: 9;
+    height: 50vh;
+}
+
+
+.bigBtn {
+    width: 40%;
+    height: 80px;
+    font-size: 1.2em;
+}
+
+@media (max-width: 993px) {
+    .aboutMe {
+        width: 100%;
+        overflow-x: hidden;
+    }
+    .bigBtn {
+        width: 80%;
+    }
 }

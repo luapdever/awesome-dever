@@ -16,7 +16,7 @@
     padding: 30px 2%;
     background-color: rgba(0, 0, 0, .5);
     border-right: 10px solid white;
-    z-index: 999;
+    z-index: 99999;
     transition: 
         background-color 2s cubic-bezier(.11,1.6,.66,0),
         border-right 2s cubic-bezier(.11,1.6,.66,0),

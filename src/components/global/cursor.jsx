@@ -11,6 +11,8 @@ function Cursor({ props }) {
   useEffect(() => {
 		window.addEventListener("mousemove", handleCursor)
 
+		// window.addEventListener("contextmenu", e => e.preventDefault());
+
 		return () => {
 			window.removeEventListener("mousemove", handleCursor)
 		}

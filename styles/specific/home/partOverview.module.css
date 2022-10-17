@@ -110,7 +110,11 @@
     transform-origin: 50% 0;
     transition: all 1s ease-in-out;
 }
+.partOverview>section div img.imgLeft {
+    filter: blur(4px) grayscale(60%);
+}
 .partOverview>section div img.imgLeft:hover {
+    filter: none;
     transform: translateY(-150px);
 }
 .partOverview>section div img.imgRight {
@@ -138,6 +142,9 @@
     }
     .partOverview>section:nth-child(2) .partLink {
         max-width: 100%;
+    }
+    .partOverview>section:nth-child(1) .partLink {
+        justify-content: center;
     }
     .partOverview>section .partImg {
         width: 100%;

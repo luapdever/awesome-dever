@@ -1,17 +1,13 @@
 .footer {
   display: flex;
-  flex: 1;
   padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
+  border-top: 1px solid #000000;
+  justify-content: space-evenly;
   align-items: center;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
+  background-color: #111;
+  /* position: absolute;
+  bottom: 0; */
+  z-index: 9999999;
 }
 
 @media (prefers-color-scheme: dark) {
