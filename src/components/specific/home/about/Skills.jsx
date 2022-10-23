@@ -5,21 +5,27 @@ import gsap from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { listSkills } from "../../../../rawDatas/aboutMe";
 
+
 function Skills() {
   const imgSk = useRef();
   const skillBox = useRef();
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    if (typeof window !== "undefined") {
+      gsap.registerPlugin(ScrollTrigger);
+    }
+    const ctx = gsap.context(() => {
+      gsap.to(imgSk.current, {
+        objectPosition: "100% 0",
+        scrollTrigger: {
+          trigger: imgSk.current,
+          start: "top center",
+          scrub: 2,
+        },
+      });
+    })
 
-    gsap.to(imgSk.current, {
-      objectPosition: "100% 0",
-      scrollTrigger: {
-        trigger: imgSk.current,
-        start: "top center",
-        scrub: 2,
-      },
-    });
+    return () => ctx.revert();
   }, []);
 
   return (

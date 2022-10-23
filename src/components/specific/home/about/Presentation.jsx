@@ -6,35 +6,55 @@ import luap from "../../../../assets/img/awesome/luap.jpg";
 import luap2 from "../../../../assets/img/awesome/luap2.jpg";
 import { me, socialMedias } from "../../../../rawDatas/aboutMe";
 
+
 function Presentation() {
   const imgLeft = useRef();
   const imgRight = useRef();
+  const mediaSocials = useRef();
+  const presBlock = useRef();
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    if (typeof window !== "undefined") {
+      gsap.registerPlugin(ScrollTrigger);
+    }
+    
+    const ctx = gsap.context(() => {
+      gsap.to(imgLeft.current, {
+        rotate: -30,
+        scrollTrigger: {
+          trigger: imgLeft.current,
+          start: "top 800",
+          scrub: 2
+        },
+      });
+  
+      gsap.to(imgRight.current, {
+        rotate: 30,
+        scrollTrigger: {
+          trigger: imgLeft.current,
+          start: "top 500",
+          scrub: 2
+        },
+      });
+      
+      gsap.from(".fromRight", {
+        x: 80,
+        opacity: 0,
+        scrollTrigger: {
+          trigger: presBlock.current,
+          start: "top center",
+          end: "bottom bottom",
+          scrub: 2
+        },
+      });
+    })
 
-    gsap.to(imgLeft.current, {
-      rotate: -30,
-      scrollTrigger: {
-        trigger: imgLeft.current,
-        start: "top 800px",
-        scrub: 2
-      },
-    });
-
-    gsap.to(imgRight.current, {
-      rotate: 30,
-      scrollTrigger: {
-        trigger: imgLeft.current,
-        start: "top 500px",
-        scrub: 2
-      },
-    });
+    return () => ctx.revert();
 		
   }, []);
 
   return (
-    <div className={styles.present}>
+    <div ref={presBlock} className={styles.present}>
       <div className={styles.imgLuap}>
         <img
           ref={imgLeft}
@@ -49,11 +69,11 @@ function Presentation() {
           alt={"Paul M. ZANNOU IMG 2"}
         />
       </div>
-      <div>
-        <h1>{me.fullName}</h1>
+      <div className="fromRight">
+        <h1 className="fromRight">{me.fullName}</h1>
         <div>
           {me.aboutMe}
-          <p className={styles.mediaSocials}>
+          <p ref={mediaSocials} className={styles.mediaSocials+" fromRight"}>
             {socialMedias.map((social, index) => (
               <a key={"Social "+index} href={social.link} target="_blank" rel="noreferrer">
                 <button>{social.icon}</button>

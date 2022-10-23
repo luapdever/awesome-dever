@@ -10,7 +10,6 @@ import gsap from 'gsap'
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Cursor from "../src/components/global/cursor";
 
-gsap.registerPlugin(ScrollTrigger)
 
 function MyApp({ Component, pageProps }) {
   return (

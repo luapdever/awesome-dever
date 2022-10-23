@@ -83,6 +83,10 @@ a, .link {
     Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
+.text-primary {
+  color: var(--color-primary);
+}
+
 /*============ Containers  =================================================================*/
 
 .container {
@@ -194,7 +198,7 @@ button:hover::after, .button:hover::after {
 .moveIt {
   animation: awesomeButton 2s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.transY {
+.translateY {
   animation: transY 2s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 

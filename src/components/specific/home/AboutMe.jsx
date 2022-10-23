@@ -20,46 +20,42 @@ function AboutMe() {
   const bigFooter = useRef();
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.to(presentation.current, {
-      xPercent: 100,
-      scrollTrigger: {
-        trigger: presentation.current,
-        start: "100px top",
-        scrub: 2
-      },
-    });
+    if (typeof window !== "undefined") {
+      gsap.registerPlugin(ScrollTrigger);
+    }
     
-    gsap.to(formation.current, {
-      yPercent: 100,
-      scrollTrigger: {
-        trigger: formation.current,
-        start: "300px top",
-        scrub: 2,
-        snap: [0, 0.85]
-      },
+    const ctx = gsap.context(() => {
+  
+      gsap.to(presentation.current, {
+        xPercent: 100,
+        scrollTrigger: {
+          trigger: presentation.current,
+          start: "100 top",
+          scrub: 2
+        },
+      });
+      
+      gsap.to(formation.current, {
+        yPercent: 100,
+        scrollTrigger: {
+          trigger: formation.current,
+          start: "300 top",
+          scrub: 2,
+          snap: [0, 0.85]
+        },
+      });
+      
+      gsap.to(formation.current, {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: bigFooter.current,
+          start: "top center",
+          end: "bottom bottom",
+          scrub: true,
+        },
+      });
     });
-    
-    gsap.to(formation.current, {
-      opacity: 0,
-      scrollTrigger: {
-        trigger: bigFooter.current,
-        start: "top center",
-        end: "bottom bottom",
-        scrub: true,
-      },
-    });
-    
-    // gsap.to(skills.current, {
-    //   xPercent: -100,
-    //   scrollTrigger: {
-    //     trigger: skills.current,
-    //     start: "100px top",
-    //     scrub: 2,
-    //     snap: [0, 0.8]
-    //   },
-    // });
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -69,7 +65,9 @@ function AboutMe() {
         <div>
           Scroll down
           <br />
-          <FaChevronDown />
+          <div className="translateY">
+            <FaChevronDown />
+          </div>
         </div>
       </div>
       <div ref={presentation} className={styles.presentation}>

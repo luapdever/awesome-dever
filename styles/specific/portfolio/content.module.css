@@ -1,0 +1,186 @@
+@keyframes rToL {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.contentBlk {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+}
+.contentBlk>section {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.contentBlk .welcomeScreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    background-color: white;
+    color: black;
+    font-size: 2rem;
+    z-index: 30;
+}
+.contentBlk .welcomeScreen>img {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.contentBlk .welcomeScreen>img, .contentBlk .welcomeScreen>h2 {
+    animation: rToL 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.contentBlk .desktop {
+    background: url(../../../src//assets/img/awesome/realisations/minimalist.jpg) no-repeat;
+    padding: 10px;
+}
+.contentBlk .desktop .performances {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.contentBlk .desktop .performances>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100px;
+    overflow: hidden;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.contentBlk .desktop .performances>div:hover {
+    overflow: visible;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.contentBlk .desktop .performances>div:hover>span {
+    white-space: inherit;
+}
+.contentBlk .desktop .performances>div>img {
+    background-color: white;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+.contentBlk .desktop .performances>div>span {
+    text-shadow: 0px 0px 5px black;
+    text-align: center;
+    width: 80px;
+    word-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.contentBlk .windows>div {
+    width: 50%;
+    height: 60%;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.7);
+    animation: fadeIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.contentBlk .windows>div .windHeader {
+    height: 45px;
+    background-color: #222;
+    color: white;
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.contentBlk .windows>div .windHeader>.windActions {
+    display: flex;
+    gap: 5px;
+}
+.contentBlk .windows>div .windHeader>.windActions>svg {
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    padding: 4px;
+    border-radius: 100%;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.contentBlk .windows>div .windHeader>.windActions>svg:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.contentBlk .windows>div .windHeader>.windLabel {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.contentBlk .windows>div .windContent {
+    padding: 1px;
+    height: calc(100% - 45px);
+    user-select: text;
+}
+
+.contentBlk .taskbar {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 80%;
+    height: 50px;
+    background-color: #000000aa;
+    /* border: 1px solid #000000; */
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 5px;
+    overflow: auto;
+}
+.contentBlk .taskbar .task {
+    width: 45px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    padding: 5px;
+    transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.contentBlk .taskbar .task:hover {
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.contentBlk .taskbar .task.fake {
+    cursor: none;
+}
+.contentBlk .taskbar .task.active {
+    border-bottom: 2px solid white;
+}
+.contentBlk .taskbar .task>img {
+    background-color: white;
+    padding: 2px;
+    border-radius: 5px;
+}
