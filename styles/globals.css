@@ -6,8 +6,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Gemunu Libre";
-  font-size: 1.1em;
+  font-family: "Dosis";
+  letter-spacing: 1px;
   scroll-behavior: smooth;
 }
 
@@ -158,6 +158,7 @@ button, .button {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Dosis";
 }
 button:hover, .button:hover {
   background-color: white;
@@ -252,7 +253,6 @@ button:hover::after, .button:hover::after {
     color: white;
     background: black;
   }
-  .card,
   .footer {
     border-color: #222;
   }

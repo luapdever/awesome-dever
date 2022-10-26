@@ -1,15 +1,19 @@
 .welcomeContent {
-    height: 100%;
+    min-height: 100%;
+    background: url(../../../../src/assets/img/awesome/luap-thinking.png) no-repeat center, #000000ef;
+    background-blend-mode: darken;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .welcomeContent>h1 {
     text-align: center;
     padding: 0 15px;
+    margin: 20px 0 0 0;
 }
 .welcomeContent>div {
-    background-color: #111;
-    color: white;
-    min-height: 100%;
-    padding: 30px;
+    padding: 10px 30px;
     text-align: left;
 }
 

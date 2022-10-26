@@ -67,7 +67,7 @@
 }
 .appStore .appList>div {
     display: flex;
-    gap: 20px;
+    gap: 40px;
     justify-content: space-evenly;
     align-items: center;
 }
@@ -102,10 +102,15 @@
 @media (max-width: 768px) {
     .appStore .appList>div {
         flex-direction: column;
-        gap: 40px;
+        justify-content: center;
     }
     .appStore .appList>div:nth-child(even) {
         flex-direction: column;
+    }
+    .appStore .appList>div>div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     .appStore .appList>div>img {
         width: 90%;

@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Gemunu+Libre"
+          href="https://fonts.googleapis.com/css?family=Dosis"
         />
       </Head>
       <body>

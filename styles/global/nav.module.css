@@ -61,8 +61,9 @@
 .navbar.navbar_fixed nav a {
     font-size: 18px;
     cursor: url(../..//src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    transition: all 1s cubic-bezier(.11,1.6,.66,0);
 }
-.navbar.navbar_fixed nav a:active {
+.navbar.navbar_fixed nav a:hover, .navbar.navbar_fixed nav a:active {
     color: orangered;
     font-weight: bold;
 }

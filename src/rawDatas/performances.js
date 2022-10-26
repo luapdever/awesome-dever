@@ -15,9 +15,14 @@ export const performances = [
       return <WinIframe props={{ source: this.url }} />;
     },
     properties: {
-      createdAt: "June 30, 2019",
+      createdAt: "December 15, 2021",
       addedAt: "October 20, 2022",
-      more: "More Details dever",
+      technos: (
+        <>
+          <b>Vue and Nuxt JS, Laravel</b>
+        </>
+      ),
+      more: "This is where all my performances and news that I want to share will be found.",
     },
   },
   {
@@ -31,7 +36,12 @@ export const performances = [
     properties: {
       createdAt: "June 30, 2019",
       addedAt: "October 20, 2022",
-      more: "More Details appStore",
+      technos: (
+        <>
+          <b>Flutter</b>
+        </>
+      ),
+      more: "Discover my all mobile project with Flutter technology.",
     },
   },
   {
@@ -47,7 +57,52 @@ export const performances = [
     properties: {
       createdAt: "June 30, 2019",
       addedAt: "October 20, 2022",
-      more: "More Details devshop",
+      technos: (
+        <>
+          <b>Nuxt JS, Strapi</b>
+        </>
+      ),
+      more: "E-commerce application offering sales of various categories of items such as Clothes, Jewel, Look; ... This application evokes functionality from order to delivery.",
+    },
+  },
+  {
+    id: "aws",
+    icon: "https://aws.bj/logo.png",
+    bg: "#181b1c",
+    label: "AWS",
+    isLink: true,
+    url: "https://aws.bj",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "July 30, 2022",
+      addedAt: "October 20, 2022",
+      technos: (
+        <>
+          <b>React and Next JS</b>
+        </>
+      ),
+      collaboraters: (
+        <>
+          <a
+            href={"https://github.com/Mohamed-Fdl"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <b>Fadel ABOU</b>
+          </a>{" "}
+          -
+          <a
+            href={"https://github.com/EvansUchwa"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <b>Evans Uchwa</b>
+          </a>
+        </>
+      ),
+      more: "Official All Web Service website.",
     },
   },
   {
@@ -63,6 +118,11 @@ export const performances = [
     properties: {
       createdAt: "June 30, 2019",
       addedAt: "October 20, 2022",
+      technos: (
+        <>
+          <b>PHP, Bootstrap</b>
+        </>
+      ),
       collaboraters: (
         <>
           <a
@@ -82,7 +142,7 @@ export const performances = [
           </a>
         </>
       ),
-      more: "More Details kloo",
+      more: "With Kloo, Increase engagement and traffic via links and micro-pages. Enrich your Instagram Bio pages. Videos, Music, Instagram Posts, ...",
     },
   },
   {
@@ -97,6 +157,11 @@ export const performances = [
     properties: {
       createdAt: "June 30, 2019",
       addedAt: "October 20, 2022",
+      technos: (
+        <>
+          <b>React, Node JS</b>
+        </>
+      ),
       collaboraters: (
         <>
           <a
@@ -116,7 +181,7 @@ export const performances = [
           </a>
         </>
       ),
-      more: "More Details sevexchange",
+      more: "Exchange your Crypto and Mobile Money currencies easily and securely.",
     },
   },
 ];

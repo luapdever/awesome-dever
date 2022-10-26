@@ -21,6 +21,12 @@ function Properties({ props }) {
           <p>{curProp.addedAt}</p>
         </section>
       )}
+      {curProp.technos && (
+        <section>
+          <h4>Made with</h4>
+          <p>{curProp.technos}</p>
+        </section>
+      )}
       {curProp.collaboraters && (
         <section>
           <h4>Collaboraters</h4>
