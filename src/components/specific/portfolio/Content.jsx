@@ -4,21 +4,31 @@ import dever from "../../../assets/img/icons/DEVER.svg";
 import gsap from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { performances } from "../../../rawDatas/performances";
-import { FaRegSquare, FaRegWindowMinimize, FaTh, FaTimes } from "react-icons/fa";
+import {
+  FaRegSquare,
+  FaRegWindowMinimize,
+  FaTh,
+  FaTimes,
+} from "react-icons/fa";
 import useWindowScreen from "../../../hooks/useWindowScreen";
 
 function Content() {
   const welcomeScreen = useRef();
+  const contextMenus = useRef();
 
   const [
-    currentWindow,
-    setCurrentWindow,
-    windowsOpenned,
-    setWindowsOpenned,
-    openWindow,
-    resizeWindow,
-    closeWindow,
-    moveWindow,
+    currentWindow, 
+		currentContext, 
+		windowsOpenned, 
+		openWindow,
+		resizeWindow,
+		minimizeWindow,
+		closeWindow,
+		moveWindow,
+    copyTabLink,
+    switchContext,
+    hideContextMenuIfVisible,
+    switchProp,
   ] = useWindowScreen();
 
   useEffect(() => {
@@ -39,7 +49,10 @@ function Content() {
   }, []);
 
   return (
-    <div className={styles.contentBlk}>
+    <div
+      className={styles.contentBlk}
+      onClick={(e) => hideContextMenuIfVisible(e, contextMenus.current)}
+    >
       {/* The splash screen */}
       <section ref={welcomeScreen} className={styles.welcomeScreen}>
         <img
@@ -58,6 +71,7 @@ function Content() {
             <div
               key={"Performance" + index}
               onDoubleClick={(e) => openWindow(e, per)}
+              onContextMenu={(e) => switchContext(e, per, contextMenus.current)}
             >
               <img
                 src={per.icon}
@@ -78,6 +92,7 @@ function Content() {
             key={"Window" + ind}
             id={"wind" + ind}
             fullscreen={"false"}
+            minimized={"false"}
             style={{ zIndex: wind.id === currentWindow ? 20 : "inherit" }}
           >
             <div
@@ -90,7 +105,9 @@ function Content() {
                 {wind.window.label}
               </div>
               <div className={styles.windActions}>
-                <FaRegWindowMinimize />
+                <FaRegWindowMinimize
+                  onClick={(e) => minimizeWindow(e, "wind" + ind)}
+                />
                 <FaRegSquare onClick={(e) => resizeWindow(e, "wind" + ind)} />
                 <FaTimes onClick={(e) => closeWindow(e, ind)} />
               </div>
@@ -108,21 +125,52 @@ function Content() {
         </div>
         {windowsOpenned.map((task, index) => (
           <div
-            key={"Task"+index}
+            key={"Task" + index}
             className={
               styles.task +
               (task.id === currentWindow ? " " + styles.active : "")
             }
-            onClick={(e) => openWindow(e, task.window)}
+            onClick={(e) => {
+              openWindow(e, task.window);
+              minimizeWindow(e, "wind" + index);
+            }}
           >
-            <img 
-              src={task.window.icon} 
+            <img
+              src={task.window.icon}
               alt="Task icon"
-              width={25} 
+              width={25}
               style={{ backgroundColor: task.window.bg ?? "white" }}
             />
           </div>
         ))}
+      </div>
+
+      {/* The Taskbar */}
+
+      <div
+        ref={contextMenus}
+        className={styles.contextMenus}
+      >
+        {currentContext && (
+          <>
+            <div onClick={(e) => openWindow(e, currentContext)}>Open</div>
+            {currentContext.isLink && (
+              <>
+                <a
+                  href={currentContext.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div>Open in new tab</div>
+                </a>
+                <div onClick={(e) => copyTabLink(e, currentContext.url)}>
+                  Copy link
+                </div>
+              </>
+            )}
+            <div onClick={(e) => switchProp(e, currentContext)}>Properties</div>
+          </>
+        )}
       </div>
     </div>
   );

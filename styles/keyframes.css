@@ -30,3 +30,12 @@
     transform: rotate(360deg);
   }
 }
+
+@keyframes blurIt {
+  0% {
+    filter: blur(0);
+  }
+  100% {
+    filter: blur(1px);
+  }
+}

@@ -1,0 +1,21 @@
+.welcomeContent {
+    height: 100%;
+}
+.welcomeContent>h1 {
+    text-align: center;
+    padding: 0 15px;
+}
+.welcomeContent>div {
+    background-color: #111;
+    color: white;
+    min-height: 100%;
+    padding: 30px;
+    text-align: left;
+}
+
+.welcomeContent>div .mediaSocials {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}

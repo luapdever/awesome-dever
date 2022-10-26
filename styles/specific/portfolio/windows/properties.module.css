@@ -1,0 +1,22 @@
+.properties {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    margin: 3%;
+}
+.properties .infoProp {
+    color: #222;
+    margin: 0 0 15px 0;
+}
+.properties>section {
+    border-bottom: 1px solid #aaaaaa;
+    padding: 5px;
+}
+.properties>section>h4 {
+    color: #110068;
+    margin: 0;
+}
+.properties>section>p {
+    margin: 5px;
+}

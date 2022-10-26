@@ -1,0 +1,116 @@
+@keyframes moveIt {
+    0% {
+      transform: translateX(0px) translateY(0px);
+    }
+    50% {
+      transform: translateX(-10px) translateY(10px);
+    }
+    100% {
+      transform: translateX(0px) translateY(0px);
+    }
+  }
+
+
+.appStore {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.appStore>.header {
+    width: 100%;
+    height: 100%;
+    background: url(../../../../src/assets/img/icons/bgAppleStore.jpg) no-repeat center 100%/100%, #110068b8;
+    background-blend-mode: darken;
+    color: white;
+    padding: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.appStore>.header>div {
+    position: relative;
+    padding: 5%;
+}
+.appStore>.header>div::before, .appStore>.header>div::after {
+    width: 80px;
+    height: 1px;
+    background-color: white;
+    content: "";
+    position: absolute;
+}
+.appStore>.header>div::before {
+    top: -50%;
+    left: -15%;
+    margin-left: 10%;
+}
+.appStore>.header>div::after {
+    bottom: -50%;
+    right: -15%;
+    margin-right: 10%;
+}
+.appStore>.header>div>h1 {
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+
+.appStore .appList {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+    background-color: beige;
+}
+.appStore .appList>div {
+    display: flex;
+    gap: 20px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.appStore .appList>div:nth-child(even) {
+    flex-direction: row-reverse;
+}
+.appStore .appList>div>img {
+    width: 42%;
+    height: 100%;
+    object-fit: cover;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 5px 10px 50px rgba(0, 0, 0, 0.7);
+    position: relative;
+}
+.appStore .appList>div>img:hover {
+    animation: moveIt 2s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.appStore .appList>div h2 {
+    margin: 0;
+    color: #110068;
+}
+.appStore .appList>div button {
+    border-color: #110068;
+    color: #110068;
+}
+.appStore .appList>div button:hover {
+    background-color: #110068;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .appStore .appList>div {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .appStore .appList>div:nth-child(even) {
+        flex-direction: column;
+    }
+    .appStore .appList>div>img {
+        width: 90%;
+    }
+    .appStore .appList>div h2 {
+        text-align: center;
+    } 
+}

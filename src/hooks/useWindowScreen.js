@@ -1,26 +1,44 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import welcome from "../assets/img/icons/welcome.svg";
+import details from "../assets/img/icons/details.png";
+import Properties from "../components/specific/portfolio/wndows/Properties";
+import WelcomeContent from "../components/specific/portfolio/wndows/Welcome";
 
 const useWindowScreen = () => {
   const [currentWindow, setCurrentWindow] = useState("welcome");
+  const [currentContext, setCurrentContext] = useState();
 
   const welcomeWindow = {
     id: "welcome",
     icon: welcome.src,
     label: "Welcome",
     bg: "#00000000",
-    content: (
-      <>
-        <div>Welcome to Dever screen</div>
-      </>
-    ),
+    content: <WelcomeContent />,
   };
+
   const [windowsOpenned, setWindowsOpenned] = useState([
     {
       id: "welcome",
       window: welcomeWindow,
     },
   ]);
+
+  const switchContext = (event, performance, refCtx) => {
+    event.preventDefault();
+
+    setCurrentContext(performance);
+    refCtx.style.display = "block";
+    refCtx.style.position = "fixed";
+    refCtx.style.top = event.clientY +"px";
+    refCtx.style.left = event.clientX +"px";
+  };
+  
+  const hideContextMenuIfVisible = (event, refCtx) => {
+    if(refCtx.style.display != "none") {
+      refCtx.style.display = "none"
+    }
+  };
 
   const openWindow = (event, performance) => {
     event.preventDefault();
@@ -40,21 +58,36 @@ const useWindowScreen = () => {
   const resizeWindow = (e, idWind) => {
     let tarWind = document.getElementById(idWind);
     if (tarWind.fullscreen) {
-      tarWind.style.width = "50%";
+      tarWind.style.width = window.innerWidth < 768 ? "80%" :"50%";
       tarWind.style.height = "60%";
-      tarWind.style.top = "50%";
-      tarWind.style.left = "50%";
-      tarWind.style.transform = "translate(-50%, -50%)";
+      // tarWind.style.top = "50%";
+      // tarWind.style.left = "50%";
+      // tarWind.style.transform = "translate(-50%, -50%)";
       tarWind.style.borderRadius = "5px";
       tarWind.fullscreen = false;
     } else {
       tarWind.style.width = "100%";
       tarWind.style.height = "100%";
-      tarWind.style.top = "0";
-      tarWind.style.left = "0";
-      tarWind.style.transform = "translate(0, 0)";
+      // tarWind.style.top = "0";
+      // tarWind.style.left = "0";
+      // tarWind.style.transform = "translate(0, 0)";
       tarWind.style.borderRadius = "0px";
       tarWind.fullscreen = true;
+    }
+  };
+
+  const minimizeWindow = (e, idWind) => {
+    let tarWind = document.getElementById(idWind);
+    if (tarWind.minimized) {
+      tarWind.style.top = "50%";
+      tarWind.style.opacity = "1";
+      tarWind.style.pointerEvents = "initial";
+      tarWind.minimized = false;
+    } else {
+      tarWind.style.top = "100%";
+      tarWind.style.opacity = "0";
+      tarWind.style.pointerEvents = "none";
+      tarWind.minimized = true;
     }
   };
 
@@ -78,15 +111,38 @@ const useWindowScreen = () => {
 		}
 	}
 
+	const copyTabLink = (e, tabLink) => {
+    navigator.clipboard.writeText(tabLink)
+    .then((res) => {
+      toast.success("URL copied successfully");
+    })
+	}
+
+  const switchProp = (event, curCtx) => {
+    event.preventDefault();
+
+    openWindow(event, {
+      id: "properties_"+curCtx.id,
+      icon: details.src,
+      label: "Properties - "+curCtx.label,
+      bg: "#00000000",
+      content: <Properties props={{ curProp: curCtx.properties }} />,
+    });
+  }
+
   return [
 		currentWindow, 
-		setCurrentWindow, 
+		currentContext, 
 		windowsOpenned, 
-		setWindowsOpenned,
 		openWindow,
 		resizeWindow,
+		minimizeWindow,
 		closeWindow,
-		moveWindow
+		moveWindow,
+    copyTabLink,
+    switchContext,
+    hideContextMenuIfVisible,
+    switchProp
 	];
 };
 

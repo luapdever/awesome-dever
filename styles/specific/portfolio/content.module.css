@@ -53,10 +53,21 @@
     background: url(../../../src//assets/img/awesome/realisations/minimalist.jpg) no-repeat;
     padding: 10px;
 }
+
+
+
+
+
+
+
 .contentBlk .desktop .performances {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
     gap: 10px;
+    width: min-content;
+    height: 90%;
 }
 .contentBlk .desktop .performances>div {
     display: flex;
@@ -94,11 +105,19 @@
     text-overflow: ellipsis;
     transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+
+
+
+
+
+
 .contentBlk .windows>div {
     width: 50%;
     height: 60%;
     background-color: white;
     border: 1px solid black;
+    border-bottom: 2px solid white;
     color: black;
     position: absolute;
     top: 50%;
@@ -140,7 +159,13 @@
     padding: 1px;
     height: calc(100% - 45px);
     user-select: text;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
+
+
+
+
 
 .contentBlk .taskbar {
     position: absolute;
@@ -183,4 +208,34 @@
     background-color: white;
     padding: 2px;
     border-radius: 5px;
+}
+
+
+
+
+.contentBlk .contextMenus {
+    position: absolute;
+    top: 20px;
+    left: 80px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 10px 8px 30px rgba(0, 0, 0, 0.5);
+    display: none;
+}
+.contentBlk .contextMenus>div, .contentBlk .contextMenus>a {
+    display: block;
+    padding: 10px 15px;
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    transition: all .3s ease-in-out;
+}
+.contentBlk .contextMenus>div:hover, .contentBlk .contextMenus>a:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+@media (max-width: 768px) {
+    .contentBlk .windows>div {
+        width: 80%;
+    }
 }
