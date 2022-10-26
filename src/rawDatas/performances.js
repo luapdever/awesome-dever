@@ -12,13 +12,13 @@ export const performances = [
     isLink: true,
     url: "https://luap-dever.me",
     get content() {
-      return <WinIframe props={{ source: this.url }} />
+      return <WinIframe props={{ source: this.url }} />;
     },
     properties: {
       createdAt: "June 30, 2019",
       addedAt: "October 20, 2022",
-      more: "More Details dever"
-    }
+      more: "More Details dever",
+    },
   },
   {
     id: "appStore",
@@ -26,13 +26,13 @@ export const performances = [
     bg: "#999",
     label: "App Store",
     get content() {
-      return <AppStore />
+      return <AppStore />;
     },
     properties: {
       createdAt: "June 30, 2019",
       addedAt: "October 20, 2022",
-      more: "More Details appStore"
-    }
+      more: "More Details appStore",
+    },
   },
   {
     id: "devshop",
@@ -42,13 +42,13 @@ export const performances = [
     isLink: true,
     url: "https://devshop-luap.netlify.app",
     get content() {
-      return <WinIframe props={{ source: this.url }} />
+      return <WinIframe props={{ source: this.url }} />;
     },
     properties: {
       createdAt: "June 30, 2019",
       addedAt: "October 20, 2022",
-      more: "More Details devshop"
-    }
+      more: "More Details devshop",
+    },
   },
   {
     id: "kloo",
@@ -58,14 +58,32 @@ export const performances = [
     isLink: true,
     url: "https://kloo.me",
     get content() {
-      return <WinIframe props={{ source: this.url }} />
+      return <WinIframe props={{ source: this.url }} />;
     },
     properties: {
       createdAt: "June 30, 2019",
       addedAt: "October 20, 2022",
-      collaboraters: <><b>Fadel ABOU</b> - <b>Evans Uchwa</b></>,
-      more: "More Details kloo"
-    }
+      collaboraters: (
+        <>
+          <a
+            href={"https://github.com/Mohamed-Fdl"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <b>Fadel ABOU</b>
+          </a>{" "}
+          -
+          <a
+            href={"https://github.com/EvansUchwa"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <b>Evans Uchwa</b>
+          </a>
+        </>
+      ),
+      more: "More Details kloo",
+    },
   },
   {
     id: "sevexchange",
@@ -74,13 +92,31 @@ export const performances = [
     isLink: true,
     url: "https://sevexchange.com",
     get content() {
-      return <WinIframe props={{ source: this.url }} />
+      return <WinIframe props={{ source: this.url }} />;
     },
     properties: {
       createdAt: "June 30, 2019",
       addedAt: "October 20, 2022",
-      collaboraters: <><b>Fadel ABOU</b> - <b>Evans Uchwa</b></>,
-      more: "More Details sevexchange"
-    }
+      collaboraters: (
+        <>
+          <a
+            href={"https://github.com/Mohamed-Fdl"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <b>Fadel ABOU</b>
+          </a>{" "}
+          -
+          <a
+            href={"https://github.com/EvansUchwa"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <b>Evans Uchwa</b>
+          </a>
+        </>
+      ),
+      more: "More Details sevexchange",
+    },
   },
 ];
