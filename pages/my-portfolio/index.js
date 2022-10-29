@@ -1,8 +1,15 @@
 import Head from 'next/head'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { toast } from 'react-toastify'
 import Portfolio from '../../src/components/specific/portfolio'
 
 function MyPortfolio() {
+  useEffect(() => {
+    if(window.innerWidth < 600) {
+      toast.info("The best felling of this page is on big screen.")
+    }
+  }, [])
+
   return (
     <div className={"container"}>
       <Head>
