@@ -51,7 +51,7 @@ function AppStore() {
               <p>
                 <b>Size : </b> <strong>{mbPer.size}</strong>
               </p>
-              <button onClick={(e) => (window.location.href = mbPer.url)}>
+              <button onClick={(e) => (window.open(mbPer.url))}>
                 Download
               </button>
             </div>

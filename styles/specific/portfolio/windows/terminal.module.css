@@ -1,0 +1,30 @@
+.terminal {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 10px;
+}
+.terminal>div>p {
+    margin: 5px 0;
+    color: #999;
+}
+.terminal>div>section {
+    width: 100%;
+}
+
+.terminal .shellInput>form {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+.terminal .shellInput>form input {
+    width: 80%;
+    height: 25px;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+}
+.terminal b {
+    color: orange;
+}

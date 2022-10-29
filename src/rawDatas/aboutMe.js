@@ -19,7 +19,7 @@ export const me = {
           <b>Cotonou</b>
         </a>
         , I am a <b>fullstack developer</b> of digital solutions, creative
-        interfaces, web services, APIs. With two years of experience in{" "}
+        interfaces, web services, APIs. With three years of experience in{" "}
         <b>Internet and Multimedia</b>, I marvelously merge <b>2D</b>, <b>3D</b>{" "}
         and text (I'm talking about <b>code</b> 🙄) to make interactive and
         experimental applications that respond to given <b>solutions</b>. <br />

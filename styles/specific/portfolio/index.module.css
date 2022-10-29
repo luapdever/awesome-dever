@@ -1,6 +1,7 @@
 .portfolio {
     width: 100%;
     height: calc(100vh - 100px);
+    margin-bottom: 40px;
 }
 .portfolio .deviceShape {
     width: 95%;

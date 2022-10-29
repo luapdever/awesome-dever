@@ -66,6 +66,27 @@ export const performances = [
     },
   },
   {
+    id: "wecard",
+    icon: "https://wecard-dever.netlify.app/card.png",
+    bg: "#333333",
+    label: "WeCard",
+    isLink: true,
+    url: "https://wecard-dever.netlify.app",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "September 18, 2019",
+      addedAt: "October 20, 2022",
+      technos: (
+        <>
+          <b>Vue JS</b>
+        </>
+      ),
+      more: "Generate your virtual credit card and get everything in picture.",
+    },
+  },
+  {
     id: "aws",
     icon: "https://aws.bj/logo.png",
     bg: "#181b1c",

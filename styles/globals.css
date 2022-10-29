@@ -1,5 +1,7 @@
 :root {
   --color-primary: #110068;
+  --color-primary-dark: #011F4B;
+  --color-dark: #111;
 }
 
 html,
@@ -19,7 +21,7 @@ body {
   color: white;
   background: url("../src//assets/img/awesome/laravel_vue.svg") fixed no-repeat
       center,
-    var(--color-primary);
+    radial-gradient(var(--color-primary), var(--color-dark));
   background-blend-mode: darken;
   overflow-x: hidden;
 }

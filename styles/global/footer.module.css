@@ -9,6 +9,31 @@
   bottom: 0; */
   z-index: 9999999;
 }
+.footer>div:nth-child(1)>h3 {
+  margin: 5px 0;
+}
+.footer>div:nth-child(2)>p {
+  margin: 0;
+  font-size: 0.8em;
+  color: #999;
+}
+.footer .socialMedias {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+.footer .socialMedias a {
+  min-width: 30px;
+  min-height: 30px;
+  padding: 10px;
+  background-color: white;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+}
 
 @media (prefers-color-scheme: dark) {
   .footer {

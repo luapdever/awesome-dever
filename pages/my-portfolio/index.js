@@ -7,7 +7,7 @@ function MyPortfolio() {
     <div className={"container"}>
       <Head>
         <title>Dever - Overview Portfolio</title>
-        <meta name="description" content="Awesome portfolio in phone shape. Enjoy !!" />
+        <meta name="description" content="Awesome portfolio in screen shape. Enjoy !!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

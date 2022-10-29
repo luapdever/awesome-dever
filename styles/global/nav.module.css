@@ -1,3 +1,49 @@
+@keyframes aweNav {
+    0% {
+        width: 20px;
+        left: -20%;
+        /* transform: rotate(0); */
+    }
+    45% {
+        width: 5px;
+        left: 80%;
+        /* transform: rotate(0); */
+    }
+    75% {
+        width: 5px;
+        left: 80%;
+        /* transform: rotate(90deg); */
+    }
+    100% {
+        width: 20px;
+        left: -20%;
+        /* transform: rotate(0); */
+    }
+}
+
+@keyframes aweNavInv {
+    0% {
+        width: 20px;
+        right: -20%;
+        /* transform: rotate(0); */
+    }
+    45% {
+        width: 5px;
+        right: 80%;
+        /* transform: rotate(0); */
+    }
+    75% {
+        width: 5px;
+        right: 80%;
+        /* transform: rotate(90deg); */
+    }
+    100% {
+        width: 20px;
+        right: -20%;
+        /* transform: rotate(0); */
+    }
+}
+
 .navbar {
     width: 100%;
     height: 100px;
@@ -13,7 +59,8 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 30px 2%;
+    height: 90px;
+    padding: 10px 2%;
     background-color: rgba(0, 0, 0, .5);
     border-right: 10px solid white;
     z-index: 99999;
@@ -45,7 +92,7 @@
     justify-content: flex-end;
     gap: 20px;
     width: 75%;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
     left: 20%;
     opacity: 0;
@@ -59,15 +106,38 @@
 }
 
 .navbar.navbar_fixed nav a {
+    height: 100%;
+    padding: 15px 0;
     font-size: 18px;
-    cursor: url(../..//src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    cursor: url(../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    position: relative;
     transition: all 1s cubic-bezier(.11,1.6,.66,0);
 }
-.navbar.navbar_fixed nav a:hover, .navbar.navbar_fixed nav a:active {
+.navbar.navbar_fixed nav a:hover, .navbar.navbar_fixed nav a.active {
     color: orangered;
     font-weight: bold;
 }
 
+.navbar.navbar_fixed nav a:hover::before, 
+.navbar.navbar_fixed nav a:hover::after, 
+.navbar.navbar_fixed nav a.active::before, 
+.navbar.navbar_fixed nav a.active::after {
+    width: 20px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, .5);
+    content: "";
+    position: absolute;
+}
+.navbar.navbar_fixed nav a:hover::before, 
+.navbar.navbar_fixed nav a.active::before {
+    top: 0px;
+    animation: aweNav 1s infinite ease-in-out;
+}
+.navbar.navbar_fixed nav a:hover::after, 
+.navbar.navbar_fixed nav a.active::after {
+    top: 100%;
+    animation: aweNavInv 1s infinite ease-in-out;
+}
 
 @media (max-width: 768px) {
     .navbar.navbar_fixed>section>h2 {

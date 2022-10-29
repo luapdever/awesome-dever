@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "../../../../styles/specific/portfolio/content.module.css";
 import dever from "../../../assets/img/icons/DEVER.svg";
+import consl from '../../../assets/img/icons/console.png'
+
 import gsap from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { performances } from "../../../rawDatas/performances";
@@ -17,18 +19,20 @@ function Content() {
   const contextMenus = useRef();
 
   const [
-    currentWindow, 
-		currentContext, 
-		windowsOpenned, 
-		openWindow,
-		resizeWindow,
-		minimizeWindow,
-		closeWindow,
-		moveWindow,
+    currentWindow,
+    setCurrentWindow,
+    currentContext,
+    windowsOpenned,
+    openWindow,
+    resizeWindow,
+    minimizeWindow,
+    closeWindow,
+    moveWindow,
     copyTabLink,
     switchContext,
     hideContextMenuIfVisible,
     switchProp,
+    terminalWindow,
   ] = useWindowScreen();
 
   useEffect(() => {
@@ -94,10 +98,11 @@ function Content() {
             fullscreen={"false"}
             minimized={"false"}
             style={{ zIndex: wind.id === currentWindow ? 20 : "inherit" }}
+            onClick={(e) => setCurrentWindow(wind.id)}
           >
             <div
               className={styles.windHeader}
-              // onDrag={(e) => moveWindow(e, "wind" + ind)}
+              onDrag={(e) => moveWindow(e, "wind" + ind)}
               onDoubleClick={(e) => resizeWindow(e, "wind" + ind)}
             >
               <div className={styles.windLabel}>
@@ -123,6 +128,20 @@ function Content() {
         <div className={styles.task + " " + styles.fake}>
           <FaTh />
         </div>
+        <div
+          className={styles.task}
+          onClick={(e) => openWindow(e, terminalWindow)}
+        >
+          <img
+            src={consl.src}
+            alt="Task icon"
+            width={25}
+            style={{ backgroundColor: "#00000000" }}
+          />
+        </div>
+        
+        <div className={windowsOpenned.length > 0 && styles.task_bars}></div>
+
         {windowsOpenned.map((task, index) => (
           <div
             key={"Task" + index}
@@ -132,7 +151,7 @@ function Content() {
             }
             onClick={(e) => {
               openWindow(e, task.window);
-              minimizeWindow(e, "wind" + index);
+              minimizeWindow(e, "wind" + index, !(task.id === currentWindow));
             }}
           >
             <img
@@ -147,10 +166,7 @@ function Content() {
 
       {/* The Taskbar */}
 
-      <div
-        ref={contextMenus}
-        className={styles.contextMenus}
-      >
+      <div ref={contextMenus} className={styles.contextMenus}>
         {currentContext && (
           <>
             <div onClick={(e) => openWindow(e, currentContext)}>Open</div>

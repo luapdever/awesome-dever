@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import welcome from "../assets/img/icons/welcome.svg";
+import console from "../assets/img/icons/console.png";
 import details from "../assets/img/icons/details.png";
 import Properties from "../components/specific/portfolio/wndows/Properties";
 import WelcomeContent from "../components/specific/portfolio/wndows/Welcome";
+import Terminal from "../components/specific/portfolio/wndows/Terminal";
 
 const useWindowScreen = () => {
   const [currentWindow, setCurrentWindow] = useState("welcome");
@@ -14,13 +16,25 @@ const useWindowScreen = () => {
     icon: welcome.src,
     label: "Welcome",
     bg: "#00000000",
-    content: <WelcomeContent />,
+    content: <WelcomeContent /> ,
+  };
+
+  const terminalWindow = {
+    id: "terminal",
+    icon: console.src,
+    label: "Terminal",
+    bg: "#00000000",
+    content: <Terminal />,
   };
 
   const [windowsOpenned, setWindowsOpenned] = useState([
     {
       id: "welcome",
       window: welcomeWindow,
+    },
+    {
+      id: "terminal",
+      window: terminalWindow,
     },
   ]);
 
@@ -76,9 +90,9 @@ const useWindowScreen = () => {
     }
   };
 
-  const minimizeWindow = (e, idWind) => {
+  const minimizeWindow = (e, idWind, fromTaskbar = false) => {
     let tarWind = document.getElementById(idWind);
-    if (tarWind.minimized) {
+    if (tarWind.minimized || fromTaskbar) {
       tarWind.style.top = "50%";
       tarWind.style.opacity = "1";
       tarWind.style.pointerEvents = "initial";
@@ -99,6 +113,9 @@ const useWindowScreen = () => {
   };
 
 	const moveWindow = (e, idWind) => {
+    e.preventDefault();
+    
+    console.log("I'm in")
     let tarWind = document.getElementById(idWind);
 
 		const mouse = {
@@ -132,6 +149,7 @@ const useWindowScreen = () => {
 
   return [
 		currentWindow, 
+    setCurrentWindow, 
 		currentContext, 
 		windowsOpenned, 
 		openWindow,
@@ -142,7 +160,8 @@ const useWindowScreen = () => {
     copyTabLink,
     switchContext,
     hideContextMenuIfVisible,
-    switchProp
+    switchProp,
+    terminalWindow,
 	];
 };
 
