@@ -1,4 +1,4 @@
-import { FaFacebook, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaLinkedinIn, FaTerminal, FaTwitter } from "react-icons/fa";
 import styles from "../../styles/specific/home/about/presentation.module.css";
 import blender from '../assets/img/icons/blender.svg'
 import psIcon from '../assets/img/icons/adobe-ps.svg'
@@ -38,6 +38,8 @@ export const me = {
   ),
 };
 
+
+
 export const socialMedias = [
   {
     icon: <FaGithub />,
@@ -60,6 +62,8 @@ export const socialMedias = [
     link: "https://luap-dever.me",
   },
 ];
+
+
 
 export const formations = [
   {
@@ -183,7 +187,15 @@ export const listSkills = [
       <>Project versioning with {' '}
         <a href="https://google.com/search?q=git" target="_blank" rel="noreferrer">
           <img src={"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"} alt="git icon" width={20} />{' '}
+        </a> and {' '}
+        <a href="https://google.com/search?q=github" target="_blank" rel="noreferrer">
+          <img src={"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"} alt="github icon" width={20} />{' '}<b className="or">Github</b>
         </a> 
+      </>,
+      <>Bash programming {' '}
+        <a href="https://google.com/search?q=git" target="_blank" rel="noreferrer">
+          <b className="or"><FaTerminal /></b>
+        </a>
       </>,
     ]
   },

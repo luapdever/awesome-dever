@@ -80,7 +80,7 @@ function Content() {
               <img
                 src={per.icon}
                 style={{ backgroundColor: per.bg ?? "white" }}
-                alt="Performance icon"
+                alt="Icon"
                 width={50}
               />
               <span>{per.label}</span>

@@ -1,0 +1,55 @@
+.contact {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+.contact>div {
+    width: 80%;
+    margin: auto;
+    padding: 5%;
+}
+.contact>div>form {
+    width: 100%;
+}
+.contact .luapImg {
+    width: 200px;
+    height: 200%;
+    border: 1px inset #999;
+    background-color: #222;
+    border-radius: 100%;
+    overflow: hidden;
+    margin: auto;
+}
+.contact .luapImg>svg {
+    width: 100%;
+    height: 100%;
+}
+.contact .luapImg>svg path {
+    transition: all 1s cubic-bezier(.11,1.6,.66,0);
+}
+.contact>div>form>div {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 5px;
+}
+.contact>div>form>div input, .contact>div>form>div textarea {
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+    background: none;
+    outline: none;
+    border: none;
+    color: white;
+    border: 1px solid #999;
+    border-radius: 8px 2px;
+    transition: all 0.5s cubic-bezier(.11,1.6,.66,0);
+}
+.contact>div>form>div textarea {
+    height: 100px;
+}
+.contact>div>form>div input:focus, .contact>div>form>div textarea:focus {
+    border-color: orange;
+}

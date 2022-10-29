@@ -23,6 +23,9 @@ export const availableCmds = [
             <li>
               <b className="or">skills</b> : Show my technical skills.
             </li>
+            <li>
+              <b className="or">spare</b> : Show my spare times.
+            </li>
           </ul>
         </div>
       </>
@@ -91,4 +94,15 @@ export const availableCmds = [
       </>
     ),
   },
+	{
+		id: "spare",
+		output: <>
+        <p>My spare times</p>
+        <ul>
+					<li>Watching football</li>
+					<li>Composing song</li>
+					<li>Reading book</li>
+				</ul>
+      </>
+	}
 ];
