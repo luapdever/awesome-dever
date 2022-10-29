@@ -12,7 +12,7 @@ export const performances = [
     icon: dever.src,
     label: "My Blog",
     isLink: true,
-    url: "https://luap-dever.me",
+    url: "https://blog.luap-dever.me",
     get content() {
       return <WinIframe props={{ source: this.url }} />;
     },
@@ -32,7 +32,7 @@ export const performances = [
     icon: contactImg.src,
     label: "Contact me",
     isLink: true,
-    url: "https://luap-dever.me/contact",
+    url: "https://blog.luap-dever.me/contact",
     get content() {
       return <Contact />;
     },
