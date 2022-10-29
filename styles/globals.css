@@ -246,6 +246,11 @@ button:hover::after, .button:hover::after {
     display: none;
   }
 }
+@media (max-width: 330px) {
+  .notInSMobile {
+    display: none;
+  }
+}
 
 @media (prefers-color-scheme: dark) {
   html {
