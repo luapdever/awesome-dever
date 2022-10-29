@@ -1,6 +1,7 @@
 import gsap from "gsap";
 import Link from "next/link";
 import React from "react";
+import { toast } from "react-toastify";
 
 import styles from "../../../../styles/specific/home/partOverview.module.css";
 import real1 from "../../../assets/img/awesome/realisations/header_img.jpg";
@@ -36,6 +37,10 @@ function PartOverview() {
               href="https://three.luap-dever.me"
               target={"_blank"}
               rel="noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                toast.info("The 3D view will be available soon. See you later 😇")
+              }}
             >
               3D View
             </a>
