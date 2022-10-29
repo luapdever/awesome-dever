@@ -32,7 +32,7 @@ function NavBar() {
         </Link>
         <nav>
           <Link href={"/"}>Home</Link>
-          <Link href={"/#aboutMe"} scroll={false} className={"notInSMobile"}>About me</Link>
+          <div className={"notInSMobile"}><Link href={"/#aboutMe"} scroll={false}>About me</Link></div>
           <Link href={"/my-portfolio"}>Overview</Link>
         </nav>
       </div>
