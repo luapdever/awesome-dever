@@ -59,7 +59,7 @@ function Contact() {
     if (test) {
 			setLoading(true)
       axios
-        .post("https://dever-backend.herokuapp.com/api/contact", {
+        .post(process.env.apiUrl + "contact", {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json, text-plain, */*",

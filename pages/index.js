@@ -21,10 +21,10 @@ export default function Home() {
         />
         <meta
           property='og:image'
-          content={"https://luap-dever.me/luap.png"}
+          content={process.env.appUrl + "luap.png"}
           key='image'
         />
-        <meta property='og:url' content={"https://luap-dever.me"} key='url' />
+        <meta property='og:url' content={process.env.appUrl} key='url' />
         <meta
           name='description'
           content='I am a fullstack developer of digital solutions, creative
