@@ -12,7 +12,7 @@ export const availableCmds = [
               <b className="or">help</b> : Display command manual.
             </li>
             <li>
-              <b className="or">clear or cls</b> : Display command manual.
+              <b className="or">clear or cls</b> : Clear console.
             </li>
             <li>
               <b className="or">about</b> : Display my small description.
