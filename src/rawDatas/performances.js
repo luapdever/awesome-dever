@@ -1,10 +1,13 @@
 import dever from "../assets/img/icons/projects/DEVER.svg";
 import contactImg from "../assets/img/icons/projects/contact.png";
+import console from "../assets/img/icons/console.png";
 import appIcon from "../assets/img/icons/appStore.png";
 import sevexchange from "../assets/img/icons/projects/sevexchange.png";
+
 import WinIframe from "../components/global/custiframe";
 import AppStore from "../components/specific/portfolio/wndows/AppStore";
 import Contact from "../components/specific/portfolio/wndows/Contact";
+import Terminal from "../components/specific/portfolio/wndows/Terminal";
 
 export const performances = [
   {
@@ -28,11 +31,16 @@ export const performances = [
     },
   },
   {
+    id: "terminal",
+    icon: console.src,
+    label: "Terminal",
+    bg: "#00000000",
+    content: <Terminal />,
+  },
+  {
     id: "contact",
     icon: contactImg.src,
     label: "Contact me",
-    isLink: true,
-    url: "https://blog.luap-dever.me/contact",
     get content() {
       return <Contact />;
     },
