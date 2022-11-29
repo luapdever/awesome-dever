@@ -15,7 +15,7 @@ import { Router } from "next/router";
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
     Router.events.on("routeChangeStart", (url)=>{
-      console.log("route is changing")
+      console.log("Route is changing")
     }) 
   }, [])
 

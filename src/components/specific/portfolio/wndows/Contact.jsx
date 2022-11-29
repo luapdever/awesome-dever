@@ -84,7 +84,6 @@ function Contact() {
           toast.error(err);
 					setLoading(false)
         });
-      console.log(formValues);
     }
   };
 

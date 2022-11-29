@@ -115,7 +115,6 @@ const useWindowScreen = () => {
 	const moveWindow = (e, idWind) => {
     e.preventDefault();
     
-    console.log("I'm in")
     let tarWind = document.getElementById(idWind);
 
 		const mouse = {
