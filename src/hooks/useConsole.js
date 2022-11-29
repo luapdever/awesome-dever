@@ -62,7 +62,6 @@ export const useConsole = (styles) => {
 			}
 
 			setConsoleOutputs([...copyConsOut]);
-			console.log(consoleOutputs)
     }
   };
 
