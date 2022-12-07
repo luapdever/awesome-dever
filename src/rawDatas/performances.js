@@ -36,6 +36,16 @@ export const performances = [
     label: "Terminal",
     bg: "#00000000",
     content: <Terminal />,
+    properties: {
+      createdAt: "October 20, 2022",
+      addedAt: "October 20, 2022",
+      technos: (
+        <>
+          <b>React JS</b>
+        </>
+      ),
+      more: "Discover information about me by typing in a command line.",
+    },
   },
   {
     id: "contact",
@@ -49,10 +59,10 @@ export const performances = [
       addedAt: "October 20, 2022",
       technos: (
         <>
-          <b>Vue and Nuxt JS, Laravel</b>
+          <b>Next JS</b>
         </>
       ),
-      more: "This is where all my performances and news that I want to share will be found.",
+      more: "You can contact me with form on this window.",
     },
   },
   {
