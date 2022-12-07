@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useRef, useState } from "react";
 import styles from "../../../../styles/specific/portfolio/content.module.css";
 import dever from "../../../assets/img/icons/DEVER.svg";
@@ -71,19 +72,19 @@ function Content() {
       {/* The desktop shortcut */}
       <section className={styles.desktop}>
         <div className={styles.performances}>
-          {performances.map((per, index) => (
+          {performances.map((perform, index) => (
             <div
               key={"Performance" + index}
-              onDoubleClick={(e) => openWindow(e, per)}
-              onContextMenu={(e) => switchContext(e, per, contextMenus.current)}
+              onDoubleClick={(e) => openWindow(e, perform)}
+              onContextMenu={(e) => switchContext(e, perform, contextMenus.current)}
             >
               <img
-                src={per.icon}
-                style={{ backgroundColor: per.bg ?? "white" }}
+                src={perform.icon}
+                style={{ backgroundColor: perform.bg ?? "white" }}
                 alt="Icon"
                 width={50}
               />
-              <span>{per.label}</span>
+              <span>{perform.label}</span>
             </div>
           ))}
         </div>
@@ -102,6 +103,7 @@ function Content() {
           >
             <div
               className={styles.windHeader}
+              draggable
               onDrag={(e) => moveWindow(e, "wind" + ind)}
               onDoubleClick={(e) => resizeWindow(e, "wind" + ind)}
             >

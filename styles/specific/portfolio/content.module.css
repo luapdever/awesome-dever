@@ -16,6 +16,17 @@
         opacity: 1;
     }
 }
+@keyframes turnInto {
+    0% {
+        transform: translateY(0px) rotate(0);
+    }
+    50% {
+        transform: translateY(-8px) rotate(360deg);
+    }
+    100% {
+        transform: translateY(1px) rotate(360deg);
+    }
+}
 
 .contentBlk {
     width: 100%;
@@ -226,6 +237,9 @@
 }
 .contentBlk .taskbar .task.active {
     border-bottom: 2px solid white;
+}
+.contentBlk .taskbar .task.active>img {
+    animation: turnInto 2s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .contentBlk .taskbar .task>img {
     background-color: white;

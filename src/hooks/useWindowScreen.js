@@ -74,17 +74,17 @@ const useWindowScreen = () => {
     if (tarWind.fullscreen) {
       tarWind.style.width = window.innerWidth < 768 ? "80%" :"50%";
       tarWind.style.height = "60%";
-      // tarWind.style.top = "50%";
-      // tarWind.style.left = "50%";
-      // tarWind.style.transform = "translate(-50%, -50%)";
+      tarWind.style.top = "50%";
+      tarWind.style.left = "50%";
+      tarWind.style.transform = "translate(-50%, -50%)";
       tarWind.style.borderRadius = "5px";
       tarWind.fullscreen = false;
     } else {
       tarWind.style.width = "100%";
       tarWind.style.height = "100%";
-      // tarWind.style.top = "0";
-      // tarWind.style.left = "0";
-      // tarWind.style.transform = "translate(0, 0)";
+      tarWind.style.top = "0";
+      tarWind.style.left = "0";
+      tarWind.style.transform = "translate(0, 0)";
       tarWind.style.borderRadius = "0px";
       tarWind.fullscreen = true;
     }
@@ -94,6 +94,7 @@ const useWindowScreen = () => {
     let tarWind = document.getElementById(idWind);
     if (tarWind.minimized || fromTaskbar) {
       tarWind.style.top = "50%";
+      tarWind.style.left = "50%";
       tarWind.style.opacity = "1";
       tarWind.style.pointerEvents = "initial";
       tarWind.minimized = false;
