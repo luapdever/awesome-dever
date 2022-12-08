@@ -4,7 +4,7 @@ const nextConfig = {
   swcMinify: true,
   env: {
     appUrl: "https://luap-dever.me/",
-    apiUrl: "https://dever-backend.herokuapp.com/api/"
+    apiUrl: "https://dever-luapdever511.koyeb.app/api/"
   }
 }
 
