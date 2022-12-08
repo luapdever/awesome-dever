@@ -122,7 +122,7 @@ const useWindowScreen = () => {
 			x: e.clientX,
 			y: e.clientY
 		}
-		if(mouse.x !== 0 && mouse.y !== 0) {
+		if(!tarWind.fullscreen && mouse.x !== 0 && mouse.y !== 0) {
 			tarWind.style.top = mouse.y + "px";
 			tarWind.style.left = mouse.x + "px";
 		}
