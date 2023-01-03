@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className={"container"}>
       <Head>
-        <title>Dever - Awesome portfolio</title>
+        <title>Dever - Awesome portfolio | Paul M. ZANNOU</title>
         <meta
           name="description"
           content="I am a fullstack developer of digital solutions, creative

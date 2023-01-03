@@ -16,6 +16,7 @@ function WelcomeContent() {
           <b className="or"> embedded websites</b>. So you have the choice to open it in a new tab to
           have a good experience. For more information, you can <b className="or">contact me</b>.
         </p>
+        <p style={{ textAlign: "right" }}><em>Paul M. ZANNOU</em></p>
         <p className={styles.mediaSocials}>
           {socialMedias.map((social, index) => (
             <a

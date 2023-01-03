@@ -67,6 +67,9 @@ function Content() {
           width={80}
         />
         <h2 className="text-primary">DEVER</h2>
+        <span>
+          Developped by <b className="or">Paul M. ZANNOU</b>
+        </span>
       </section>
 
       {/* The desktop shortcut */}
@@ -90,7 +93,7 @@ function Content() {
         </div>
       </section>
 
-      {/* The All wndows openned */}
+      {/* All windows openned */}
       <div className={styles.windows}>
         {windowsOpenned.map((wind, ind) => (
           <div
