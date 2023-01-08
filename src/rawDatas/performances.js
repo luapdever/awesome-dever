@@ -106,6 +106,27 @@ export const performances = [
     },
   },
   {
+    id: "avcall",
+    icon: "https://api.iconify.design/healthicons:group-discussion-meeting.svg",
+    bg: "#fff",
+    label: "AV Call",
+    isLink: true,
+    url: "https://avcall.netlify.app",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "January 08, 2023",
+      addedAt: "January 08, 2023",
+      technos: (
+        <>
+          <b>React JS</b>
+        </>
+      ),
+      more: "Do quickly meeting in one click... (Audio an Video Call).",
+    },
+  },
+  {
     id: "wecard",
     icon: "https://wecard-dever.netlify.app/card.png",
     bg: "#333333",
