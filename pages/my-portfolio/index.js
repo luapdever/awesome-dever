@@ -11,7 +11,7 @@ function MyPortfolio() {
   }, [])
 
   return (
-    <div className={"container"}>
+    <div className={"container hiddenOverflow"}>
       <Head>
         <title>Dever - Overview Portfolio</title>
         <meta name="description" content="Awesome portfolio in screen shape. Enjoy !!" />
