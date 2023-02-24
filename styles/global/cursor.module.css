@@ -36,6 +36,9 @@
     pointer-events: none;
     transform: translate(-50%, -50%);
 }
+.funCursor.disabled {
+  display: none !important;
+}
 
 .round, .roundB {
   width: 30px;

@@ -1,8 +1,11 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styles from "../../../styles/global/cursor.module.css";
 
 function Cursor({ props }) {
   const [mouse, setMouse] = useState({ x: 110, y: 110 });
+
+  const location = useRouter();
 
   const handleCursor = (event) => {
     setMouse({ x: event.clientX, y: event.clientY });
@@ -21,7 +24,10 @@ function Cursor({ props }) {
   return (
     <>
       <div
-        className={styles.funCursor}
+        className={
+          styles.funCursor +
+          (location.pathname.includes("my-portfolio") ? " "+styles.disabled : "")
+        }
         style={{
           top: mouse.y + "px",
           left: mouse.x + "px",

@@ -111,6 +111,7 @@
     align-items: center;
     gap: 5px;
     width: 100px;
+    height: 100px;
     overflow: hidden;
     padding: 8px;
     border-radius: 8px;
@@ -171,6 +172,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: move;
 }
 .contentBlk .windows>div .windHeader>.windActions {
     display: flex;
@@ -292,5 +294,14 @@
 
     .contentBlk .windows>div .windHeader>.windLabel {
         width: 80%;
+    }
+    .contentBlk .desktop .performances>div {
+        gap: 2px;
+        width: 80px;
+        height: 80px;
+        padding: 5px;
+    }
+    .contentBlk .desktop .performances>div>span {
+        font-size: 0.8em;
     }
 }
