@@ -227,43 +227,4 @@ export const performances = [
       more: "With Kloo, Increase engagement and traffic via links and micro-pages. Enrich your Instagram Bio pages. Videos, Music, Instagram Posts, ...",
     },
   },
-  {
-    id: "sevexchange",
-    icon: sevexchange.src,
-    label: "Sevexchange",
-    isLink: true,
-    url: "https://sevexchange.com",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
-    properties: {
-      createdAt: "June 30, 2019",
-      addedAt: "October 20, 2022",
-      technos: (
-        <>
-          <b>React, Node JS</b>
-        </>
-      ),
-      collaboraters: (
-        <>
-          <a
-            href={"https://github.com/Mohamed-Fdl"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b>Fadel ABOU</b>
-          </a>{" "}
-          -
-          <a
-            href={"https://github.com/EvansUchwa"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b>Evans Uchwa</b>
-          </a>
-        </>
-      ),
-      more: "Exchange your Crypto and Mobile Money currencies easily and securely.",
-    },
-  },
 ];
