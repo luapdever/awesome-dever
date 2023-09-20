@@ -169,6 +169,27 @@ export const performances = [
     },
   },
   {
+    id: "facebookconnect",
+    icon: "https://icones8.fr/icon/DOP2zfuoXrpk/facebook",
+    bg: "#ffffff",
+    label: "FB Connect",
+    isLink: true,
+    url: "https://tranquil-fbconnect.netlify.app/",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "Avril 01, 2023",
+      addedAt: "September 20, 2023",
+      technos: (
+        <>
+          <b>Vue JS</b>
+        </>
+      ),
+      more: "Jennyfer personal website.",
+    },
+  },
+  {
     id: "aws",
     icon: "https://aws.bj/logo.png",
     bg: "#181b1c",
