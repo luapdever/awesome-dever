@@ -170,7 +170,7 @@ export const performances = [
   },
   {
     id: "facebookconnect",
-    icon: "https://icones8.fr/icon/DOP2zfuoXrpk/facebook",
+    icon: "https://img.icons8.com/quill/50/facebook.png",
     bg: "#ffffff",
     label: "FB Connect",
     isLink: true,
