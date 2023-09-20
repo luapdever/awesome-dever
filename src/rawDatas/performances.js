@@ -15,7 +15,7 @@ export const performances = [
     icon: dever.src,
     label: "My Blog",
     isLink: true,
-    url: "https://blog.luap-dever.me",
+    url: "https://blog-luap-dever.netlify.app/",
     get content() {
       return <WinIframe props={{ source: this.url }} />;
     },
