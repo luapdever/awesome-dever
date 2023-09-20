@@ -148,6 +148,27 @@ export const performances = [
     },
   },
   {
+    id: "jenny",
+    icon: "https://jennyfer-portfolio.netlify.app/img/fav.jpg",
+    bg: "#ffffff",
+    label: "Jenny Portfolio",
+    isLink: true,
+    url: "https://jennyfer-portfolio.netlify.app/",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "September 05, 2022",
+      addedAt: "September 20, 2023",
+      technos: (
+        <>
+          <b>HTML</b>, <b>CSS</b>, <b>Bootstrap</b>
+        </>
+      ),
+      more: "Jennyfer personal website.",
+    },
+  },
+  {
     id: "aws",
     icon: "https://aws.bj/logo.png",
     bg: "#181b1c",
