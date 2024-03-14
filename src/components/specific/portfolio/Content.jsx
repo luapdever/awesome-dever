@@ -62,7 +62,7 @@ function Content() {
     >
       
       {/* The splash screen */}
-      {/* <section ref={welcomeScreen} className={styles.welcomeScreen}>
+      <section ref={welcomeScreen} className={styles.welcomeScreen}>
         <img
           src={dever.src}
           alt="Luap Dever logo"
@@ -73,7 +73,7 @@ function Content() {
         <span>
           Developped by <b className="or">Paul M. ZANNOU</b>
         </span>
-      </section> */}
+      </section>
 
       {/* The desktop shortcut */}
       <section className={styles.desktop}>
