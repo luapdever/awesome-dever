@@ -31,6 +31,26 @@ export const performances = [
     },
   },
   {
+    id: "dvdesktop",
+    icon: dever.src,
+    label: "DVDesktop",
+    isLink: true,
+    url: "https://kamgoko.com/demos/paul/virtual-desktop/",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "February 15, 2023",
+      addedAt: "March 15, 2024",
+      technos: (
+        <>
+          <b>Vue JS</b>
+        </>
+      ),
+      more: "Explore virtual desktop.",
+    },
+  },
+  {
     id: "terminal",
     icon: console.src,
     label: "Terminal",
@@ -190,43 +210,29 @@ export const performances = [
     },
   },
   {
-    id: "aws",
-    icon: "https://aws.bj/logo.png",
-    bg: "#181b1c",
-    label: "AWS",
+    id: "gocoachings",
+    icon: "https://www.gocoachings.com/favicon1.png",
+    bg: "#fff",
+    label: "GoCoachings",
     isLink: true,
-    url: "https://aws.bj",
+    url: "https://www.gocoachings.com",
     get content() {
       return <WinIframe props={{ source: this.url }} />;
     },
     properties: {
-      createdAt: "July 30, 2022",
-      addedAt: "October 20, 2022",
+      createdAt: "July 25, 2023",
+      addedAt: "March 14, 2024",
       technos: (
         <>
-          <b>React and Next JS</b>
+          <b>Nuxt.js, Strapi, Node.js, SCSS</b>
         </>
       ),
       collaboraters: (
         <>
-          <a
-            href={"https://github.com/Mohamed-Fdl"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b>Fadel ABOU</b>
-          </a>{" "}
-          -
-          <a
-            href={"https://github.com/EvansUchwa"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b>Evans Uchwa</b>
-          </a>
+          <b>Fadel ABOU</b> - <b>Evans Uchwa</b>
         </>
       ),
-      more: "Official All Web Service website.",
+      more: "The all-in-one platform for managing, monitoring and measuring your coaching sessions.",
     },
   },
   {
@@ -267,6 +273,45 @@ export const performances = [
         </>
       ),
       more: "With Kloo, Increase engagement and traffic via links and micro-pages. Enrich your Instagram Bio pages. Videos, Music, Instagram Posts, ...",
+    },
+  },
+  {
+    id: "sevexchange",
+    icon: sevexchange.src,
+    label: "Sevexchange",
+    isLink: true,
+    url: "https://sevexchange.com",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "June 30, 2019",
+      addedAt: "October 20, 2022",
+      technos: (
+        <>
+          <b>React, Node JS</b>
+        </>
+      ),
+      collaboraters: (
+        <>
+          <a
+            href={"https://github.com/Mohamed-Fdl"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <b>Fadel ABOU</b>
+          </a>{" "}
+          -
+          <a
+            href={"https://github.com/EvansUchwa"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <b>Evans Uchwa</b>
+          </a>
+        </>
+      ),
+      more: "Exchange your Crypto and Mobile Money currencies easily and securely.",
     },
   },
 ];

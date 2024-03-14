@@ -282,7 +282,7 @@ button:hover::after, .button:hover::after {
   }
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
@@ -299,4 +299,4 @@ button:hover::after, .button:hover::after {
   .logo img {
     filter: invert(1);
   }
-}
+} */
