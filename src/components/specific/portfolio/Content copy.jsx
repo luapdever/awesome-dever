@@ -28,9 +28,9 @@ function Content() {
     resizeWindow,
     minimizeWindow,
     closeWindow,
-    handleDragStart,
-    moveWindow,
-    handleDragEnd,
+    onDown,
+    onMove,
+    onUp,
     copyTabLink,
     switchContext,
     hideContextMenuIfVisible,
@@ -59,10 +59,12 @@ function Content() {
     <div
       className={styles.contentBlk}
       onClick={(e) => hideContextMenuIfVisible(e, contextMenus.current)}
+      onMouseMove={(e) => onMove(e)}
+      onMouseUp={(e) => onUp(e)}
+      onTouchMove={(e) => onMove(e)}
     >
-      
       {/* The splash screen */}
-      {/* <section ref={welcomeScreen} className={styles.welcomeScreen}>
+      <section ref={welcomeScreen} className={styles.welcomeScreen}>
         <img
           src={dever.src}
           alt="Luap Dever logo"
@@ -73,7 +75,7 @@ function Content() {
         <span>
           Developped by <b className="or">Paul M. ZANNOU</b>
         </span>
-      </section> */}
+      </section>
 
       {/* The desktop shortcut */}
       <section className={styles.desktop}>
@@ -109,10 +111,7 @@ function Content() {
           >
             <div
               className={styles.windHeader}
-              draggable
-              onDragStart={(e) => handleDragStart(e, "wind" + ind)}
-              onDrag={(e) => moveWindow(e, "wind" + ind)}
-              onDragEnd={(e) => handleDragEnd(e, "wind" + ind)}
+              onMouseDown={(e) => onDown(e, "wind" + ind)}
               onDoubleClick={(e) => resizeWindow(e, "wind" + ind)}
             >
               <div className={styles.windLabel}>

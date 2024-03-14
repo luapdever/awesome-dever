@@ -10,6 +10,9 @@ import Terminal from "../components/specific/portfolio/wndows/Terminal";
 const useWindowScreen = () => {
   const [currentWindow, setCurrentWindow] = useState("welcome");
   const [currentContext, setCurrentContext] = useState();
+  const [currentElInDrag, setCurrentElInDrag] = useState(null);
+
+  const state = { distX: 0, distY: 0 };
 
   const welcomeWindow = {
     id: "welcome",
@@ -38,9 +41,11 @@ const useWindowScreen = () => {
     },
   ]);
 
-  const state = {
-    x: 0,
-    y: 0,
+  const resetWindowState = () => {
+    if(currentElInDrag == null) return;
+    
+    currentElInDrag.style.pointerEvents = 'all';
+    currentElInDrag.style.transition = 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
   }
 
   const switchContext = (event, performance, refCtx) => {
@@ -118,38 +123,47 @@ const useWindowScreen = () => {
     setCurrentWindow(windowsOpenned.length > 0 ? windowsOpenned[windowsOpenned.length - 1].id : "")
   };
 
-	const handleDragStart = (e, idWind) => {
-    let tarWind = document.getElementById(idWind);
-
-    if(!e.dataTransfer) return;
-
-    let img = new Image();
-    img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=';
-    e.dataTransfer.setDragImage(img, 0, 0);
-
-    state.x = 0;
-    state.y = tarWind.offsetTop/2;
-    tarWind.classList.add('dragging');
-  }
-
-	const moveWindow = (e, idWind) => {
+	const onDown = (e, idWind = null) => {
     e.preventDefault();
+    
+    if(idWind) {
+      let tarWind = document.getElementById(idWind);
+      setCurrentElInDrag(tarWind);
+    }
 
-    let tarWind = document.getElementById(idWind);
+    if(currentElInDrag == null) return;
 
-		const mouse = {
-			x: e.clientX + state.x,
-			y: e.clientY + state.y,
-		}
-		if(!tarWind.fullscreen && mouse.x !== 0 && mouse.y !== 0) {
-			tarWind.style.top = mouse.y + "px";
-			tarWind.style.left = mouse.x + "px";
-		}
+    var evt = e.type === 'touchstart' ? e.changedTouches[0] : e;
+  
+    state.distX = Math.abs(currentElInDrag.offsetLeft - evt.clientX);
+    state.distY = Math.abs(currentElInDrag.offsetTop - evt.clientY);
+    
+    currentElInDrag.style.pointerEvents = 'none';
+    currentElInDrag.style.transition = 'none';
+
+		// const mouse = {
+		// 	x: e.clientX,
+		// 	y: e.clientY
+		// }
+		// if(!tarWind.fullscreen && mouse.x !== 0 && mouse.y !== 0) {
+		// 	tarWind.style.top = mouse.y + "px";
+		// 	tarWind.style.left = mouse.x + "px";
+		// }
 	}
 
-  const handleDragEnd = (e, idWind) => {
-    let tarWind = document.getElementById(idWind);
-    tarWind.classList.remove('dragging');
+  const onMove = (e) => {
+    if(currentElInDrag == null) return;
+
+    if (currentElInDrag.style.pointerEvents === 'none') {
+      var evt = e.type === 'touchmove' ? e.changedTouches[0] : e;
+      
+      currentElInDrag.style.left = `${evt.clientX - state.distX}px`;
+      currentElInDrag.style.top = `${evt.clientY - state.distY}px`;
+    };
+  }
+
+  const onUp = (e) => {
+    resetWindowState();
   }
 
 	const copyTabLink = (e, tabLink) => {
@@ -180,9 +194,9 @@ const useWindowScreen = () => {
 		resizeWindow,
 		minimizeWindow,
 		closeWindow,
-		handleDragStart,
-		moveWindow,
-		handleDragEnd,
+		onDown,
+		onMove,
+		onUp,
     copyTabLink,
     switchContext,
     hideContextMenuIfVisible,
