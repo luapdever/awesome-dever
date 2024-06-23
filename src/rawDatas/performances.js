@@ -316,7 +316,7 @@ export const performances = [
   },
   {
     id: "ninjalinking",
-    icon: sevexchange.src,
+    icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAPFBMVEVHcEz//4P//4P//4P//4P//4P//4P//4P//4P//4P//4P//4P//4P//4P//4P//4P//4P//4P//4P//4O5UZg5AAAAFHRSTlMARzoIEGxTmq4neMGCHozM/WC7606F424AAAETSURBVCiRdZJJgsQgCEURBRTneP+7NlZiuhbdrpTP+BDgPj5xESmcPHyfwJL7FePVs3D4taeSYyNSJm0xl3TsKNuMTv2cSBIFH3+7uupSSFArqrPnJyYUs8eT2FRTyn5yFgdvQQ8hupbZbhJJTznP26lSFA8pN8QTgH2Zr6OWE3DXWU+AjBZsVqTOUC56hTn67jQ4ugpIZKMgu3e/hm4iSTWKCWq1ZVwVriHh6cEES+UC1L6IxrpHrnOn4k5o3dJalggeQa24tUvOHnGMdSMPiLvdPWC11LzGfNjpZ0BD0jYqj+4JMFgbyQ0R0ksxHog3dsVaTU3G/2D/LEoI5/TqkKi9i3pWq8S6zV+r/f8z/PV9fgDxlAwONqjLlwAAAABJRU5ErkJggg==",
     label: "NinjaLinking",
     isLink: true,
     url: "https://app.ninjalinking.fr",
