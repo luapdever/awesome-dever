@@ -229,7 +229,7 @@ export const performances = [
       ),
       collaboraters: (
         <>
-          <b>Fadel ABOU</b> - <b>Evans Uchwa</b>
+          <b>Fidèle SODOGA</b> - <b>Fresnel AGLOSSI</b>
         </>
       ),
       more: "The all-in-one platform for managing, monitoring and measuring your coaching sessions.",
@@ -312,6 +312,31 @@ export const performances = [
         </>
       ),
       more: "Exchange your Crypto and Mobile Money currencies easily and securely.",
+    },
+  },
+  {
+    id: "ninjalinking",
+    icon: sevexchange.src,
+    label: "NinjaLinking",
+    isLink: true,
+    url: "https://app.ninjalinking.fr",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "Avril 20, 2024",
+      addedAt: "June 23, 2024",
+      technos: (
+        <>
+          <b>Vue.js, Laravel, Tailwind CSS</b>
+        </>
+      ),
+      collaboraters: (
+        <>
+          <b>Fidèle SODOGA</b> - <b>Fresnel AGLOSSI</b>
+        </>
+      ),
+      more: "Plateforme pour rechercher des backlinks à vos liens références.",
     },
   },
 ];
