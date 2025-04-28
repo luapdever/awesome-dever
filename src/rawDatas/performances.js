@@ -340,4 +340,56 @@ export const performances = [
       more: "Plateforme pour rechercher des backlinks à vos liens références.",
     },
   },
+  {
+    id: "mtnselfcare",
+    icon: "https://my.mtn.bj/wp-content/themes/kamgoko/mtn-logo-nav-new.svg",
+    label: "My MTN Web",
+    bg: "#FFFFFF",
+    isLink: true,
+    url: "https://my.mtn.bj/",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "Avril 20, 2024",
+      addedAt: "June 23, 2024",
+      technos: (
+        <>
+          <b>Vue.js, Wordpress, Bootstrap, Node.js</b>
+        </>
+      ),
+      collaboraters: (
+        <>
+          <b>KAMGOKO Technologies</b>
+        </>
+      ),
+      more: "MyMTN Web – Tout MTN dans une seule application",
+    },
+  },
+  {
+    id: "monrouteur",
+    icon: "https://my.mtn.bj/wp-content/themes/kamgoko/mtn-logo-nav-new.svg",
+    label: "Mon routeur",
+    bg: "#FFFFFF",
+    isLink: true,
+    url: "http://monrouteur.mtn.bj/?ref=noref",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "Avril 20, 2024",
+      addedAt: "June 23, 2024",
+      technos: (
+        <>
+          <b>HTML, CSS, JS, nginx</b>
+        </>
+      ),
+      collaboraters: (
+        <>
+          <b>KAMGOKO Technologies</b>
+        </>
+      ),
+      more: "Site du zéro landing page de MTN en cas d'expiration de forfaits sur un routeur MTN.",
+    },
+  },
 ];
