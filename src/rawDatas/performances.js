@@ -199,7 +199,7 @@ export const performances = [
       return <WinIframe props={{ source: this.url }} />;
     },
     properties: {
-      createdAt: "Avril 01, 2023",
+      createdAt: "April 01, 2023",
       addedAt: "September 20, 2023",
       technos: (
         <>
@@ -325,7 +325,7 @@ export const performances = [
       return <WinIframe props={{ source: this.url }} />;
     },
     properties: {
-      createdAt: "Avril 20, 2024",
+      createdAt: "April 20, 2024",
       addedAt: "June 23, 2024",
       technos: (
         <>
@@ -351,7 +351,7 @@ export const performances = [
       return <WinIframe props={{ source: this.url }} />;
     },
     properties: {
-      createdAt: "Avril 20, 2024",
+      createdAt: "April 20, 2024",
       addedAt: "June 23, 2024",
       technos: (
         <>
@@ -383,7 +383,7 @@ export const performances = [
       return <WinIframe props={{ source: this.url }} />;
     },
     properties: {
-      createdAt: "Avril 20, 2024",
+      createdAt: "April 20, 2024",
       addedAt: "June 23, 2024",
       technos: (
         <>
@@ -415,7 +415,7 @@ export const performances = [
       return <WinIframe props={{ source: this.url }} />;
     },
     properties: {
-      createdAt: "Avril 20, 2024",
+      createdAt: "April 20, 2024",
       addedAt: "June 23, 2024",
       technos: (
         <>
@@ -447,7 +447,7 @@ export const performances = [
       return <WinIframe props={{ source: this.url }} />;
     },
     properties: {
-      createdAt: "Avril 20, 2024",
+      createdAt: "April 20, 2024",
       addedAt: "June 23, 2024",
       technos: (
         <>
@@ -466,6 +466,32 @@ export const performances = [
         </>
       ),
       more: "Achat et vente en ligne de tout type de produits au Bénin.",
+    },
+  },
+  {
+    id: "mdt",
+    icon: "https://app-mdt.fr/assets/logo-Of-Jg48T.png",
+    label: "MIROITERIE DU TERNOIS",
+    bg: "#FFFFFF",
+    isLink: true,
+    url: "https://app-mdt.fr",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "April 05, 2025",
+      addedAt: "April 28, 2025",
+      technos: (
+        <>
+          <b>Vue.js, Laravel, Tailwind CSS</b>
+        </>
+      ),
+      collaboraters: (
+        <>
+          <b>Fidèle SODOGA</b> - <b>Fresnel AGLOSSI</b>
+        </>
+      ),
+      more: "Application de gestion des ouvriers, des chantiers et des travaux effectués.",
     },
   },
 ];
