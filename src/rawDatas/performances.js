@@ -360,7 +360,13 @@ export const performances = [
       ),
       collaboraters: (
         <>
-          <b>KAMGOKO Technologies</b>
+          <a
+            href={"https://kamgoko.tech"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <b>KAMGOKO Technologies</b>
+          </a>
         </>
       ),
       more: "MyMTN Web – Tout MTN dans une seule application",
@@ -386,10 +392,80 @@ export const performances = [
       ),
       collaboraters: (
         <>
-          <b>KAMGOKO Technologies</b>
+          <a
+            href={"https://kamgoko.tech"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <b>KAMGOKO Technologies</b>
+          </a>
         </>
       ),
       more: "Site du zéro landing page de MTN en cas d'expiration de forfaits sur un routeur MTN.",
+    },
+  },
+  {
+    id: "ytickets",
+    icon: "https://my.mtn.bj/wp-content/themes/kamgoko/mtn-logo-nav-new.svg",
+    label: "Y'ello Tickets",
+    bg: "#FFFFFF",
+    isLink: true,
+    url: "https://my.mtn.bj/yello-tickets/",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "Avril 20, 2024",
+      addedAt: "June 23, 2024",
+      technos: (
+        <>
+          <b>Vue.js, Node.js</b>
+        </>
+      ),
+      collaboraters: (
+        <>
+          <a
+            href={"https://kamgoko.tech"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <b>KAMGOKO Technologies</b>
+          </a>
+        </>
+      ),
+      more: "Application de gestion des tickets de support par les agents MTN.",
+    },
+  },
+  {
+    id: "ymarket",
+    icon: "https://my.mtn.bj/wp-content/themes/kamgoko/mtn-logo-nav-new.svg",
+    label: "Y'ello Market",
+    bg: "#FFFFFF",
+    isLink: true,
+    url: "https://shop.mtn.bj/",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "Avril 20, 2024",
+      addedAt: "June 23, 2024",
+      technos: (
+        <>
+          <b>Vue.js, Node.js</b>
+        </>
+      ),
+      collaboraters: (
+        <>
+          <a
+            href={"https://kamgoko.tech"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <b>KAMGOKO Technologies</b>
+          </a>
+        </>
+      ),
+      more: "Achat et vente en ligne de tout type de produits au Bénin.",
     },
   },
 ];
