@@ -71,7 +71,7 @@ function Content() {
         />
         <h2 className="text-primary">DEVER</h2>
         <span>
-          Developped by <b className="or">Paul M. ZANNOU</b>
+          Developped by <b className="or">Paul Mèdédji ZANNOU</b>
         </span>
       </section>
 

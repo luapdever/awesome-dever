@@ -30,26 +30,26 @@ export const performances = [
       more: "This is where all my performances and news that I want to share will be found.",
     },
   },
-  {
-    id: "dvdesktop",
-    icon: dever.src,
-    label: "DVDesktop",
-    isLink: true,
-    url: "https://kamgoko.com/demos/paul/virtual-desktop/",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
-    properties: {
-      createdAt: "February 15, 2023",
-      addedAt: "March 15, 2024",
-      technos: (
-        <>
-          <b>Vue JS</b>
-        </>
-      ),
-      more: "Explore virtual desktop.",
-    },
-  },
+  // {
+  //   id: "dvdesktop",
+  //   icon: dever.src,
+  //   label: "DVDesktop",
+  //   isLink: true,
+  //   url: "https://kamgoko.com/demos/paul/virtual-desktop/",
+  //   get content() {
+  //     return <WinIframe props={{ source: this.url }} />;
+  //   },
+  //   properties: {
+  //     createdAt: "February 15, 2023",
+  //     addedAt: "March 15, 2024",
+  //     technos: (
+  //       <>
+  //         <b>Vue JS</b>
+  //       </>
+  //     ),
+  //     more: "Explore virtual desktop.",
+  //   },
+  // },
   {
     id: "terminal",
     icon: console.src,
@@ -104,27 +104,27 @@ export const performances = [
       more: "Discover my all mobile project with Flutter technology.",
     },
   },
-  {
-    id: "devshop",
-    icon: "https://devshop-luap.netlify.app/_nuxt/img/DevShop.625c106.svg",
-    bg: "#000000bb",
-    label: "DevShop",
-    isLink: true,
-    url: "https://devshop-luap.netlify.app",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
-    properties: {
-      createdAt: "June 30, 2019",
-      addedAt: "October 20, 2022",
-      technos: (
-        <>
-          <b>Nuxt JS, Strapi</b>
-        </>
-      ),
-      more: "E-commerce application offering sales of various categories of items such as Clothes, Jewel, Look; ... This application evokes functionality from order to delivery.",
-    },
-  },
+  // {
+  //   id: "devshop",
+  //   icon: "https://devshop-luap.netlify.app/_nuxt/img/DevShop.625c106.svg",
+  //   bg: "#000000bb",
+  //   label: "DevShop",
+  //   isLink: true,
+  //   url: "https://devshop-luap.netlify.app",
+  //   get content() {
+  //     return <WinIframe props={{ source: this.url }} />;
+  //   },
+  //   properties: {
+  //     createdAt: "June 30, 2019",
+  //     addedAt: "October 20, 2022",
+  //     technos: (
+  //       <>
+  //         <b>Nuxt JS, Strapi</b>
+  //       </>
+  //     ),
+  //     more: "E-commerce application offering sales of various categories of items such as Clothes, Jewel, Look; ... This application evokes functionality from order to delivery.",
+  //   },
+  // },
   {
     id: "avcall",
     icon: "https://api.iconify.design/healthicons:group-discussion-meeting.svg",
@@ -236,6 +236,32 @@ export const performances = [
     },
   },
   {
+    id: "wapify",
+    icon: "https://wapify.co/assets/img/logo.svg",
+    bg: "#fff",
+    label: "WAPIFY",
+    isLink: true,
+    url: "https://wapify.co/",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "July 25, 2023",
+      addedAt: "March 14, 2024",
+      technos: (
+        <>
+          <b>Vue.js, Laravel, Python, Node.js, GPT AI Model, Bootstrap, Tailwind CSS</b>
+        </>
+      ),
+      collaboraters: (
+        <>
+          <b>Fidèle SODOGA</b> - <b>Fresnel AGLOSSI</b>
+        </>
+      ),
+      more: "Explode your sales, qualify your top clients, and watch your profits skyrocket—all while you sleep—with WAPIFY™️, the must have and easy to use All-in-One WhatsApp Marketing AI Tool.",
+    },
+  },
+  {
     id: "kloo",
     icon: "https://kloo.me/themes/altum/assets/images/customs/kloo.svg",
     bg: "#4062ff",
@@ -338,6 +364,38 @@ export const performances = [
         </>
       ),
       more: "Plateforme pour rechercher des backlinks à vos liens références.",
+    },
+  },
+  {
+    id: "yconnect",
+    icon: "https://my.mtn.bj/wp-content/themes/kamgoko/mtn-logo-nav-new.svg",
+    label: "Y'ello Connect",
+    bg: "#FFFFFF",
+    isLink: true,
+    url: "https://auth.mtn.bj/",
+    get content() {
+      return <WinIframe props={{ source: this.url }} />;
+    },
+    properties: {
+      createdAt: "April 20, 2024",
+      addedAt: "June 23, 2024",
+      technos: (
+        <>
+          <b>Vue.js, Bootstrap, Node.js</b>
+        </>
+      ),
+      collaboraters: (
+        <>
+          <a
+            href={"https://kamgoko.tech"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <b>KAMGOKO Technologies</b>
+          </a>
+        </>
+      ),
+      more: "Y'ello Connect - Portail d'authentification de MTN Bénin",
     },
   },
   {

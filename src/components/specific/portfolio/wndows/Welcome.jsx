@@ -10,13 +10,13 @@ function WelcomeContent() {
       </h1>
       <div>
         <p>
-          You can see on this screen some of my performances or collaborations in web and mobile
-          development. Just like on a computer, you <b className="or">double click</b> on an icon to
-          see the content. Some of this content uses external resources such as
-          <b className="or"> embedded websites</b>. So you have the choice to open it in a new tab to
-          have a good experience. For more information, you can <b className="or">contact me</b>.
+          This screen showcases a selection of my work and collaborations in web and mobile development. 
+          As on a desktop, you can <b className="or">double-click</b> an icon to explore its content. 
+          Some projects include <b className="or">embedded websites</b> or external resources — feel free to open them in a new tab for a smoother experience. 
+          Please note that several projects cannot be displayed here due to confidentiality agreements, as they involve internal enterprise applications. 
+          For more details or to discuss my full experience, feel free to <b className="or">contact me</b>.
         </p>
-        <p style={{ textAlign: "right" }}><em>Paul M. ZANNOU</em></p>
+        <p style={{ textAlign: "right" }}><em>Paul Mèdédji ZANNOU</em></p>
         <p className={styles.mediaSocials}>
           {socialMedias.map((social, index) => (
             <a
