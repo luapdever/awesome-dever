@@ -436,7 +436,7 @@ export const performances = [
     label: "Mon routeur",
     bg: "#FFFFFF",
     isLink: true,
-    url: "http://monrouteur.mtn.bj/?ref=noref",
+    url: "https://monrouteur.mtn.bj/?ref=noref",
     get content() {
       return <WinIframe props={{ source: this.url }} />;
     },
