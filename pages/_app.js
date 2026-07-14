@@ -7,6 +7,7 @@ import NavBar from "../src/components/global/nav";
 import "../styles/keyframes.css";
 import "../styles/globals.css";
 import Cursor from "../src/components/global/cursor";
+import { LandingLangProvider } from "../src/context/landingLang";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -26,11 +27,13 @@ function MyApp({ Component, pageProps }) {
       style={{ fontFamily: "var(--font-sans), 'Montserrat', 'Segoe UI', system-ui, sans-serif" }}
     >
       <Suspense fallback={<p>Loading</p>}>
-        <Cursor />
-        {!hideChrome && <NavBar />}
-        <Component {...pageProps} />
-        <ToastContainer theme="dark" />
-        {!hideChrome && <TheFooter />}
+        <LandingLangProvider>
+          <Cursor />
+          {!hideChrome && <NavBar />}
+          <Component {...pageProps} />
+          <ToastContainer theme="dark" />
+          {!hideChrome && <TheFooter />}
+        </LandingLangProvider>
       </Suspense>
     </div>
   );

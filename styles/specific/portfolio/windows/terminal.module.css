@@ -38,6 +38,7 @@
 }
 .terminal .shellInput input {
     flex: 1;
+    min-width: 0;
     height: 24px;
     background: none;
     border: none;

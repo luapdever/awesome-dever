@@ -5,14 +5,16 @@ import gsap from "gsap/dist/gsap";
 import dever from "../../assets/img/icons/DEVER.svg";
 import styles from "../../../styles/global/nav.module.css";
 import { socialMedias } from "../../rawDatas/aboutMe";
+import { L, tx } from "../../rawDatas/i18n";
+import { useLandingLang } from "../../context/landingLang";
 
 const LINKS = [
-  { label: "Accueil", href: "/", id: "top" },
-  { label: "Qui suis-je", href: "/#qui-suis-je", id: "qui-suis-je" },
-  { label: "Compétences", href: "/#que-sais-je-faire", id: "que-sais-je-faire" },
-  { label: "Parcours", href: "/#parcours", id: "parcours" },
-  { label: "Expériences", href: "/#experiences", id: "experiences" },
-  { label: "Bio", href: "/about-me", id: "bio" },
+  { label: L("Home", "Accueil"), href: "/", id: "top" },
+  { label: L("About", "Qui suis-je"), href: "/#qui-suis-je", id: "qui-suis-je" },
+  { label: L("Skills", "Compétences"), href: "/#que-sais-je-faire", id: "que-sais-je-faire" },
+  { label: L("Journey", "Parcours"), href: "/#parcours", id: "parcours" },
+  { label: L("Experience", "Expériences"), href: "/#experiences", id: "experiences" },
+  { label: L("Bio", "Bio"), href: "/about-me", id: "bio" },
 ];
 
 function NavBar() {
@@ -20,6 +22,8 @@ function NavBar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("top");
   const overlay = useRef();
+  const { lang, setLang } = useLandingLang();
+  const other = lang === "fr" ? "en" : "fr";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -67,12 +71,16 @@ function NavBar() {
         <nav className={styles.pill}>
           {LINKS.map((l) => (
             <Link key={l.id} href={l.href} className={`${styles.pillLink} ${active === l.id ? styles.pillActive : ""}`}>
-              {l.label}
+              {tx(l.label, lang)}
             </Link>
           ))}
         </nav>
 
         <div className={styles.right}>
+          <div className={styles.langSwitch}>
+            <button className={lang === "fr" ? styles.langActive : ""} onClick={() => setLang("fr")}>FR</button>
+            <button className={lang === "en" ? styles.langActive : ""} onClick={() => setLang("en")}>EN</button>
+          </div>
           <Link href="/paulfolio" className={styles.cta}>PaulBrain&nbsp;OS</Link>
           <button
             className={`${styles.burger} ${open ? styles.burgerOpen : ""}`}
@@ -90,7 +98,7 @@ function NavBar() {
           {overlayLinks.map((l, i) => (
             <Link key={l.id} href={l.href} className={styles.overlayLink} data-oitem onClick={() => setOpen(false)}>
               <span className={styles.oIndex}>{String(i + 1).padStart(2, "0")}</span>
-              <span className={styles.oLabel}>{l.label}</span>
+              <span className={styles.oLabel}>{tx(l.label, lang)}</span>
             </Link>
           ))}
         </nav>

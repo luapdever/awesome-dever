@@ -105,7 +105,7 @@
 .mile p { margin: 0; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); line-height: 1.5; }
 
 /* Interests */
-.interests { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 22px; }
+.interests { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 52px; }
 .interest { padding: 26px 22px; border-radius: var(--radius-lg); background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); transition: transform 0.3s var(--ease-spring), border-color 0.3s ease; }
 .interest:hover { transform: translateY(-4px); border-color: var(--color-accent); }
 .interest img { width: 32px; height: 32px; margin-bottom: 14px; }

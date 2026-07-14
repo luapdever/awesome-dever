@@ -56,7 +56,7 @@ function TheFooter() {
         <span className={styles.made}>
           Conçu &amp; codé avec
           <img src="https://api.iconify.design/ph:coffee-fill.svg?color=%23ffa500" alt="café" className={styles.madeIcon} />
-          · Next.js &amp; GSAP
+          · passion
         </span>
       </div>
     </footer>

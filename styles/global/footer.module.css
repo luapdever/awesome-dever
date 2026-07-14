@@ -67,10 +67,11 @@
 .madeIcon { width: 15px; height: 15px; vertical-align: middle; }
 
 @media (max-width: 860px) {
-  .top { grid-template-columns: 1fr 1fr; gap: 30px; }
+  .top { grid-template-columns: 1fr 1fr; gap: 30px 24px; }
   .brand { grid-column: 1 / -1; }
 }
 @media (max-width: 520px) {
-  .top { grid-template-columns: 1fr; }
+  /* Keep the menu columns two-by-two instead of a single stack */
+  .top { padding: 44px 20px 30px; gap: 26px 18px; }
   .bottom { flex-direction: column; text-align: center; }
 }

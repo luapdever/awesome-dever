@@ -16,7 +16,7 @@ function Seo({
   title = SITE_NAME,
   description = DEFAULT_DESCRIPTION,
   path = "/",
-  image = "luap.png",
+  image = "awesome-dever.png",
   type = "website",
   jsonLd,
 }) {
@@ -30,6 +30,7 @@ function Seo({
       <meta name="description" content={description} />
       <meta name="author" content="Paul M. ZANNOU" />
       <link rel="canonical" href={url} />
+      <link rel="image_src" href={imageUrl} />
 
       {/* Open Graph */}
       <meta property="og:site_name" content={SITE_NAME} key="ogsite" />
@@ -38,12 +39,18 @@ function Seo({
       <meta property="og:type" content={type} key="ogtype" />
       <meta property="og:url" content={url} key="ogurl" />
       <meta property="og:image" content={imageUrl} key="ogimage" />
+      <meta property="og:image:secure_url" content={imageUrl} key="ogimagesecure" />
+      <meta property="og:image:type" content="image/png" key="ogimagetype" />
+      <meta property="og:image:width" content="1490" key="ogimagew" />
+      <meta property="og:image:height" content="990" key="ogimageh" />
+      <meta property="og:image:alt" content={title} key="ogimagealt" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:image:alt" content={title} />
 
       {jsonLd && (
         <script
