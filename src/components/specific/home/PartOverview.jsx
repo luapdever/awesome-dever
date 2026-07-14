@@ -30,7 +30,7 @@ function PartOverview() {
             />
           </div>
           <div className={styles.partLink}>
-            <Link href={"/my-portfolio"}>
+            <Link href={"/paulfolio"}>
               Overview
             </Link>
             <a

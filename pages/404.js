@@ -1,52 +1,19 @@
 import React from "react";
 import styles from "../styles/specific/404.module.css";
-import notOnRoad from "../src/assets/img/awesome/notOnRoad.svg";
-import Image from "next/image";
 import Link from "next/link";
-import Head from "next/head";
+import Seo from "../src/components/global/seo";
 
 function Custom404() {
   return (
     <>
-      <Head>
-        <title>Dever - Page Not Found</title>
-        <meta
-          name="description"
-          content="I am a fullstack developer of digital solutions, creative
-        interfaces, web services, APIs. With three years of experience in 
-        Internet and Multimedia, I marvelously merge 2D, 3D 
-        and text to make interactive and
-        experimental applications that respond to given solutions."
-        />
-        <meta
-          property='og:title'
-          content='Dever - Awesome portfolio | Paul M. ZANNOU'
-          key='title'
-        />
-        <meta
-          property='og:image'
-          content={"https://luap-dever.me/luap.png"}
-          key='image'
-        />
-        <meta property='og:url' content={"https://luap-dever.me"} key='url' />
-        <meta
-          name='description'
-          content='I am a fullstack developer of digital solutions, creative
-          interfaces, web services, APIs. With three years of experience in 
-          Internet and Multimedia, I marvelously merge 2D, 3D 
-          and text to make interactive and
-          experimental applications that respond to given solutions.'
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Seo path="/404" title="Dever - Page Not Found | Paul M. ZANNOU" />
       <div className={styles.block404}>
-        <h1>404 - You're not on road !</h1>
+        <h1>404 - You&apos;re not on road !</h1>
         <div>
           <Link href={"/"}>
             <div className="button">Go to home</div>
           </Link>
         </div>
-        {/* <Image src={notOnRoad} alt="Not On Road" /> */}
       </div>
     </>
   );

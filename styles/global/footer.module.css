@@ -1,12 +1,12 @@
 .footer {
   display: flex;
   padding: 2rem 0;
-  border-top: 1px solid #999;
+  border-top: 1px solid var(--glass-border);
   justify-content: space-evenly;
   align-items: center;
-  background-color: #111;
-  /* position: absolute;
-  bottom: 0; */
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
   z-index: 9999999;
 }
 .footer>div:nth-child(1)>h3 {
@@ -32,7 +32,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 3px;
+  border-radius: 10px;
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.footer .socialMedias a:hover {
+  transform: translateY(-4px);
+  background-color: var(--color-accent);
+  color: white;
+  box-shadow: var(--shadow-glow);
 }
 
 @media (max-width: 768px) {

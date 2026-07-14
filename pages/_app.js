@@ -1,34 +1,38 @@
-import Head from "next/head";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Montserrat } from "next/font/google";
 import TheFooter from "../src/components/global/footer";
 import NavBar from "../src/components/global/nav";
 import "../styles/keyframes.css";
 import "../styles/globals.css";
-import gsap from 'gsap'
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Cursor from "../src/components/global/cursor";
-import { Router } from "next/router";
 
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+});
 
 function MyApp({ Component, pageProps }) {
-  useEffect(() => {
-    Router.events.on("routeChangeStart", (url)=>{
-      console.log("Route is changing")
-    }) 
-  }, [])
+  // Pages can opt out of the global chrome (nav + footer) — e.g. the OS
+  // at /paulfolio runs full-screen without header/footer.
+  const hideChrome = Component.hideChrome === true;
 
   return (
-    <>
+    <div
+      className={montserrat.variable}
+      style={{ fontFamily: "var(--font-sans), 'Montserrat', 'Segoe UI', system-ui, sans-serif" }}
+    >
       <Suspense fallback={<p>Loading</p>}>
         <Cursor />
-        <NavBar />
+        {!hideChrome && <NavBar />}
         <Component {...pageProps} />
-        <ToastContainer />
-        <TheFooter />
+        <ToastContainer theme="dark" />
+        {!hideChrome && <TheFooter />}
       </Suspense>
-    </>
+    </div>
   );
 }
 

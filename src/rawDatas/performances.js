@@ -4,52 +4,145 @@ import console from "../assets/img/icons/console.png";
 import appIcon from "../assets/img/icons/appStore.png";
 import sevexchange from "../assets/img/icons/projects/sevexchange.png";
 
-import WinIframe from "../components/global/custiframe";
 import AppStore from "../components/specific/portfolio/wndows/AppStore";
 import Contact from "../components/specific/portfolio/wndows/Contact";
 import Terminal from "../components/specific/portfolio/wndows/Terminal";
+import Skills from "../components/specific/portfolio/wndows/Skills";
+import Career from "../components/specific/portfolio/wndows/Career";
+import Vault from "../components/specific/portfolio/wndows/Vault";
+import { appWindow } from "../components/specific/portfolio/wndows/AppWindow";
+import { L } from "./i18n";
+
+const MTN_LOGO = "https://my.mtn.bj/wp-content/themes/kamgoko/mtn-logo-nav-new.svg";
+const KAMGOKO = "KAMGOKO Technologies";
+const STUDIO = "Fidèle SODOGA · Fresnel AGLOSSI";
+
+/* Company / theme folders (iOS-style groups). Apps carrying `group` are folded here. */
+export const groupsMeta = {
+  MTN: { name: "MTN", icon: MTN_LOGO, bg: "#FFFFFF" },
+  Trainings: { name: "Trainings", icon: "https://api.iconify.design/fluent-emoji-flat:graduation-cap.svg", bg: "#0e0730" },
+};
 
 export const performances = [
+  /* ============ System apps (Paul's mind) ============ */
+  {
+    id: "career",
+    icon: "https://api.iconify.design/fluent-emoji-flat:briefcase.svg",
+    label: "Career",
+    get content() { return <Career />; },
+    properties: {
+      category: L("System · Experience", "Système · Expérience"),
+      status: "Live",
+      role: L("Full-Stack Software Engineer", "Ingénieur logiciel full-stack"),
+      year: "2020 — Present",
+      stack: ["React JS"],
+      features: [L("5+ years of experience", "Plus de 5 ans d'expérience"), L("Interactive timeline", "Frise interactive"), "Data source: experiences.js"],
+      more: L("5+ years of professional experience rendered as a live, data-driven timeline.", "Plus de 5 ans d'expérience professionnelle sous forme de frise dynamique."),
+    },
+  },
+  {
+    id: "skills",
+    icon: "https://api.iconify.design/fluent-emoji-flat:brain.svg",
+    label: "Skills",
+    get content() { return <Skills />; },
+    properties: {
+      category: L("System · Stack", "Système · Stack"),
+      status: "Live",
+      role: "Full-Stack",
+      year: "Today",
+      stack: ["React JS"],
+      features: [L("8 skill categories", "8 catégories de compétences"), L("Proficiency bars", "Barres de niveau"), "Data source: skillset.js"],
+      more: L("The technical stack running on this machine, with proficiency levels.", "La stack technique qui tourne sur cette machine, avec les niveaux."),
+    },
+  },
+  {
+    id: "vault",
+    icon: "https://api.iconify.design/fluent-emoji-flat:locked-with-key.svg",
+    label: "Enterprise",
+    get content() { return <Vault />; },
+    properties: {
+      category: L("System · Confidential", "Système · Confidentiel"),
+      status: "Enterprise",
+      year: "2022 — 2026",
+      stack: ["React JS"],
+      features: [L("Private & enterprise projects", "Projets privés & entreprise"), L("Described with permission", "Décrits avec autorisation")],
+      more: L("Private & enterprise projects (InvoicePay, Celtiis…) grouped and described.", "Projets privés & entreprise (InvoicePay, Celtiis…) regroupés et décrits."),
+    },
+  },
+  {
+    id: "cv",
+    icon: "https://api.iconify.design/fluent-emoji-flat:memo.svg",
+    label: "CV",
+    isLink: true,
+    embed: true,
+    fullscreenOnly: true,
+    syncLang: true,
+    url: "/cv/index.html",
+    get content() { return appWindow(this); },
+    properties: {
+      category: L("System · Résumé", "Système · CV"),
+      status: "Live",
+      role: L("Full-Stack Software Engineer", "Ingénieur logiciel full-stack"),
+      year: "2020 — Present",
+      stack: ["HTML", "CSS", "JavaScript"],
+      features: [L("FR / EN + 4 profiles", "FR / EN + 4 profils"), L("One-click PDF export", "Export PDF en un clic"), L("Always fullscreen", "Toujours en plein écran")],
+      more: L("My interactive résumé — bilingual, with Full-Stack / Frontend / Backend / DevOps variants and PDF export.", "Mon CV interactif — bilingue, avec les variantes Full-Stack / Frontend / Backend / DevOps et export PDF."),
+    },
+  },
+
+  /* ============ Featured public app ============ */
+  {
+    id: "emilia",
+    icon: "https://emiliacross.com/assets/images/app-logo-rounded.png",
+    bg: "#00000000",
+    label: "Emilia Cross",
+    isLink: true,
+    embed: false,
+    url: "https://emiliacross.com/",
+    get content() { return appWindow(this); },
+    properties: {
+      category: L("Social · Live video streaming", "Social · Streaming vidéo en direct"),
+      status: "Live",
+      role: L("Architect & Backend / Real-Time Developer", "Architecte & développeur backend / temps réel"),
+      client: "France Assist",
+      team: "France Assist",
+      year: "2024 — 2025",
+      stack: ["NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker"],
+      features: [
+        L("Per-minute credit-based billing with Stripe", "Facturation à la minute par crédits (Stripe)"),
+        L("Agora live video + dedicated WebSocket signaling", "Vidéo live Agora + signalisation WebSocket dédiée"),
+        L("KYC verification, RBAC and 2FA", "Vérification KYC, RBAC et 2FA"),
+      ],
+      createdAt: "January 2024",
+      addedAt: "Today",
+      more: L(
+        "Live video matchmaking platform: per-minute credit billing, Stripe payments, KYC, partner discovery and real-time messaging. Multi-service NestJS architecture with a dedicated WebSocket server, RBAC, 2FA and monitoring.",
+        "Plateforme de mise en relation par visio en direct : facturation à la minute par crédits, paiements Stripe, KYC, découverte de partenaires et messagerie temps réel. Architecture NestJS multi-services avec serveur WebSocket dédié, RBAC, 2FA et supervision."
+      ),
+    },
+  },
+
+  /* ============ Personal apps & demos ============ */
   {
     id: "dever",
     icon: dever.src,
     label: "My Blog",
     isLink: true,
+    embed: true,
     url: "https://blog-luap-dever.netlify.app/",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
+    get content() { return appWindow(this); },
     properties: {
+      category: L("Personal · Blog", "Personnel · Blog"),
+      status: "Live",
+      role: L("Full-Stack Developer", "Développeur full-stack"),
+      year: "2021 — Present",
+      stack: ["Vue.js", "Nuxt.js", "Laravel"],
+      features: [L("Articles & news", "Articles & actus"), L("Personal space", "Espace personnel")],
       createdAt: "December 15, 2021",
       addedAt: "October 20, 2022",
-      technos: (
-        <>
-          <b>Vue and Nuxt JS, Laravel</b>
-        </>
-      ),
-      more: "This is where all my performances and news that I want to share will be found.",
+      more: L("Where I share my work, experiments and news.", "Où je partage mon travail, mes expériences et mes actus."),
     },
   },
-  // {
-  //   id: "dvdesktop",
-  //   icon: dever.src,
-  //   label: "DVDesktop",
-  //   isLink: true,
-  //   url: "https://kamgoko.com/demos/paul/virtual-desktop/",
-  //   get content() {
-  //     return <WinIframe props={{ source: this.url }} />;
-  //   },
-  //   properties: {
-  //     createdAt: "February 15, 2023",
-  //     addedAt: "March 15, 2024",
-  //     technos: (
-  //       <>
-  //         <b>Vue JS</b>
-  //       </>
-  //     ),
-  //     more: "Explore virtual desktop.",
-  //   },
-  // },
   {
     id: "terminal",
     icon: console.src,
@@ -57,32 +150,28 @@ export const performances = [
     bg: "#00000000",
     content: <Terminal />,
     properties: {
-      createdAt: "October 20, 2022",
-      addedAt: "October 20, 2022",
-      technos: (
-        <>
-          <b>React JS</b>
-        </>
-      ),
-      more: "Discover information about me by typing in a command line.",
+      category: L("System · Shell", "Système · Shell"),
+      status: "Live",
+      role: "React JS",
+      year: "2022",
+      stack: ["React JS"],
+      features: [L("about · edu · skills commands", "commandes about · edu · skills"), L("Interactive CLI", "CLI interactive")],
+      more: L("Discover information about me by typing commands.", "Découvrez des infos sur moi en tapant des commandes."),
     },
   },
   {
     id: "contact",
     icon: contactImg.src,
     label: "Contact me",
-    get content() {
-      return <Contact />;
-    },
+    get content() { return <Contact />; },
     properties: {
-      createdAt: "December 15, 2021",
-      addedAt: "October 20, 2022",
-      technos: (
-        <>
-          <b>Next JS</b>
-        </>
-      ),
-      more: "You can contact me with form on this window.",
+      category: L("System · Contact", "Système · Contact"),
+      status: "Live",
+      role: "Next JS",
+      year: "2022",
+      stack: ["Next.js"],
+      features: [L("Message form", "Formulaire de message"), L("Direct reach", "Contact direct")],
+      more: L("Reach me directly through the form.", "Contactez-moi directement via le formulaire."),
     },
   },
   {
@@ -90,60 +179,193 @@ export const performances = [
     icon: appIcon.src,
     bg: "#999",
     label: "App Store",
-    get content() {
-      return <AppStore />;
-    },
+    get content() { return <AppStore />; },
     properties: {
-      createdAt: "June 30, 2019",
-      addedAt: "October 20, 2022",
-      technos: (
-        <>
-          <b>Flutter</b>
-        </>
-      ),
-      more: "Discover my all mobile project with Flutter technology.",
+      category: L("Mobile · Store", "Mobile · Store"),
+      status: "Live",
+      role: L("Mobile Developer", "Développeur mobile"),
+      year: "2019 — 2022",
+      stack: ["Flutter", "Dart"],
+      features: ["Ovote · UserList · ToDoList · QR Scan", L("Flutter apps", "Applis Flutter")],
+      more: L("My mobile projects built with Flutter.", "Mes projets mobiles réalisés avec Flutter."),
     },
   },
-  // {
-  //   id: "devshop",
-  //   icon: "https://devshop-luap.netlify.app/_nuxt/img/DevShop.625c106.svg",
-  //   bg: "#000000bb",
-  //   label: "DevShop",
-  //   isLink: true,
-  //   url: "https://devshop-luap.netlify.app",
-  //   get content() {
-  //     return <WinIframe props={{ source: this.url }} />;
-  //   },
-  //   properties: {
-  //     createdAt: "June 30, 2019",
-  //     addedAt: "October 20, 2022",
-  //     technos: (
-  //       <>
-  //         <b>Nuxt JS, Strapi</b>
-  //       </>
-  //     ),
-  //     more: "E-commerce application offering sales of various categories of items such as Clothes, Jewel, Look; ... This application evokes functionality from order to delivery.",
-  //   },
-  // },
+
+  /* ============ MTN group (company folder) ============ */
+  {
+    id: "yconnect",
+    icon: MTN_LOGO,
+    label: "Y'ello Connect",
+    bg: "#FFFFFF",
+    group: "MTN",
+    isLink: true,
+    embed: false,
+    url: "https://auth.mtn.bj/",
+    get content() { return appWindow(this); },
+    properties: {
+      category: L("Telecom · Auth / SSO", "Télécom · Auth / SSO"),
+      status: "Live",
+      role: L("Frontend Developer", "Développeur frontend"),
+      client: "MTN Bénin",
+      team: KAMGOKO,
+      year: "2024",
+      stack: ["Vue.js", "Bootstrap", "Node.js"],
+      features: [L("Single sign-on portal", "Portail d'authentification unique"), L("Secure authentication", "Authentification sécurisée")],
+      more: L("Y'ello Connect — MTN Bénin's authentication portal.", "Y'ello Connect — le portail d'authentification de MTN Bénin."),
+    },
+  },
+  {
+    id: "mtnselfcare",
+    icon: MTN_LOGO,
+    label: "My MTN Web",
+    bg: "#FFFFFF",
+    group: "MTN",
+    isLink: true,
+    embed: false,
+    url: "https://my.mtn.bj/",
+    get content() { return appWindow(this); },
+    properties: {
+      category: L("Telecom · Selfcare", "Télécom · Selfcare"),
+      status: "Live",
+      role: L("Frontend Developer", "Développeur frontend"),
+      client: "MTN Bénin",
+      team: KAMGOKO,
+      year: "2024",
+      stack: ["Vue.js", "WordPress", "Bootstrap", "Node.js"],
+      features: [L("Plans, purchases & account", "Forfaits, achats & compte"), L("RESTful API integration", "Intégration d'APIs RESTful"), L("Advanced state management", "Gestion d'état avancée")],
+      more: L("MyMTN Web — all of MTN in a single self-service application.", "MyMTN Web — tout MTN dans une seule application self-service."),
+    },
+  },
+  {
+    id: "monrouteur",
+    icon: MTN_LOGO,
+    label: "Mon routeur",
+    bg: "#FFFFFF",
+    group: "MTN",
+    isLink: true,
+    embed: false,
+    url: "https://monrouteur.mtn.bj/?ref=noref",
+    get content() { return appWindow(this); },
+    properties: {
+      category: L("Telecom · Activation", "Télécom · Activation"),
+      status: "Live",
+      role: L("Frontend Developer", "Développeur frontend"),
+      client: "MTN Bénin",
+      team: KAMGOKO,
+      year: "2024",
+      stack: ["HTML", "CSS", "JS", "Nginx"],
+      features: [L("Zero-balance landing", "Landing solde épuisé"), L("Plan/data activation", "Activation forfait/data")],
+      more: L("MonRouteur — activation landing shown when an MTN router runs out of plan or data.", "MonRouteur — page d'activation affichée quand un routeur MTN n'a plus de forfait ou de data."),
+    },
+  },
+  {
+    id: "ytickets",
+    icon: MTN_LOGO,
+    label: "Y'ello Tickets",
+    bg: "#FFFFFF",
+    group: "MTN",
+    isLink: true,
+    embed: false,
+    url: "https://my.mtn.bj/yello-tickets/",
+    get content() { return appWindow(this); },
+    properties: {
+      category: L("Telecom · Support", "Télécom · Support"),
+      status: "Live",
+      role: L("Full-Stack Developer", "Développeur full-stack"),
+      client: "MTN Bénin",
+      team: KAMGOKO,
+      year: "2024",
+      stack: ["Vue.js", "Node.js"],
+      features: [L("Agent ticket management", "Gestion des tickets par agents"), L("Support workflow", "Workflow de support")],
+      more: L("Support-ticket management used by MTN agents.", "Gestion des tickets de support utilisée par les agents MTN."),
+    },
+  },
+  {
+    id: "ymarket",
+    icon: MTN_LOGO,
+    label: "Y'ello Market",
+    bg: "#FFFFFF",
+    group: "MTN",
+    isLink: true,
+    embed: false,
+    url: "https://shop.mtn.bj/",
+    get content() { return appWindow(this); },
+    properties: {
+      category: L("Telecom · E-commerce", "Télécom · E-commerce"),
+      status: "Live",
+      role: L("Full-Stack Developer", "Développeur full-stack"),
+      client: "MTN Bénin",
+      team: KAMGOKO,
+      year: "2024",
+      stack: ["Vue.js", "Node.js"],
+      features: [L("Online marketplace", "Marketplace en ligne"), L("Buy & sell in Benin", "Achat & vente au Bénin")],
+      more: L("Online marketplace for all kinds of products in Benin.", "Marketplace en ligne pour tous types de produits au Bénin."),
+    },
+  },
+  {
+    id: "mtnbj",
+    icon: MTN_LOGO,
+    label: "MTN Bénin",
+    bg: "#FFFFFF",
+    group: "MTN",
+    isLink: true,
+    embed: false,
+    url: "https://www.mtn.bj/",
+    get content() { return appWindow(this); },
+    properties: {
+      category: L("Telecom · Corporate", "Télécom · Corporate"),
+      status: "Live",
+      role: L("WordPress Developer", "Développeur WordPress"),
+      client: "MTN Bénin",
+      team: KAMGOKO,
+      year: "2022 — 2025",
+      stack: ["WordPress", "PHP", "SASS"],
+      features: [L("Custom theme & plugins", "Thème & plugins sur mesure"), L("Performance & SEO", "Performance & SEO")],
+      more: L("Corporate website of MTN Bénin — custom WordPress theme and plugins.", "Site corporate de MTN Bénin — thème et plugins WordPress sur mesure."),
+    },
+  },
+  {
+    id: "mtncg",
+    icon: MTN_LOGO,
+    label: "MTN Congo",
+    bg: "#FFFFFF",
+    group: "MTN",
+    isLink: true,
+    embed: false,
+    url: "http://mtn.cg/",
+    get content() { return appWindow(this); },
+    properties: {
+      category: L("Telecom · Corporate", "Télécom · Corporate"),
+      status: "Live",
+      role: L("WordPress Developer", "Développeur WordPress"),
+      client: "MTN Congo",
+      team: KAMGOKO,
+      year: "2022 — 2025",
+      stack: ["WordPress", "PHP", "SASS"],
+      features: [L("Custom theme & plugins", "Thème & plugins sur mesure"), L("Multilingual content", "Contenu multilingue")],
+      more: L("Corporate website of MTN Congo — custom WordPress theme and plugins.", "Site corporate de MTN Congo — thème et plugins WordPress sur mesure."),
+    },
+  },
+
+  /* ============ Other apps & collaborations ============ */
   {
     id: "avcall",
     icon: "https://api.iconify.design/healthicons:group-discussion-meeting.svg",
     bg: "#fff",
     label: "AV Call",
+    group: "Trainings",
     isLink: true,
+    embed: true,
     url: "https://avcall.netlify.app",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
+    get content() { return appWindow(this); },
     properties: {
-      createdAt: "January 08, 2023",
-      addedAt: "January 08, 2023",
-      technos: (
-        <>
-          <b>React JS</b>
-        </>
-      ),
-      more: "Do quickly meeting in one click... (Audio an Video Call).",
+      category: L("Training · Meeting", "Formation · Visio"),
+      status: "Training",
+      role: L("Frontend Developer", "Développeur frontend"),
+      year: "2023",
+      stack: ["React JS", "WebRTC"],
+      features: [L("One-click meetings", "Réunions en un clic"), L("Audio & video call", "Appel audio & vidéo")],
+      more: L("Quick audio & video meetings in one click.", "Réunions audio & vidéo rapides en un clic."),
     },
   },
   {
@@ -151,20 +373,19 @@ export const performances = [
     icon: "https://wecard-dever.netlify.app/card.png",
     bg: "#333333",
     label: "WeCard",
+    group: "Trainings",
     isLink: true,
+    embed: true,
     url: "https://wecard-dever.netlify.app",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
+    get content() { return appWindow(this); },
     properties: {
-      createdAt: "September 18, 2019",
-      addedAt: "October 20, 2022",
-      technos: (
-        <>
-          <b>Vue JS</b>
-        </>
-      ),
-      more: "Generate your virtual credit card and get everything in picture.",
+      category: L("Training · Virtual card", "Formation · Carte virtuelle"),
+      status: "Training",
+      role: L("Frontend Developer", "Développeur frontend"),
+      year: "2019",
+      stack: ["Vue.js"],
+      features: [L("Generate a virtual card", "Générer une carte virtuelle"), L("Export as image", "Export en image")],
+      more: L("Generate your virtual credit card and export everything as an image.", "Générez votre carte de crédit virtuelle et exportez le tout en image."),
     },
   },
   {
@@ -173,19 +394,18 @@ export const performances = [
     bg: "#ffffff",
     label: "Jenny Portfolio",
     isLink: true,
+    embed: true,
     url: "https://jennyfer-portfolio.netlify.app/",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
+    get content() { return appWindow(this); },
     properties: {
-      createdAt: "September 05, 2022",
-      addedAt: "September 20, 2023",
-      technos: (
-        <>
-          <b>HTML</b>, <b>CSS</b>, <b>Bootstrap</b>
-        </>
-      ),
-      more: "Jennyfer personal website.",
+      category: L("Web · Portfolio", "Web · Portfolio"),
+      status: "Live",
+      role: L("Frontend Developer", "Développeur frontend"),
+      client: "Jennyfer",
+      year: "2022",
+      stack: ["HTML", "CSS", "Bootstrap"],
+      features: [L("Personal website", "Site personnel")],
+      more: L("Jennyfer's personal portfolio website.", "Le site portfolio personnel de Jennyfer."),
     },
   },
   {
@@ -193,46 +413,39 @@ export const performances = [
     icon: "https://img.icons8.com/quill/50/facebook.png",
     bg: "#ffffff",
     label: "FB Connect",
+    group: "Trainings",
     isLink: true,
+    embed: true,
     url: "https://tranquil-fbconnect.netlify.app/",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
+    get content() { return appWindow(this); },
     properties: {
-      createdAt: "April 01, 2023",
-      addedAt: "September 20, 2023",
-      technos: (
-        <>
-          <b>Vue JS</b>
-        </>
-      ),
-      more: "Jennyfer personal website.",
+      category: L("Training · UI clone", "Formation · Clone UI"),
+      status: "Training",
+      role: L("Frontend Developer", "Développeur frontend"),
+      year: "2023",
+      stack: ["Vue JS"],
+      features: [L("Facebook-like auth UI", "UI d'auth façon Facebook")],
+      more: L("A Facebook-style connect / authentication UI experiment.", "Une expérimentation d'UI de connexion/authentification façon Facebook."),
     },
   },
   {
     id: "gocoachings",
-    icon: "https://www.gocoachings.com/favicon1.png",
+    icon: "https://www.google.com/s2/favicons?sz=64&domain=gocoachings.com",
     bg: "#fff",
     label: "GoCoachings",
     isLink: true,
+    embed: false,
     url: "https://www.gocoachings.com",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
+    get content() { return appWindow(this); },
     properties: {
-      createdAt: "July 25, 2023",
-      addedAt: "March 14, 2024",
-      technos: (
-        <>
-          <b>Nuxt.js, Strapi, Node.js, SCSS</b>
-        </>
-      ),
-      collaboraters: (
-        <>
-          <b>Fidèle SODOGA</b> - <b>Fresnel AGLOSSI</b>
-        </>
-      ),
-      more: "The all-in-one platform for managing, monitoring and measuring your coaching sessions.",
+      category: L("SaaS · Coaching", "SaaS · Coaching"),
+      status: "Live",
+      role: L("Full-Stack Developer", "Développeur full-stack"),
+      team: STUDIO,
+      year: "2023 — 2024",
+      stack: ["Nuxt.js", "Strapi", "Node.js", "SCSS"],
+      features: [L("Manage & measure coaching sessions", "Gérer & mesurer les séances de coaching"), L("All-in-one platform", "Plateforme tout-en-un")],
+      more: L("The all-in-one platform to manage, monitor and measure your coaching sessions.", "La plateforme tout-en-un pour gérer, suivre et mesurer vos séances de coaching."),
     },
   },
   {
@@ -241,24 +454,18 @@ export const performances = [
     bg: "#fff",
     label: "WAPIFY",
     isLink: true,
+    embed: false,
     url: "https://wapify.co/",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
+    get content() { return appWindow(this); },
     properties: {
-      createdAt: "July 25, 2023",
-      addedAt: "March 14, 2024",
-      technos: (
-        <>
-          <b>Vue.js, Laravel, Python, Node.js, GPT AI Model, Bootstrap, Tailwind CSS</b>
-        </>
-      ),
-      collaboraters: (
-        <>
-          <b>Fidèle SODOGA</b> - <b>Fresnel AGLOSSI</b>
-        </>
-      ),
-      more: "Explode your sales, qualify your top clients, and watch your profits skyrocket—all while you sleep—with WAPIFY™️, the must have and easy to use All-in-One WhatsApp Marketing AI Tool.",
+      category: L("SaaS · WhatsApp AI marketing", "SaaS · Marketing IA WhatsApp"),
+      status: "Live",
+      role: L("Full-Stack Developer", "Développeur full-stack"),
+      team: STUDIO,
+      year: "2023 — 2024",
+      stack: ["Vue.js", "Laravel", "Python", "Node.js", "GPT AI", "Tailwind CSS"],
+      features: [L("All-in-one WhatsApp marketing", "Marketing WhatsApp tout-en-un"), L("AI-assisted automation", "Automatisation assistée par IA")],
+      more: L("The all-in-one, easy-to-use WhatsApp marketing AI tool to grow sales and qualify top clients.", "L'outil IA de marketing WhatsApp tout-en-un et simple pour booster les ventes et qualifier les meilleurs clients."),
     },
   },
   {
@@ -267,38 +474,18 @@ export const performances = [
     bg: "#4062ff",
     label: "Kloo",
     isLink: true,
+    embed: false,
     url: "https://kloo.me",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
+    get content() { return appWindow(this); },
     properties: {
-      createdAt: "June 30, 2019",
-      addedAt: "October 20, 2022",
-      technos: (
-        <>
-          <b>PHP, Bootstrap</b>
-        </>
-      ),
-      collaboraters: (
-        <>
-          <a
-            href={"https://github.com/Mohamed-Fdl"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b>Fadel ABOU</b>
-          </a>{" "}
-          -
-          <a
-            href={"https://github.com/EvansUchwa"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b>Evans Uchwa</b>
-          </a>
-        </>
-      ),
-      more: "With Kloo, Increase engagement and traffic via links and micro-pages. Enrich your Instagram Bio pages. Videos, Music, Instagram Posts, ...",
+      category: L("Web · Link-in-bio", "Web · Link-in-bio"),
+      status: "Live",
+      role: L("Full-Stack Developer", "Développeur full-stack"),
+      team: "Fadel ABOU · Evans Uchwa",
+      year: "2019",
+      stack: ["PHP", "Bootstrap"],
+      features: [L("Links & micro-pages", "Liens & micro-pages"), L("Bio-page enrichment", "Enrichissement de bio")],
+      more: L("Boost engagement and traffic with links and micro-pages; enrich your bio pages.", "Boostez l'engagement et le trafic avec des liens et des micro-pages ; enrichissez vos pages de bio."),
     },
   },
   {
@@ -306,38 +493,18 @@ export const performances = [
     icon: sevexchange.src,
     label: "Sevexchange",
     isLink: true,
+    embed: false,
     url: "https://sevexchange.com",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
+    get content() { return appWindow(this); },
     properties: {
-      createdAt: "June 30, 2019",
-      addedAt: "October 20, 2022",
-      technos: (
-        <>
-          <b>React, Node JS</b>
-        </>
-      ),
-      collaboraters: (
-        <>
-          <a
-            href={"https://github.com/Mohamed-Fdl"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b>Fadel ABOU</b>
-          </a>{" "}
-          -
-          <a
-            href={"https://github.com/EvansUchwa"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b>Evans Uchwa</b>
-          </a>
-        </>
-      ),
-      more: "Exchange your Crypto and Mobile Money currencies easily and securely.",
+      category: L("Fintech · Exchange", "Fintech · Échange"),
+      status: "Live",
+      role: L("Full-Stack Developer", "Développeur full-stack"),
+      team: "Fadel ABOU · Evans Uchwa",
+      year: "2019",
+      stack: ["React", "Node.js"],
+      features: [L("Crypto & mobile-money exchange", "Échange crypto & mobile money"), L("Secure transactions", "Transactions sécurisées")],
+      more: L("Exchange your crypto and mobile-money currencies easily and securely.", "Échangez vos cryptos et vos devises mobile money facilement et en toute sécurité."),
     },
   },
   {
@@ -346,210 +513,38 @@ export const performances = [
     label: "NinjaLinking",
     bg: "#333333",
     isLink: true,
+    embed: false,
     url: "https://app.ninjalinking.fr",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
+    get content() { return appWindow(this); },
     properties: {
-      createdAt: "April 20, 2024",
-      addedAt: "June 23, 2024",
-      technos: (
-        <>
-          <b>Vue.js, Laravel, Tailwind CSS</b>
-        </>
-      ),
-      collaboraters: (
-        <>
-          <b>Fidèle SODOGA</b> - <b>Fresnel AGLOSSI</b>
-        </>
-      ),
-      more: "Plateforme pour rechercher des backlinks à vos liens références.",
-    },
-  },
-  {
-    id: "yconnect",
-    icon: "https://my.mtn.bj/wp-content/themes/kamgoko/mtn-logo-nav-new.svg",
-    label: "Y'ello Connect",
-    bg: "#FFFFFF",
-    isLink: true,
-    url: "https://auth.mtn.bj/",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
-    properties: {
-      createdAt: "April 20, 2024",
-      addedAt: "June 23, 2024",
-      technos: (
-        <>
-          <b>Vue.js, Bootstrap, Node.js</b>
-        </>
-      ),
-      collaboraters: (
-        <>
-          <a
-            href={"https://kamgoko.tech"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b>KAMGOKO Technologies</b>
-          </a>
-        </>
-      ),
-      more: "Y'ello Connect - Portail d'authentification de MTN Bénin",
-    },
-  },
-  {
-    id: "mtnselfcare",
-    icon: "https://my.mtn.bj/wp-content/themes/kamgoko/mtn-logo-nav-new.svg",
-    label: "My MTN Web",
-    bg: "#FFFFFF",
-    isLink: true,
-    url: "https://my.mtn.bj/",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
-    properties: {
-      createdAt: "April 20, 2024",
-      addedAt: "June 23, 2024",
-      technos: (
-        <>
-          <b>Vue.js, Wordpress, Bootstrap, Node.js</b>
-        </>
-      ),
-      collaboraters: (
-        <>
-          <a
-            href={"https://kamgoko.tech"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b>KAMGOKO Technologies</b>
-          </a>
-        </>
-      ),
-      more: "MyMTN Web – Tout MTN dans une seule application",
-    },
-  },
-  {
-    id: "monrouteur",
-    icon: "https://my.mtn.bj/wp-content/themes/kamgoko/mtn-logo-nav-new.svg",
-    label: "Mon routeur",
-    bg: "#FFFFFF",
-    isLink: true,
-    url: "https://monrouteur.mtn.bj/?ref=noref",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
-    properties: {
-      createdAt: "April 20, 2024",
-      addedAt: "June 23, 2024",
-      technos: (
-        <>
-          <b>HTML, CSS, JS, nginx</b>
-        </>
-      ),
-      collaboraters: (
-        <>
-          <a
-            href={"https://kamgoko.tech"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b>KAMGOKO Technologies</b>
-          </a>
-        </>
-      ),
-      more: "Site du zéro landing page de MTN en cas d'expiration de forfaits sur un routeur MTN.",
-    },
-  },
-  {
-    id: "ytickets",
-    icon: "https://my.mtn.bj/wp-content/themes/kamgoko/mtn-logo-nav-new.svg",
-    label: "Y'ello Tickets",
-    bg: "#FFFFFF",
-    isLink: true,
-    url: "https://my.mtn.bj/yello-tickets/",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
-    properties: {
-      createdAt: "April 20, 2024",
-      addedAt: "June 23, 2024",
-      technos: (
-        <>
-          <b>Vue.js, Node.js</b>
-        </>
-      ),
-      collaboraters: (
-        <>
-          <a
-            href={"https://kamgoko.tech"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b>KAMGOKO Technologies</b>
-          </a>
-        </>
-      ),
-      more: "Application de gestion des tickets de support par les agents MTN.",
-    },
-  },
-  {
-    id: "ymarket",
-    icon: "https://my.mtn.bj/wp-content/themes/kamgoko/mtn-logo-nav-new.svg",
-    label: "Y'ello Market",
-    bg: "#FFFFFF",
-    isLink: true,
-    url: "https://shop.mtn.bj/",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
-    properties: {
-      createdAt: "April 20, 2024",
-      addedAt: "June 23, 2024",
-      technos: (
-        <>
-          <b>Vue.js, Node.js</b>
-        </>
-      ),
-      collaboraters: (
-        <>
-          <a
-            href={"https://kamgoko.tech"}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <b>KAMGOKO Technologies</b>
-          </a>
-        </>
-      ),
-      more: "Achat et vente en ligne de tout type de produits au Bénin.",
+      category: L("SaaS · SEO backlinks", "SaaS · Backlinks SEO"),
+      status: "Live",
+      role: L("Full-Stack Developer", "Développeur full-stack"),
+      team: STUDIO,
+      year: "2024",
+      stack: ["Vue.js", "Laravel", "Tailwind CSS"],
+      features: [L("Backlink discovery", "Recherche de backlinks"), L("Referral link management", "Gestion des liens de référence")],
+      more: L("Platform to find backlinks for your reference links.", "Plateforme pour trouver des backlinks vers vos liens de référence."),
     },
   },
   {
     id: "mdt",
-    icon: "https://app-mdt.fr/assets/logo-Of-Jg48T.png",
-    label: "MIROITERIE DU TERNOIS",
+    icon: "https://www.mdtfermetures.com/favicon.png",
+    label: "Miroiterie du Ternois",
     bg: "#FFFFFF",
     isLink: true,
-    url: "https://app-mdt.fr",
-    get content() {
-      return <WinIframe props={{ source: this.url }} />;
-    },
+    embed: false,
+    url: "https://www.mdtfermetures.com",
+    get content() { return appWindow(this); },
     properties: {
-      createdAt: "April 05, 2025",
-      addedAt: "April 28, 2025",
-      technos: (
-        <>
-          <b>Vue.js, Laravel, Tailwind CSS</b>
-        </>
-      ),
-      collaboraters: (
-        <>
-          <b>Fidèle SODOGA</b> - <b>Fresnel AGLOSSI</b>
-        </>
-      ),
-      more: "Application de gestion des ouvriers, des chantiers et des travaux effectués.",
+      category: L("Business · Field management", "Business · Gestion terrain"),
+      status: "Live",
+      role: L("Full-Stack Developer", "Développeur full-stack"),
+      team: STUDIO,
+      year: "2025",
+      stack: ["Vue.js", "Laravel", "Tailwind CSS"],
+      features: [L("Worker & site management", "Gestion ouvriers & chantiers"), L("Job tracking", "Suivi des travaux")],
+      more: L("Management of workers, sites and completed jobs.", "Gestion des ouvriers, des chantiers et des travaux effectués."),
     },
   },
 ];

@@ -1,39 +1,41 @@
 @keyframes awesomeCursor {
     0% {
-      transform: scale(1);
+      transform: translate(-50%, -50%) scale(1);
     }
     50% {
-      transform: scale(3);
+      transform: translate(-50%, -50%) scale(1.6);
     }
     100% {
-      transform: scale(1);
+      transform: translate(-50%, -50%) scale(1);
     }
 }
 @keyframes awesomeRound {
     0% {
       transform: scale(1);
-      background: inherit;
+      opacity: 0.5;
     }
     50% {
-      transform: scale(3);
-      background: white;
+      transform: scale(1.8);
+      opacity: 0.9;
     }
     100% {
       transform: scale(1);
-      background: inherit;
+      opacity: 0.5;
     }
 }
 
 
 .funCursor {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     border-radius: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
     position: fixed;
-    animation: awesomeCursor 1s infinite;
+    animation: awesomeCursor 2.4s ease-in-out infinite;
     z-index: 9999;
     pointer-events: none;
+    transition: top 0.08s ease-out, left 0.08s ease-out;
     transform: translate(-50%, -50%);
 }
 .funCursor.disabled {
@@ -41,13 +43,13 @@
 }
 
 .round, .roundB {
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
   border-radius: 100%;
   pointer-events: none;
   z-index: -1;
-  background: white;
-  animation: awesomeRound 1s infinite;
+  background: rgba(123, 79, 240, 0.35);
+  animation: awesomeRound 3s ease-in-out infinite;
 }
 .round {
   position: absolute;

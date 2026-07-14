@@ -1,122 +1,122 @@
-@keyframes moveIt {
-    0% {
-      transform: translateX(0px) translateY(0px);
-    }
-    50% {
-      transform: translateX(-10px) translateY(10px);
-    }
-    100% {
-      transform: translateX(0px) translateY(0px);
-    }
-  }
-
-
 .appStore {
     width: 100%;
     height: 100%;
-    overflow-x: hidden;
     overflow-y: auto;
-}
-.appStore>.header {
-    width: 100%;
-    height: 100%;
-    background: url(../../../../src/assets/img/icons/bgAppleStore.jpg) no-repeat center 100%/100%, #110068b8;
-    background-blend-mode: darken;
-    color: white;
-    padding: 10%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.appStore>.header>div {
-    position: relative;
-    padding: 5%;
-}
-.appStore>.header>div::before, .appStore>.header>div::after {
-    width: 80px;
-    height: 1px;
-    background-color: white;
-    content: "";
-    position: absolute;
-}
-.appStore>.header>div::before {
-    top: -50%;
-    left: -15%;
-    margin-left: 10%;
-}
-.appStore>.header>div::after {
-    bottom: -50%;
-    right: -15%;
-    margin-right: 10%;
-}
-.appStore>.header>div>h1 {
-    margin: 0px;
-    margin-bottom: 5px;
+    overflow-x: hidden;
+    color: #fff;
+    background: transparent;
 }
 
+.header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 26px 24px 20px;
+    background:
+        radial-gradient(circle at 12% 0%, rgba(74, 52, 214, 0.5), transparent 55%),
+        radial-gradient(circle at 95% 120%, rgba(255, 165, 0, 0.18), transparent 55%),
+        rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--glass-border);
+}
+.headIcon {
+    width: 52px;
+    height: 52px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    border-radius: 15px;
+    background: linear-gradient(150deg, rgba(74, 52, 214, 0.55), rgba(255, 165, 0, 0.28));
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+}
+.headIcon img { width: 30px; height: 30px; }
+.header h1 { margin: 0; font-size: 1.6rem; letter-spacing: 0.5px; }
+.header span { color: rgba(255, 255, 255, 0.6); font-size: 0.85rem; }
 
-.appStore .appList {
+.list {
+    padding: 16px 20px 26px;
     display: flex;
     flex-direction: column;
-    gap: 80px;
-    justify-content: center;
-    align-items: center;
-    padding: 5%;
-    background-color: beige;
-    color: black;
+    gap: 14px;
 }
-.appStore .appList>div {
+.card {
     display: flex;
-    gap: 40px;
-    justify-content: space-evenly;
-    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+    transition: transform 0.35s var(--ease-spring), border-color 0.3s ease, background 0.3s ease;
 }
-.appStore .appList>div:nth-child(even) {
-    flex-direction: row-reverse;
+.card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 165, 0, 0.45);
+    background: rgba(255, 255, 255, 0.06);
 }
-.appStore .appList>div>img {
-    width: 42%;
-    height: 100%;
+.preview {
+    width: 104px;
+    height: 104px;
+    flex: 0 0 auto;
     object-fit: cover;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 5px 10px 50px rgba(0, 0, 0, 0.7);
-    position: relative;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: var(--shadow-1);
 }
-.appStore .appList>div>img:hover {
-    animation: moveIt 2s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.cardTop { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.info h2 { margin: 0; font-size: 1.08rem; color: #fff; }
+.tag { font-size: 0.72rem; color: var(--color-accent-soft); font-weight: 700; }
+.dev { display: block; font-size: 0.68rem; color: rgba(255, 255, 255, 0.5); margin-top: 2px; }
+.badge {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+    background: rgba(74, 52, 214, 0.35);
+    border: 1px solid var(--glass-border);
+    color: #cfc9ff;
 }
-.appStore .appList>div h2 {
-    margin: 0;
-    color: #110068;
+.desc { font-size: 0.8rem; color: rgba(255, 255, 255, 0.8); margin: 8px 0; line-height: 1.4; }
+.meta {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: auto;
 }
-.appStore .appList>div button {
-    border-color: #110068;
-    color: #110068;
+.stars { color: var(--color-accent); letter-spacing: 1.5px; }
+.getBtn {
+    align-self: flex-start;
+    margin-top: 12px;
+    padding: 7px 22px;
+    border-radius: 20px;
+    border: none;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #fff;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent));
+    box-shadow: var(--shadow-amber);
+    cursor: url(../../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    transition: transform 0.2s var(--ease-spring), filter 0.2s ease;
 }
-.appStore .appList>div button:hover {
-    background-color: #110068;
-    color: white;
+.getBtn:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.05); }
+.getBtn:disabled {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.5);
+    box-shadow: none;
+    cursor: default;
 }
 
 @media (max-width: 768px) {
-    .appStore .appList>div {
-        flex-direction: column;
-        justify-content: center;
-    }
-    .appStore .appList>div:nth-child(even) {
-        flex-direction: column;
-    }
-    .appStore .appList>div>div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .appStore .appList>div>img {
-        width: 90%;
-    }
-    .appStore .appList>div h2 {
-        text-align: center;
-    } 
+    .card { flex-direction: column; align-items: center; text-align: center; }
+    .preview { width: 120px; height: 120px; }
+    .cardTop { flex-direction: column; align-items: center; gap: 6px; }
+    .meta { justify-content: center; }
+    .getBtn { align-self: center; }
 }

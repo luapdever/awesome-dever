@@ -98,8 +98,9 @@ const useWindowScreen = () => {
   const minimizeWindow = (e, idWind, fromTaskbar = false) => {
     let tarWind = document.getElementById(idWind);
     if (tarWind.minimized || fromTaskbar) {
-      tarWind.style.top = "50%";
-      tarWind.style.left = "50%";
+      // Fullscreen-only windows restore to the top-left corner, not centered.
+      tarWind.style.top = tarWind.fullscreen ? "0" : "50%";
+      tarWind.style.left = tarWind.fullscreen ? "0" : "50%";
       tarWind.style.opacity = "1";
       tarWind.style.pointerEvents = "initial";
       tarWind.minimized = false;
@@ -188,6 +189,7 @@ const useWindowScreen = () => {
     hideContextMenuIfVisible,
     switchProp,
     terminalWindow,
+    welcomeWindow,
   };
 };
 

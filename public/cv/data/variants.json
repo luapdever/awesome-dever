@@ -1,0 +1,145 @@
+{
+  "fullstack": {
+    "projectOrder": [
+      "celtiis",
+      "mtn-sites",
+      "mymtn",
+      "emilia",
+      "invoicepay"
+    ],
+    "skillOrder": [
+      "languages",
+      "backend",
+      "frontend",
+      "mobile",
+      "cms",
+      "db",
+      "devops",
+      "cloud",
+      "obs",
+      "vcs"
+    ],
+    "focus": [],
+    "fr": {
+      "role": "Ingénieur Logiciel Full-Stack",
+      "roleSub": "Web · Mobile · Realtime · DevOps",
+      "profile": "Ingénieur logiciel full-stack avec plus de 5 ans d'expérience dans la conception d'applications web, mobiles et realtime à fort trafic. J'architecture des plateformes de bout en bout, du backend distribué (NestJS, Node.js, PostgreSQL, WebSocket) aux interfaces réactives (Vue.js, Flutter), jusqu'au déploiement conteneurisé et aux pipelines CI/CD. Expertise reconnue en systèmes de paiement, streaming vidéo realtime, e-facturation gouvernementale, contrôle d'accès (RBAC/SSO) et écosystèmes WordPress d'entreprise multilingues."
+    },
+    "en": {
+      "role": "Full-Stack Software Engineer",
+      "roleSub": "Web · Mobile · Realtime · DevOps",
+      "profile": "Full-stack software engineer with 5+ years of experience designing high-traffic web, mobile and real-time applications. I architect end-to-end platforms, from distributed backends (NestJS, Node.js, PostgreSQL, WebSocket) to reactive interfaces (Vue.js, Flutter), through to containerized deployment and CI/CD pipelines. Proven expertise in payment systems, real-time video streaming, government e-invoicing, access control (RBAC/SSO) and multilingual enterprise WordPress ecosystems."
+    }
+  },
+  "frontend": {
+    "projectOrder": [
+      "mymtn",
+      "mtn-sites",
+      "celtiis",
+      "emilia",
+      "invoicepay"
+    ],
+    "skillOrder": [
+      "frontend",
+      "languages",
+      "mobile",
+      "cms",
+      "backend",
+      "cloud",
+      "devops",
+      "db",
+      "obs",
+      "vcs"
+    ],
+    "focus": [
+      "frontend",
+      "mobile",
+      "languages",
+      "cms"
+    ],
+    "fr": {
+      "role": "Ingénieur Frontend",
+      "roleSub": "Web · Mobile · UI/UX · SPA",
+      "profile": "Ingénieur frontend spécialisé dans la création d'interfaces web et mobiles réactives, performantes et accessibles. J'excelle avec Vue.js/Nuxt.js et Flutter, l'intégration d'APIs RESTful, la gestion d'état avancée et l'optimisation du rendu. Fort d'une expérience sur des applications grand public à fort trafic (Selfcare télécom, plateformes sociales), je conçois des composants réutilisables et des expériences utilisateur soignées, du prototype à la production."
+    },
+    "en": {
+      "role": "Frontend Engineer",
+      "roleSub": "Web · Mobile · UI/UX · SPA",
+      "profile": "Frontend engineer specialized in building reactive, performant and accessible web and mobile interfaces. I excel with Vue.js/Nuxt.js and Flutter, RESTful API integration, advanced state management and rendering optimization. With experience on high-traffic consumer apps (telecom Selfcare, social platforms), I craft reusable components and polished user experiences, from prototype to production."
+    }
+  },
+  "backend": {
+    "projectOrder": [
+      "emilia",
+      "invoicepay",
+      "celtiis",
+      "mtn-sites",
+      "mymtn"
+    ],
+    "skillOrder": [
+      "backend",
+      "languages",
+      "db",
+      "cloud",
+      "devops",
+      "obs",
+      "frontend",
+      "cms",
+      "mobile",
+      "vcs"
+    ],
+    "focus": [
+      "backend",
+      "db",
+      "cloud",
+      "languages"
+    ],
+    "fr": {
+      "role": "Ingénieur Backend",
+      "roleSub": "APIs · Realtime · Paiements · Data",
+      "profile": "Ingénieur backend expert en conception d'APIs robustes et de systèmes distribués à fort trafic. Je maîtrise NestJS, Node.js et Express, les architectures multi-services et realtime (WebSocket, Agora), les systèmes de paiement (Stripe), la sécurité (RBAC, SSO, 2FA) et les bases de données relationnelles (PostgreSQL, MySQL). J'ai livré des plateformes critiques : streaming vidéo facturé à la minute et e-facturation gouvernementale avec workflows d'approbation multi-niveaux."
+    },
+    "en": {
+      "role": "Backend Engineer",
+      "roleSub": "APIs · Real-Time · Payments · Data",
+      "profile": "Backend engineer expert in designing robust APIs and distributed systems for high traffic. I master NestJS, Node.js and Express, multi-service and real-time architectures (WebSocket, Agora), payment systems (Stripe), security (RBAC, SSO, 2FA) and relational databases (PostgreSQL, MySQL). I have delivered mission-critical platforms: per-minute-billed video streaming and government e-invoicing with multi-level approval workflows."
+    }
+  },
+  "devops": {
+    "projectOrder": [
+      "emilia",
+      "celtiis",
+      "invoicepay",
+      "mtn-sites",
+      "mymtn"
+    ],
+    "skillOrder": [
+      "devops",
+      "cloud",
+      "obs",
+      "backend",
+      "db",
+      "vcs",
+      "languages",
+      "cms",
+      "frontend",
+      "mobile"
+    ],
+    "focus": [
+      "devops",
+      "cloud",
+      "obs",
+      "backend"
+    ],
+    "fr": {
+      "role": "Ingénieur DevOps",
+      "roleSub": "Docker · CI/CD · Cloud · Observabilité",
+      "profile": "Ingénieur orienté DevOps, je conçois et automatise des chaînes de déploiement conteneurisées fiables. J'ai mis en place des pipelines CI/CD (GitLab CI, Jenkins), des architectures Docker/Docker Compose multi-services, des reverse proxies Nginx avec SSL/TLS, du SSO Keycloak, ainsi que de la supervision (Prometheus, Grafana, Uptime Kuma) et des sauvegardes automatisées. J'assure la scalabilité, la sécurité et la disponibilité d'applications en production."
+    },
+    "en": {
+      "role": "DevOps Engineer",
+      "roleSub": "Docker · CI/CD · Cloud · Observability",
+      "profile": "DevOps-oriented engineer building and automating reliable containerized delivery pipelines. I have set up CI/CD pipelines (GitLab CI, Jenkins), multi-service Docker/Docker Compose architectures, Nginx reverse proxies with SSL/TLS, Keycloak SSO, plus monitoring (Prometheus, Grafana, Uptime Kuma) and automated backups. I ensure the scalability, security and availability of production applications."
+    }
+  }
+}

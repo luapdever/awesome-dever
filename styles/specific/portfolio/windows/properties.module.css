@@ -1,27 +1,55 @@
 .properties {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-    padding: 3%;
-    background-color: white;
-    color: black;
+    gap: 6px;
+    padding: 20px 22px;
+    background: transparent;
+    color: #fff;
     width: 100%;
     height: 100%;
     overflow-y: auto;
 }
 .properties .infoProp {
-    color: #222;
-    margin: 0 0 15px 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    margin: 0 0 12px 0;
 }
 .properties>section {
-    border-bottom: 1px solid #aaaaaa;
-    padding: 5px;
+    border-bottom: 1px solid var(--glass-border);
+    padding: 8px 4px;
 }
 .properties>section>h4 {
-    color: #110068;
-    margin: 0;
+    color: var(--color-accent-soft);
+    margin: 0 0 3px;
+    font-size: 0.72rem;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
 }
 .properties>section>p {
-    margin: 5px;
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
 }
+.properties .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; border: 0; }
+.properties .tagCat {
+    font-size: 0.72rem; font-weight: 600; color: #cfc9ff;
+    background: rgba(74, 52, 214, 0.3); border: 1px solid var(--glass-border);
+    border-radius: 999px; padding: 3px 10px;
+}
+.properties .tagStatus {
+    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+    border-radius: 999px; padding: 3px 10px;
+    background: rgba(74, 52, 214, 0.3); border: 1px solid var(--glass-border); color: #cfc9ff;
+}
+.properties .tagStatus.s_Live { background: rgba(46,204,113,0.18); border-color: rgba(46,204,113,0.4); color: #8ff0b5; }
+.properties .tagStatus.s_Demo { background: rgba(255,165,0,0.16); border-color: rgba(255,165,0,0.4); color: var(--color-accent-soft); }
+.properties .tagStatus.s_Training { background: rgba(56,189,248,0.16); border-color: rgba(56,189,248,0.4); color: #8fd6ff; }
+.properties .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.properties .chip {
+    font-size: 0.68rem; font-weight: 600; color: #e7e3ff;
+    background: rgba(255,255,255,0.08); border: 1px solid var(--glass-border);
+    border-radius: 6px; padding: 2px 8px;
+}
+.properties .featList { margin: 4px 0 0; padding: 0; list-style: none; }
+.properties .featList li { position: relative; padding-left: 15px; font-size: 0.85rem; margin-bottom: 5px; color: rgba(255,255,255,0.88); }
+.properties .featList li::before { content: ""; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 1px; background: var(--color-accent); }

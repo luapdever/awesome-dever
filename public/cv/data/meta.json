@@ -1,0 +1,24 @@
+{
+  "name": "PAUL MEDEDJI ZANNOU",
+  "palette": {
+    "primary": "#110068",
+    "accent": "#ffa500"
+  },
+  "languages": [
+    "fr",
+    "en"
+  ],
+  "variantKeys": [
+    "fullstack",
+    "frontend",
+    "backend",
+    "devops"
+  ],
+  "variantLabels": {
+    "fullstack": "Full-Stack",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "devops": "DevOps"
+  },
+  "generatedFrom": "index.html"
+}

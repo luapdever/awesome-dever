@@ -1,0 +1,328 @@
+{
+  "ui": {
+    "profil": "Profil",
+    "exp": "Expériences professionnelles",
+    "projets": "Projets phares",
+    "tech": "Compétences techniques",
+    "soft": "Compétences transversales",
+    "contact": "Contact",
+    "formation": "Formation",
+    "certs": "Certificats",
+    "langues": "Langues",
+    "interets": "Centres d'intérêt",
+    "client": "Client",
+    "privateProj": "Projet privé (institutionnel)",
+    "exportPdf": "Exporter en PDF",
+    "profilLabel": "Profil",
+    "langLabel": "Langue"
+  },
+  "contact": [
+    {
+      "icon": "phone",
+      "text": "+229 01 90 66 73 33",
+      "href": "tel:+2290190667333"
+    },
+    {
+      "icon": "mail",
+      "text": "pzannou511@gmail.com",
+      "href": "mailto:pzannou511@gmail.com"
+    },
+    {
+      "icon": "pin",
+      "text": "Abomey-Calavi / Dèkoungbé, Bénin",
+      "href": ""
+    },
+    {
+      "icon": "briefcase",
+      "text": "KAMGOKO Technologies",
+      "href": ""
+    }
+  ],
+  "experiences": [
+    {
+      "role": "Ingénieur Logiciel Full-Stack",
+      "org": "KAMGOKO Technologies",
+      "period": "Janvier 2022 – Présent",
+      "note": "Prestations web pour grands comptes télécoms et médias",
+      "bullets": [
+        "2026 · Celtiis - SBIN — Site corporate multilingue et portail presse/LMS : 17 plugins WordPress sur mesure, ATS de recrutement, RBAC par module, SSO Keycloak et CI/CD conteneurisé (Jenkins, Docker).",
+        "2022 – 2025 · MTN & Moov — Sites corporate MTN Bénin, MTN Congo et Moov Africa Togo, application Selfcare MyMTN (Vue.js) et page d'activation MonRouteur : thèmes/plugins WordPress sur mesure, intégration d'APIs RESTful et optimisation des performances."
+      ]
+    },
+    {
+      "role": "Ingénieur Backend & Realtime",
+      "org": "France Assist",
+      "period": "2024 – 2025",
+      "note": "Collaboration — Emilia Cross, plateforme de streaming vidéo social",
+      "bullets": [
+        "Architecture d'une plateforme de streaming vidéo realtime en NestJS (API multi-services + serveur WebSocket dédié).",
+        "Facturation à la minute par système de crédits, paiements Stripe, vérification KYC, contrôle d'accès (RBAC) et 2FA.",
+        "Intégration vidéo Agora RTC, notifications Firebase, stockage Google Cloud et supervision applicative."
+      ]
+    },
+    {
+      "role": "Développeur Desktop & Mobile",
+      "org": "CCIB — Chambre de Commerce et d'Industrie du Bénin",
+      "period": "2022 – 2023",
+      "note": "Prestation — InvoicePay, dématérialisation des factures",
+      "bullets": [
+        "Développement d'une plateforme d'e-facturation pour une institution publique : workflow d'approbation hiérarchique multi-niveaux (13 rôles) en Express/Sequelize.",
+        "Génération de rapports PDF, notifications push Firebase et e-mail multicanal, et journal d'audit complet pour la conformité."
+      ]
+    },
+    {
+      "role": "Développeur Frontend",
+      "org": "Octogone Trading Sarl",
+      "period": "Oct. 2021 – Déc. 2021",
+      "note": "",
+      "bullets": [
+        "Développement d'interfaces interactives et responsives en HTML5, CSS3 et JavaScript.",
+        "Composants réutilisables Vue.js (Nuxt.js), optimisation Webpack et collaboration Agile avec designers et équipe de dev."
+      ]
+    },
+    {
+      "role": "Développeur Web & Mobile — Stage",
+      "org": "Web Marina Agency",
+      "period": "2020 – 2021",
+      "note": "",
+      "bullets": [
+        "Participation au développement d'applications mobiles iOS/Android avec Flutter.",
+        "Implémentation d'interfaces intuitives et intégration d'API pour une expérience utilisateur optimale."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "celtiis",
+      "name": "Celtiis - SBIN — Corporate & Newsroom",
+      "year": "2026",
+      "role": "Lead développeur WordPress",
+      "client": "Celtiis (via KAMGOKO)",
+      "desc": "Portail de marque bilingue (FR/EN) et plateforme presse intégrant un LMS : thème orienté objet, ATS de recrutement (pipeline 10 étapes, OAuth LinkedIn), simulateur C'Cash, helpdesk, médiathèque sécurisée, RBAC par module et SSO Keycloak. 17 plugins sur mesure et déploiement conteneurisé.",
+      "stack": [
+        "WordPress",
+        "PHP 8.5",
+        "ACF Pro",
+        "Polylang",
+        "LearnPress",
+        "Keycloak SSO",
+        "Docker",
+        "Jenkins",
+        "Prometheus",
+        "Grafana"
+      ],
+      "links": []
+    },
+    {
+      "id": "mtn-sites",
+      "name": "Sites corporate MTN Bénin & MTN Congo",
+      "year": "2022 – 2025",
+      "role": "Développeur WordPress",
+      "client": "MTN Group",
+      "desc": "Sites vitrines corporate pour deux opérateurs télécoms majeurs : construction de thèmes personnalisés, plugins sur mesure, gestion de contenus multilingue et optimisation des performances et du référencement.",
+      "stack": [
+        "WordPress",
+        "PHP",
+        "JavaScript",
+        "SASS"
+      ],
+      "links": [
+        {
+          "label": "mtn.bj",
+          "href": "https://www.mtn.bj/"
+        },
+        {
+          "label": "mtn.cg",
+          "href": "http://mtn.cg/"
+        }
+      ]
+    },
+    {
+      "id": "mymtn",
+      "name": "MyMTN Selfcare & MonRouteur",
+      "year": "2022 – 2025",
+      "role": "Développeur Frontend",
+      "client": "MTN Bénin",
+      "desc": "Application Selfcare abonnés (SPA) — consultation de forfaits, achats et gestion de compte — et page MonRouteur d'activation de forfaits/data en cas de solde ou de forfait épuisé. Intégration d'APIs RESTful, gestion d'état avancée et optimisation de l'expérience utilisateur.",
+      "stack": [
+        "Vue.js",
+        "Nuxt.js",
+        "REST API",
+        "SASS",
+        "Webpack"
+      ],
+      "links": [
+        {
+          "label": "my.mtn.bj",
+          "href": "https://my.mtn.bj/"
+        },
+        {
+          "label": "monrouteur.mtn.bj",
+          "href": "https://monrouteur.mtn.bj/forfaits/"
+        }
+      ]
+    },
+    {
+      "id": "emilia",
+      "name": "Emilia Cross — Streaming vidéo social",
+      "year": "2024 – 2025",
+      "role": "Architecte & développeur backend / realtime",
+      "client": "France Assist",
+      "desc": "Plateforme de mise en relation par visio en direct : facturation à la minute par système de crédits, paiements Stripe, vérification KYC, découverte de partenaires et messagerie realtime. Architecture NestJS multi-services (API + serveur WebSocket dédié) avec RBAC, 2FA et supervision.",
+      "stack": [
+        "NestJS",
+        "TypeScript",
+        "PostgreSQL",
+        "Socket.io",
+        "Agora RTC",
+        "Stripe",
+        "Firebase",
+        "Docker",
+        "GitLab CI/CD"
+      ],
+      "links": [
+        {
+          "label": "emiliacross.com",
+          "href": "https://emiliacross.com/"
+        }
+      ]
+    },
+    {
+      "id": "invoicepay",
+      "name": "InvoicePay — E-facturation gouvernementale",
+      "year": "2022 – 2023",
+      "role": "Développeur backend Node.js",
+      "client": "CCIB — Chambre de Commerce et d'Industrie du Bénin",
+      "desc": "Plateforme de dématérialisation et de validation de factures pour une institution publique : workflow d'approbation hiérarchique multi-niveaux (13 rôles), génération de rapports PDF, notifications push Firebase et e-mail multicanal, et journal d'audit complet pour conformité.",
+      "stack": [
+        "Node.js",
+        "Express",
+        "Sequelize",
+        "MySQL",
+        "JWT",
+        "Firebase FCM",
+        "WebSocket",
+        "PDF"
+      ],
+      "links": [],
+      "private": true
+    }
+  ],
+  "skills": [
+    {
+      "key": "languages",
+      "cat": "Langages",
+      "items": "JavaScript, TypeScript, PHP, Dart, Java, HTML5, CSS3/SASS, SQL"
+    },
+    {
+      "key": "backend",
+      "cat": "Backend",
+      "items": "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize"
+    },
+    {
+      "key": "frontend",
+      "cat": "Frontend",
+      "items": "Vue.js, Nuxt.js, SASS, Webpack"
+    },
+    {
+      "key": "mobile",
+      "cat": "Mobile",
+      "items": "Flutter, GetX, Bloc"
+    },
+    {
+      "key": "cms",
+      "cat": "CMS",
+      "items": "WordPress (thèmes & plugins), ACF Pro, Elementor, Polylang, LearnPress"
+    },
+    {
+      "key": "db",
+      "cat": "Bases de données",
+      "items": "PostgreSQL, MySQL / MariaDB"
+    },
+    {
+      "key": "devops",
+      "cat": "DevOps",
+      "items": "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS"
+    },
+    {
+      "key": "cloud",
+      "cat": "Cloud & Services",
+      "items": "Google Cloud Storage, Firebase, Stripe, Agora RTC, Twilio, Keycloak SSO"
+    },
+    {
+      "key": "obs",
+      "cat": "Observabilité",
+      "items": "Prometheus, Grafana, Uptime Kuma, Swagger/OpenAPI"
+    },
+    {
+      "key": "vcs",
+      "cat": "Versioning",
+      "items": "Git, GitHub, GitLab, npm, Yarn"
+    }
+  ],
+  "softSkills": [
+    {
+      "title": "Architecture logicielle",
+      "desc": "systèmes modulaires et scalables"
+    },
+    {
+      "title": "Résolution de problèmes",
+      "desc": "analyse, débogage, optimisation"
+    },
+    {
+      "title": "Sécurité applicative",
+      "desc": "RBAC, SSO, 2FA, durcissement"
+    },
+    {
+      "title": "Collaboration",
+      "desc": "travail en équipe, revue de code"
+    },
+    {
+      "title": "Adaptabilité",
+      "desc": "montée en compétence rapide"
+    },
+    {
+      "title": "Gestion de projet",
+      "desc": "méthodologies Agile / Scrum"
+    }
+  ],
+  "education": [
+    {
+      "period": "2018 – 2021",
+      "school": "IFRI",
+      "detail": "BAC+3 · Internet et Multimédia"
+    },
+    {
+      "period": "2017 – 2018",
+      "school": "CEG1 Tchaourou",
+      "detail": "Baccalauréat série C"
+    }
+  ],
+  "certificates": [
+    "Official Vue.js Certification Program",
+    "Tosa WordPress Certification",
+    "Coursera — Python Coding"
+  ],
+  "languages": [
+    {
+      "name": "Français",
+      "level": "Courant",
+      "pct": 100
+    },
+    {
+      "name": "Anglais",
+      "level": "Intermédiaire",
+      "pct": 60
+    },
+    {
+      "name": "Fon",
+      "level": "Courant",
+      "pct": 100
+    }
+  ],
+  "interests": [
+    "Lecture",
+    "Composition de musique",
+    "Sport"
+  ]
+}

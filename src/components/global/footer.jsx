@@ -1,9 +1,6 @@
-import Image from "next/image";
 import React from "react";
-import dever from "../../assets/img/icons/DEVER.svg";
 import styles from "../../../styles/global/footer.module.css";
 import { socialMedias } from "../../rawDatas/aboutMe";
-import Link from "next/link";
 
 function TheFooter() {
   return (

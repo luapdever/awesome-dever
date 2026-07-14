@@ -26,7 +26,7 @@ function Cursor({ props }) {
       <div
         className={
           styles.funCursor +
-          (location.pathname.includes("my-portfolio") ? " "+styles.disabled : "")
+          (location.pathname.includes("paulfolio") ? " "+styles.disabled : "")
         }
         style={{
           top: mouse.y + "px",

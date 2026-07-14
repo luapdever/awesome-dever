@@ -84,7 +84,7 @@ function AboutMe() {
         <SpareTime />
       </div>
       <div ref={bigFooter} className={styles.bigFooter}>
-        <Link href={"/my-portfolio"}>
+        <Link href={"/paulfolio"}>
           <button className={styles.bigBtn}>See my portfolio</button>
         </Link>
       </div>

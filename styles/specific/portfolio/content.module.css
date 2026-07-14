@@ -8,14 +8,6 @@
         transform: translateX(0);
     }
 }
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
 @keyframes turnInto {
     0% {
         transform: translateY(0px) rotate(0);
@@ -33,21 +25,23 @@
     height: 100%;
     overflow: hidden;
     position: relative;
-    /* user-select: none; */
 }
-.contentBlk>section {
+.contentBlk > section {
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
 }
+
+/*============ Boot splash =============================================*/
+
 .contentBlk .welcomeScreen {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
-    /* background-color: #011F4Bfa; */
+    gap: 16px;
     color: white;
     font-size: 2rem;
     z-index: 30;
@@ -61,114 +55,300 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: radial-gradient(#111111f5, #000000fe);
-    filter: blur(1px);
+    background:
+        radial-gradient(circle at 50% 38%, rgba(74, 52, 214, 0.5), transparent 58%),
+        radial-gradient(circle at 50% 70%, rgba(255, 165, 0, 0.08), transparent 55%),
+        radial-gradient(#0a0630, #05030f);
     z-index: -1;
 }
-.contentBlk .welcomeScreen>img {
+.contentBlk .welcomeScreen .bootLogo {
     background-color: white;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+    padding: 6px;
+    animation: rToL 1.4s var(--ease-spring), glowPulse 2.4s ease-in-out infinite 1.4s;
 }
-.contentBlk .welcomeScreen>h2 {
+.contentBlk .welcomeScreen > h2 {
     color: white;
+    letter-spacing: 6px;
+    margin: 0;
+    background: linear-gradient(120deg, #fff 0%, var(--color-accent-soft) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rToL 1.8s var(--ease-spring);
 }
-.contentBlk .welcomeScreen>span {
+.contentBlk .welcomeScreen .bootTagline {
+    font-size: 0.5em;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: -6px;
+    animation: rToL 2.1s var(--ease-spring);
+}
+.contentBlk .welcomeScreen .bootBar {
+    width: 180px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+}
+.contentBlk .welcomeScreen .bootBar > span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--color-primary-light), var(--color-accent));
+    animation: bootProgress 2.8s ease-out forwards;
+}
+.contentBlk .welcomeScreen .bootCredit {
     position: absolute;
-    bottom: 15px;
+    bottom: 24px;
     left: 50%;
     transform: translate(-50%, 0);
     font-size: 0.4em;
+    opacity: 0.8;
 }
-.contentBlk .welcomeScreen>img, .contentBlk .welcomeScreen>h2 {
-    animation: rToL 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+/*============ Top menu bar ============================================*/
+
+.menuBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 32px;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.92);
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    border-bottom: 1px solid var(--glass-border);
+    user-select: none;
 }
+.menuLeft, .menuRight {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.menuLeft img {
+    background: white;
+    border-radius: 4px;
+    padding: 1px 2px;
+}
+.menuLeft b {
+    color: white;
+    letter-spacing: 1px;
+}
+.menuItem {
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+}
+.menuItem:hover {
+    opacity: 1;
+}
+.menuRight svg {
+    opacity: 0.85;
+    font-size: 0.9rem;
+}
+.langSwitch {
+    display: flex;
+    gap: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 2px;
+}
+.langSwitch button {
+    border: none;
+    background: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: inherit;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.langSwitch button.langActive {
+    background: var(--color-accent);
+    color: #3a2500;
+}
+
+/*============ Menu bar dropdowns / widgets ============================*/
+.menuItem { position: relative; }
+.menuItemActive { opacity: 1 !important; color: var(--color-accent-soft); }
+.widgetBtn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+}
+.menuBackdrop { position: absolute; inset: 0; z-index: 49; }
+
+.dropdown, .popover {
+    position: absolute;
+    top: calc(100% + 9px);
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 14px;
+    box-shadow: var(--shadow-2), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    color: #fff;
+    z-index: 30;
+    animation: windowPop 0.18s var(--ease-spring);
+}
+.dropdown { left: -6px; min-width: 200px; padding: 6px; transform-origin: top left; }
+.dropItem {
+    padding: 9px 12px;
+    border-radius: 9px;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    transition: background 0.15s ease;
+}
+.dropItem:hover { background: var(--color-primary-light); }
+
+.popover { right: -6px; transform-origin: top right; padding: 12px; }
+
+.calendarPop { width: 258px; }
+.calHead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.calHead b { font-size: 0.86rem; text-transform: capitalize; }
+.calHead svg {
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    opacity: 0.7; padding: 5px; border-radius: 7px; font-size: 1.1em;
+    transition: all 0.15s ease;
+}
+.calHead svg:hover { opacity: 1; background: rgba(255, 255, 255, 0.12); }
+.calGrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.calDow { font-size: 0.62rem; text-align: center; color: var(--color-accent-soft); padding: 3px 0; font-weight: 700; }
+.calCell { font-size: 0.74rem; text-align: center; padding: 6px 0; border-radius: 7px; }
+.calCell:hover { background: rgba(255, 255, 255, 0.08); }
+.calToday { background: var(--color-accent); color: #3a2500; font-weight: 700; }
+
+.volumePop { width: 210px; }
+.volTop { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; margin-bottom: 10px; }
+.volTop span { color: var(--color-accent-soft); font-weight: 700; }
+.volumePop input[type="range"] {
+    width: 100%;
+    accent-color: var(--color-accent);
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+}
+.muteBtn {
+    margin-top: 12px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 9px;
+    font-size: 0.78rem;
+    background: rgba(255, 255, 255, 0.06);
+}
+.muteBtn:hover { background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent)); }
+
+/*============ Desktop + icons =========================================*/
+
 .contentBlk .desktop {
-    background: url(../../../src//assets/img/awesome/realisations/minimalist.jpg) no-repeat center;
-    padding: 10px;
+    padding: 44px 14px 14px;
+    background:
+        radial-gradient(circle at 16% 20%, rgba(74, 52, 214, 0.6), transparent 44%),
+        radial-gradient(circle at 84% 82%, rgba(255, 165, 0, 0.22), transparent 48%),
+        radial-gradient(circle at 52% 50%, #150d3e, #06031a);
+    background-size: 200% 200%, 200% 200%, 100% 100%;
+    animation: auroraShift 22s ease-in-out infinite;
 }
-
-
-
-
-
-
-
 .contentBlk .desktop .performances {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     width: min-content;
     height: 90%;
     user-select: none;
 }
-.contentBlk .desktop .performances>div {
+.contentBlk .desktop .performances > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     width: 100px;
     height: 100px;
     overflow: hidden;
-    padding: 8px;
-    border-radius: 8px;
+    padding: 10px 8px;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
     cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
-    transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.4s var(--ease-spring), background-color 0.3s ease, border-color 0.3s ease;
 }
-.contentBlk .desktop .performances>div:hover {
+.contentBlk .desktop .performances > div:hover {
     overflow: visible;
-    background-color: rgba(0, 0, 0, 0.7);
+    transform: translateY(-4px);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--glass-border);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
-.contentBlk .desktop .performances>div:hover>span {
+.contentBlk .desktop .performances > div:hover > span {
     white-space: inherit;
 }
-.contentBlk .desktop .performances>div>img {
+.contentBlk .desktop .performances > div > img {
     background-color: white;
-    padding: 5px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    padding: 6px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-1);
 }
-.contentBlk .desktop .performances>div>span {
-    text-shadow: 0px 0px 5px black;
+.contentBlk .desktop .performances > div > span {
+    text-shadow: 0px 1px 4px black;
     text-align: center;
-    width: 80px;
+    width: 84px;
     word-wrap: break-word;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 0.9rem;
+    transition: all 0.4s var(--ease-spring);
 }
 
+/*============ Windows =================================================*/
 
-
-
-
-
-
-.contentBlk .windows>div {
-    width: 50%;
-    height: 60%;
-    background: radial-gradient(#111111f5, #000000fe);
-    border: 1px solid black;
-    border-bottom: 2px solid white;
+.contentBlk .windows > div {
+    width: 52%;
+    height: 62%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur)) saturate(140%);
+    border: 1px solid var(--glass-border);
     color: white;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 5px;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4);
-    animation: fadeIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-2), inset 0 1px 0 var(--glass-highlight);
+    overflow: hidden;
+    animation: windowPop 0.4s var(--ease-spring);
+    transition: top 0.25s ease, left 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
 }
-.contentBlk .windows>div .windHeader {
-    height: 45px;
-    background-color: #222;
+.contentBlk .windows > div.fullWin {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: none;
+    border-radius: 0;
+}
+.contentBlk .windows > div .windHeader {
+    height: 46px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    border-bottom: 1px solid var(--glass-border);
     color: white;
-    padding: 8px 10px;
+    padding: 8px 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -176,134 +356,508 @@
     position: relative;
     z-index: 9999;
 }
-.contentBlk .windows>div .windHeader>.windActions {
+.contentBlk .windows > div .windHeader > .windActions {
     display: flex;
-    gap: 5px;
+    gap: 8px;
     user-select: none;
 }
-.contentBlk .windows>div .windHeader>.windActions>svg {
+.contentBlk .windows > div .windHeader > .windActions > svg {
     cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
-    padding: 4px;
-    font-size: 1.3em;
+    padding: 5px;
+    font-size: 1.4em;
     border-radius: 100%;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s var(--ease-spring);
 }
-.contentBlk .windows>div .windHeader>.windActions>svg:hover {
-    background-color: rgba(0, 0, 0, 0.5);
+.contentBlk .windows > div .windHeader > .windActions > svg:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
 }
-.contentBlk .windows>div .windHeader>.windLabel {
+.contentBlk .windows > div .windHeader > .windActions > svg:last-child:hover {
+    background-color: #ff5f57;
+    color: white;
+}
+.contentBlk .windows > div .windHeader > .windLabel {
     display: flex;
     align-items: center;
-    gap: 5px;
-    width: 40%;
+    gap: 8px;
+    width: 50%;
+    font-weight: 600;
     user-select: none;
 }
-.contentBlk .windows>div .windContent {
-    padding: 1px;
-    height: calc(100% - 45px);
-    user-select: text;
+.contentBlk .windows > div .windHeader > .windLabel > img {
+    border-radius: 5px;
+}
+.contentBlk .windows > div .windContent {
+    padding: 0;
+    height: calc(100% - 46px);
     overflow-y: auto;
     overflow-x: hidden;
     user-select: none;
 }
 
-
-
-
+/*============ Dock / taskbar ==========================================*/
 
 .contentBlk .taskbar {
     position: absolute;
-    bottom: 0;
+    bottom: 12px;
     left: 50%;
     transform: translate(-50%, 0);
-    width: 80%;
-    height: 50px;
-    background-color: #000000aa;
-    /* border: 1px solid #000000; */
-    border-radius: 15px 15px 0 0;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 5px;
-    overflow: auto;
-    user-select: none;
-}
-.contentBlk .taskbar .task {
-    width: 45px;
-    height: 100%;
+    max-width: 86%;
+    height: 62px;
+    padding: 0 12px;
+    /* Liquid glass */
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.03) 42%, rgba(255, 255, 255, 0.01)),
+        rgba(20, 14, 54, 0.42);
+    backdrop-filter: blur(26px) saturate(200%) brightness(1.08);
+    -webkit-backdrop-filter: blur(26px) saturate(200%) brightness(1.08);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 24px;
+    box-shadow:
+        0 18px 50px rgba(4, 2, 20, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 1px rgba(255, 255, 255, 0.06);
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 6px;
+    overflow: visible;
+    user-select: none;
+}
+/* Specular sheen on top of the dock */
+.contentBlk .taskbar::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 12px;
+    right: 12px;
+    height: 40%;
+    border-radius: 22px 22px 40px 40px / 22px 22px 20px 20px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), transparent);
+    pointer-events: none;
+    opacity: 0.6;
+}
+.contentBlk .taskbar .task {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
-    padding: 5px;
-    transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    padding: 6px;
+    border-radius: 12px;
+    position: relative;
+    transition: transform 0.3s var(--ease-spring), background-color 0.3s ease;
+    transform-origin: bottom center;
 }
 .contentBlk .taskbar .task:hover {
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(255, 255, 255, 0.12);
+    transform: scale(1.32) translateY(-6px);
 }
 .contentBlk .taskbar .task.fake {
     cursor: none;
+    color: rgba(255, 255, 255, 0.85);
 }
-.contentBlk .taskbar .task.active {
-    border-bottom: 2px solid white;
+.contentBlk .taskbar .task.active::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 6px var(--color-accent);
 }
-.contentBlk .taskbar .task.active>img {
-    animation: turnInto 2s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.contentBlk .taskbar .task.active > img {
+    animation: turnInto 2s infinite var(--ease-spring);
 }
-.contentBlk .taskbar .task>img {
+.contentBlk .taskbar .task > img {
     background-color: white;
-    padding: 2px;
-    border-radius: 5px;
+    padding: 3px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-1);
 }
 .contentBlk .taskbar .task_bars {
     width: 1px;
-    height: 70%;
-    background-color: #999;
-    margin: auto 5px;
+    height: 60%;
+    background-color: rgba(255, 255, 255, 0.25);
+    margin: auto 6px;
 }
 
-
-
+/*============ Context menu ============================================*/
 
 .contentBlk .contextMenus {
     position: absolute;
     top: 20px;
     left: 80px;
-    background-color: white;
-    color: black;
-    border-radius: 10px;
-    box-shadow: 10px 8px 30px rgba(0, 0, 0, 0.5);
+    z-index: 60;
+    min-width: 180px;
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    border: 1px solid var(--glass-border);
+    color: white;
+    border-radius: var(--radius);
+    padding: 6px;
+    box-shadow: var(--shadow-2);
     display: none;
-    transition: all .2s ease-in-out;
+    animation: windowPop 0.18s ease;
+    transform-origin: top left;
 }
-.contentBlk .contextMenus>div, .contentBlk .contextMenus>a {
+.contentBlk .contextMenus > div, .contentBlk .contextMenus > a {
     display: block;
-    padding: 10px 15px;
+    padding: 9px 14px;
+    border-radius: 8px;
     cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
-    transition: all .3s ease-in-out;
+    transition: background-color 0.2s ease;
 }
-.contentBlk .contextMenus>div:hover, .contentBlk .contextMenus>a:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+.contentBlk .contextMenus > div:hover, .contentBlk .contextMenus > a:hover {
+    background-color: var(--color-primary-light);
 }
 
+/*============ Boot splash — terminal boot-log ========================*/
+
+.contentBlk .welcomeScreen .bootTerm {
+    width: min(460px, 86%);
+    text-align: left;
+    animation: bootIn 0.6s var(--ease-spring);
+}
+@keyframes bootIn {
+    0% { opacity: 0; transform: translateY(14px) scale(0.98); }
+    100% { opacity: 1; transform: none; }
+}
+.contentBlk .welcomeScreen .bootBrand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: "SFMono-Regular", Menlo, Monaco, monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #fff;
+    margin-bottom: 22px;
+}
+.contentBlk .welcomeScreen .bootBrand em {
+    font-style: normal;
+    font-size: 0.6em;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0;
+}
+.contentBlk .welcomeScreen .bootLogo {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 11px;
+    padding: 5px;
+    box-shadow: 0 0 26px rgba(255, 165, 0, 0.3), 0 0 46px rgba(74, 52, 214, 0.4);
+}
+.contentBlk .welcomeScreen .bootLog {
+    font-family: "SFMono-Regular", Menlo, Monaco, monospace;
+}
+.contentBlk .welcomeScreen .bootLog p {
+    font-size: 0.82rem;
+    color: #aeb8c4;
+    margin: 5px 0;
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: logIn 0.35s ease forwards;
+    animation-delay: var(--d);
+}
+.contentBlk .welcomeScreen .bootLog p b { color: #7ce38b; font-weight: 700; margin-right: 7px; }
+@keyframes logIn { to { opacity: 1; transform: none; } }
+.contentBlk .welcomeScreen .bootReady {
+    color: #fff !important;
+    letter-spacing: 1.5px;
+    margin-top: 8px !important;
+    text-transform: uppercase;
+    font-size: 0.72rem !important;
+}
+.contentBlk .welcomeScreen .bootCursor {
+    display: inline-block;
+    width: 8px;
+    height: 13px;
+    margin-left: 6px;
+    background: var(--color-accent);
+    vertical-align: middle;
+    animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+.contentBlk .welcomeScreen .bootTerm .bootBar {
+    width: 100%;
+    margin-top: 24px;
+}
+
+/*============ Company folders (iOS-style) ============================*/
+
+.folderIcon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 100px;
+    height: 100px;
+    padding: 10px 8px;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    transition: transform 0.4s var(--ease-spring), background-color 0.3s ease, border-color 0.3s ease;
+}
+.folderIcon:hover {
+    transform: translateY(-4px);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--glass-border);
+}
+.folderTile {
+    width: 52px;
+    height: 52px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 3px;
+    padding: 5px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-1);
+}
+.folderTile img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+    background: #fff;
+    padding: 1px;
+}
+.folderIcon > span {
+    text-shadow: 0 1px 4px black;
+    font-size: 0.9rem;
+    max-width: 84px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.folderOverlay {
+    position: absolute;
+    inset: 0;
+    z-index: 40;
+    display: grid;
+    place-items: center;
+    background: rgba(6, 3, 26, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: fadeIn 0.25s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.folderPanel {
+    width: min(560px, 82%);
+    max-height: 74%;
+    overflow-y: auto;
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-2), inset 0 1px 0 var(--glass-highlight);
+    padding: 18px 20px 24px;
+    animation: windowPop 0.35s var(--ease-spring);
+}
+.folderPanelHead {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    color: #fff;
+}
+.folderPanelHead img { width: 30px; height: 30px; border-radius: 8px; padding: 2px; }
+.folderPanelHead b { font-size: 1.15rem; letter-spacing: 1px; flex: 1; }
+.folderClose {
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    padding: 6px; border-radius: 50%; font-size: 1.5em; color: rgba(255,255,255,0.7);
+    transition: all 0.2s ease;
+}
+.folderClose:hover { background: #ff5f57; color: #fff; }
+.folderApps {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 8px;
+}
+.folderApps > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    padding: 12px 6px;
+    border-radius: var(--radius);
+    color: #fff;
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    transition: transform 0.35s var(--ease-spring), background-color 0.25s ease;
+}
+.folderApps > div:hover { transform: translateY(-3px); background: rgba(255,255,255,0.08); }
+.folderApps > div img { border-radius: 12px; padding: 5px; box-shadow: var(--shadow-1); }
+.folderApps > div span { font-size: 0.82rem; text-align: center; }
+
+/*============ App launcher (Windows-like) ============================*/
+
+.contentBlk .taskbar .task.launcherBtn { color: #fff; }
+.contentBlk .taskbar .task.launcherBtn:hover { background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent)); }
+
+.launcherOverlay {
+    position: absolute;
+    inset: 0;
+    z-index: 45;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 88px;
+    background: rgba(6, 3, 26, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: fadeIn 0.2s ease;
+}
+.launcher {
+    width: min(680px, 92%);
+    max-height: 68%;
+    display: flex;
+    flex-direction: column;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
+        var(--glass-bg-strong);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+    box-shadow: var(--shadow-2), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    padding: 16px;
+    animation: windowPop 0.28s var(--ease-spring);
+}
+.launcherHead {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 6px 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+.launcherSearch {
+    flex: 1;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 0 14px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+.launcherSearch::placeholder { color: rgba(255, 255, 255, 0.35); }
+.launcherSearch:focus { border-color: var(--color-accent); background: rgba(255, 255, 255, 0.09); }
+.launcherGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    overflow-y: auto;
+    padding: 4px;
+}
+.launcherItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 6px;
+    border-radius: 14px;
+    border: 1px solid transparent;
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    transition: transform 0.2s var(--ease-spring), background 0.2s ease, border-color 0.2s ease;
+}
+.launcherItem img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    padding: 5px;
+    border-radius: 11px;
+    box-shadow: var(--shadow-1);
+}
+.launcherItem span {
+    font-size: 0.78rem;
+    text-align: center;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(255, 255, 255, 0.9);
+}
+.launcherItem:hover,
+.launcherItem.launcherSel {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-accent);
+    transform: translateY(-3px);
+}
+.launcherEmpty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 30px 0;
+}
+@media (max-width: 768px) {
+    .launcherGrid { grid-template-columns: repeat(3, 1fr); }
+    .launcherOverlay { padding-bottom: 84px; align-items: center; }
+}
 
 @media (max-width: 768px) {
-    .contentBlk .windows>div {
-        width: 80%;
+    .contentBlk .windows > div {
+        width: 92%;
+        height: 72%;
     }
-
-    .contentBlk .windows>div .windHeader>.windLabel {
-        width: 80%;
+    .contentBlk .windows > div .windHeader > .windLabel {
+        width: 70%;
     }
-    .contentBlk .desktop .performances>div {
-        gap: 2px;
-        width: 80px;
-        height: 80px;
-        padding: 5px;
+    /* Desktop icons flow as a scrollable grid across the width (no horizontal overflow) */
+    .contentBlk .desktop {
+        padding: 42px 10px 90px;
     }
-    .contentBlk .desktop .performances>div>span {
-        font-size: 0.8em;
+    .contentBlk .desktop .performances {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        justify-content: flex-start;
+        width: 100%;
+        height: auto;
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        gap: 4px;
+    }
+    .contentBlk .desktop .performances > div,
+    .folderIcon {
+        gap: 4px;
+        width: 78px;
+        height: 84px;
+        padding: 6px;
+    }
+    .contentBlk .desktop .performances > div > span,
+    .folderIcon > span {
+        font-size: 0.72rem;
+    }
+    /* Dock scrolls horizontally when it holds many icons */
+    .contentBlk .taskbar {
+        max-width: 94%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    .contentBlk .taskbar .task:hover {
+        transform: none;
+        background-color: rgba(255, 255, 255, 0.12);
+    }
+    .folderPanel { width: 90%; max-height: 66%; }
+    .menuLeft .menuItem {
+        display: none;
     }
 }

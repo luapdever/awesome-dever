@@ -1,0 +1,328 @@
+{
+  "ui": {
+    "profil": "Profile",
+    "exp": "Professional Experience",
+    "projets": "Featured Projects",
+    "tech": "Technical Skills",
+    "soft": "Soft Skills",
+    "contact": "Contact",
+    "formation": "Education",
+    "certs": "Certifications",
+    "langues": "Languages",
+    "interets": "Interests",
+    "client": "Client",
+    "privateProj": "Private project (institutional)",
+    "exportPdf": "Export to PDF",
+    "profilLabel": "Profile",
+    "langLabel": "Language"
+  },
+  "contact": [
+    {
+      "icon": "phone",
+      "text": "+229 01 90 66 73 33",
+      "href": "tel:+2290190667333"
+    },
+    {
+      "icon": "mail",
+      "text": "pzannou511@gmail.com",
+      "href": "mailto:pzannou511@gmail.com"
+    },
+    {
+      "icon": "pin",
+      "text": "Abomey-Calavi / Dèkoungbé, Benin",
+      "href": ""
+    },
+    {
+      "icon": "briefcase",
+      "text": "KAMGOKO Technologies",
+      "href": ""
+    }
+  ],
+  "experiences": [
+    {
+      "role": "Full-Stack Software Engineer",
+      "org": "KAMGOKO Technologies",
+      "period": "January 2022 – Present",
+      "note": "Web services for major telecom and media accounts",
+      "bullets": [
+        "2026 · Celtiis - SBIN — Multilingual corporate website and press/LMS portal: 17 custom WordPress plugins, recruitment ATS, per-module RBAC, Keycloak SSO and containerized CI/CD (Jenkins, Docker).",
+        "2022 – 2025 · MTN & Moov — Corporate websites for MTN Benin, MTN Congo and Moov Africa Togo, the MyMTN Selfcare app (Vue.js) and the MonRouteur activation page: custom WordPress themes/plugins, RESTful API integration and performance optimization."
+      ]
+    },
+    {
+      "role": "Backend & Real-Time Engineer",
+      "org": "France Assist",
+      "period": "2024 – 2025",
+      "note": "Collaboration — Emilia Cross, social video streaming platform",
+      "bullets": [
+        "Architected a real-time video streaming platform in NestJS (multi-service API + dedicated WebSocket server).",
+        "Per-minute credit-based billing, Stripe payments, KYC verification, access control (RBAC) and 2FA.",
+        "Agora RTC video integration, Firebase notifications, Google Cloud storage and application monitoring."
+      ]
+    },
+    {
+      "role": "Desktop & Mobile Developer",
+      "org": "CCIB — Chamber of Commerce and Industry of Benin",
+      "period": "2022 – 2023",
+      "note": "Contract — InvoicePay, invoice dematerialization",
+      "bullets": [
+        "Built an e-invoicing platform for a public institution: multi-level hierarchical approval workflow (13 roles) in Express/Sequelize.",
+        "PDF report generation, Firebase push and multi-channel email notifications, and a complete audit log for compliance."
+      ]
+    },
+    {
+      "role": "Frontend Developer",
+      "org": "Octogone Trading Sarl",
+      "period": "Oct. 2021 – Dec. 2021",
+      "note": "",
+      "bullets": [
+        "Developed interactive, responsive interfaces with HTML5, CSS3 and JavaScript.",
+        "Reusable Vue.js (Nuxt.js) components, Webpack optimization and Agile collaboration with designers and the dev team."
+      ]
+    },
+    {
+      "role": "Web & Mobile Developer — Internship",
+      "org": "Web Marina Agency",
+      "period": "2020 – 2021",
+      "note": "",
+      "bullets": [
+        "Contributed to the development of innovative iOS/Android mobile apps with Flutter.",
+        "Implemented intuitive interfaces and API integration for an optimal user experience."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "celtiis",
+      "name": "Celtiis - SBIN — Corporate & Newsroom",
+      "year": "2026",
+      "role": "Lead WordPress Developer",
+      "client": "Celtiis (via KAMGOKO)",
+      "desc": "Bilingual (FR/EN) brand portal and press platform with an integrated LMS: object-oriented theme, recruitment ATS (10-step pipeline, LinkedIn OAuth), C'Cash simulator, helpdesk, secure media library, per-module RBAC and Keycloak SSO. 17 custom plugins and containerized deployment.",
+      "stack": [
+        "WordPress",
+        "PHP 8.5",
+        "ACF Pro",
+        "Polylang",
+        "LearnPress",
+        "Keycloak SSO",
+        "Docker",
+        "Jenkins",
+        "Prometheus",
+        "Grafana"
+      ],
+      "links": []
+    },
+    {
+      "id": "mtn-sites",
+      "name": "MTN Benin & MTN Congo corporate websites",
+      "year": "2022 – 2025",
+      "role": "WordPress Developer",
+      "client": "MTN Group",
+      "desc": "Corporate showcase websites for two major telecom operators: custom themes, tailored plugins, multilingual content management and performance/SEO optimization.",
+      "stack": [
+        "WordPress",
+        "PHP",
+        "JavaScript",
+        "SASS"
+      ],
+      "links": [
+        {
+          "label": "mtn.bj",
+          "href": "https://www.mtn.bj/"
+        },
+        {
+          "label": "mtn.cg",
+          "href": "http://mtn.cg/"
+        }
+      ]
+    },
+    {
+      "id": "mymtn",
+      "name": "MyMTN Selfcare & MonRouteur",
+      "year": "2022 – 2025",
+      "role": "Frontend Developer",
+      "client": "MTN Benin",
+      "desc": "Subscriber Selfcare app (SPA) — plans, purchases and account management — and the MonRouteur page for activating plans/data when the balance or bundle is depleted. RESTful API integration, advanced state management and UX optimization.",
+      "stack": [
+        "Vue.js",
+        "Nuxt.js",
+        "REST API",
+        "SASS",
+        "Webpack"
+      ],
+      "links": [
+        {
+          "label": "my.mtn.bj",
+          "href": "https://my.mtn.bj/"
+        },
+        {
+          "label": "monrouteur.mtn.bj",
+          "href": "https://monrouteur.mtn.bj/forfaits/"
+        }
+      ]
+    },
+    {
+      "id": "emilia",
+      "name": "Emilia Cross — Social video streaming",
+      "year": "2024 – 2025",
+      "role": "Architect & backend / real-time developer",
+      "client": "France Assist",
+      "desc": "Live video matchmaking platform: per-minute credit-based billing, Stripe payments, KYC verification, partner discovery and real-time messaging. Multi-service NestJS architecture (API + dedicated WebSocket server) with RBAC, 2FA and monitoring.",
+      "stack": [
+        "NestJS",
+        "TypeScript",
+        "PostgreSQL",
+        "Socket.io",
+        "Agora RTC",
+        "Stripe",
+        "Firebase",
+        "Docker",
+        "GitLab CI/CD"
+      ],
+      "links": [
+        {
+          "label": "emiliacross.com",
+          "href": "https://emiliacross.com/"
+        }
+      ]
+    },
+    {
+      "id": "invoicepay",
+      "name": "InvoicePay — Government e-invoicing",
+      "year": "2022 – 2023",
+      "role": "Node.js Backend Developer",
+      "client": "CCIB — Chamber of Commerce and Industry of Benin",
+      "desc": "Invoice dematerialization and validation platform for a public institution: multi-level hierarchical approval workflow (13 roles), PDF report generation, Firebase push and multi-channel email notifications, and a complete audit log for compliance.",
+      "stack": [
+        "Node.js",
+        "Express",
+        "Sequelize",
+        "MySQL",
+        "JWT",
+        "Firebase FCM",
+        "WebSocket",
+        "PDF"
+      ],
+      "links": [],
+      "private": true
+    }
+  ],
+  "skills": [
+    {
+      "key": "languages",
+      "cat": "Languages",
+      "items": "JavaScript, TypeScript, PHP, Dart, Java, HTML5, CSS3/SASS, SQL"
+    },
+    {
+      "key": "backend",
+      "cat": "Backend",
+      "items": "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize"
+    },
+    {
+      "key": "frontend",
+      "cat": "Frontend",
+      "items": "Vue.js, Nuxt.js, SASS, Webpack"
+    },
+    {
+      "key": "mobile",
+      "cat": "Mobile",
+      "items": "Flutter, GetX, Bloc"
+    },
+    {
+      "key": "cms",
+      "cat": "CMS",
+      "items": "WordPress (themes & plugins), ACF Pro, Elementor, Polylang, LearnPress"
+    },
+    {
+      "key": "db",
+      "cat": "Databases",
+      "items": "PostgreSQL, MySQL / MariaDB"
+    },
+    {
+      "key": "devops",
+      "cat": "DevOps",
+      "items": "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS"
+    },
+    {
+      "key": "cloud",
+      "cat": "Cloud & Services",
+      "items": "Google Cloud Storage, Firebase, Stripe, Agora RTC, Twilio, Keycloak SSO"
+    },
+    {
+      "key": "obs",
+      "cat": "Observability",
+      "items": "Prometheus, Grafana, Uptime Kuma, Swagger/OpenAPI"
+    },
+    {
+      "key": "vcs",
+      "cat": "Version Control",
+      "items": "Git, GitHub, GitLab, npm, Yarn"
+    }
+  ],
+  "softSkills": [
+    {
+      "title": "Software architecture",
+      "desc": "modular, scalable systems"
+    },
+    {
+      "title": "Problem solving",
+      "desc": "analysis, debugging, optimization"
+    },
+    {
+      "title": "Application security",
+      "desc": "RBAC, SSO, 2FA, hardening"
+    },
+    {
+      "title": "Collaboration",
+      "desc": "teamwork, code review"
+    },
+    {
+      "title": "Adaptability",
+      "desc": "fast ramp-up on new tech"
+    },
+    {
+      "title": "Project management",
+      "desc": "Agile / Scrum methodologies"
+    }
+  ],
+  "education": [
+    {
+      "period": "2018 – 2021",
+      "school": "IFRI",
+      "detail": "Bachelor's · Internet & Multimedia"
+    },
+    {
+      "period": "2017 – 2018",
+      "school": "CEG1 Tchaourou",
+      "detail": "High School Diploma (Science)"
+    }
+  ],
+  "certificates": [
+    "Official Vue.js Certification Program",
+    "Tosa WordPress Certification",
+    "Coursera — Python Coding"
+  ],
+  "languages": [
+    {
+      "name": "French",
+      "level": "Fluent",
+      "pct": 100
+    },
+    {
+      "name": "English",
+      "level": "Intermediate",
+      "pct": 60
+    },
+    {
+      "name": "Fon",
+      "level": "Fluent",
+      "pct": 100
+    }
+  ],
+  "interests": [
+    "Reading",
+    "Music composition",
+    "Sport"
+  ]
+}
