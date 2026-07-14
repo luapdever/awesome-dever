@@ -306,6 +306,7 @@ function Content() {
           </div>
           <div className={styles.bootBar}><span></span></div>
         </div>
+        <span className={styles.bootDevBy}>Developed by <b>Paul Mèdédji ZANNOU</b></span>
       </section>
 
       {/* The top menu bar */}

@@ -256,12 +256,17 @@ button:hover, .button:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(123, 79, 240, 0.6);
+  background: rgba(255, 255, 255, 0.55);
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+html {
+  scrollbar-color: rgba(255, 255, 255, 0.55) transparent;
+  scrollbar-width: thin;
 }
 
 @media (max-width: 1200px) {

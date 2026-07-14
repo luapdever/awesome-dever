@@ -1,40 +1,109 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import dever from '../../assets/img/icons/DEVER.svg'
-import styles from '../../../styles/global/nav.module.css'
+import gsap from "gsap/dist/gsap";
+import dever from "../../assets/img/icons/DEVER.svg";
+import styles from "../../../styles/global/nav.module.css";
+import { socialMedias } from "../../rawDatas/aboutMe";
+
+const LINKS = [
+  { label: "Accueil", href: "/", id: "top" },
+  { label: "Qui suis-je", href: "/#qui-suis-je", id: "qui-suis-je" },
+  { label: "Compétences", href: "/#que-sais-je-faire", id: "que-sais-je-faire" },
+  { label: "Parcours", href: "/#parcours", id: "parcours" },
+  { label: "Expériences", href: "/#experiences", id: "experiences" },
+  { label: "Bio", href: "/about-me", id: "bio" },
+];
 
 function NavBar() {
-  const navbar = useRef();
-  const [isFixed, setFixedState] = useState(false);
-
-  const handleScroll = (e) => {
-    if(scrollY > 250) {
-      return setFixedState(true)
-    }
-    return setFixedState(false);
-  }
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("top");
+  const overlay = useRef();
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-  }, [])
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Desktop scroll-spy for the active pill link
+  useEffect(() => {
+    const secs = LINKS.map((l) => document.getElementById(l.id)).filter(Boolean);
+    if (!secs.length) return;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    secs.forEach((s) => io.observe(s));
+    return () => io.disconnect();
+  }, []);
+
+  // Full-screen overlay reveal
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open && overlay.current) {
+      gsap.fromTo(
+        overlay.current.querySelectorAll("[data-oitem]"),
+        { y: 46, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.06, delay: 0.12 }
+      );
+    }
+  }, [open]);
+
+  const overlayLinks = [...LINKS, { label: "PaulBrain OS", href: "/paulfolio", id: "os" }];
 
   return (
     <>
-      <div ref={navbar} className={styles.navbar + " " + (isFixed && styles.navbar_fixed)}>
-        <Link href={"/"}>
-          <section>
-            <div className={styles.logo_dever}>
-              <Image src={dever} alt="Luap Dever logo" title="Luap Dever" width={50} height={50} />
-            </div>
-            <h2>DEVER</h2>
-          </section>
+      <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
+        <Link href="/" className={styles.logo} onClick={() => setOpen(false)}>
+          <span className={styles.logoMark}>
+            <Image src={dever} alt="Dever" width={24} height={24} />
+          </span>
+          <span className={styles.logoText}>DEVER</span>
         </Link>
-        <nav>
-          <Link href={"/"}>Home</Link>
-          <div className={"notInSMobile"}><Link href={"/#aboutMe"} scroll={false}>About me</Link></div>
-          <Link href={"/paulfolio"}>Overview</Link>
+
+        <nav className={styles.pill}>
+          {LINKS.map((l) => (
+            <Link key={l.id} href={l.href} className={`${styles.pillLink} ${active === l.id ? styles.pillActive : ""}`}>
+              {l.label}
+            </Link>
+          ))}
         </nav>
+
+        <div className={styles.right}>
+          <Link href="/paulfolio" className={styles.cta}>PaulBrain&nbsp;OS</Link>
+          <button
+            className={`${styles.burger} ${open ? styles.burgerOpen : ""}`}
+            onClick={() => setOpen((o) => !o)}
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={open}
+          >
+            <span /><span />
+          </button>
+        </div>
+      </header>
+
+      <div ref={overlay} className={`${styles.overlay} ${open ? styles.overlayOpen : ""}`}>
+        <nav className={styles.overlayNav}>
+          {overlayLinks.map((l, i) => (
+            <Link key={l.id} href={l.href} className={styles.overlayLink} data-oitem onClick={() => setOpen(false)}>
+              <span className={styles.oIndex}>{String(i + 1).padStart(2, "0")}</span>
+              <span className={styles.oLabel}>{l.label}</span>
+            </Link>
+          ))}
+        </nav>
+        <div className={styles.overlayFoot} data-oitem>
+          <a href="mailto:pzannou511@gmail.com" className={styles.overlayMail}>pzannou511@gmail.com</a>
+          <div className={styles.overlaySocials}>
+            {socialMedias.map((s, i) =>
+              i < socialMedias.length - 1 ? (
+                <a key={i} href={s.link} target="_blank" rel="noopener noreferrer">{s.icon}</a>
+              ) : null
+            )}
+          </div>
+        </div>
       </div>
     </>
   );

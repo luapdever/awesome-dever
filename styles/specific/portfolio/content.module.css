@@ -590,6 +590,17 @@
     width: 100%;
     margin-top: 24px;
 }
+.contentBlk .welcomeScreen .bootDevBy {
+    position: absolute;
+    bottom: 26px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.45);
+}
+.contentBlk .welcomeScreen .bootDevBy b { color: var(--color-accent-soft); font-weight: 700; }
 
 /*============ Company folders (iOS-style) ============================*/
 
