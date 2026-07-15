@@ -18,6 +18,27 @@ export const NAV = {
   os: { type: "route", url: "/paulfolio" },
 };
 
+// Libellés du bouton d'action proposé au visiteur (jamais de navigation auto :
+// le bot suggère, le visiteur clique).
+export const NAV_LABEL = {
+  bio: { fr: "Voir sa bio", en: "See his bio" },
+  collaborations: { fr: "Voir ses projets", en: "See his projects" },
+  skills: { fr: "Voir ses compétences", en: "See his skills" },
+  experiences: { fr: "Voir ses expériences", en: "See his experience" },
+  journey: { fr: "Voir son parcours", en: "See his journey" },
+  testimonials: { fr: "Voir les témoignages", en: "See testimonials" },
+  stack: { fr: "Voir sa stack", en: "See his stack" },
+  contact: { fr: "Aller au contact", en: "Go to contact" },
+  cv: { fr: "Ouvrir le CV", en: "Open the résumé" },
+  os: { fr: "Ouvrir PaulBrain OS", en: "Open PaulBrain OS" },
+};
+
+export function navLabel(key, lang) {
+  const l = NAV_LABEL[key];
+  if (!l) return "";
+  return l[lang === "en" ? "en" : "fr"];
+}
+
 // Retire les marqueurs [[go:...]] (et un éventuel marqueur en cours de
 // frappe en fin de flux) et renvoie le texte propre + les cibles trouvées.
 export function extractActions(raw) {

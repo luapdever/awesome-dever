@@ -47,6 +47,18 @@ export const skillSet = [
     concepts: ["Streams & backpressure", "Dependency injection (NestJS)", "Idempotency & outbox pattern", "Rate limiting & circuit breakers", "Lightweight CQRS / event-driven"],
   },
   {
+    key: "ai",
+    category: "AI / LLM",
+    icon: "https://api.iconify.design/fluent-emoji-flat:robot.svg",
+    skills: [
+      { name: "LLM integration (Groq · Ollama)", level: 80, icon: "https://api.iconify.design/mdi:robot-happy.svg?color=%23ffffff" },
+      { name: "OpenAI-compatible APIs", level: 82, icon: "https://api.iconify.design/simple-icons:openai.svg?color=%23ffffff" },
+      { name: "Prompt engineering & guardrails", level: 80, icon: "https://api.iconify.design/mdi:shield-account.svg?color=%23ffffff" },
+      { name: "Token streaming (SSE)", level: 84, icon: "https://api.iconify.design/mdi:transit-connection-variant.svg?color=%23ffffff" },
+    ],
+    concepts: ["Context-stuffing vs RAG", "Context window & token budgeting", "System prompt & guardrails", "SSE token streaming", "Function / tool calling", "Embeddings & vector search (RAG-ready)", "Groq ↔ Ollama hot-swap"],
+  },
+  {
     key: "mobile",
     category: "Mobile",
     icon: "https://api.iconify.design/fluent-emoji-flat:mobile-phone.svg",

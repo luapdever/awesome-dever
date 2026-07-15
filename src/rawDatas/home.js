@@ -53,6 +53,15 @@ export const capabilities = [
     tags: ["NestJS", "Node.js", "Express", "PostgreSQL", "WebSocket"],
   },
   {
+    icon: ph("robot"),
+    title: L("AI & LLM", "IA & LLM"),
+    desc: L(
+      "Conversational assistants wired to LLMs: token streaming, prompt guardrails, context-stuffing and a RAG-ready design.",
+      "Assistants conversationnels branchés aux LLM : streaming de tokens, garde-fous de prompt, context-stuffing et une architecture prête pour le RAG."
+    ),
+    tags: ["Groq", "Ollama", "NestJS", "SSE", "RAG-ready"],
+  },
+  {
     icon: ph("rocket-launch"),
     title: L("DevOps & Cloud", "DevOps & Cloud"),
     desc: L(
@@ -114,7 +123,7 @@ export const HOME_UI = {
     btnOS: "Explore PaulBrain OS",
     btnCV: "My résumé",
     scroll: "SCROLL",
-    casquettes: ["Frontend", "Backend", "DevOps", "Mobile", "CMS / WordPress", "Real-Time", "Creative / 3D"],
+    casquettes: ["Frontend", "Backend", "DevOps", "Mobile", "CMS / WordPress", "Real-Time", "AI / LLM", "Creative / 3D"],
     stackHead: "What I'm made of.",
     headCollab: "Some collaborations.",
     collabSub: "A few live projects shipped with teams and clients.",
@@ -137,7 +146,7 @@ export const HOME_UI = {
     btnOS: "Explorer PaulBrain OS",
     btnCV: "Mon CV",
     scroll: "SCROLL",
-    casquettes: ["Frontend", "Backend", "DevOps", "Mobile", "CMS / WordPress", "Temps réel", "Créatif / 3D"],
+    casquettes: ["Frontend", "Backend", "DevOps", "Mobile", "CMS / WordPress", "Temps réel", "IA / LLM", "Créatif / 3D"],
     stackHead: "Ce que j'ai dans le ventre.",
     headCollab: "Mes collaborations.",
     collabSub: "Quelques projets en ligne livrés avec des équipes et des clients.",

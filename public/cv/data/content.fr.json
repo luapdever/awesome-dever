@@ -172,6 +172,23 @@
       ]
     },
     {
+      "id": "paulbot",
+      "name": "PaulBot — assistant IA du portfolio",
+      "year": "2025",
+      "role": "Full-stack & intégration IA",
+      "client": "Projet personnel",
+      "desc": "Assistant conversationnel intégré à mon portfolio, qui répond aux questions des visiteurs sur mon parcours. Backend NestJS dédié diffusant les tokens en streaming (SSE) depuis un LLM compatible OpenAI (Groq — Llama 3.3 70B), avec bascule à chaud vers un Ollama auto-hébergé sans changer le code. Stratégie de context-stuffing (tout le profil tient dans la fenêtre de contexte du modèle, donc pas de RAG nécessaire pour l'instant) sur une architecture prête pour le RAG. Des garde-fous au niveau du prompt le maintiennent sur le sujet et respectent les NDA, un système de marqueurs lui permet de naviguer sur le site, et les sessions en mémoire génèrent un PDF de la conversation envoyé par email à la fin de chaque échange.",
+      "stack": [
+        "NestJS",
+        "TypeScript",
+        "Groq / Llama 3.3",
+        "Ollama",
+        "Streaming SSE",
+        "Next.js",
+        "Docker"
+      ]
+    },
+    {
       "id": "invoicepay",
       "hidden": true,
       "company": "CCIB — Chambre de Commerce et d'Industrie du Bénin",
@@ -188,6 +205,11 @@
       "key": "backend",
       "cat": "Backend",
       "items": "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize"
+    },
+    {
+      "key": "ai",
+      "cat": "IA / LLM",
+      "items": "Intégration LLM (Groq, Ollama), APIs compatibles OpenAI, context-stuffing, architecture prête pour le RAG, prompt engineering & garde-fous, streaming SSE (tokens), function calling"
     },
     {
       "key": "frontend",

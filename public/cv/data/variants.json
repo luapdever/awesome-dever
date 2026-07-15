@@ -5,11 +5,13 @@
       "mtn-sites",
       "mymtn",
       "emilia",
+      "paulbot",
       "invoicepay"
     ],
     "skillOrder": [
       "languages",
       "backend",
+      "ai",
       "frontend",
       "mobile",
       "cms",
@@ -37,6 +39,7 @@
       "mtn-sites",
       "celtiis",
       "emilia",
+      "paulbot",
       "invoicepay"
     ],
     "skillOrder": [
@@ -45,6 +48,7 @@
       "mobile",
       "cms",
       "backend",
+      "ai",
       "cloud",
       "devops",
       "db",
@@ -71,6 +75,7 @@
   "backend": {
     "projectOrder": [
       "emilia",
+      "paulbot",
       "invoicepay",
       "celtiis",
       "mtn-sites",
@@ -78,6 +83,7 @@
     ],
     "skillOrder": [
       "backend",
+      "ai",
       "languages",
       "db",
       "cloud",
@@ -90,9 +96,9 @@
     ],
     "focus": [
       "backend",
+      "ai",
       "db",
-      "cloud",
-      "languages"
+      "cloud"
     ],
     "fr": {
       "role": "Ingénieur Backend",
@@ -110,6 +116,7 @@
       "emilia",
       "celtiis",
       "invoicepay",
+      "paulbot",
       "mtn-sites",
       "mymtn"
     ],
@@ -118,6 +125,7 @@
       "cloud",
       "obs",
       "backend",
+      "ai",
       "db",
       "vcs",
       "languages",

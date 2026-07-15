@@ -981,12 +981,19 @@
             links: [{ label: "emiliacross.com", href: "https://emiliacross.com/" }]
           },
           {
+            id: "paulbot", name: "PaulBot — assistant IA du portfolio", year: "2025", role: "Full-stack & intégration IA",
+            client: "Projet personnel",
+            desc: "Assistant conversationnel intégré à mon portfolio, qui répond aux questions des visiteurs sur mon parcours. Backend NestJS dédié diffusant les tokens en streaming (SSE) depuis un LLM compatible OpenAI (Groq — Llama 3.3 70B), avec bascule à chaud vers un Ollama auto-hébergé sans changer le code. Stratégie de context-stuffing (tout le profil tient dans la fenêtre de contexte du modèle, donc pas de RAG nécessaire pour l'instant) sur une architecture prête pour le RAG. Des garde-fous au niveau du prompt le maintiennent sur le sujet et respectent les NDA, un système de marqueurs lui permet de naviguer sur le site, et les sessions en mémoire génèrent un PDF de la conversation envoyé par email à la fin de chaque échange.",
+            stack: ["NestJS", "TypeScript", "Groq / Llama 3.3", "Ollama", "Streaming SSE", "Next.js", "Docker"]
+          },
+          {
             id: "invoicepay", hidden: true, company: "CCIB — Chambre de Commerce et d'Industrie du Bénin", year: "2022 – 2023"
           }
         ],
         skills: [
           { key: "languages", cat: "Langages", items: "JavaScript, TypeScript, PHP, Dart, Java, HTML5, CSS3/SASS, SQL" },
           { key: "backend", cat: "Backend", items: "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize" },
+          { key: "ai", cat: "IA / LLM", items: "Intégration LLM (Groq, Ollama), APIs compatibles OpenAI, context-stuffing, architecture prête pour le RAG, prompt engineering & garde-fous, streaming SSE, function calling" },
           { key: "frontend", cat: "Frontend", items: "Vue.js, Nuxt.js, SASS, Webpack" },
           { key: "mobile", cat: "Mobile", items: "Flutter, GetX, Bloc" },
           { key: "cms", cat: "CMS", items: "WordPress (thèmes & plugins), ACF Pro, Elementor, Polylang, LearnPress" },
@@ -1099,12 +1106,19 @@
             links: [{ label: "emiliacross.com", href: "https://emiliacross.com/" }]
           },
           {
+            id: "paulbot", name: "PaulBot — AI portfolio assistant", year: "2025", role: "Full-stack & AI integration",
+            client: "Personal project",
+            desc: "A conversational assistant embedded in my portfolio that answers visitors' questions about my background. Dedicated NestJS backend streaming tokens (SSE) from an OpenAI-compatible LLM (Groq — Llama 3.3 70B), hot-swappable to a self-hosted Ollama with no code change. Context-stuffing strategy (the full profile fits the model's context window, so no RAG needed yet) on a RAG-ready architecture. Prompt-level guardrails keep it on-topic and NDA-safe, a marker system lets it navigate the site, and in-memory sessions auto-generate a PDF transcript emailed at the end of each conversation.",
+            stack: ["NestJS", "TypeScript", "Groq / Llama 3.3", "Ollama", "SSE streaming", "Next.js", "Docker"]
+          },
+          {
             id: "invoicepay", hidden: true, company: "CCIB — Chamber of Commerce and Industry of Benin", year: "2022 – 2023"
           }
         ],
         skills: [
           { key: "languages", cat: "Languages", items: "JavaScript, TypeScript, PHP, Dart, Java, HTML5, CSS3/SASS, SQL" },
           { key: "backend", cat: "Backend", items: "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize" },
+          { key: "ai", cat: "AI / LLM", items: "LLM integration (Groq, Ollama), OpenAI-compatible APIs, context-stuffing, RAG-ready design, prompt engineering & guardrails, SSE token streaming, function calling" },
           { key: "frontend", cat: "Frontend", items: "Vue.js, Nuxt.js, SASS, Webpack" },
           { key: "mobile", cat: "Mobile", items: "Flutter, GetX, Bloc" },
           { key: "cms", cat: "CMS", items: "WordPress (themes & plugins), ACF Pro, Elementor, Polylang, LearnPress" },
@@ -1145,8 +1159,8 @@
 
     const VARIANTS = {
       fullstack: {
-        projectOrder: ["celtiis", "mtn-sites", "mymtn", "emilia", "invoicepay"],
-        skillOrder: ["languages", "backend", "frontend", "mobile", "cms", "db", "devops", "cloud", "obs", "vcs"],
+        projectOrder: ["celtiis", "mtn-sites", "mymtn", "emilia", "paulbot", "invoicepay"],
+        skillOrder: ["languages", "backend", "ai", "frontend", "mobile", "cms", "db", "devops", "cloud", "obs", "vcs"],
         focus: [],
         fr: {
           role: "Ingénieur Logiciel Full-Stack", roleSub: "Web · Mobile · Realtime · DevOps",
@@ -1158,8 +1172,8 @@
         }
       },
       frontend: {
-        projectOrder: ["mymtn", "mtn-sites", "celtiis", "emilia", "invoicepay"],
-        skillOrder: ["frontend", "languages", "mobile", "cms", "backend", "cloud", "devops", "db", "obs", "vcs"],
+        projectOrder: ["mymtn", "mtn-sites", "celtiis", "emilia", "paulbot", "invoicepay"],
+        skillOrder: ["frontend", "languages", "mobile", "cms", "backend", "ai", "cloud", "devops", "db", "obs", "vcs"],
         focus: ["frontend", "mobile", "languages", "cms"],
         fr: {
           role: "Ingénieur Frontend", roleSub: "Web · Mobile · UI/UX · SPA",
@@ -1171,9 +1185,9 @@
         }
       },
       backend: {
-        projectOrder: ["emilia", "invoicepay", "celtiis", "mtn-sites", "mymtn"],
-        skillOrder: ["backend", "languages", "db", "cloud", "devops", "obs", "frontend", "cms", "mobile", "vcs"],
-        focus: ["backend", "db", "cloud", "languages"],
+        projectOrder: ["emilia", "paulbot", "invoicepay", "celtiis", "mtn-sites", "mymtn"],
+        skillOrder: ["backend", "ai", "languages", "db", "cloud", "devops", "obs", "frontend", "cms", "mobile", "vcs"],
+        focus: ["backend", "ai", "db", "cloud"],
         fr: {
           role: "Ingénieur Backend", roleSub: "APIs · Realtime · Paiements · Data",
           profile: "Ingénieur backend expert en conception d'APIs robustes et de systèmes distribués à fort trafic. Je maîtrise NestJS, Node.js et Express, les architectures multi-services et realtime (WebSocket, Agora), les systèmes de paiement (Stripe), la sécurité (RBAC, SSO, 2FA) et les bases de données relationnelles (PostgreSQL, MySQL). J'ai livré des plateformes critiques : streaming vidéo facturé à la minute et e-facturation pour le secteur public."
@@ -1184,8 +1198,8 @@
         }
       },
       devops: {
-        projectOrder: ["emilia", "celtiis", "invoicepay", "mtn-sites", "mymtn"],
-        skillOrder: ["devops", "cloud", "obs", "backend", "db", "vcs", "languages", "cms", "frontend", "mobile"],
+        projectOrder: ["emilia", "celtiis", "invoicepay", "paulbot", "mtn-sites", "mymtn"],
+        skillOrder: ["devops", "cloud", "obs", "backend", "ai", "db", "vcs", "languages", "cms", "frontend", "mobile"],
         focus: ["devops", "cloud", "obs", "backend"],
         fr: {
           role: "Ingénieur DevOps", roleSub: "Docker · CI/CD · Cloud · Observabilité",
