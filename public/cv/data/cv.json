@@ -128,12 +128,12 @@
       "fr": {
         "role": "Ingénieur Backend",
         "roleSub": "APIs · Realtime · Paiements · Data",
-        "profile": "Ingénieur backend expert en conception d'APIs robustes et de systèmes distribués à fort trafic. Je maîtrise NestJS, Node.js et Express, les architectures multi-services et realtime (WebSocket, Agora), les systèmes de paiement (Stripe), la sécurité (RBAC, SSO, 2FA) et les bases de données relationnelles (PostgreSQL, MySQL). J'ai livré des plateformes critiques : streaming vidéo facturé à la minute et e-facturation gouvernementale avec workflows d'approbation multi-niveaux."
+        "profile": "Ingénieur backend expert en conception d'APIs robustes et de systèmes distribués à fort trafic. Je maîtrise NestJS, Node.js et Express, les architectures multi-services et realtime (WebSocket, Agora), les systèmes de paiement (Stripe), la sécurité (RBAC, SSO, 2FA) et les bases de données relationnelles (PostgreSQL, MySQL). J'ai livré des plateformes critiques : streaming vidéo facturé à la minute et e-facturation pour le secteur public."
       },
       "en": {
         "role": "Backend Engineer",
         "roleSub": "APIs · Real-Time · Payments · Data",
-        "profile": "Backend engineer expert in designing robust APIs and distributed systems for high traffic. I master NestJS, Node.js and Express, multi-service and real-time architectures (WebSocket, Agora), payment systems (Stripe), security (RBAC, SSO, 2FA) and relational databases (PostgreSQL, MySQL). I have delivered mission-critical platforms: per-minute-billed video streaming and government e-invoicing with multi-level approval workflows."
+        "profile": "Backend engineer expert in designing robust APIs and distributed systems for high traffic. I master NestJS, Node.js and Express, multi-service and real-time architectures (WebSocket, Agora), payment systems (Stripe), security (RBAC, SSO, 2FA) and relational databases (PostgreSQL, MySQL). I have delivered mission-critical platforms: per-minute-billed video streaming and public-sector e-invoicing."
       }
     },
     "devops": {
@@ -222,7 +222,7 @@
           "period": "Janvier 2022 – Présent",
           "note": "Prestations web pour grands comptes télécoms et médias",
           "bullets": [
-            "2026 · Celtiis - SBIN — Site corporate multilingue et portail presse/LMS : 17 plugins WordPress sur mesure, ATS de recrutement, RBAC par module, SSO Keycloak et CI/CD conteneurisé (Jenkins, Docker).",
+            "2026 · Celtiis (via KAMGOKO) — Mission confidentielle sous accord de non-divulgation (NDA).",
             "2022 – 2025 · MTN & Moov — Sites corporate MTN Bénin, MTN Congo et Moov Africa Togo, application Selfcare MyMTN (Vue.js) et page d'activation MonRouteur : thèmes/plugins WordPress sur mesure, intégration d'APIs RESTful et optimisation des performances."
           ]
         },
@@ -241,10 +241,9 @@
           "role": "Développeur Desktop & Mobile",
           "org": "CCIB — Chambre de Commerce et d'Industrie du Bénin",
           "period": "2022 – 2023",
-          "note": "Prestation — InvoicePay, dématérialisation des factures",
+          "note": "Prestation pour une institution publique — sous NDA",
           "bullets": [
-            "Développement d'une plateforme d'e-facturation pour une institution publique : workflow d'approbation hiérarchique multi-niveaux (13 rôles) en Express/Sequelize.",
-            "Génération de rapports PDF, notifications push Firebase et e-mail multicanal, et journal d'audit complet pour la conformité."
+            "Détails du projet couverts par un accord de confidentialité (NDA)."
           ]
         },
         {
@@ -271,24 +270,9 @@
       "projects": [
         {
           "id": "celtiis",
-          "name": "Celtiis - SBIN — Corporate & Newsroom",
-          "year": "2026",
-          "role": "Lead développeur WordPress",
-          "client": "Celtiis (via KAMGOKO)",
-          "desc": "Portail de marque bilingue (FR/EN) et plateforme presse intégrant un LMS : thème orienté objet, ATS de recrutement (pipeline 10 étapes, OAuth LinkedIn), simulateur C'Cash, helpdesk, médiathèque sécurisée, RBAC par module et SSO Keycloak. 17 plugins sur mesure et déploiement conteneurisé.",
-          "stack": [
-            "WordPress",
-            "PHP 8.5",
-            "ACF Pro",
-            "Polylang",
-            "LearnPress",
-            "Keycloak SSO",
-            "Docker",
-            "Jenkins",
-            "Prometheus",
-            "Grafana"
-          ],
-          "links": []
+          "hidden": true,
+          "company": "Celtiis (via KAMGOKO)",
+          "year": "2026"
         },
         {
           "id": "mtn-sites",
@@ -366,23 +350,9 @@
         },
         {
           "id": "invoicepay",
-          "name": "InvoicePay — E-facturation gouvernementale",
-          "year": "2022 – 2023",
-          "role": "Développeur backend Node.js",
-          "client": "CCIB — Chambre de Commerce et d'Industrie du Bénin",
-          "desc": "Plateforme de dématérialisation et de validation de factures pour une institution publique : workflow d'approbation hiérarchique multi-niveaux (13 rôles), génération de rapports PDF, notifications push Firebase et e-mail multicanal, et journal d'audit complet pour conformité.",
-          "stack": [
-            "Node.js",
-            "Express",
-            "Sequelize",
-            "MySQL",
-            "JWT",
-            "Firebase FCM",
-            "WebSocket",
-            "PDF"
-          ],
-          "links": [],
-          "private": true
+          "hidden": true,
+          "company": "CCIB — Chambre de Commerce et d'Industrie du Bénin",
+          "year": "2022 – 2023"
         }
       ],
       "skills": [
@@ -550,7 +520,7 @@
           "period": "January 2022 – Present",
           "note": "Web services for major telecom and media accounts",
           "bullets": [
-            "2026 · Celtiis - SBIN — Multilingual corporate website and press/LMS portal: 17 custom WordPress plugins, recruitment ATS, per-module RBAC, Keycloak SSO and containerized CI/CD (Jenkins, Docker).",
+            "2026 · Celtiis (via KAMGOKO) — Confidential engagement under a non-disclosure agreement (NDA).",
             "2022 – 2025 · MTN & Moov — Corporate websites for MTN Benin, MTN Congo and Moov Africa Togo, the MyMTN Selfcare app (Vue.js) and the MonRouteur activation page: custom WordPress themes/plugins, RESTful API integration and performance optimization."
           ]
         },
@@ -569,10 +539,9 @@
           "role": "Desktop & Mobile Developer",
           "org": "CCIB — Chamber of Commerce and Industry of Benin",
           "period": "2022 – 2023",
-          "note": "Contract — InvoicePay, invoice dematerialization",
+          "note": "Contract for a public institution — under NDA",
           "bullets": [
-            "Built an e-invoicing platform for a public institution: multi-level hierarchical approval workflow (13 roles) in Express/Sequelize.",
-            "PDF report generation, Firebase push and multi-channel email notifications, and a complete audit log for compliance."
+            "Project details are covered by a non-disclosure agreement (NDA)."
           ]
         },
         {
@@ -599,24 +568,9 @@
       "projects": [
         {
           "id": "celtiis",
-          "name": "Celtiis - SBIN — Corporate & Newsroom",
-          "year": "2026",
-          "role": "Lead WordPress Developer",
-          "client": "Celtiis (via KAMGOKO)",
-          "desc": "Bilingual (FR/EN) brand portal and press platform with an integrated LMS: object-oriented theme, recruitment ATS (10-step pipeline, LinkedIn OAuth), C'Cash simulator, helpdesk, secure media library, per-module RBAC and Keycloak SSO. 17 custom plugins and containerized deployment.",
-          "stack": [
-            "WordPress",
-            "PHP 8.5",
-            "ACF Pro",
-            "Polylang",
-            "LearnPress",
-            "Keycloak SSO",
-            "Docker",
-            "Jenkins",
-            "Prometheus",
-            "Grafana"
-          ],
-          "links": []
+          "hidden": true,
+          "company": "Celtiis (via KAMGOKO)",
+          "year": "2026"
         },
         {
           "id": "mtn-sites",
@@ -694,23 +648,9 @@
         },
         {
           "id": "invoicepay",
-          "name": "InvoicePay — Government e-invoicing",
-          "year": "2022 – 2023",
-          "role": "Node.js Backend Developer",
-          "client": "CCIB — Chamber of Commerce and Industry of Benin",
-          "desc": "Invoice dematerialization and validation platform for a public institution: multi-level hierarchical approval workflow (13 roles), PDF report generation, Firebase push and multi-channel email notifications, and a complete audit log for compliance.",
-          "stack": [
-            "Node.js",
-            "Express",
-            "Sequelize",
-            "MySQL",
-            "JWT",
-            "Firebase FCM",
-            "WebSocket",
-            "PDF"
-          ],
-          "links": [],
-          "private": true
+          "hidden": true,
+          "company": "CCIB — Chamber of Commerce and Industry of Benin",
+          "year": "2022 – 2023"
         }
       ],
       "skills": [

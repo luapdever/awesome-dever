@@ -1,8 +1,9 @@
 /* ============================================================
-   SOURCE DE DONNÉES — Compétences (catégorisées + niveaux)
-   Données brutes réutilisables (portfolio OS, futurs use cases).
-   Champs : key, category, icon (iconify), accent?, skills[{name, level, icon?}]
-   level ∈ 0..100 (pour barres / radar).
+   SOURCE DE DONNÉES — Compétences (catégorisées).
+   Champs : key, category, icon (iconify), skills[{name, icon?}],
+   concepts[] = concepts avancés ("deep cuts") pour prouver la
+   profondeur sans afficher de pourcentage/niveau.
+   (level conservé pour d'éventuels usages internes, non affiché.)
    ============================================================ */
 export const skillSet = [
   {
@@ -17,6 +18,7 @@ export const skillSet = [
       { name: "Java", level: 65, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
       { name: "SQL", level: 82, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
     ],
+    concepts: ["Event loop & microtasks", "Proxy / Reflect metaprogramming", "TS conditional & mapped types", "Generators & iterators", "WeakRef / FinalizationRegistry"],
   },
   {
     key: "frontend",
@@ -29,6 +31,7 @@ export const skillSet = [
       { name: "HTML5 / CSS3 / SASS", level: 95, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" },
       { name: "GSAP / Three.js", level: 75, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" },
     ],
+    concepts: ["Fine-grained reactivity", "Streaming SSR & partial hydration", "GSAP timelines & ScrollTrigger", "Virtual scrolling", "Web Components / Shadow DOM"],
   },
   {
     key: "backend",
@@ -41,6 +44,7 @@ export const skillSet = [
       { name: "Laravel", level: 78, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" },
       { name: "REST · WebSocket", level: 88, icon: "https://api.iconify.design/mdi:api.svg?color=%23ffffff" },
     ],
+    concepts: ["Streams & backpressure", "Dependency injection (NestJS)", "Idempotency & outbox pattern", "Rate limiting & circuit breakers", "Lightweight CQRS / event-driven"],
   },
   {
     key: "mobile",
@@ -50,6 +54,7 @@ export const skillSet = [
       { name: "Flutter", level: 84, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
       { name: "GetX / Bloc", level: 78, icon: "https://api.iconify.design/mdi:state-machine.svg?color=%23ffffff" },
     ],
+    concepts: ["Dart isolates & concurrency", "Reactive state (Bloc/GetX)", "Native platform channels", "Custom render objects"],
   },
   {
     key: "cms",
@@ -60,6 +65,7 @@ export const skillSet = [
       { name: "ACF · Polylang · LearnPress", level: 85, icon: "https://api.iconify.design/mdi:puzzle.svg?color=%23ffffff" },
       { name: "Strapi", level: 72, icon: "https://www.svgrepo.com/show/354399/strapi-icon.svg" },
     ],
+    concepts: ["Hooks & filters internals", "Custom Gutenberg blocks", "WP REST + JWT auth", "Multisite & i18n (Polylang)"],
   },
   {
     key: "data",
@@ -70,6 +76,7 @@ export const skillSet = [
       { name: "MySQL / MariaDB", level: 85, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
       { name: "TypeORM · Sequelize", level: 82, icon: "https://api.iconify.design/mdi:database-cog.svg?color=%23ffffff" },
     ],
+    concepts: ["Recursive CTEs", "LATERAL joins", "Row-Level Security", "Window functions", "Partial & GIN indexes"],
   },
   {
     key: "devops",
@@ -82,6 +89,7 @@ export const skillSet = [
       { name: "Firebase · GCP · Stripe", level: 82, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
       { name: "Keycloak (SSO) · Agora", level: 78, icon: "https://api.iconify.design/mdi:shield-key.svg?color=%23ffffff" },
     ],
+    concepts: ["Multi-stage & distroless builds", "Layer caching", "Blue/green & rollbacks", "SSO OIDC (Keycloak)", "Observability (RED/USE)"],
   },
   {
     key: "tools",
@@ -93,6 +101,7 @@ export const skillSet = [
       { name: "Blender (3D)", level: 68, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg" },
       { name: "Photoshop · XD", level: 72, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" },
     ],
+    concepts: ["Interactive rebase & bisect", "PromQL & Grafana dashboards", "Correlated traces/metrics/logs", "Design tokens"],
   },
 ];
 

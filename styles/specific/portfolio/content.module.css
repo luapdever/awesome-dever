@@ -214,6 +214,38 @@
     transition: background 0.15s ease;
 }
 .dropItem:hover { background: var(--color-primary-light); }
+.dropAccent { color: var(--color-accent-soft); font-weight: 700; }
+.dropAccent:hover { background: var(--color-accent); color: #2a1a00; }
+.dropDivider { height: 1px; margin: 6px 8px; background: rgba(255, 255, 255, 0.12); }
+
+/* Apple-style brand button + system info panel */
+.osBrand {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 2px 4px;
+    border-radius: 6px;
+    cursor: url(../../../src/assets/img/icons/cursor-hand.png) 12 12, auto;
+    transition: background 0.2s ease;
+}
+.osBrand:hover { background: rgba(255, 255, 255, 0.08); }
+.systemDrop { min-width: 268px; }
+.sysInfo {
+    padding: 12px 12px 10px;
+    border-radius: 10px;
+    margin-bottom: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+}
+.sysTitle { font-size: 0.95rem; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 10px; }
+.sysTitle em { color: var(--color-accent-soft); font-style: normal; font-weight: 700; }
+.sysRow {
+    display: flex; justify-content: space-between; gap: 16px;
+    font-size: 0.76rem; padding: 3px 0; line-height: 1.4;
+}
+.sysRow span { color: rgba(255, 255, 255, 0.55); }
+.sysRow b { color: #fff; font-weight: 600; text-align: right; }
 
 .popover { right: -6px; transform-origin: top right; padding: 12px; }
 

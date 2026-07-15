@@ -38,7 +38,7 @@ const SOCIALS = [
   { label: "Email", url: "mailto:pzannou511@gmail.com" },
 ];
 
-const OPENABLE = ["career", "skills", "vault", "cv", "emilia", "contact", "appStore", "terminal", "dever"];
+export const OPENABLE = ["career", "skills", "vault", "cv", "emilia", "contact", "appStore", "terminal", "dever"];
 
 export function buildCommands() {
   const C = {};

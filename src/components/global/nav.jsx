@@ -7,6 +7,7 @@ import styles from "../../../styles/global/nav.module.css";
 import { socialMedias } from "../../rawDatas/aboutMe";
 import { L, tx } from "../../rawDatas/i18n";
 import { useLandingLang } from "../../context/landingLang";
+import { useExperience } from "../../context/experience";
 
 const LINKS = [
   { label: L("Home", "Accueil"), href: "/", id: "top" },
@@ -23,6 +24,7 @@ function NavBar() {
   const [active, setActive] = useState("top");
   const overlay = useRef();
   const { lang, setLang } = useLandingLang();
+  const { openChooser } = useExperience();
   const other = lang === "fr" ? "en" : "fr";
 
   useEffect(() => {
@@ -102,6 +104,14 @@ function NavBar() {
             </Link>
           ))}
         </nav>
+        <button
+          className={styles.overlayExp}
+          data-oitem
+          onClick={() => { setOpen(false); openChooser(); }}
+        >
+          <span className={styles.overlayExpIcon}>⤢</span>
+          {lang === "fr" ? "Changer d'expérience" : "Change experience"}
+        </button>
         <div className={styles.overlayFoot} data-oitem>
           <a href="mailto:pzannou511@gmail.com" className={styles.overlayMail}>pzannou511@gmail.com</a>
           <div className={styles.overlaySocials}>

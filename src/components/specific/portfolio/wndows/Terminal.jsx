@@ -3,7 +3,7 @@ import styles from "../../../../../styles/specific/portfolio/windows/terminal.mo
 import { useConsole } from "../../../../hooks/useConsole";
 
 function Terminal() {
-  const { lines, exec, recall, prompt } = useConsole();
+  const { lines, exec, recall, complete, suggest, prompt } = useConsole();
   const scrollRef = useRef();
   const inputRef = useRef();
 
@@ -22,6 +22,13 @@ function Terminal() {
   const onKeyDown = (e) => {
     if (e.key === "ArrowUp") { e.preventDefault(); recall(-1, e.target); }
     else if (e.key === "ArrowDown") { e.preventDefault(); recall(1, e.target); }
+    else if (e.key === "Tab") {
+      e.preventDefault();
+      const { value, candidates } = complete(e.target.value);
+      e.target.value = value;
+      requestAnimationFrame(() => { e.target.selectionStart = e.target.selectionEnd = value.length; });
+      suggest(candidates);
+    }
   };
 
   return (

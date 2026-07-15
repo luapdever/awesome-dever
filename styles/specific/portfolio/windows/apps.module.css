@@ -93,6 +93,29 @@
 }
 @keyframes growBar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
+/* Tech chips (no levels) */
+.techChips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+.techChip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 10px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border);
+  font-size: 0.76rem; color: rgba(255, 255, 255, 0.9); line-height: 1;
+}
+.techChip img { width: 14px; height: 14px; }
+
+/* Signature concepts ("deep cuts") */
+.concepts { border-top: 1px dashed var(--glass-border); padding-top: 12px; }
+.conceptsLabel {
+  display: block; font-size: 0.64rem; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--color-accent-soft); font-weight: 700; margin-bottom: 8px;
+}
+.conceptTags { display: flex; flex-wrap: wrap; gap: 6px; }
+.conceptTag {
+  padding: 4px 9px; border-radius: 7px;
+  background: rgba(255, 165, 0, 0.1); border: 1px solid rgba(255, 165, 0, 0.28);
+  color: var(--color-accent-soft); font-size: 0.72rem; line-height: 1.2;
+}
+
 /* ===================== CAREER / TIMELINE ===================== */
 .timeline {
   position: relative;

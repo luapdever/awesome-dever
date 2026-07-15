@@ -66,7 +66,7 @@ export const performances = [
       year: "2022 — 2026",
       stack: ["React JS"],
       features: [L("Private & enterprise projects", "Projets privés & entreprise"), L("Described with permission", "Décrits avec autorisation")],
-      more: L("Private & enterprise projects (InvoicePay, Celtiis…) grouped and described.", "Projets privés & entreprise (InvoicePay, Celtiis…) regroupés et décrits."),
+      more: L("Private & enterprise engagements — companies disclosed, project details under NDA.", "Prestations privées & entreprise — entreprises communiquées, détails des projets sous NDA."),
     },
   },
   {

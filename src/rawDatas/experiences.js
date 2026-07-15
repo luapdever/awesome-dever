@@ -20,8 +20,8 @@ export const experiences = [
     summary: L("Web engineering for major telecom and media accounts.", "Ingénierie web pour de grands comptes télécoms et médias."),
     highlights: [
       L(
-        "2026 · Celtiis – SBIN: multilingual corporate site + press/LMS portal, 17 custom WordPress plugins, recruitment ATS, per-module RBAC, Keycloak SSO, containerized CI/CD.",
-        "2026 · Celtiis – SBIN : site corporate multilingue + portail presse/LMS, 17 plugins WordPress sur mesure, ATS de recrutement, RBAC par module, SSO Keycloak, CI/CD conteneurisé."
+        "2026 · Celtiis (via KAMGOKO): confidential engagement under a non-disclosure agreement (NDA).",
+        "2026 · Celtiis (via KAMGOKO) : mission confidentielle sous accord de non-divulgation (NDA)."
       ),
       L(
         "2022–2025 · MTN & Moov: corporate sites (MTN Benin, MTN Congo, Moov Africa Togo), MyMTN Selfcare (Vue.js) and the MonRouteur activation page — custom themes/plugins, RESTful APIs, performance.",
@@ -71,18 +71,14 @@ export const experiences = [
     end: "2023-12",
     current: false,
     location: "Cotonou, Benin",
-    summary: L("InvoicePay — invoice dematerialization for a public institution.", "InvoicePay — dématérialisation des factures pour une institution publique."),
+    summary: L("Confidential engagement for a public institution — under NDA.", "Prestation confidentielle pour une institution publique — sous NDA."),
     highlights: [
       L(
-        "Built an e-invoicing platform with a multi-level hierarchical approval workflow (13 roles) in Express/Sequelize.",
-        "Plateforme d'e-facturation avec un workflow d'approbation hiérarchique multi-niveaux (13 rôles) en Express/Sequelize."
-      ),
-      L(
-        "PDF report generation, Firebase push and multi-channel email notifications, complete audit log for compliance.",
-        "Génération de rapports PDF, notifications push Firebase et e-mail multicanal, journal d'audit complet pour la conformité."
+        "Project details are covered by a non-disclosure agreement (NDA).",
+        "Détails du projet couverts par un accord de confidentialité (NDA)."
       ),
     ],
-    stack: ["Node.js", "Express", "Sequelize", "MySQL", "Firebase FCM", "Flutter"],
+    stack: ["Node.js", "Express", "MySQL"],
     links: [],
   },
   {

@@ -8,6 +8,9 @@ import "../styles/keyframes.css";
 import "../styles/globals.css";
 import Cursor from "../src/components/global/cursor";
 import { LandingLangProvider } from "../src/context/landingLang";
+import { ExperienceProvider } from "../src/context/experience";
+import ExperienceModal from "../src/components/specific/home/ExperienceModal";
+import ExperienceButton from "../src/components/global/ExperienceButton";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -28,11 +31,15 @@ function MyApp({ Component, pageProps }) {
     >
       <Suspense fallback={<p>Loading</p>}>
         <LandingLangProvider>
-          <Cursor />
-          {!hideChrome && <NavBar />}
-          <Component {...pageProps} />
-          <ToastContainer theme="dark" />
-          {!hideChrome && <TheFooter />}
+          <ExperienceProvider>
+            <Cursor />
+            {!hideChrome && <NavBar />}
+            <Component {...pageProps} />
+            <ToastContainer theme="dark" />
+            {!hideChrome && <TheFooter />}
+            {!hideChrome && <ExperienceButton />}
+            {!hideChrome && <ExperienceModal />}
+          </ExperienceProvider>
         </LandingLangProvider>
       </Suspense>
     </div>

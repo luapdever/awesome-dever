@@ -7,8 +7,24 @@ import { yearsOfExperience } from "./xp";
 import { L } from "./i18n";
 
 const ph = (name, color = "ffa500") => `https://api.iconify.design/ph:${name}.svg?color=%23${color}`;
+const favicon = (domain) => `https://www.google.com/s2/favicons?sz=64&domain=${domain}`;
 
 const YEARS = yearsOfExperience();
+
+/* Mes collaborations — 10 projets clés, tirés du portfolio (PaulBrain OS).
+   Chaque carte pointe vers le projet en ligne ; « Voir plus » ouvre l'OS. */
+export const collaborations = [
+  { name: "Emilia Cross", client: "France Assist", url: "https://emiliacross.com/", icon: favicon("emiliacross.com"), tag: L("Real-time video streaming", "Streaming vidéo temps réel") },
+  { name: "My MTN · Selfcare", client: "MTN Bénin", url: "https://my.mtn.bj/", icon: favicon("my.mtn.bj"), tag: L("Vue.js self-care portal", "Portail selfcare Vue.js") },
+  { name: "MTN Bénin", client: "MTN Bénin", url: "https://www.mtn.bj/", icon: favicon("mtn.bj"), tag: L("Corporate WordPress", "Site corporate WordPress") },
+  { name: "Mon Routeur", client: "MTN Bénin", url: "https://monrouteur.mtn.bj/?ref=noref", icon: favicon("monrouteur.mtn.bj"), tag: L("Activation journey", "Parcours d'activation") },
+  { name: "WAPIFY", client: L("Studio · SaaS", "Studio · SaaS"), url: "https://wapify.co/", icon: favicon("wapify.co"), tag: L("WhatsApp AI marketing", "Marketing IA WhatsApp") },
+  { name: "GoCoachings", client: L("Studio · SaaS", "Studio · SaaS"), url: "https://www.gocoachings.com", icon: favicon("gocoachings.com"), tag: L("Coaching platform", "Plateforme de coaching") },
+  { name: "NinjaLinking", client: L("Studio · France", "Studio · France"), url: "https://app.ninjalinking.fr", icon: favicon("ninjalinking.fr"), tag: L("SEO backlinks SaaS", "SaaS backlinks SEO") },
+  { name: "Sevexchange", client: L("Fintech", "Fintech"), url: "https://sevexchange.com", icon: favicon("sevexchange.com"), tag: L("Crypto & mobile-money exchange", "Échange crypto & mobile money") },
+  { name: "Kloo", client: L("Web", "Web"), url: "https://kloo.me", icon: favicon("kloo.me"), tag: L("Link-in-bio platform", "Plateforme link-in-bio") },
+  { name: "Miroiterie du Ternois", client: "France", url: "https://www.mdtfermetures.com", icon: favicon("mdtfermetures.com"), tag: L("Field & site management", "Gestion chantiers & terrain") },
+];
 
 export const stats = [
   { n: `${YEARS}+`, l: L("years of experience", "ans d'expérience") },
@@ -98,17 +114,22 @@ export const HOME_UI = {
     btnOS: "Explore PaulBrain OS",
     btnCV: "My résumé",
     scroll: "SCROLL",
+    casquettes: ["Frontend", "Backend", "DevOps", "Mobile", "CMS / WordPress", "Real-Time", "Creative / 3D"],
+    stackHead: "What I'm made of.",
+    headCollab: "Some collaborations.",
+    collabSub: "A few live projects shipped with teams and clients.",
+    collabMore: "See everything in PaulBrain OS",
     aboutText: "A self-taught developer turned engineer, I turn problems others call complicated — per-minute billing, real-time video streaming, government e-invoicing — into stable, elegant and documented products.",
     bioLink: "My full bio",
     headCaps: "A Swiss army knife — that compiles.",
-    headJourney: "My journey, frame by frame.",
+    headJourney: "My journey in frames.",
     journeyIntro: "Seven snapshots, six years, one constant: learning faster than the coffee cools.",
     headExp: "Where I've left some code.",
     headTesti: "They survived my commits.",
     ctaTitle: "Shall we build something?",
     ctaText: "An ambitious project, a tight deadline, an idea that keeps you up at night? Write to me.",
     ctaMail: "Send an email",
-    ctaOther: "Other ways to know me",
+    ctaOther: "Change my experience",
     headLinks: "Useful links.",
   },
   fr: {
@@ -116,17 +137,22 @@ export const HOME_UI = {
     btnOS: "Explorer PaulBrain OS",
     btnCV: "Mon CV",
     scroll: "SCROLL",
+    casquettes: ["Frontend", "Backend", "DevOps", "Mobile", "CMS / WordPress", "Temps réel", "Créatif / 3D"],
+    stackHead: "Ce que j'ai dans le ventre.",
+    headCollab: "Mes collaborations.",
+    collabSub: "Quelques projets en ligne livrés avec des équipes et des clients.",
+    collabMore: "Tout voir dans PaulBrain OS",
     aboutText: "Développeur autodidacte devenu ingénieur, je transforme des problèmes que d'autres jugent compliqués — facturation à la minute, streaming vidéo temps réel, e-facturation gouvernementale — en produits stables, élégants et documentés.",
     bioLink: "Ma bio complète",
     headCaps: "Un couteau suisse, mais qui compile.",
-    headJourney: "Mon parcours, image par image.",
+    headJourney: "Mon parcours en images.",
     journeyIntro: "Sept clichés, six ans, une constante : apprendre plus vite que le café ne refroidit.",
     headExp: "Là où j'ai laissé du code.",
     headTesti: "Ils ont survécu à mes commits.",
     ctaTitle: "On construit quelque chose ?",
     ctaText: "Un projet ambitieux, un délai serré, une idée qui vous empêche de dormir ? Écrivez-moi.",
     ctaMail: "Écrire un e-mail",
-    ctaOther: "Autres façons de me connaître",
+    ctaOther: "Changer d'expérience",
     headLinks: "Liens utiles.",
   },
 };

@@ -49,6 +49,13 @@
   word-break: break-word;
 }
 .col a:hover { color: var(--color-accent-soft); transform: translateX(3px); }
+.linkBtn {
+  display: block; padding: 0; margin-bottom: 10px;
+  background: none; border: none; text-align: left;
+  font-family: inherit; font-size: 0.88rem; color: var(--color-accent-soft);
+  cursor: pointer; transition: color 0.2s ease, transform 0.2s ease;
+}
+.linkBtn:hover { color: var(--color-accent); transform: translateX(3px); }
 
 .bottom {
   max-width: 1120px;

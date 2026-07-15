@@ -26,6 +26,7 @@ import { toast } from "react-toastify";
 import useWindowScreen from "../../../hooks/useWindowScreen";
 import Clock from "../../global/clock";
 import { OS } from "../../../rawDatas/os";
+import { yearsOfExperience } from "../../../rawDatas/xp";
 import { useLang } from "./lang";
 
 // Parse a shareable hash like "app=skills&lang=fr" (or bare "skills").
@@ -159,6 +160,28 @@ function Content() {
       { label: t.miGithub, fn: () => window.open("https://github.com/luapdever", "_blank") },
     ],
   };
+
+  // Apple-menu-style "About this system" — same info as the terminal `neofetch`.
+  const SYS_INFO = [
+    { k: "OS", v: `${OS.name} v${OS.version}` },
+    { k: "Host", v: "paul@paulbrain" },
+    { k: lang === "fr" ? "Rôle" : "Role", v: lang === "fr" ? "Ingénieur logiciel full-stack" : "Full-Stack Software Engineer" },
+    { k: "Uptime", v: `${yearsOfExperience()}+ ${lang === "fr" ? "ans" : "years"}` },
+    { k: "Shell", v: "Dever Shell" },
+    { k: "Stack", v: "JS/TS · Vue · NestJS · Flutter · Docker" },
+  ];
+  const SYSTEM_MENU = [
+    { label: t.miApps, fn: openLauncher },
+    { label: t.miTerminal, fn: () => openWin(terminalWindow) },
+    { label: t.miCV, fn: () => openWin(perfById.cv) },
+    { label: t.miContact, fn: () => openWin(perfById.contact) },
+    { divider: true },
+    { label: t.miWallpaper, fn: () => setWallpaper(pickWallpaper()) },
+    { label: t.miFullscreen, fn: toggleFullscreen },
+    { label: lang === "fr" ? "Redémarrer le système" : "Restart system", fn: () => window.location.reload() },
+    { divider: true },
+    { label: lang === "fr" ? "Suspendre — retour au portfolio" : "Suspend — back to portfolio", fn: () => { window.location.href = "/"; }, accent: true },
+  ];
 
   // Play a short beep at the current volume so the control is genuinely audible.
   const beep = (vol) => {
@@ -312,8 +335,31 @@ function Content() {
       {/* The top menu bar */}
       <div className={styles.menuBar} style={openMenu ? { zIndex: 50 } : undefined}>
         <div className={styles.menuLeft}>
-          <img src={dever.src} alt={OS.name} width={18} />
-          <b>{OS.name}</b>
+          <span
+            className={styles.osBrand + (openMenu === "system" ? " " + styles.menuItemActive : "")}
+            onClick={(e) => { e.stopPropagation(); setOpenMenu(openMenu === "system" ? null : "system"); }}
+          >
+            <img src={dever.src} alt={OS.name} width={18} />
+            <b>{OS.name}</b>
+            {openMenu === "system" && (
+              <div className={`${styles.dropdown} ${styles.systemDrop}`} onClick={(e) => e.stopPropagation()}>
+                <div className={styles.sysInfo}>
+                  <div className={styles.sysTitle}>{OS.name} <em>v{OS.version}</em></div>
+                  {SYS_INFO.map((row, i) => (
+                    <div className={styles.sysRow} key={i}><span>{row.k}</span><b>{row.v}</b></div>
+                  ))}
+                </div>
+                <div className={styles.dropDivider} />
+                {SYSTEM_MENU.map((it, i) => it.divider ? (
+                  <div key={i} className={styles.dropDivider} />
+                ) : (
+                  <div key={i} className={styles.dropItem + (it.accent ? " " + styles.dropAccent : "")} onClick={() => menuAction(it.fn)}>
+                    {it.label}
+                  </div>
+                ))}
+              </div>
+            )}
+          </span>
           {[["file", t.menuFile], ["view", t.menuView], ["help", t.menuHelp]].map(([k, label]) => (
             <span
               key={k}

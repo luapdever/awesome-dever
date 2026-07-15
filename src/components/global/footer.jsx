@@ -2,9 +2,13 @@ import React from "react";
 import Link from "next/link";
 import styles from "../../../styles/global/footer.module.css";
 import { socialMedias } from "../../rawDatas/aboutMe";
+import { useExperience } from "../../context/experience";
+import { useLandingLang } from "../../context/landingLang";
 
 function TheFooter() {
   const year = new Date().getFullYear();
+  const { openChooser } = useExperience();
+  const { lang } = useLandingLang();
   return (
     <footer className={styles.footer}>
       <div className={styles.top}>
@@ -41,6 +45,9 @@ function TheFooter() {
           <a href="/cv/index.html" target="_blank" rel="noopener noreferrer">Mon CV interactif</a>
           <Link href="/#temoignages">Témoignages</Link>
           <a href="https://luap-dever.me" target="_blank" rel="noopener noreferrer">Mon blog</a>
+          <button type="button" className={styles.linkBtn} onClick={openChooser}>
+            {lang === "fr" ? "Changer d'expérience" : "Change experience"}
+          </button>
         </div>
 
         <div className={styles.col}>

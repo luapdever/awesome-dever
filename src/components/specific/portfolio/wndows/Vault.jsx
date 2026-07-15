@@ -31,8 +31,8 @@ function Vault() {
           p.hidden ? (
             <div className={`${styles.vaultCard} ${styles.hidden}`} key={p.id}>
               <img className={styles.lock} src="https://api.iconify.design/mdi:eye-off.svg?color=%23ffffff" alt="Hidden" />
-              <h2>{p.name}</h2>
-              <span className={styles.tag}>{p.year}</span>
+              <h2>{p.company || p.name}</h2>
+              <span className={styles.tag}>{statusLabel(p.status)} · {p.year}</span>
               <div className={styles.hiddenBody}>
                 <div className={styles.redacted} aria-hidden="true">
                   <div className={`${styles.rline} ${styles.s1}`} />

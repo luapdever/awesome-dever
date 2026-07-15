@@ -4,17 +4,30 @@ import Link from "next/link";
 import gsap from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "../../../../styles/specific/home/home.module.css";
-import { stats, capabilities, journey, testimonials, usefulLinks, HERO_TITLE, HOME_UI } from "../../../rawDatas/home";
+import { stats, capabilities, journey, testimonials, usefulLinks, collaborations, HERO_TITLE, HOME_UI } from "../../../rawDatas/home";
 import { experiences } from "../../../rawDatas/experiences";
 import { yearsOfExperience } from "../../../rawDatas/xp";
-import { tx } from "../../../rawDatas/i18n";
+import { tx, SKILL_CAT } from "../../../rawDatas/i18n";
 import { useLandingLang } from "../../../context/landingLang";
-import PremiumModal from "./PremiumModal";
+import { useExperience } from "../../../context/experience";
+import { skillSet } from "../../../rawDatas/skillset";
 
 const YEARS = yearsOfExperience();
 const initials = (name) => name.split(/\s+/).map((w) => w[0]).join("").slice(0, 2).toUpperCase();
-const MARQUEE = ["Vue.js", "NestJS", "Node.js", "Flutter", "TypeScript", "PostgreSQL", "Docker", "WebSocket", "React", "Stripe", "WordPress", "GSAP", "Three.js", "CI/CD"];
 const ROLES = ["Full-Stack Engineer", "Creative Developer", "Problem Solver", "Real-Time Architect"];
+
+// Phosphor category icons for the stack (no emojis on the landing).
+const ph = (name, color = "ffa500") => `https://api.iconify.design/ph:${name}.svg?color=%23${color}`;
+const CAT_PH = {
+  languages: ph("code"),
+  frontend: ph("browser"),
+  backend: ph("stack"),
+  mobile: ph("device-mobile"),
+  cms: ph("globe-hemisphere-west"),
+  data: ph("database"),
+  devops: ph("rocket-launch"),
+  tools: ph("wrench"),
+};
 
 const MaskWords = ({ text, className }) => (
   <span className={className}>
@@ -30,21 +43,15 @@ function HomePage() {
   const root = useRef();
   const galleryPin = useRef();
   const galleryTrack = useRef();
+  const testiRef = useRef();
   const { lang } = useLandingLang();
   const ui = HOME_UI[lang];
-  const [modalOpen, setModalOpen] = useState(false);
+  const { openChooser } = useExperience();
   const [role, setRole] = useState(0);
 
   useEffect(() => {
     const id = setInterval(() => setRole((r) => (r + 1) % ROLES.length), 2600);
     return () => clearInterval(id);
-  }, []);
-
-  // Show the premium modal on every load/reload (after the preloader clears).
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const id = setTimeout(() => setModalOpen(true), 3200);
-    return () => clearTimeout(id);
   }, []);
 
   // Magnetic buttons
@@ -70,6 +77,43 @@ function HomePage() {
       return () => clearTimeout(id);
     }
   }, [lang]);
+
+  // Testimonials: gentle auto-scroll, still manually draggable (pauses on interaction).
+  useEffect(() => {
+    const el = testiRef.current;
+    if (!el) return;
+    // Keep a float accumulator — assigning a sub-pixel value to scrollLeft each
+    // frame would round back to 0 and never move.
+    let raf, paused = false, last = null, pos = el.scrollLeft || 0;
+    const PX_PER_SEC = 28;
+    const step = (ts) => {
+      if (last != null && !paused && el.scrollWidth > el.clientWidth) {
+        const dt = Math.min((ts - last) / 1000, 0.05);
+        const half = el.scrollWidth / 2;
+        pos += PX_PER_SEC * dt;
+        if (pos >= half) pos -= half;
+        el.scrollLeft = pos;
+      }
+      last = ts;
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    const pause = () => { paused = true; };
+    const resume = () => { pos = el.scrollLeft; last = null; paused = false; };
+    el.addEventListener("pointerenter", pause);
+    el.addEventListener("pointerleave", resume);
+    el.addEventListener("pointerdown", pause);
+    el.addEventListener("touchstart", pause, { passive: true });
+    el.addEventListener("touchend", resume);
+    return () => {
+      cancelAnimationFrame(raf);
+      el.removeEventListener("pointerenter", pause);
+      el.removeEventListener("pointerleave", resume);
+      el.removeEventListener("pointerdown", pause);
+      el.removeEventListener("touchstart", pause);
+      el.removeEventListener("touchend", resume);
+    };
+  }, []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -121,20 +165,27 @@ function HomePage() {
           },
         });
       };
-      // Desktop: pinned horizontal scroll (unchanged)
+      // Desktop: pinned horizontal scroll (vertical scroll drives it) — unchanged.
       mm.add("(min-width: 860px)", () => { setupPin(); });
-      // Mobile: same pinned horizontal scroll + image parallax for depth
+      // Mobile: native horizontal swipe + normal vertical page scroll (no pin),
+      // GSAP image parallax driven by the container's own horizontal scroll.
       mm.add("(max-width: 859px)", () => {
-        const scrollTween = setupPin();
         const track = galleryTrack.current;
-        if (scrollTween && track) {
-          track.querySelectorAll("figure img").forEach((img) => {
-            gsap.fromTo(img, { scale: 1.2, xPercent: -10 }, {
-              xPercent: 10, ease: "none",
-              scrollTrigger: { trigger: img.parentElement, containerAnimation: scrollTween, start: "left right", end: "right left", scrub: true },
-            });
+        if (!track) return;
+        const imgs = track.querySelectorAll("figure img");
+        gsap.set(imgs, { scale: 1.16 });
+        const onScroll = () => {
+          const tr = track.getBoundingClientRect();
+          const center = tr.left + tr.width / 2;
+          imgs.forEach((img) => {
+            const r = img.parentElement.getBoundingClientRect();
+            const rel = ((r.left + r.width / 2) - center) / (tr.width || 1); // -1..1
+            gsap.set(img, { xPercent: rel * 9 });
           });
-        }
+        };
+        onScroll();
+        track.addEventListener("scroll", onScroll, { passive: true });
+        return () => track.removeEventListener("scroll", onScroll);
       });
 
       /* Count-up */
@@ -154,8 +205,6 @@ function HomePage() {
 
   return (
     <div className={styles.home} ref={root}>
-      {modalOpen && <PremiumModal onClose={() => setModalOpen(false)} />}
-
       {/* PRELOADER */}
       <div className={styles.preloader} id="preloader">
         <div id="preName" className={styles.preName}>PAUL · ZANNOU</div>
@@ -198,10 +247,10 @@ function HomePage() {
         </div>
       </section>
 
-      {/* MARQUEE */}
+      {/* MARQUEE — casquettes / roles */}
       <div className={styles.marquee}>
         <div className={styles.marqueeTrack}>
-          {[...MARQUEE, ...MARQUEE].map((m, i) => (<span key={i}>{m}<i>✦</i></span>))}
+          {[...ui.casquettes, ...ui.casquettes].map((m, i) => (<span key={i}>{m}<i>✦</i></span>))}
         </div>
       </div>
 
@@ -269,6 +318,53 @@ function HomePage() {
         </div>
       </section>
 
+      {/* MES COLLABORATIONS — projets clés + CTA vers l'OS */}
+      <section id="collaborations" className={styles.section}>
+        <div className={styles.stackHeadRow}>
+          <h2 className={styles.bigHead} data-mask><MaskWords text={ui.headCollab} /></h2>
+          <p className={styles.stackSub} data-reveal>{ui.collabSub}</p>
+        </div>
+        <div className={styles.collabGrid} data-stagger>
+          {collaborations.map((c, i) => (
+            <a key={i} href={c.url} target="_blank" rel="noopener noreferrer" className={styles.collabCard}>
+              <span className={styles.collabIcon}><img src={c.icon} alt="" loading="lazy" /></span>
+              <span className={styles.collabName}>{c.name}</span>
+              <span className={styles.collabClient}>{tx(c.client, lang)}</span>
+              <span className={styles.collabTag}>{tx(c.tag, lang)}</span>
+              <b className={styles.collabArrow}>↗</b>
+            </a>
+          ))}
+        </div>
+        <div className={styles.collabMore} data-reveal>
+          <Link href="/paulfolio" className={styles.btnPrimary}>{ui.collabMore}</Link>
+        </div>
+      </section>
+
+      {/* MA STACK PAR CATÉGORIE — bloc scannable, pas de bandeau */}
+      <section id="stack" className={styles.section}>
+        <div className={styles.stackHeadRow}>
+          <h2 className={styles.bigHead} data-mask><MaskWords text={ui.stackHead} /></h2>
+        </div>
+        <div className={styles.techGrid} data-stagger>
+          {skillSet.map((cat) => (
+            <div className={styles.techCat} key={cat.key}>
+              <div className={styles.techCatHead}>
+                <img src={CAT_PH[cat.key] || cat.icon} alt="" />
+                <span>{SKILL_CAT[cat.category] ? tx(SKILL_CAT[cat.category], lang) : cat.category}</span>
+              </div>
+              <div className={styles.techChips}>
+                {cat.skills.map((sk, i) => (
+                  <span className={styles.techChip} key={i}>
+                    {sk.icon && <img src={sk.icon} alt="" loading="lazy" />}
+                    {sk.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* CHIFFRES */}
       <section className={styles.statsBand} data-stagger>
         {stats.map((s, i) => {
@@ -287,18 +383,16 @@ function HomePage() {
       <section id="temoignages" className={`${styles.section} ${styles.testiHead}`}>
         <h2 className={styles.bigHead} data-mask><MaskWords text={ui.headTesti} /></h2>
       </section>
-      <div className={styles.testiMarquee}>
-        <div className={styles.testiTrack}>
-          {[...testimonials, ...testimonials].map((t, i) => (
-            <blockquote className={styles.testi} key={i}>
-              <p>“{tx(t.text, lang)}”</p>
-              <footer>
-                <span className={styles.avatar}>{initials(t.name)}</span>
-                <span className={styles.testiWho}><b>{t.name}</b><span>{tx(t.role, lang)}{t.project ? ` · ${t.project}` : ""}</span></span>
-              </footer>
-            </blockquote>
-          ))}
-        </div>
+      <div className={styles.testiScroller} ref={testiRef}>
+        {[...testimonials, ...testimonials].map((t, i) => (
+          <blockquote className={styles.testi} key={i}>
+            <p>“{tx(t.text, lang)}”</p>
+            <footer>
+              <span className={styles.avatar}>{initials(t.name)}</span>
+              <span className={styles.testiWho}><b>{t.name}</b><span>{tx(t.role, lang)}{t.project ? ` · ${t.project}` : ""}</span></span>
+            </footer>
+          </blockquote>
+        ))}
       </div>
 
       {/* POUR COLLABORER */}
@@ -307,7 +401,7 @@ function HomePage() {
         <p data-reveal>{ui.ctaText}</p>
         <div className={styles.ctaActions} data-reveal>
           <a className={styles.btnPrimary} href="mailto:pzannou511@gmail.com" data-magnetic>{ui.ctaMail}</a>
-          <button className={styles.btnGhost} onClick={() => setModalOpen(true)} data-magnetic>{ui.ctaOther}</button>
+          <button className={styles.btnGhost} onClick={openChooser} data-magnetic>{ui.ctaOther}</button>
         </div>
       </section>
 

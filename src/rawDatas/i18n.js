@@ -52,7 +52,7 @@ export const STR = {
       "This is my mind, booted as an operating system. Double-click any icon to explore — or jump straight in below. Confidential and enterprise work lives in Enterprise, and same-company apps are tucked into folders, just like on a phone.",
     wViewBlog: "View my blog",
     // Skills
-    skTitle: "Skills", skSub: "What runs on this machine — technical stack & proficiency",
+    skTitle: "Skills", skSub: "What runs on this machine — technical stack & signature concepts", skConcepts: "Signature concepts",
     // Career
     caTitle: "Career", caSub: "System uptime — 5+ years of professional experience", caNow: "Now",
     // Enterprise / Vault
@@ -113,7 +113,7 @@ export const STR = {
     wIntro:
       "Ceci est mon esprit, démarré comme un système d'exploitation. Double-cliquez sur une icône pour explorer — ou lancez-vous ci-dessous. Les projets confidentiels et d'entreprise sont dans Entreprise, et les apps d'une même société sont rangées dans des dossiers, comme sur un téléphone.",
     wViewBlog: "Voir mon blog",
-    skTitle: "Compétences", skSub: "Ce qui tourne sur cette machine — stack technique & niveau",
+    skTitle: "Compétences", skSub: "Ce qui tourne sur cette machine — stack technique & concepts signatures", skConcepts: "Concepts clés",
     caTitle: "Parcours", caSub: "Uptime du système — plus de 5 ans d'expérience", caNow: "Actuel",
     enTitle: "Projets d'entreprise", enSub: "Projets privés & entreprise — non consultables publiquement",
     enNote: "Ces applications sont confidentielles ou restreintes sous accord d'entreprise. Les descriptions sont partagées avec autorisation.",

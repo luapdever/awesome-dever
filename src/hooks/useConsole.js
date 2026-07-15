@@ -1,7 +1,15 @@
 import React, { useRef, useState } from "react";
-import { buildCommands } from "../rawDatas/terminalCommands";
+import { buildCommands, OPENABLE } from "../rawDatas/terminalCommands";
 
 const PROMPT = "paul@paulbrain:~$";
+
+// Longest common prefix of a list of strings.
+const lcp = (arr) => {
+  if (!arr.length) return "";
+  let p = arr[0];
+  for (const s of arr) while (!s.startsWith(p)) p = p.slice(0, -1);
+  return p;
+};
 
 const intro = {
   type: "out",
@@ -59,6 +67,54 @@ export const useConsole = () => {
     setLines((prev) => [...prev, { type: "cmd", text: value }, { type: "out", node: output }]);
   };
 
+  // ---- Tab autocompletion (shell-like) ----
+  const commandNames = () =>
+    [...new Set(Object.keys(commands.current)), "clear", "cls"].filter((n) => /^[a-z]/.test(n)).sort();
+  const argPool = (cmd) => {
+    if (cmd === "open") return OPENABLE;
+    if (cmd === "lang") return ["fr", "en"];
+    if (cmd === "help" || cmd === "man") return commandNames();
+    return null;
+  };
+
+  // Returns { value, candidates }: value = the (possibly) completed input;
+  // candidates = matches to display when the completion is ambiguous.
+  const complete = (raw) => {
+    const value = raw || "";
+    const trailingSpace = /\s$/.test(value);
+    const tokens = value.split(/\s+/).filter(Boolean);
+
+    // Completing the command name (first word).
+    if (tokens.length <= 1 && !trailingSpace) {
+      const partial = (tokens[0] || "").toLowerCase();
+      const matches = commandNames().filter((n) => n.startsWith(partial));
+      if (matches.length === 0) return { value, candidates: [] };
+      if (matches.length === 1) return { value: matches[0] + " ", candidates: [] };
+      const prefix = lcp(matches);
+      return { value: prefix.length > partial.length ? prefix : value, candidates: matches };
+    }
+
+    // Completing an argument for commands that take one.
+    const pool = argPool(tokens[0].toLowerCase());
+    if (!pool) return { value, candidates: [] };
+    const partial = trailingSpace ? "" : (tokens[tokens.length - 1] || "").toLowerCase();
+    const base = tokens.slice(0, trailingSpace ? tokens.length : tokens.length - 1).join(" ");
+    const matches = pool.filter((a) => a.toLowerCase().startsWith(partial));
+    if (matches.length === 0) return { value, candidates: [] };
+    if (matches.length === 1) return { value: `${base} ${matches[0]} `, candidates: [] };
+    const prefix = lcp(matches);
+    return { value: prefix.length > partial.length ? `${base} ${prefix}` : value, candidates: matches };
+  };
+
+  // Print candidate completions below the prompt (like a shell after double-Tab).
+  const suggest = (candidates) => {
+    if (!candidates || candidates.length < 2) return;
+    setLines((prev) => [
+      ...prev,
+      { type: "out", node: <p style={{ color: "rgba(255,255,255,0.55)", margin: "2px 0 6px" }}>{candidates.join("   ")}</p> },
+    ]);
+  };
+
   // ArrowUp / ArrowDown history recall.
   const recall = (dir, input) => {
     const items = history.current;
@@ -71,5 +127,5 @@ export const useConsole = () => {
     });
   };
 
-  return { lines, exec, recall, prompt: PROMPT };
+  return { lines, exec, recall, complete, suggest, prompt: PROMPT };
 };

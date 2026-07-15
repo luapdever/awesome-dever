@@ -55,15 +55,16 @@
 
 /* Language switch — segmented control (matches PaulBrain OS) */
 .langSwitch {
-  display: flex; gap: 2px; padding: 2px;
+  display: flex; align-items: center; gap: 2px; height: 38px; padding: 4px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--glass-border);
-  border-radius: 8px;
+  border-radius: 10px;
 }
 .langSwitch button {
+  display: inline-flex; align-items: center; height: 100%;
   border: none; background: none; color: rgba(255, 255, 255, 0.6);
-  font-family: inherit; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.5px;
-  padding: 4px 9px; border-radius: 6px; cursor: pointer;
+  font-family: inherit; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px;
+  padding: 0 12px; border-radius: 7px; cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
 }
 .langSwitch button:hover { color: #fff; }
@@ -110,7 +111,16 @@
 }
 .overlayLink:hover { color: var(--color-accent); transform: translateX(10px); }
 .oIndex { font-size: 0.8rem; font-weight: 700; color: var(--color-accent); font-family: "SFMono-Regular", monospace; }
-.overlayFoot { margin-top: 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.overlayExp {
+  display: inline-flex; align-items: center; gap: 10px; align-self: flex-start;
+  margin-top: 28px; padding: 12px 20px; border-radius: 999px;
+  background: rgba(255, 165, 0, 0.12); border: 1px solid var(--color-accent);
+  color: var(--color-accent-soft); font-family: inherit; font-weight: 700; font-size: 1rem;
+  cursor: pointer; transition: background 0.2s ease, color 0.2s ease;
+}
+.overlayExp:hover { background: var(--color-accent); color: #1a0a00; }
+.overlayExpIcon { font-size: 1.1rem; }
+.overlayFoot { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
 .overlayMail { color: rgba(255, 255, 255, 0.7); font-size: 0.95rem; }
 .overlayMail:hover { color: var(--color-accent); }
 .overlaySocials { display: flex; gap: 14px; font-size: 1.2rem; }

@@ -1,36 +1,30 @@
 /* ============================================================
    SOURCE DE DONNÉES — Vault (projets privés / entreprise)
-   Projets non affichables publiquement en iframe (confidentiels,
-   internes, sous accord d'entreprise). Regroupés dans l'app "Vault".
-   Champs : id, name, client, role, year, status, tag, desc,
-            stack[], highlights[], link?{label,url}
+   Projets non affichables publiquement (confidentiels, internes,
+   sous accord). Regroupés dans l'app "Vault".
+   Confidentialité : pour les projets sous NDA (`hidden: true`), on
+   n'expose QUE l'entreprise concernée (`company`) — aucun nom ni
+   détail de projet n'est stocké ici.
+   Champs publics : id, name, client, role, year, status, tag, desc,
+            stack[], link?{label,url}
    status ∈ "Confidential" | "Enterprise" | "Government"
    ============================================================ */
 import { L } from "./i18n";
 
 export const vaultProjects = [
   {
-    id: "invoicepay",
-    name: "InvoicePay",
-    client: "CCIB — Chamber of Commerce and Industry of Benin",
-    role: L("Node.js Backend Developer", "Développeur backend Node.js"),
+    id: "gov-einvoicing",
+    company: "CCIB — Chambre de Commerce et d'Industrie du Bénin",
     year: "2022 – 2023",
     status: "Government",
-    tag: L("E-invoicing", "E-facturation"),
-    desc: L(
-      "Invoice dematerialization and validation platform for a public institution: multi-level hierarchical approval workflow (13 roles), PDF report generation, Firebase push and multi-channel email notifications, and a complete audit log for compliance.",
-      "Plateforme de dématérialisation et de validation de factures pour une institution publique : workflow d'approbation hiérarchique multi-niveaux (13 rôles), génération de rapports PDF, notifications push Firebase et e-mail multicanal, et journal d'audit complet pour la conformité."
-    ),
-    stack: ["Node.js", "Express", "Sequelize", "MySQL", "JWT", "Firebase FCM", "WebSocket", "PDF"],
-    link: null,
+    hidden: true,
   },
   {
     id: "celtiis-corporate",
-    name: "Celtiis – SBIN",
+    company: "Celtiis (via KAMGOKO)",
     year: "2026",
     status: "Confidential",
     hidden: true,
-    desc: "Details are under NDA and cannot be disclosed.",
   },
   {
     id: "moov-togo",

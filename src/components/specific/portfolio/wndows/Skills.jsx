@@ -26,18 +26,26 @@ function Skills() {
               {cat.icon && <img src={cat.icon} alt="" />}
               {SKILL_CAT[cat.category] ? tx(SKILL_CAT[cat.category], lang) : cat.category}
             </div>
-            {cat.skills.map((sk, i) => (
-              <div className={styles.skillRow} key={cat.key + i}>
-                <div className={styles.top}>
+
+            <div className={styles.techChips}>
+              {cat.skills.map((sk, i) => (
+                <span className={styles.techChip} key={cat.key + i}>
                   {sk.icon && <img src={sk.icon} alt="" loading="lazy" />}
-                  <span>{sk.name}</span>
-                  <span className={styles.pct}>{sk.level}%</span>
-                </div>
-                <div className={styles.track}>
-                  <div className={styles.fill} style={{ width: sk.level + "%" }} />
+                  {sk.name}
+                </span>
+              ))}
+            </div>
+
+            {cat.concepts?.length > 0 && (
+              <div className={styles.concepts}>
+                <span className={styles.conceptsLabel}>{t.skConcepts}</span>
+                <div className={styles.conceptTags}>
+                  {cat.concepts.map((c, i) => (
+                    <span className={styles.conceptTag} key={i}>{c}</span>
+                  ))}
                 </div>
               </div>
-            ))}
+            )}
           </div>
         ))}
       </div>

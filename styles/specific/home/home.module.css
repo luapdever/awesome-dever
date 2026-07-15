@@ -112,13 +112,24 @@
 .gCard figcaption b { display: block; font-size: 1.05rem; margin-bottom: 5px; }
 .gCard figcaption span { font-size: 0.84rem; color: rgba(255, 255, 255, 0.65); line-height: 1.45; }
 
-/* Mobile: same pinned horizontal scroll, sized for touch */
+/* Mobile: native horizontal swipe carousel (page still scrolls vertically) */
 @media (max-width: 859px) {
-  .galleryTrack { gap: 16px; padding: 0 18px; }
-  .galleryIntro { width: 82vw; }
+  .galleryPin { overflow: visible; }
+  .galleryTrack {
+    height: auto; width: 100%;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    gap: 16px; padding: 24px 18px 40px;
+    scrollbar-width: none;
+    transform: none !important;
+  }
+  .galleryTrack::-webkit-scrollbar { display: none; }
+  .galleryIntro { width: 78vw; }
   .galleryIntro h2 { font-size: clamp(1.9rem, 8.5vw, 2.6rem); }
   .galleryIntro p { font-size: 0.92rem; }
-  .gCard { width: 80vw; }
+  .gCard { width: 80vw; scroll-snap-align: center; }
   .gImg { aspect-ratio: 3 / 4; }
   .gImg img { transition: none; }
 }
@@ -147,17 +158,49 @@
 .statBig b { display: block; font-size: clamp(2.4rem, 7vw, 4.6rem); font-weight: 800; color: var(--color-accent); line-height: 1; letter-spacing: -2px; }
 .statBig span { font-size: 0.84rem; color: rgba(255, 255, 255, 0.6); }
 
-/* ---------- Testimonials marquee ---------- */
+/* ---------- Testimonials — manually scrollable ---------- */
 .testiHead { padding-bottom: 22px; }
-.testiMarquee { overflow: hidden; padding: 0 0 56px; }
-.testiTrack { display: flex; gap: 12px; width: max-content; animation: marq 60s linear infinite; }
-.testiTrack:hover { animation-play-state: paused; }
-.testi { flex: 0 0 auto; width: 380px; white-space: normal; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 26px; display: flex; flex-direction: column; gap: 18px; }
+.testiScroller {
+  display: flex; gap: 10px;
+  overflow-x: auto; overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px clamp(20px, 5vw, 64px) 56px;
+  scrollbar-width: none;
+}
+.testiScroller::-webkit-scrollbar { display: none; }
+.testiHint { text-align: center; font-size: 0.78rem; letter-spacing: 1px; color: rgba(255, 255, 255, 0.4); padding: 0 0 56px; }
+.testi { scroll-snap-align: start; flex: 0 0 auto; margin: 0; width: min(380px, 82vw); white-space: normal; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 26px; display: flex; flex-direction: column; gap: 18px; }
 .testi p { margin: 0; font-size: 0.94rem; line-height: 1.6; color: rgba(255, 255, 255, 0.85); }
 .testi footer { display: flex; align-items: center; gap: 12px; margin-top: auto; }
 .avatar { width: 42px; height: 42px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; font-weight: 800; font-size: 0.85rem; color: #2a1a00; background: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent)); }
 .testiWho b { display: block; font-size: 0.9rem; }
 .testiWho span { font-size: 0.75rem; color: rgba(255, 255, 255, 0.6); }
+
+/* ---------- Tech stack by category ---------- */
+.stackHeadRow { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 40px; }
+.stackHeadRow .bigHead { margin: 0; }
+.stackSub { color: rgba(255, 255, 255, 0.6); font-size: 0.98rem; max-width: 42ch; margin: 0; }
+.techGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.techCat { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 22px; transition: border-color 0.3s ease, background 0.3s ease; }
+.techCat:hover { border-color: rgba(255, 165, 0, 0.4); background: rgba(255, 255, 255, 0.06); }
+.techCatHead { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.02rem; margin-bottom: 16px; }
+.techCatHead img { width: 22px; height: 22px; }
+.techChips { display: flex; flex-wrap: wrap; gap: 8px; }
+.techChip { display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); font-size: 0.82rem; color: rgba(255, 255, 255, 0.9); line-height: 1; }
+.techChip img { width: 16px; height: 16px; }
+
+/* ---------- Collaborations ---------- */
+.collabGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.collabCard { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 22px; border-radius: var(--radius-lg); background: rgba(255, 255, 255, 0.04); border: 1px solid var(--glass-border); transition: transform 0.3s var(--ease-spring), border-color 0.3s ease, background 0.3s ease; }
+.collabCard:hover { transform: translateY(-6px); border-color: rgba(255, 165, 0, 0.5); background: rgba(255, 255, 255, 0.07); }
+.collabIcon { width: 42px; height: 42px; border-radius: 11px; overflow: hidden; background: rgba(255, 255, 255, 0.92); display: grid; place-items: center; margin-bottom: 8px; }
+.collabIcon img { width: 24px; height: 24px; }
+.collabName { font-weight: 800; font-size: 1.05rem; letter-spacing: -0.3px; }
+.collabClient { font-size: 0.76rem; color: var(--color-accent-soft); font-weight: 700; }
+.collabTag { font-size: 0.85rem; color: rgba(255, 255, 255, 0.62); line-height: 1.4; }
+.collabArrow { position: absolute; top: 20px; right: 20px; color: rgba(255, 255, 255, 0.35); font-size: 1.05rem; transition: color 0.2s ease, transform 0.2s ease; }
+.collabCard:hover .collabArrow { color: var(--color-accent); transform: translate(2px, -2px); }
+.collabMore { margin-top: 72px; display: flex; justify-content: center; }
 
 /* ---------- CTA ---------- */
 .cta { max-width: 1000px; margin: 0 auto; padding: clamp(80px, 12vw, 160px) clamp(20px, 5vw, 64px); text-align: center; }
@@ -175,7 +218,7 @@
 .linkCard:hover .linkArrow { transform: translateX(4px); }
 
 /* ============ PREMIUM MODAL ============ */
-.modalOverlay { position: fixed; inset: 0; z-index: 400; display: grid; place-items: center; padding: 20px; background: rgba(6, 3, 26, 0.62); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); animation: fadeIn 0.25s ease; }
+.modalOverlay { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; background: rgba(6, 3, 26, 0.62); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); animation: fadeIn 0.25s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 .modal { position: relative; width: min(600px, 100%); max-height: 88vh; overflow-y: auto; background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)), var(--glass-bg-strong); backdrop-filter: blur(28px) saturate(160%); -webkit-backdrop-filter: blur(28px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 22px; box-shadow: var(--shadow-2), inset 0 1px 0 rgba(255, 255, 255, 0.28); padding: 30px 28px 26px; color: #fff; animation: modalPop 0.35s var(--ease-spring); }
 @keyframes modalPop { from { opacity: 0; transform: translateY(20px) scale(0.97); } to { opacity: 1; transform: none; } }
@@ -197,6 +240,9 @@
 .modalTerminalTop { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 0.82rem; color: rgba(255, 255, 255, 0.6); }
 .modalTerminalTop b { color: var(--color-accent-soft); }
 .modalBack { padding: 6px 12px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.06); color: #fff; font-family: inherit; font-size: 0.8rem; cursor: pointer; }
+.modalTerminalHint { flex: 1; min-width: 0; }
+.modalContinueInline { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--color-accent); background: rgba(255, 165, 0, 0.12); color: var(--color-accent-soft); font-family: inherit; font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background 0.2s ease, color 0.2s ease; }
+.modalContinueInline:hover { background: var(--color-accent); color: #1a0a00; }
 .modalTerminalBody { height: clamp(400px, 60vh, 560px); border-radius: 14px; overflow: hidden; border: 1px solid var(--glass-border); }
 /* Terminal mode gets a roomier modal */
 .modalWide { width: min(900px, 100%); max-height: 92vh; }
