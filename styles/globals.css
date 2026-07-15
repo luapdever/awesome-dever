@@ -304,8 +304,11 @@ html {
 .expSticky:hover { transform: translateY(-50%) scale(1.1); box-shadow: 0 14px 42px rgba(255, 140, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.45); }
 .expSticky img { width: 26px; height: 26px; display: block; }
 @media (max-width: 600px) {
-  .expSticky { width: 48px; height: 48px; left: 12px; }
-  .expSticky img { width: 22px; height: 22px; }
+  /* Coin bas-gauche sur mobile : ne recouvre plus le contenu des sections
+     (le launcher du bot est en bas-droite, pas de collision). */
+  .expSticky { width: 46px; height: 46px; left: 12px; top: auto; bottom: 16px; transform: none; }
+  .expSticky:hover { transform: scale(1.1); }
+  .expSticky img { width: 20px; height: 20px; }
 }
 
 @media (max-width: 1200px) {

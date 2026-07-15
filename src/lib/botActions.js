@@ -39,6 +39,33 @@ export function navLabel(key, lang) {
   return l[lang === "en" ? "en" : "fr"];
 }
 
+/* Découpe un texte en segments texte / lien cliquable (URL, www., email).
+   Renvoie [{ t: "text"|"link", v, href? }] — le rendu JSX se fait côté composant.
+   La ponctuation finale (., ), etc.) est exclue du lien. */
+const LINK_RE = /(https?:\/\/[^\s]+|www\.[^\s]+|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/g;
+export function linkTokens(text) {
+  const src = text || "";
+  const out = [];
+  let last = 0;
+  let m;
+  LINK_RE.lastIndex = 0;
+  while ((m = LINK_RE.exec(src)) !== null) {
+    let tok = m[0];
+    const trail = tok.match(/[.,;:!?)\]}'"»…]+$/);
+    const trailing = trail ? trail[0] : "";
+    if (trailing) tok = tok.slice(0, tok.length - trailing.length);
+    if (!tok) continue;
+    if (m.index > last) out.push({ t: "text", v: src.slice(last, m.index) });
+    const isEmail = /^[^\s@]+@[^\s@]+$/.test(tok) && !/^https?:/i.test(tok);
+    const href = isEmail ? `mailto:${tok}` : /^www\./i.test(tok) ? `https://${tok}` : tok;
+    out.push({ t: "link", v: tok, href, external: !isEmail });
+    if (trailing) out.push({ t: "text", v: trailing });
+    last = m.index + m[0].length;
+  }
+  if (last < src.length) out.push({ t: "text", v: src.slice(last) });
+  return out;
+}
+
 // Retire les marqueurs [[go:...]] (et un éventuel marqueur en cours de
 // frappe en fin de flux) et renvoie le texte propre + les cibles trouvées.
 export function extractActions(raw) {

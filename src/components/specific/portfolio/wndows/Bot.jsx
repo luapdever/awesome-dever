@@ -4,7 +4,7 @@ import styles from "../../../../../styles/specific/portfolio/windows/bot.module.
 import { useLang } from "../lang";
 import { extractActions } from "../../../../lib/botActions";
 
-const ROBOT = "https://api.iconify.design/fluent-emoji-flat:robot.svg";
+const ROBOT = "https://api.iconify.design/ph:robot.svg?color=%23ffffff";
 const SEND = "https://api.iconify.design/ph:paper-plane-tilt-fill.svg?color=%232a1a00";
 
 // SSR/proxy par défaut ("/api/chat"). En SPA, définir NEXT_PUBLIC_CHAT_URL

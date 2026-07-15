@@ -15,7 +15,7 @@ function AppStore() {
     <div className={styles.appStore}>
       <header className={styles.header}>
         <span className={styles.headIcon}>
-          <img src="https://api.iconify.design/fluent-emoji-flat:mobile-phone-with-arrow.svg" alt="" />
+          <img src="https://api.iconify.design/ph:device-mobile.svg?color=%23ffa500" alt="" />
         </span>
         <div>
           <h1>App Store</h1>

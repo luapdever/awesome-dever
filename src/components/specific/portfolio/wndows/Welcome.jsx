@@ -7,12 +7,12 @@ import luap from "../../../../assets/img/awesome/luap-thinking.png";
 import { useLang } from "../lang";
 
 const QUICK = [
-  { id: "skills", label: "Skills", icon: "https://api.iconify.design/fluent-emoji-flat:brain.svg" },
-  { id: "career", label: "Career", icon: "https://api.iconify.design/fluent-emoji-flat:briefcase.svg" },
-  { id: "vault", label: "Enterprise", icon: "https://api.iconify.design/fluent-emoji-flat:locked-with-key.svg" },
-  { id: "appStore", label: "Apps", icon: "https://api.iconify.design/fluent-emoji-flat:mobile-phone-with-arrow.svg" },
-  { id: "terminal", label: "Terminal", icon: "https://api.iconify.design/fluent-emoji-flat:desktop-computer.svg" },
-  { id: "contact", label: "Contact", icon: "https://api.iconify.design/fluent-emoji-flat:envelope.svg" },
+  { id: "skills", label: "Skills", icon: "https://api.iconify.design/ph:brain.svg?color=%23ffc25c" },
+  { id: "career", label: "Career", icon: "https://api.iconify.design/ph:briefcase.svg?color=%23ffc25c" },
+  { id: "vault", label: "Enterprise", icon: "https://api.iconify.design/ph:lock-key.svg?color=%23ffc25c" },
+  { id: "appStore", label: "Apps", icon: "https://api.iconify.design/ph:device-mobile.svg?color=%23ffc25c" },
+  { id: "terminal", label: "Terminal", icon: "https://api.iconify.design/ph:desktop.svg?color=%23ffc25c" },
+  { id: "contact", label: "Contact", icon: "https://api.iconify.design/ph:envelope-simple.svg?color=%23ffc25c" },
 ];
 
 function open(e, id) {

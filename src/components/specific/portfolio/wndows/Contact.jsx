@@ -47,7 +47,7 @@ function Contact() {
     <div className={styles.contact}>
       <header className={styles.head}>
         <span className={styles.headIcon}>
-          <img src="https://api.iconify.design/fluent-emoji-flat:love-letter.svg" alt="" />
+          <img src="https://api.iconify.design/ph:envelope-simple.svg?color=%23ffa500" alt="" />
         </span>
         <div>
           <h1>{t.cTitle}</h1>

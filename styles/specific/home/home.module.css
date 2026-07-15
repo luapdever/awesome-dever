@@ -19,7 +19,8 @@
 
 /* ---------- Preloader ---------- */
 .preloader {
-  position: fixed; inset: 0; z-index: 300;
+  /* Toujours au-dessus de TOUT (widget bot inclus, à 100001) pendant le chargement. */
+  position: fixed; inset: 0; z-index: 2147483647;
   background: var(--color-ink);
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
 }
@@ -251,6 +252,42 @@
 @media (max-width: 860px) {
   .stackCard { position: relative !important; top: auto !important; }
   .statsBand { grid-template-columns: repeat(2, 1fr); gap: 26px 16px; }
+}
+
+/* ===== Refonte mobile : rythme vertical resserré, échelle typo maîtrisée ===== */
+@media (max-width: 768px) {
+  .heroSec { padding: 96px 0 70px; min-height: 100vh; }
+  .heroTitle { font-size: clamp(2.3rem, 11vw, 3.5rem); line-height: 1.06; letter-spacing: -0.8px; }
+  .kicker { margin-bottom: 14px; }
+  .heroSub { margin-top: 18px; }
+  .heroActions { margin-top: 26px; }
+  .marquee { padding: 14px 0; }
+
+  .section { padding: clamp(46px, 9vw, 72px) clamp(18px, 5vw, 40px); }
+  .headRow { margin-bottom: 24px; }
+  .bigHead { font-size: clamp(1.6rem, 7.4vw, 2.4rem); letter-spacing: -0.6px; }
+  .stackHeadRow { margin-bottom: 22px; }
+
+  .aboutText { font-size: clamp(1.1rem, 4.6vw, 1.5rem); line-height: 1.5; margin-bottom: 22px; }
+
+  .capCard { padding: 20px; }
+  .capIcon { width: 40px; height: 40px; margin-bottom: 12px; }
+  .capCard h3 { font-size: 1.08rem; }
+  .techCat { padding: 18px; }
+  .collabCard { padding: 18px; }
+  .collabName { font-size: 1rem; }
+  .collabMore { margin-top: 40px; }
+
+  /* Sticky stack (expériences) → colonne, numéro compact */
+  .stackCard { flex-direction: column; gap: 8px; padding: 20px; }
+  .stackNum { font-size: 1.9rem; }
+
+  .statsBand { padding: 44px clamp(18px, 5vw, 40px); }
+  .statBig b { font-size: clamp(2rem, 9vw, 2.8rem); letter-spacing: -1px; }
+
+  .cta { padding: clamp(56px, 12vw, 120px) clamp(18px, 5vw, 40px); }
+  .ctaBig { font-size: clamp(2rem, 11vw, 3.2rem); letter-spacing: -1px; }
+  .cta p { font-size: 0.98rem; }
 }
 @media (max-width: 600px) {
   .heroActions { width: 100%; }

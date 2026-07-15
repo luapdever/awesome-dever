@@ -209,7 +209,7 @@
     {
       "key": "ai",
       "cat": "IA / LLM",
-      "items": "Intégration LLM (Groq, Ollama), APIs compatibles OpenAI, context-stuffing, architecture prête pour le RAG, prompt engineering & garde-fous, streaming SSE (tokens), function calling"
+      "items": "Intégration LLM (agnostique du modèle), API OpenAI standard, RAG (génération augmentée par récupération), fine-tuning, prompt engineering & garde-fous, function/tool calling, automatisation IA"
     },
     {
       "key": "frontend",

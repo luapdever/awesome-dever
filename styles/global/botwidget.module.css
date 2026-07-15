@@ -113,6 +113,8 @@
 .bubbleCol { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; max-width: 80%; }
 .rowUser .bubbleCol { align-items: flex-end; }
 .msgTime { font-size: 0.66rem; color: rgba(255, 255, 255, 0.38); padding: 0 5px; }
+.msgLink { color: var(--color-accent-soft); text-decoration: underline; text-underline-offset: 2px; word-break: break-all; }
+.msgLink:hover { color: var(--color-accent); }
 .assistant, .user { max-width: 100%; padding: 9px 13px; border-radius: 15px; font-size: 0.86rem; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
 
 /* Bouton d'action proposé (navigation) — le visiteur clique, rien d'automatique */

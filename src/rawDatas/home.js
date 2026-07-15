@@ -56,10 +56,10 @@ export const capabilities = [
     icon: ph("robot"),
     title: L("AI & LLM", "IA & LLM"),
     desc: L(
-      "Conversational assistants wired to LLMs: token streaming, prompt guardrails, context-stuffing and a RAG-ready design.",
-      "Assistants conversationnels branchés aux LLM : streaming de tokens, garde-fous de prompt, context-stuffing et une architecture prête pour le RAG."
+      "LLM-powered assistants and automations: standard OpenAI API, RAG, fine-tuning, prompt guardrails and tool calling.",
+      "Assistants et automatisations propulsés par LLM : API OpenAI standard, RAG, fine-tuning, garde-fous de prompt et tool calling."
     ),
-    tags: ["Groq", "Ollama", "NestJS", "SSE", "RAG-ready"],
+    tags: ["LLM", "RAG", "Fine-tuning", "OpenAI API", "Automation"],
   },
   {
     icon: ph("rocket-launch"),

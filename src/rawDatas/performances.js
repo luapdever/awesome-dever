@@ -21,14 +21,15 @@ const STUDIO = "Fidèle SODOGA · Fresnel AGLOSSI";
 /* Company / theme folders (iOS-style groups). Apps carrying `group` are folded here. */
 export const groupsMeta = {
   MTN: { name: "MTN", icon: MTN_LOGO, bg: "#FFFFFF" },
-  Trainings: { name: "Trainings", icon: "https://api.iconify.design/fluent-emoji-flat:graduation-cap.svg", bg: "#0e0730" },
+  Trainings: { name: "Trainings", icon: "https://api.iconify.design/ph:graduation-cap.svg?color=%23ffffff", bg: "#0e0730" },
 };
 
 export const performances = [
   /* ============ System apps (Paul's mind) ============ */
   {
     id: "career",
-    icon: "https://api.iconify.design/fluent-emoji-flat:briefcase.svg",
+    icon: "https://api.iconify.design/ph:briefcase.svg?color=%23ffffff",
+    bg: "#4a34d6",
     label: "Career",
     get content() { return <Career />; },
     properties: {
@@ -43,7 +44,8 @@ export const performances = [
   },
   {
     id: "skills",
-    icon: "https://api.iconify.design/fluent-emoji-flat:brain.svg",
+    icon: "https://api.iconify.design/ph:brain.svg?color=%23ffffff",
+    bg: "#d98400",
     label: "Skills",
     get content() { return <Skills />; },
     properties: {
@@ -58,7 +60,8 @@ export const performances = [
   },
   {
     id: "bot",
-    icon: "https://api.iconify.design/fluent-emoji-flat:robot.svg",
+    icon: "https://api.iconify.design/ph:robot.svg?color=%23ffffff",
+    bg: "#7846dc",
     label: "PaulBot",
     get content() { return <Bot />; },
     properties: {
@@ -73,7 +76,8 @@ export const performances = [
   },
   {
     id: "vault",
-    icon: "https://api.iconify.design/fluent-emoji-flat:locked-with-key.svg",
+    icon: "https://api.iconify.design/ph:lock-key.svg?color=%23ffffff",
+    bg: "#2a1f5c",
     label: "Enterprise",
     get content() { return <Vault />; },
     properties: {
@@ -87,7 +91,8 @@ export const performances = [
   },
   {
     id: "cv",
-    icon: "https://api.iconify.design/fluent-emoji-flat:memo.svg",
+    icon: "https://api.iconify.design/ph:file-text.svg?color=%23ffffff",
+    bg: "#0e7c66",
     label: "CV",
     isLink: true,
     embed: true,
@@ -366,7 +371,7 @@ export const performances = [
   /* ============ Other apps & collaborations ============ */
   {
     id: "avcall",
-    icon: "https://api.iconify.design/healthicons:group-discussion-meeting.svg",
+    icon: "https://api.iconify.design/ph:users-three.svg?color=%234a34d6",
     bg: "#fff",
     label: "AV Call",
     group: "Trainings",

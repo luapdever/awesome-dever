@@ -11,7 +11,7 @@ function Career() {
     <div className={styles.app}>
       <div className={styles.head}>
         <span className={styles.headIcon}>
-          <img src="https://api.iconify.design/fluent-emoji-flat:briefcase.svg" alt="Career" />
+          <img src="https://api.iconify.design/ph:briefcase.svg?color=%23ffa500" alt="Career" />
         </span>
         <div>
           <h1>{t.caTitle}</h1>

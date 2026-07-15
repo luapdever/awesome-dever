@@ -13,7 +13,7 @@ function Vault() {
     <div className={styles.app}>
       <div className={styles.head}>
         <span className={styles.headIcon}>
-          <img src="https://api.iconify.design/fluent-emoji-flat:locked-with-key.svg" alt="Enterprise" />
+          <img src="https://api.iconify.design/ph:lock-key.svg?color=%23ffc25c" alt="Enterprise" />
         </span>
         <div>
           <h1>{t.enTitle}</h1>
@@ -22,7 +22,7 @@ function Vault() {
       </div>
 
       <div className={styles.vaultNote}>
-        <img src="https://api.iconify.design/mdi:shield-lock.svg?color=%23ffc25c" alt="" width={16} height={16} />
+        <img src="https://api.iconify.design/ph:shield-check.svg?color=%23ffc25c" alt="" width={16} height={16} />
         {t.enNote}
       </div>
 
@@ -30,7 +30,7 @@ function Vault() {
         {vaultProjects.map((p) =>
           p.hidden ? (
             <div className={`${styles.vaultCard} ${styles.hidden}`} key={p.id}>
-              <img className={styles.lock} src="https://api.iconify.design/mdi:eye-off.svg?color=%23ffffff" alt="Hidden" />
+              <img className={styles.lock} src="https://api.iconify.design/ph:eye-slash.svg?color=%23ffffff" alt="Hidden" />
               <h2>{p.company || p.name}</h2>
               <span className={styles.tag}>{statusLabel(p.status)} · {p.year}</span>
               <div className={styles.hiddenBody}>
@@ -45,7 +45,7 @@ function Vault() {
                   </div>
                 </div>
                 <div className={styles.hiddenOverlay}>
-                  <img src="https://api.iconify.design/mdi:lock.svg?color=%23ffc25c" alt="" />
+                  <img src="https://api.iconify.design/ph:lock-simple.svg?color=%23ffc25c" alt="" />
                   <span className={styles.htitle}>{t.enConfidential}</span>
                   <span className={styles.hsub}>{t.enHiddenSub}</span>
                 </div>
@@ -53,7 +53,7 @@ function Vault() {
             </div>
           ) : (
             <div className={styles.vaultCard} key={p.id}>
-              <img className={styles.lock} src="https://api.iconify.design/mdi:lock.svg?color=%23ffffff" alt="Locked" />
+              <img className={styles.lock} src="https://api.iconify.design/ph:lock-simple.svg?color=%23ffffff" alt="Locked" />
               <h2>{p.name}</h2>
               <span className={styles.tag}>{tx(p.tag, lang)}</span>
               <div className={styles.vRow}>{t.lblClient}&nbsp;: <b>{p.client}</b></div>
@@ -69,7 +69,7 @@ function Vault() {
               )}
               {p.link && (
                 <a className={styles.vaultLink} href={p.link.url} target="_blank" rel="noopener noreferrer">
-                  <img src="https://api.iconify.design/mdi:open-in-new.svg?color=%23ffc25c" alt="" width={13} height={13} />
+                  <img src="https://api.iconify.design/ph:arrow-square-out.svg?color=%23ffc25c" alt="" width={13} height={13} />
                   {p.link.label}
                 </a>
               )}

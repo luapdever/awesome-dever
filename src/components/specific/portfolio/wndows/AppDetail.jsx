@@ -29,11 +29,11 @@ function AppDetail({ app }) {
       {app.url && (
         <>
           <a className={styles.openBtn} href={app.url} target="_blank" rel="noopener noreferrer">
-            <img src="https://api.iconify.design/mdi:open-in-new.svg?color=%233a2500" alt="" width={17} height={17} />
+            <img src="https://api.iconify.design/ph:arrow-square-out.svg?color=%233a2500" alt="" width={17} height={17} />
             {t.adOpen}
           </a>
           <p className={styles.cspNote}>
-            <img src="https://api.iconify.design/mdi:shield-check.svg?color=%23ffc25c" alt="" width={14} height={14} />
+            <img src="https://api.iconify.design/ph:shield-check.svg?color=%23ffc25c" alt="" width={14} height={14} />
             {t.adCsp}
           </p>
         </>

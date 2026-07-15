@@ -5,9 +5,9 @@ import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import styles from "../../../styles/global/botwidget.module.css";
 import { useLandingLang } from "../../context/landingLang";
-import { NAV, extractActions, runNavAction, navLabel, navigateRelative } from "../../lib/botActions";
+import { NAV, extractActions, runNavAction, navLabel, navigateRelative, linkTokens } from "../../lib/botActions";
 
-const ROBOT = "https://api.iconify.design/fluent-emoji-flat:robot.svg";
+const ROBOT = "https://api.iconify.design/ph:robot.svg";
 const SEND = "https://api.iconify.design/ph:paper-plane-tilt-fill.svg?color=%232a1a00";
 const CHAT = "https://api.iconify.design/ph:chat-circle-dots-fill.svg?color=%231a0a00";
 const CLOSE = "https://api.iconify.design/ph:x-bold.svg?color=%23ffffff";
@@ -364,7 +364,7 @@ function BotWidget() {
       {open && (
         <div className={styles.panel} role="dialog" aria-label={ui.title}>
           <header className={styles.head}>
-            <img src={ROBOT} alt="" className={styles.headIcon} />
+            <img src={ROBOT + "?color=%23110068"} alt="" className={styles.headIcon} />
             <div className={styles.headText}>
               <b>{ui.title}</b>
               <span>{ui.subtitle}</span>
@@ -397,7 +397,7 @@ function BotWidget() {
 
           {!contact ? (
             <div className={styles.onboard}>
-              <img src={ROBOT} alt="" className={styles.onbIcon} />
+              <img src={ROBOT + "?color=%23ffffff"} alt="" className={styles.onbIcon} />
               <b className={styles.onbTitle}>{ui.onbTitle}</b>
               <p className={styles.onbText}>{ui.onbText}</p>
 
@@ -480,8 +480,25 @@ function BotWidget() {
                         <div className={isUser ? styles.user : styles.assistant}>
                           {thinking ? (
                             <span className={styles.dots}><i /><i /><i /></span>
+                          ) : isUser ? (
+                            m.content
                           ) : (
-                            <>{m.content}{streaming && <span className={styles.caret} />}</>
+                            <>
+                              {linkTokens(m.content).map((tok, k) =>
+                                tok.t === "link" ? (
+                                  <a
+                                    key={k}
+                                    href={tok.href}
+                                    target={tok.external ? "_blank" : undefined}
+                                    rel="noopener noreferrer"
+                                    className={styles.msgLink}
+                                  >{tok.v}</a>
+                                ) : (
+                                  <React.Fragment key={k}>{tok.v}</React.Fragment>
+                                )
+                              )}
+                              {streaming && <span className={styles.caret} />}
+                            </>
                           )}
                         </div>
                         {!isUser && m.action && !streaming && (
