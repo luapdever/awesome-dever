@@ -88,7 +88,11 @@ function ExperienceModal() {
   const run = (id) => {
     if (id === "cv") { remember("cv"); window.open("/cv/index.html", "_blank"); dropClose(); }
     else if (id === "os") { remember("os"); dismiss(); router.push("/paulfolio"); }
-    else if (id === "bot") { remember("bot"); dismiss(); router.push("/paulfolio#app=bot"); }
+    else if (id === "bot") {
+      remember("bot");
+      // Ouvre le widget PaulBot (on reste sur la page) au lieu d'aller vers l'OS.
+      dropClose(() => { if (typeof window !== "undefined") window.dispatchEvent(new CustomEvent("paulbot:open")); });
+    }
     else if (id === "terminal") { remember("terminal"); setChosen(true); setMode("terminal"); }
   };
 

@@ -39,7 +39,10 @@ function MyApp({ Component, pageProps }) {
             <ToastContainer theme="dark" />
             {!hideChrome && <TheFooter />}
             {!hideChrome && <ExperienceButton />}
-            {!hideChrome && <BotWidget />}
+            {/* Widget monté en permanence (même sur l'OS /paulfolio) : il ne se
+                démonte jamais lors d'une navigation client, donc il reste ouvert
+                si le visiteur l'avait ouvert. */}
+            <BotWidget />
             {!hideChrome && <ExperienceModal />}
           </ExperienceProvider>
         </LandingLangProvider>

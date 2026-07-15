@@ -3,7 +3,7 @@
   position: fixed;
   right: 22px;
   bottom: 22px;
-  z-index: 95;
+  z-index: 100000; /* au-dessus de tout, y compris l'OS /paulfolio */
   width: 58px;
   height: 58px;
   padding: 0;
@@ -15,6 +15,7 @@
   background: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent));
   box-shadow: 0 12px 34px rgba(255, 140, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  animation: bwBob 3.8s ease-in-out infinite;
 }
 .launcher::after {
   content: "";
@@ -26,16 +27,27 @@
   pointer-events: none;
 }
 @keyframes bwHalo { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.16); opacity: 0; } }
-.launcher:hover { transform: scale(1.08); }
-.launcherOpen { transform: scale(0.9); }
-.launcher img { width: 28px; height: 28px; }
+/* Léger flottement continu du bouton (idle) */
+@keyframes bwBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+/* Wiggle rigolo de l'icône toutes les ~5 s */
+@keyframes bwWiggle {
+  0%, 82%, 100% { transform: rotate(0) scale(1); }
+  86% { transform: rotate(-14deg) scale(1.14); }
+  90% { transform: rotate(12deg) scale(1.14); }
+  94% { transform: rotate(-7deg) scale(1.06); }
+  98% { transform: rotate(3deg) scale(1); }
+}
+.launcher:hover { transform: scale(1.08); animation-play-state: paused; }
+.launcher:hover img { animation-play-state: paused; transform: scale(1.12) rotate(-6deg); }
+.launcherOpen { animation: none; transform: scale(0.9); }
+.launcher img { width: 28px; height: 28px; transition: transform 0.2s ease; animation: bwWiggle 5s ease-in-out infinite; }
 
 /* Chat panel */
 .panel {
   position: fixed;
   right: 22px;
   bottom: 92px;
-  z-index: 96;
+  z-index: 100001; /* juste au-dessus du launcher */
   width: min(380px, calc(100vw - 32px));
   height: min(560px, calc(100vh - 130px));
   display: flex;
@@ -48,9 +60,14 @@
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  animation: bwPop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: bottom right; /* jaillit depuis le launcher */
+  animation: bwPop 0.44s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-@keyframes bwPop { from { opacity: 0; transform: translateY(16px) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes bwPop {
+  0% { opacity: 0; transform: translateY(26px) scale(0.82); }
+  55% { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
 
 .head {
   display: flex; align-items: center; gap: 11px;
@@ -62,7 +79,15 @@
 .headText { display: flex; flex-direction: column; line-height: 1.25; }
 .headText b { font-size: 0.95rem; }
 .headText span { font-size: 0.72rem; color: rgba(255, 255, 255, 0.6); }
-.headClose { margin-left: auto; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 8px; border: none; background: rgba(255, 255, 255, 0.08); cursor: pointer; }
+.headMenuWrap { margin-left: auto; position: relative; }
+.headKebab { width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border: none !important; color: #fff; font-size: 1.1rem; line-height: 1; margin-left: 6px; cursor: pointer; transition: background 0.2s ease; }
+.headKebab:hover { background: none !important; transform: none; }
+.menuScrim { position: fixed; inset: 0; z-index: 1; }
+.menuPop { position: absolute; top: 36px; right: 0; z-index: 2; min-width: 190px; padding: 5px; border-radius: 12px; background: rgba(20, 12, 46, 0.98); border: 1px solid var(--glass-border); box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5); animation: bwPop 0.18s ease; }
+.menuPop button { display: flex; align-items: center; gap: 8px; width: 100%; padding: 9px 11px; border: none; border-radius: 8px; background: none; color: #fff; font-family: inherit; font-size: 0.83rem; text-align: left; cursor: pointer; transition: background 0.15s ease; }
+.menuPop button:hover { background: rgba(255, 255, 255, 0.09); }
+.menuPop button.menuDanger:hover { background: rgba(255, 120, 90, 0.16); color: #ff9f80; }
+.headClose { width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border-radius: 8px; border: none; background: rgba(255, 255, 255, 0.08); cursor: pointer; }
 .headClose img { width: 13px; height: 13px; }
 
 .stream { flex: 1; min-height: 0; overflow-y: auto; padding: 16px 14px; display: flex; flex-direction: column; gap: 11px; scrollbar-width: thin; }
@@ -87,6 +112,7 @@
 
 .bubbleCol { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; max-width: 80%; }
 .rowUser .bubbleCol { align-items: flex-end; }
+.msgTime { font-size: 0.66rem; color: rgba(255, 255, 255, 0.38); padding: 0 5px; }
 .assistant, .user { max-width: 100%; padding: 9px 13px; border-radius: 15px; font-size: 0.86rem; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
 
 /* Bouton d'action proposé (navigation) — le visiteur clique, rien d'automatique */
@@ -109,16 +135,32 @@
 .caret { display: inline-block; width: 2px; height: 1em; margin-left: 2px; vertical-align: text-bottom; background: var(--color-accent); animation: bwCaret 0.9s step-end infinite; }
 @keyframes bwCaret { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
+/* Palette de commandes « / » */
+.slashPop { position: absolute; bottom: 65px; left: 10px; z-index: 500; max-height: 216px; overflow-y: auto; padding: 6px; display: flex; flex-direction: column; gap: 2px; border-radius: 8px; background: rgba(0, 0, 0, 0.9); scrollbar-width: thin; }
+.slashHint { padding: 7px 10px 9px; font-size: 0.74rem; line-height: 1.4; color: rgba(255, 255, 255, 0.5); }
+.slashItem { display: flex; align-items: center; gap: 10px; width: 100%; padding: 9px 11px; border: none; border-radius: 10px; background: none; color: #fff; font-family: inherit; font-size: 0.84rem; text-align: left; cursor: pointer; transition: background 0.15s ease; }
+.slashItemOn { background: rgba(255, 165, 0, 0.16); }
+.slashCmd { color: var(--color-accent-soft); font-weight: 600; white-space: nowrap; }
+.slashDesc, .slashKey { margin-left: auto; color: rgba(255, 255, 255, 0.5); font-size: 0.76rem; white-space: nowrap; }
+.slashTip { margin: 12px 0 0; font-size: 0.74rem; text-align: center; color: rgba(255, 255, 255, 0.42); }
+
 .inputRow { display: flex; align-items: flex-end; gap: 8px; padding: 11px; border-top: 1px solid var(--glass-border); background: rgba(0, 0, 0, 0.28); }
+/* Bouton « / » — non primary, ouvre la palette de commandes */
+.slashBtn { width: 38px; height: 38px; flex: 0 0 auto; display: flex; justify-content: center; align-items: center; border-radius: 12px; border: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.06) !important; color: rgba(255, 255, 255, 0.72); font-family: inherit; font-size: 1.05rem; font-weight: 700; line-height: 1; cursor: pointer; transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+.slashBtn:hover { background: rgba(255, 165, 0, 0.12); color: #fff; border-color: var(--color-accent); }
+.slashBtnOn { background: rgba(255, 165, 0, 0.16); border-color: var(--color-accent); color: #fff; }
 .textarea {
   flex: 1; min-width: 0; min-height: 40px; max-height: 120px; overflow-y: auto; resize: none;
   padding: 10px 14px; border-radius: 18px;
   background: rgba(255, 255, 255, 0.07); border: 1px solid var(--glass-border);
-  color: #fff; font-family: inherit; font-size: 0.86rem; line-height: 1.45; outline: none; scrollbar-width: thin;
+  color: #fff; font-family: inherit; font-size: 0.86rem; line-height: 1.45; outline: none;
+  scrollbar-width: none;    
+  -ms-overflow-style: none;
 }
+.textarea::-webkit-scrollbar { display: none; }
 .textarea:focus { border-color: var(--color-accent); }
 .textarea::placeholder { color: rgba(255, 255, 255, 0.4); }
-.inputRow button { width: 38px; height: 38px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; border: none; cursor: pointer; background: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent)); transition: filter 0.2s ease, opacity 0.2s ease; }
+.inputRow button { width: 38px; height: 38px; flex: 0 0 auto; display: flex; justify-content: center; align-items: center; border-radius: 50%; border: none; cursor: pointer; background: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent)); transition: filter 0.2s ease, opacity 0.2s ease; }
 .inputRow button:hover { filter: brightness(1.08); }
 .inputRow button:disabled { opacity: 0.5; cursor: default; }
 .inputRow button img { width: 17px; height: 17px; }

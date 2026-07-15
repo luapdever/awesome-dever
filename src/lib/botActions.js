@@ -52,15 +52,11 @@ export function extractActions(raw) {
   return { clean, actions };
 }
 
-// Exécute une cible. `router` = next/router. Retourne true si géré.
-export function runNavAction(key, router) {
-  const nav = NAV[key];
-  if (!nav) return false;
-  if (nav.type === "external") { window.open(nav.url, "_blank", "noopener"); return true; }
-  if (nav.type === "route") { router.push(nav.url); return true; }
-  // section : s'assurer d'être sur la home puis scroller vers l'ancre
+// Scrolle vers une section de la home (en s'y rendant d'abord si besoin).
+// Navigation client-side : aucun rechargement de page.
+function scrollToHomeSection(id, router) {
   const scroll = () => {
-    const el = document.getElementById(nav.id);
+    const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   if (typeof window !== "undefined" && window.location.pathname === "/") {
@@ -69,4 +65,25 @@ export function runNavAction(key, router) {
     Promise.resolve(router.push("/")).then(() => setTimeout(scroll, 450));
   }
   return true;
+}
+
+// Exécute une cible de la whitelist. `router` = next/router. Retourne true si géré.
+export function runNavAction(key, router) {
+  const nav = NAV[key];
+  if (!nav) return false;
+  if (nav.type === "external") { window.open(nav.url, "_blank", "noopener"); return true; }
+  if (nav.type === "route") { router.push(nav.url); return true; }
+  return scrollToHomeSection(nav.id, router); // type "section"
+}
+
+// Navigation vers un lien RELATIF saisi à la main : soit une ancre de la home
+// ("#section"), soit une route interne ("/page"). Tout lien externe (http://,
+// //, protocole) est refusé. Aucun rechargement de page (router client-side).
+export function navigateRelative(target, router) {
+  const t = (target || "").trim();
+  if (!t) return false;
+  if (/^[a-z][a-z0-9+.-]*:/i.test(t) || t.startsWith("//")) return false; // externe / protocole
+  if (t.startsWith("#")) return scrollToHomeSection(t.slice(1), router);
+  if (t.startsWith("/")) { router.push(t); return true; }
+  return false;
 }
