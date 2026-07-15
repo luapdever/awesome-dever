@@ -207,3 +207,15 @@
   .panel { right: 10px; left: 10px; width: auto; bottom: 84px; height: min(70vh, calc(100vh - 110px)); }
   .launcher { right: 16px; bottom: 16px; width: 52px; height: 52px; }
 }
+
+/* iOS Safari zoome sur un champ dont la police est < 16px au focus.
+   Sur les écrans tactiles, on force 16px sur les champs de saisie pour
+   supprimer l'auto-zoom (l'apparence desktop reste inchangée). */
+@media (pointer: coarse) {
+  .textarea,
+  .onbInput,
+  .phoneWrap :global(.PhoneInputInput),
+  .phoneWrap :global(.PhoneInputCountrySelect) {
+    font-size: 16px;
+  }
+}
