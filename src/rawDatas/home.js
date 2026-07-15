@@ -70,15 +70,15 @@ export const capabilities = [
     ),
     tags: ["Docker", "GitLab CI", "Jenkins", "Nginx", "Grafana"],
   },
-  {
-    icon: ph("palette"),
-    title: L("Creative & 3D", "Créatif & 3D"),
-    desc: L(
-      "A bit of GSAP, Three.js and Blender when an interface deserves better than a spreadsheet.",
-      "Un peu de GSAP, de Three.js et de Blender quand une interface mérite mieux qu'un tableau."
-    ),
-    tags: ["GSAP", "Three.js", "Blender", "Photoshop"],
-  },
+  // {
+  //   icon: ph("palette"),
+  //   title: L("Creative & 3D", "Créatif & 3D"),
+  //   desc: L(
+  //     "A bit of GSAP, Three.js and Blender when an interface deserves better than a spreadsheet.",
+  //     "Un peu de GSAP, de Three.js et de Blender quand une interface mérite mieux qu'un tableau."
+  //   ),
+  //   tags: ["GSAP", "Three.js", "Blender", "Photoshop"],
+  // },
 ];
 
 // "Mon parcours en images" — dossier public/history
