@@ -11,6 +11,7 @@ import { LandingLangProvider } from "../src/context/landingLang";
 import { ExperienceProvider } from "../src/context/experience";
 import ExperienceModal from "../src/components/specific/home/ExperienceModal";
 import ExperienceButton from "../src/components/global/ExperienceButton";
+import BotWidget from "../src/components/global/BotWidget";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -38,6 +39,7 @@ function MyApp({ Component, pageProps }) {
             <ToastContainer theme="dark" />
             {!hideChrome && <TheFooter />}
             {!hideChrome && <ExperienceButton />}
+            {!hideChrome && <BotWidget />}
             {!hideChrome && <ExperienceModal />}
           </ExperienceProvider>
         </LandingLangProvider>

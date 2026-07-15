@@ -124,7 +124,7 @@ function Content() {
 
   // App launcher (Windows-like) + pinned dock apps
   const perfById = Object.fromEntries(performances.map((p) => [p.id, p]));
-  const PINNED = ["cv", "career", "skills", "vault", "appStore", "terminal", "contact"];
+  const PINNED = ["cv", "career", "skills", "bot", "vault", "appStore", "terminal", "contact"];
   const launcherList = performances.filter((p) =>
     p.label.toLowerCase().includes(q.trim().toLowerCase())
   );

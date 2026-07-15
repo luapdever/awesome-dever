@@ -1,0 +1,41 @@
+# PaulBrain OS — front (Next) + backend PaulBot (NestJS) + Ollama (optionnel)
+#
+# Topologie :
+#   navigateur → web (Next)  → /api/chat  (proxy SSR)  → api (Nest) → LLM
+#                (ou SPA : navigateur → api Nest en direct via NEXT_PUBLIC_CHAT_URL)
+#
+# La clé LLM ne vit QUE dans le service `api` (Nest).
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      # Cible du proxy SSR → endpoint Nest sur le réseau interne
+      - CHAT_API_URL=http://api:4000/paulbot/chat
+    restart: unless-stopped
+    depends_on:
+      - api
+
+  # Backend NestJS dédié (PaulBot). Fais pointer `build` vers TON repo Nest
+  # (celui qui contient le module paulbot/). Il écoute sur 4000.
+  api:
+    build: ../paulbot-backend   # ← adapte : chemin de ton app NestJS
+    expose:
+      - "4000"
+    env_file:
+      - .env.api               # LLM_BASE_URL / LLM_MODEL / LLM_API_KEY
+    restart: unless-stopped
+
+  # Moteur local optionnel — démarre avec:  docker compose --profile local up
+  ollama:
+    image: ollama/ollama:latest
+    profiles: ["local"]
+    volumes:
+      - ollama_models:/root/.ollama
+    ports:
+      - "11434:11434"
+    restart: unless-stopped
+
+volumes:
+  ollama_models:

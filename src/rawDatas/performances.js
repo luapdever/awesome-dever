@@ -10,6 +10,7 @@ import Terminal from "../components/specific/portfolio/wndows/Terminal";
 import Skills from "../components/specific/portfolio/wndows/Skills";
 import Career from "../components/specific/portfolio/wndows/Career";
 import Vault from "../components/specific/portfolio/wndows/Vault";
+import Bot from "../components/specific/portfolio/wndows/Bot";
 import { appWindow } from "../components/specific/portfolio/wndows/AppWindow";
 import { L } from "./i18n";
 
@@ -53,6 +54,21 @@ export const performances = [
       stack: ["React JS"],
       features: [L("8 skill categories", "8 catégories de compétences"), L("Proficiency bars", "Barres de niveau"), "Data source: skillset.js"],
       more: L("The technical stack running on this machine, with proficiency levels.", "La stack technique qui tourne sur cette machine, avec les niveaux."),
+    },
+  },
+  {
+    id: "bot",
+    icon: "https://api.iconify.design/fluent-emoji-flat:robot.svg",
+    label: "PaulBot",
+    get content() { return <Bot />; },
+    properties: {
+      category: L("System · AI assistant", "Système · Assistant IA"),
+      status: "Live",
+      role: L("Portfolio assistant", "Assistant du portfolio"),
+      year: "Today",
+      stack: ["Next.js", "Groq / Ollama", "Llama 3.3"],
+      features: [L("Answers about Paul", "Répond à propos de Paul"), L("Streaming replies", "Réponses en streaming"), L("Context-stuffed, RAG-ready", "Context-stuffing, prêt pour le RAG")],
+      more: L("A chat assistant grounded in Paul's real data (CV, projects, skills). Swappable engine — Groq now, self-hosted Ollama later.", "Un assistant de chat nourri des vraies données de Paul (CV, projets, compétences). Moteur interchangeable — Groq maintenant, Ollama auto-hébergé plus tard."),
     },
   },
   {
