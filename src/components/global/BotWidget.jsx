@@ -440,18 +440,27 @@ function BotWidget({ embedded = false, lang: langProp }) {
     }
   };
 
+  // Sur mobile, le widget couvre tout l'écran : après une navigation on le
+  // ferme pour laisser voir la destination (jamais en mode embarqué / OS).
+  const isMobile = () =>
+    typeof window !== "undefined" && window.matchMedia("(max-width: 560px)").matches;
+  const runNav = (fn) => {
+    fn();
+    if (!embedded && isMobile()) setOpen(false);
+  };
+
   // Tour guidé : navigue vers la section courante puis avance.
   const tourNext = () => {
     const steps = tourSteps(lang);
     const s = steps[tourStep];
     if (!s) return;
-    runNavAction(s.nav, router);
+    runNav(() => runNavAction(s.nav, router));
     setTourStep((i) => Math.min(i + 1, steps.length));
   };
 
   const chooseSlash = (item) => {
     if (!item) return;
-    if (slash?.mode === "go") { setDraft(""); runNavAction(item.key, router); return; }
+    if (slash?.mode === "go") { setDraft(""); runNav(() => runNavAction(item.key, router)); return; }
     if (item.type === "go") { setDraft("/go "); setTimeout(() => inputRef.current?.focus(), 0); return; }
     if (item.type === "ask") { setDraft(""); send(item.prompt); return; }
   };
@@ -459,7 +468,7 @@ function BotWidget({ embedded = false, lang: langProp }) {
   const submit = () => {
     if (slashActive) {
       // /go avec un lien relatif saisi → on navigue directement.
-      if (slash.mode === "go" && slash.link) { setDraft(""); navigateRelative(slash.link, router); return; }
+      if (slash.mode === "go" && slash.link) { setDraft(""); runNav(() => navigateRelative(slash.link, router)); return; }
       chooseSlash(slashItems[slashIndex]);
       return;
     }
@@ -754,7 +763,7 @@ function BotWidget({ embedded = false, lang: langProp }) {
                             {m.widget.actions && (
                               <div className={styles.infoActions}>
                                 {m.widget.actions.map((a, k) => a.nav ? (
-                                  <button key={k} type="button" className={styles.infoBtn} onClick={() => runNavAction(a.nav, router)}>{a.label} →</button>
+                                  <button key={k} type="button" className={styles.infoBtn} onClick={() => runNav(() => runNavAction(a.nav, router))}>{a.label} →</button>
                                 ) : (
                                   <a key={k} className={styles.infoBtn} href={a.href} target={/^(mailto|tel):/.test(a.href) ? undefined : "_blank"} rel="noopener noreferrer">{a.label} →</a>
                                 ))}
@@ -804,7 +813,7 @@ function BotWidget({ embedded = false, lang: langProp }) {
                           <button
                             type="button"
                             className={styles.navAction}
-                            onClick={() => runNavAction(m.action, router)}
+                            onClick={() => runNav(() => runNavAction(m.action, router))}
                           >
                             {navLabel(m.action, lang)} →
                           </button>

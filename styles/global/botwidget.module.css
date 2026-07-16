@@ -305,7 +305,19 @@ a.infoValue { color: var(--color-accent-soft); text-decoration: underline; text-
 .teaserClose { position: absolute; top: 6px; right: 7px; width: 18px; height: 18px; display: grid; place-items: center; padding: 0; border: none; border-radius: 50%; background: rgba(0, 0, 0, 0.14); color: #2a1a00; font-size: 0.9rem; line-height: 1; cursor: pointer; }
 
 @media (max-width: 560px) {
-  .panel { right: 10px; left: 10px; width: auto; bottom: 84px; height: min(70vh, calc(100vh - 110px)); }
+  /* Mobile : le widget couvre tout l'écran pour un vrai plein écran. */
+  .panel {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+    border: none;
+  }
   .launcher { right: 16px; bottom: 16px; width: 52px; height: 52px; }
   .teaser { right: 14px; bottom: 78px; }
 }
