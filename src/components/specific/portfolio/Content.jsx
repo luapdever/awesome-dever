@@ -28,6 +28,7 @@ import Clock from "../../global/clock";
 import { OS } from "../../../rawDatas/os";
 import { yearsOfExperience } from "../../../rawDatas/xp";
 import { useLang } from "./lang";
+import { playOsSound, setOsAudioConfig, unlockOsAudio } from "../../../lib/osSounds";
 
 // Parse a shareable hash like "app=skills&lang=fr" (or bare "skills").
 function parseHash(h) {
@@ -60,6 +61,22 @@ function Content() {
 
   // Pick a random desktop wallpaper on the client (avoids SSR hydration mismatch).
   useEffect(() => { setWallpaper(pickWallpaper()); }, []);
+
+  // Sons d'interface : on partage l'état volume/mute de la barre avec le moteur.
+  useEffect(() => { setOsAudioConfig({ volume, muted }); }, [volume, muted]);
+  // Politique autoplay : on (ré)active l'AudioContext au tout premier geste.
+  useEffect(() => {
+    const unlock = () => unlockOsAudio();
+    window.addEventListener("pointerdown", unlock, { once: true });
+    window.addEventListener("keydown", unlock, { once: true });
+    return () => {
+      window.removeEventListener("pointerdown", unlock);
+      window.removeEventListener("keydown", unlock);
+    };
+  }, []);
+  // Petits sons contextuels : tick à l'ouverture d'un menu, clic pour un dossier.
+  useEffect(() => { if (openMenu) playOsSound("toggle"); }, [openMenu]);
+  useEffect(() => { if (openFolder) playOsSound("click"); }, [openFolder]);
   // Touch / small screens: a single tap opens apps (double-click is unreliable on mobile).
   useEffect(() => {
     const check = () =>
@@ -132,7 +149,21 @@ function Content() {
     openWindow(e || { preventDefault() {} }, app);
     setLauncherOpen(false);
   };
-  const openLauncher = () => { setQ(""); setSel(0); setLauncherOpen(true); };
+  const openLauncher = () => { setQ(""); setSel(0); setLauncherOpen(true); playOsSound("pop"); };
+
+  // Clic sur une icône de la barre des tâches : ouvre si besoin, met au premier
+  // plan, et surtout RESTAURE la fenêtre si elle était réduite (sinon on ne
+  // pouvait plus la rouvrir). Reclic sur la fenêtre déjà active → on la réduit.
+  const activateFromTaskbar = (e, app) => {
+    const index = windowsOpenned.findIndex((w) => w.id === app.id);
+    if (index === -1) { openWindow(e, app); return; } // pas encore ouverte
+    const el = typeof document !== "undefined" ? document.getElementById("wind" + index) : null;
+    const isMin = !!(el && el.minimized);
+    const wasCurrent = app.id === currentWindow;
+    openWindow(e, app); // au premier plan
+    if (isMin) minimizeWindow(e, "wind" + index, true); // force la restauration
+    else if (wasCurrent) minimizeWindow(e, "wind" + index, false); // reclic actif → réduit
+  };
 
   // ---- Menu bar: dropdowns, calendar, volume ----
   const openWin = (app) => app && openWindow({ preventDefault() {} }, app);
@@ -564,7 +595,7 @@ function Content() {
             <div
               key={"Pin" + id}
               className={styles.task + (app.id === currentWindow ? " " + styles.active : "")}
-              onClick={(e) => openWindow(e, app)}
+              onClick={(e) => activateFromTaskbar(e, app)}
               title={app.label}
             >
               <img
@@ -588,10 +619,7 @@ function Content() {
               className={
                 styles.task + (task.id === currentWindow ? " " + styles.active : "")
               }
-              onClick={(e) => {
-                openWindow(e, task.window);
-                minimizeWindow(e, "wind" + index, !(task.id === currentWindow));
-              }}
+              onClick={(e) => activateFromTaskbar(e, task.window)}
             >
               <img
                 src={task.window.icon}

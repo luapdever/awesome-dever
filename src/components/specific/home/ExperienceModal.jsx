@@ -12,9 +12,9 @@ const ph = (name, color = "ffa500") => `https://api.iconify.design/ph:${name}.sv
 
 const ACTIONS = [
   { id: "cv", label: L("Read my résumé", "Lire mon CV"), sub: L("Short version, hold the coffee", "Version courte, sans le café"), icon: ph("file-text") },
-  { id: "os", label: L("PaulBrain OS", "PaulBrain OS"), sub: L("My brain in desktop mode", "Mon cerveau en mode bureau"), icon: ph("desktop") },
+  { id: "bot", label: L("PaulBot", "PaulBot"), sub: L("Chat about me then book a meeting", "Discuter à propos de moi puis RDV"), icon: ph("robot"), recommended: true },
+  { id: "os", label: L("PaulBrain OS", "PaulBrain OS"), sub: L("My brain in operating system mode", "Mon cerveau en mode système d'exploitation"), icon: ph("desktop") },
   { id: "terminal", label: L("Terminal mode", "Mode terminal"), sub: L("For the brave — type help", "Pour les vrais, tapez help"), icon: ph("terminal-window") },
-  { id: "bot", label: L("PaulBot", "PaulBot"), sub: L("Chat about Paul", "Discuter à propos de Paul"), icon: ph("robot") },
   { id: "3d", label: L("3D mode", "Mode 3D"), sub: L("Soon — still modelling…", "Bientôt — je modélise…"), icon: ph("cube", "8a8aa0"), disabled: true },
 ];
 
@@ -26,6 +26,7 @@ const MODAL_UI = {
     continue: "Or keep scrolling, your call →",
     shell: "type",
     back: "Back",
+    recommended: "Recommended",
   },
   fr: {
     badge: "Édition Premium (gratuite, promis)",
@@ -34,6 +35,7 @@ const MODAL_UI = {
     continue: "Ou continuer à scroller, c'est vous qui voyez →",
     shell: "tapez",
     back: "Retour",
+    recommended: "Recommandé",
   },
 };
 
@@ -110,7 +112,6 @@ function ExperienceModal() {
 
         {mode === "menu" ? (
           <>
-            <div className={styles.modalBadge}>{m.badge}</div>
             <h2 className={styles.modalTitle}>{m.title}</h2>
             <p className={styles.modalText}>{m.text}</p>
 
@@ -118,10 +119,15 @@ function ExperienceModal() {
               {ACTIONS.map((a) => (
                 <button
                   key={a.id}
-                  className={`${styles.modalAction} ${a.disabled ? styles.modalActionOff : ""}`}
+                  className={`${styles.modalAction} ${a.disabled ? styles.modalActionOff : ""} ${a.recommended ? styles.modalActionReco : ""}`}
                   onClick={() => !a.disabled && run(a.id)}
                   disabled={a.disabled}
                 >
+                  {a.recommended && (
+                    <span className={styles.maBadge} title={m.recommended} aria-label={m.recommended}>
+                      <img src={ph("star-fill", "2a1a00")} alt="" />
+                    </span>
+                  )}
                   <img src={a.icon} alt="" />
                   <span className={styles.maLabel}>{tx(a.label, lang)}</span>
                   <span className={styles.maSub}>{tx(a.sub, lang)}</span>

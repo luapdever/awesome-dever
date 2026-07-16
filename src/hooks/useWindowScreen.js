@@ -6,6 +6,7 @@ import details from "../assets/img/icons/details.png";
 import Properties from "../components/specific/portfolio/wndows/Properties";
 import WelcomeContent from "../components/specific/portfolio/wndows/Welcome";
 import Terminal from "../components/specific/portfolio/wndows/Terminal";
+import { playOsSound } from "../lib/osSounds";
 
 const useWindowScreen = () => {
   const [currentWindow, setCurrentWindow] = useState("welcome");
@@ -70,6 +71,9 @@ const useWindowScreen = () => {
           window: performance,
         },
       ]);
+      playOsSound("open"); // nouvelle fenêtre
+    } else {
+      playOsSound("click"); // simple mise au premier plan
     }
     setCurrentWindow(performance.id);
   };
@@ -84,6 +88,7 @@ const useWindowScreen = () => {
       tarWind.style.transform = "translate(-50%, -50%)";
       tarWind.style.borderRadius = "5px";
       tarWind.fullscreen = false;
+      playOsSound("pop"); // sortie du plein écran
     } else {
       tarWind.style.width = "100%";
       tarWind.style.height = "100%";
@@ -92,6 +97,7 @@ const useWindowScreen = () => {
       tarWind.style.transform = "translate(0, 0)";
       tarWind.style.borderRadius = "0px";
       tarWind.fullscreen = true;
+      playOsSound("maximize"); // passage plein écran
     }
   };
 
@@ -104,11 +110,13 @@ const useWindowScreen = () => {
       tarWind.style.opacity = "1";
       tarWind.style.pointerEvents = "initial";
       tarWind.minimized = false;
+      playOsSound("pop"); // restauration
     } else {
       tarWind.style.top = "100%";
       tarWind.style.opacity = "0";
       tarWind.style.pointerEvents = "none";
       tarWind.minimized = true;
+      playOsSound("minimize"); // réduction
     }
   };
 
@@ -117,6 +125,7 @@ const useWindowScreen = () => {
     copy.splice(index, 1);
     setWindowsOpenned([...copy]);
     setCurrentWindow(windowsOpenned.length > 0 ? windowsOpenned[windowsOpenned.length - 1].id : "")
+    playOsSound("close"); // fermeture
   };
 
 	const handleDragStart = (e, idWind) => {

@@ -230,12 +230,16 @@
 .modalTitle { margin: 0 0 10px; font-size: clamp(1.2rem, 4vw, 1.55rem); font-weight: 800; line-height: 1.25; }
 .modalText { margin: 0 0 20px; font-size: 0.9rem; line-height: 1.6; color: rgba(255, 255, 255, 0.78); }
 .modalGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 11px; }
-.modalAction { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; padding: 14px; border-radius: 14px; text-align: left; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); color: #fff; cursor: pointer; transition: transform 0.25s var(--ease-spring), border-color 0.25s ease, background 0.25s ease; }
+.modalAction { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; padding: 14px; border-radius: 14px; text-align: left; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); color: #fff; cursor: pointer; transition: transform 0.25s var(--ease-spring), border-color 0.25s ease, background 0.25s ease; }
 .modalAction:hover:not(:disabled) { transform: translateY(-3px); border-color: rgba(255, 165, 0, 0.5); background: rgba(255, 255, 255, 0.08); }
 .modalAction img { width: 30px; height: 30px; margin-bottom: 4px; }
 .maLabel { font-weight: 700; font-size: 0.92rem; }
 .maSub { font-size: 0.72rem; color: rgba(255, 255, 255, 0.6); }
 .modalActionOff { opacity: 0.45; cursor: not-allowed; }
+/* Mode recommandé : léger accent + mini badge étoile en coin (absolute). */
+.modalActionReco { border-color: rgba(255, 165, 0, 0.45); }
+.maBadge { position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent)); box-shadow: 0 3px 8px rgba(255, 140, 0, 0.4); }
+.maBadge img { width: 11px; height: 11px; margin: 0; }
 .modalContinue { display: block; width: 100%; margin-top: 16px; padding: 12px; border: 1px dashed var(--glass-border); border-radius: 12px; background: none; color: rgba(255, 255, 255, 0.7); font-family: inherit; font-size: 0.85rem; cursor: pointer; }
 .modalContinue:hover { color: #fff; border-color: var(--color-accent); }
 .modalTerminal { display: flex; flex-direction: column; }
