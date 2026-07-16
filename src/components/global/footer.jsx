@@ -44,7 +44,7 @@ function TheFooter() {
           <Link href="/paulfolio">PaulBrain OS</Link>
           <a href="/cv/index.html" target="_blank" rel="noopener noreferrer">Mon CV interactif</a>
           <Link href="/#temoignages">Témoignages</Link>
-          <a href="https://luap-dever.me" target="_blank" rel="noopener noreferrer">Mon blog</a>
+          <a href="https://luap-dever.netlify.app" target="_blank" rel="noopener noreferrer">Mon blog</a>
           <button type="button" className={styles.linkBtn} onClick={openChooser}>
             {lang === "fr" ? "Changer d'expérience" : "Change experience"}
           </button>

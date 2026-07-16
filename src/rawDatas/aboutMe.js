@@ -59,7 +59,7 @@ export const socialMedias = [
   },
   {
     icon: <>View my blog</>,
-    link: "https://luap-dever.me",
+    link: "https://luap-dever.netlify.app",
   },
 ];
 

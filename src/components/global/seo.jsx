@@ -6,7 +6,7 @@ const DEFAULT_DESCRIPTION =
 const TWITTER = "@SmithZannou";
 
 // Origine canonique (sans slash final) — source unique : appUrl (next.config).
-const ORIGIN = (process.env.appUrl || "https://luap-dever.me").replace(/\/+$/, "");
+const ORIGIN = (process.env.appUrl || "https://luap-dever.netlify.app").replace(/\/+$/, "");
 
 /**
  * <head> centralisé pour le SEO : title, description, canonical, robots,

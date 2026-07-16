@@ -5,7 +5,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
   name: "À propos de Paul Mèdédji ZANNOU",
-  url: "https://luap-dever.me/about-me",
+  url: "https://luap-dever.netlify.app/about-me",
   mainEntity: {
     "@type": "Person",
     name: "Paul Mèdédji ZANNOU",
@@ -15,7 +15,7 @@ const jsonLd = {
     sameAs: [
       "https://github.com/luapdever",
       "https://linkedin.com/in/paul-zannou-b253a2205",
-      "https://luap-dever.me",
+      "https://luap-dever.netlify.app",
     ],
   },
 };
