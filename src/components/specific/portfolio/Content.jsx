@@ -28,7 +28,7 @@ import Clock from "../../global/clock";
 import { OS } from "../../../rawDatas/os";
 import { yearsOfExperience } from "../../../rawDatas/xp";
 import { useLang } from "./lang";
-import { playOsSound, playStartupSound, setOsAudioConfig, unlockOsAudio } from "../../../lib/osSounds";
+import { playOsSound, playStartupSound, playStartupReversed, setOsAudioConfig, unlockOsAudio } from "../../../lib/osSounds";
 
 // Parse a shareable hash like "app=skills&lang=fr" (or bare "skills").
 function parseHash(h) {
@@ -219,7 +219,7 @@ function Content() {
     { label: t.miFullscreen, fn: toggleFullscreen },
     { label: lang === "fr" ? "Redémarrer le système" : "Restart system", fn: () => window.location.reload() },
     { divider: true },
-    { label: lang === "fr" ? "Suspendre — retour au portfolio" : "Suspend — back to portfolio", fn: () => { window.location.href = "/"; }, accent: true },
+    { label: lang === "fr" ? "Suspendre — retour au portfolio" : "Suspend — back to portfolio", fn: () => { playStartupReversed().finally(() => { window.location.href = "/"; }); }, accent: true },
   ];
 
   // Play a short beep at the current volume so the control is genuinely audible.

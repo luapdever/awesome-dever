@@ -38,10 +38,10 @@ export const capabilities = [
     icon: ph("browsers"),
     title: L("Web & Frontend", "Web & Frontend"),
     desc: L(
-      "Reactive, accessible interfaces with Vue.js, Nuxt, React/Next and Flutter on mobile.",
-      "Interfaces réactives et accessibles avec Vue.js, Nuxt, React/Next et Flutter côté mobile."
+      "Reactive, accessible and animated interfaces with React/Next, Vue.js, Nuxt and Flutter on mobile.",
+      "Interfaces réactives, accessibles et animées avec React/Next, Vue.js, Nuxt et Flutter côté mobile."
     ),
-    tags: ["Vue.js", "Nuxt", "React", "Flutter", "SASS"],
+    tags: ["React", "Next.js", "Vue.js", "Nuxt", "GSAP", "Flutter"],
   },
   {
     icon: ph("stack"),
@@ -70,15 +70,15 @@ export const capabilities = [
     ),
     tags: ["Docker", "GitLab CI", "Jenkins", "Nginx", "Grafana"],
   },
-  // {
-  //   icon: ph("palette"),
-  //   title: L("Creative & 3D", "Créatif & 3D"),
-  //   desc: L(
-  //     "A bit of GSAP, Three.js and Blender when an interface deserves better than a spreadsheet.",
-  //     "Un peu de GSAP, de Three.js et de Blender quand une interface mérite mieux qu'un tableau."
-  //   ),
-  //   tags: ["GSAP", "Three.js", "Blender", "Photoshop"],
-  // },
+  {
+    icon: ph("sparkle"),
+    title: L("Creative & Motion", "Créatif & Motion"),
+    desc: L(
+      "Award-style interfaces: GSAP/ScrollTrigger scrollytelling, synthesized UI sounds (Web Audio), voice (Web Speech) and immersive, OS-like experiences — accessible by default.",
+      "Interfaces primées : scrollytelling GSAP/ScrollTrigger, sons d'interface synthétisés (Web Audio), voix (Web Speech) et expériences immersives façon OS — accessibles par défaut."
+    ),
+    tags: ["GSAP", "ScrollTrigger", "Web Audio", "Web Speech", "a11y"],
+  },
 ];
 
 // "Mon parcours en images" — dossier public/history

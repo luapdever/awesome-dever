@@ -843,9 +843,50 @@
     }
 
     @media screen and (max-width: 840px) {
+      /* Actions regroupées en une barre fixe propre en haut (fini les 3 blocs
+         flottants qui se chevauchaient) : profils scrollables sur une ligne,
+         langue + export sur la suivante. */
+      .controls {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 70;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        background: rgba(255, 255, 255, .96);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        box-shadow: 0 4px 16px rgba(17, 0, 104, .12);
+      }
+      .switch-variant,
+      .switch-lang,
+      .toolbar {
+        position: static;
+        top: auto;
+        left: auto;
+        right: auto;
+        width: auto;
+        padding: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+      .switch-variant {
+        flex: 1 1 100%;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .switch-variant::-webkit-scrollbar { display: none; }
+      .switch-variant button { flex: 0 0 auto; }
+      .toolbar { margin-left: auto; }
+      .switch button { font-size: 12.5px; padding: 8px 12px; }
+
       .page {
         width: 100%;
-        margin: 0;
+        margin: 96px 0 0;
         box-shadow: none;
       }
 
@@ -869,14 +910,17 @@
 
 <body>
 
-  <!-- Switcher PROFIL (gauche) -->
-  <div class="switch switch-variant" id="variantSwitch"></div>
+  <!-- Contrôles : fixes aux coins sur desktop, regroupés en barre en haut sur mobile -->
+  <div class="controls">
+    <!-- Switcher PROFIL (gauche) -->
+    <div class="switch switch-variant" id="variantSwitch"></div>
 
-  <!-- Switcher LANGUE (droite) -->
-  <div class="switch switch-lang" id="langSwitch"></div>
+    <!-- Switcher LANGUE (droite) -->
+    <div class="switch switch-lang" id="langSwitch"></div>
 
-  <!-- Bouton export -->
-  <div class="toolbar"><button class="btn" id="pdfBtn" onclick="window.print()"></button></div>
+    <!-- Bouton export -->
+    <div class="toolbar"><button class="btn" id="pdfBtn" onclick="window.print()"></button></div>
+  </div>
 
   <div class="page" id="cv"><!-- rendu par JS --></div>
 
@@ -987,6 +1031,13 @@
             stack: ["NestJS", "TypeScript", "Groq / Llama 3.3", "Ollama", "Streaming SSE", "Next.js", "Docker"]
           },
           {
+            id: "portfolio", name: "Luap Dever — Portfolio interactif « PaulBrain OS »", year: "2025 – 2026", role: "Conception, design & développement full-stack",
+            client: "Projet personnel",
+            desc: "Portfolio nouvelle génération à trois expériences au choix : une landing animée façon awwwards (GSAP/ScrollTrigger — préchargeur, scroll horizontal épinglé, typographie cinétique, marquees), un système d'exploitation dans le navigateur (« PaulBrain OS » — gestionnaire de fenêtres, barre des tâches, lanceur d'apps, sons d'interface synthétisés en Web Audio) et un mode terminal interactif. Intègre PaulBot, un assistant IA branché sur un LLM en streaming (SSE), avec dictée et synthèse vocale (Web Speech), un captcha open-source anti-spam (ALTCHA) et l'export PDF de conversation par email. Bilingue (FR/EN), accessible (ARIA, prefers-reduced-motion), responsive et optimisé SEO.",
+            stack: ["Next.js", "React", "GSAP / ScrollTrigger", "Web Audio API", "Web Speech API", "NestJS", "LLM · SSE", "ALTCHA", "CSS Modules"],
+            links: [{ label: "luap-dever.netlify.app", href: "https://luap-dever.netlify.app" }]
+          },
+          {
             id: "invoicepay", hidden: true, company: "CCIB — Chambre de Commerce et d'Industrie du Bénin", year: "2022 – 2023", type: "Développement backend — institution publique"
           }
         ],
@@ -994,7 +1045,7 @@
           { key: "languages", cat: "Langages", items: "JavaScript, TypeScript, PHP, Dart, Java, HTML5, CSS3/SASS, SQL" },
           { key: "backend", cat: "Backend", items: "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize" },
           { key: "ai", cat: "IA / LLM", items: "Intégration LLM (agnostique du modèle), API OpenAI standard, RAG (génération augmentée par récupération), fine-tuning, prompt engineering & garde-fous, function/tool calling, automatisation IA" },
-          { key: "frontend", cat: "Frontend", items: "Vue.js, Nuxt.js, SASS, Webpack" },
+          { key: "frontend", cat: "Frontend", items: "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n" },
           { key: "mobile", cat: "Mobile", items: "Flutter, GetX, Bloc" },
           { key: "cms", cat: "CMS", items: "WordPress (thèmes & plugins), ACF Pro, Elementor, Polylang, LearnPress" },
           { key: "db", cat: "Bases de données", items: "PostgreSQL, MySQL / MariaDB" },
@@ -1112,6 +1163,13 @@
             stack: ["NestJS", "TypeScript", "Groq / Llama 3.3", "Ollama", "SSE streaming", "Next.js", "Docker"]
           },
           {
+            id: "portfolio", name: "Luap Dever — Interactive portfolio “PaulBrain OS”", year: "2025 – 2026", role: "Design & full-stack development",
+            client: "Personal project",
+            desc: "Next-generation portfolio with three experiences to choose from: an awwwards-style animated landing (GSAP/ScrollTrigger — preloader, pinned horizontal scroll, kinetic typography, marquees), an in-browser operating system (“PaulBrain OS” — window manager, taskbar, app launcher, Web-Audio-synthesized UI sounds) and an interactive terminal mode. Ships PaulBot, an AI assistant wired to a streaming LLM (SSE), with voice dictation and text-to-speech (Web Speech), an open-source anti-spam captcha (ALTCHA) and PDF conversation export by email. Bilingual (FR/EN), accessible (ARIA, prefers-reduced-motion), responsive and SEO-optimized.",
+            stack: ["Next.js", "React", "GSAP / ScrollTrigger", "Web Audio API", "Web Speech API", "NestJS", "LLM · SSE", "ALTCHA", "CSS Modules"],
+            links: [{ label: "luap-dever.netlify.app", href: "https://luap-dever.netlify.app" }]
+          },
+          {
             id: "invoicepay", hidden: true, company: "CCIB — Chamber of Commerce and Industry of Benin", year: "2022 – 2023", type: "Backend development — public institution"
           }
         ],
@@ -1119,7 +1177,7 @@
           { key: "languages", cat: "Languages", items: "JavaScript, TypeScript, PHP, Dart, Java, HTML5, CSS3/SASS, SQL" },
           { key: "backend", cat: "Backend", items: "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize" },
           { key: "ai", cat: "AI / LLM", items: "LLM integration (model-agnostic), standard OpenAI API, RAG (retrieval-augmented generation), fine-tuning, prompt engineering & guardrails, function/tool calling, AI workflow automation" },
-          { key: "frontend", cat: "Frontend", items: "Vue.js, Nuxt.js, SASS, Webpack" },
+          { key: "frontend", cat: "Frontend", items: "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n" },
           { key: "mobile", cat: "Mobile", items: "Flutter, GetX, Bloc" },
           { key: "cms", cat: "CMS", items: "WordPress (themes & plugins), ACF Pro, Elementor, Polylang, LearnPress" },
           { key: "db", cat: "Databases", items: "PostgreSQL, MySQL / MariaDB" },
@@ -1159,7 +1217,7 @@
 
     const VARIANTS = {
       fullstack: {
-        projectOrder: ["celtiis", "mtn-sites", "mymtn", "emilia", "paulbot", "invoicepay"],
+        projectOrder: ["celtiis", "mtn-sites", "mymtn", "emilia", "paulbot", "portfolio", "invoicepay"],
         skillOrder: ["languages", "backend", "ai", "frontend", "mobile", "cms", "db", "devops", "cloud", "obs", "vcs"],
         focus: [],
         fr: {
@@ -1172,7 +1230,7 @@
         }
       },
       frontend: {
-        projectOrder: ["mymtn", "mtn-sites", "celtiis", "emilia", "paulbot", "invoicepay"],
+        projectOrder: ["portfolio", "mymtn", "mtn-sites", "celtiis", "emilia", "paulbot", "invoicepay"],
         skillOrder: ["frontend", "languages", "mobile", "cms", "backend", "ai", "cloud", "devops", "db", "obs", "vcs"],
         focus: ["frontend", "mobile", "languages", "cms"],
         fr: {
@@ -1185,7 +1243,7 @@
         }
       },
       backend: {
-        projectOrder: ["emilia", "paulbot", "invoicepay", "celtiis", "mtn-sites", "mymtn"],
+        projectOrder: ["emilia", "paulbot", "portfolio", "invoicepay", "celtiis", "mtn-sites", "mymtn"],
         skillOrder: ["backend", "ai", "languages", "db", "cloud", "devops", "obs", "frontend", "cms", "mobile", "vcs"],
         focus: ["backend", "ai", "db", "cloud"],
         fr: {
@@ -1198,7 +1256,7 @@
         }
       },
       devops: {
-        projectOrder: ["emilia", "celtiis", "invoicepay", "paulbot", "mtn-sites", "mymtn"],
+        projectOrder: ["emilia", "celtiis", "invoicepay", "paulbot", "portfolio", "mtn-sites", "mymtn"],
         skillOrder: ["devops", "cloud", "obs", "backend", "ai", "db", "vcs", "languages", "cms", "frontend", "mobile"],
         focus: ["devops", "cloud", "obs", "backend"],
         fr: {
@@ -1340,6 +1398,9 @@
 
     render();
   </script>
+
+  <!-- Widget PaulBot embarqué (iframe vers le vrai composant React, sans duplication) -->
+  <script src="/paulbot-widget.js" defer></script>
 </body>
 
 </html>

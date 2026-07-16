@@ -95,6 +95,48 @@ export function playStartupSound() {
   }
 }
 
+// Son de démarrage joué À L'ENVERS (effet "mise en veille / extinction").
+// On décode le mp3 via la Web Audio API et on inverse les échantillons de
+// chaque canal, puis on lit le buffer. Le buffer inversé est mis en cache.
+// Renvoie une promesse résolue à la fin de la lecture (ou tout de suite si
+// l'audio est indisponible/coupé) — pratique pour enchaîner une action après.
+let reversedBuffer = null;
+async function getReversedBuffer(c) {
+  if (reversedBuffer) return reversedBuffer;
+  const res = await fetch(STARTUP_SRC);
+  const decoded = await c.decodeAudioData(await res.arrayBuffer());
+  const rev = c.createBuffer(decoded.numberOfChannels, decoded.length, decoded.sampleRate);
+  for (let ch = 0; ch < decoded.numberOfChannels; ch++) {
+    const src = decoded.getChannelData(ch);
+    const dst = rev.getChannelData(ch);
+    for (let i = 0, n = src.length; i < n; i++) dst[i] = src[n - 1 - i];
+  }
+  reversedBuffer = rev;
+  return reversedBuffer;
+}
+export async function playStartupReversed() {
+  try {
+    if (cfg.muted) return;
+    const c = ensureCtx();
+    if (!c) return;
+    if (c.state === "suspended") await c.resume().catch(() => {});
+    const buf = await getReversedBuffer(c);
+    const node = c.createBufferSource();
+    const gain = c.createGain();
+    gain.gain.value = Math.max(0, Math.min(1, cfg.volume / 100));
+    node.buffer = buf;
+    node.connect(gain);
+    gain.connect(c.destination);
+    node.start();
+    await new Promise((r) => {
+      node.onended = r;
+      setTimeout(r, (buf.duration + 0.3) * 1000); // filet de sécurité
+    });
+  } catch {
+    /* audio indisponible — on ignore */
+  }
+}
+
 // Joue un petit son. Sans effet si coupé, indisponible, ou avant tout geste.
 export function playOsSound(type = "click") {
   try {

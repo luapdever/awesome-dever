@@ -31,7 +31,7 @@ export const skillSet = [
       { name: "HTML5 / CSS3 / SASS", level: 95, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" },
       { name: "GSAP / Three.js", level: 75, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" },
     ],
-    concepts: ["Fine-grained reactivity", "Streaming SSR & partial hydration", "GSAP timelines & ScrollTrigger", "Virtual scrolling", "Web Components / Shadow DOM"],
+    concepts: ["Fine-grained reactivity", "Streaming SSR & partial hydration", "GSAP timelines & ScrollTrigger", "Award-style scrollytelling (pinned scroll, kinetic type)", "OS-style window manager UI", "Web Audio synthesis", "Web Speech API (STT/TTS)", "Accessibility (WCAG, ARIA, reduced-motion)", "i18n (FR/EN)", "Web Components / Shadow DOM"],
   },
   {
     key: "backend",

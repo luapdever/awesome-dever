@@ -43,6 +43,23 @@ export function navLabel(key, lang) {
    Renvoie [{ t: "text"|"link", v, href? }] — le rendu JSX se fait côté composant.
    La ponctuation finale (., ), etc.) est exclue du lien. */
 const LINK_RE = /(https?:\/\/[^\s]+|www\.[^\s]+|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/g;
+// Découpe un fragment de texte sur les marqueurs **gras** (Markdown) en
+// tokens text/bold, pour un rendu en <b> (le modèle formate ainsi ses titres,
+// ex. « **DevOps & Cloud** »).
+const BOLD_RE = /\*\*(.+?)\*\*/g;
+function pushText(out, str) {
+  if (!str) return;
+  let last = 0;
+  let m;
+  BOLD_RE.lastIndex = 0;
+  while ((m = BOLD_RE.exec(str)) !== null) {
+    if (m.index > last) out.push({ t: "text", v: str.slice(last, m.index) });
+    out.push({ t: "bold", v: m[1] });
+    last = m.index + m[0].length;
+  }
+  if (last < str.length) out.push({ t: "text", v: str.slice(last) });
+}
+
 export function linkTokens(text) {
   const src = text || "";
   const out = [];
@@ -55,14 +72,14 @@ export function linkTokens(text) {
     const trailing = trail ? trail[0] : "";
     if (trailing) tok = tok.slice(0, tok.length - trailing.length);
     if (!tok) continue;
-    if (m.index > last) out.push({ t: "text", v: src.slice(last, m.index) });
+    if (m.index > last) pushText(out, src.slice(last, m.index));
     const isEmail = /^[^\s@]+@[^\s@]+$/.test(tok) && !/^https?:/i.test(tok);
     const href = isEmail ? `mailto:${tok}` : /^www\./i.test(tok) ? `https://${tok}` : tok;
     out.push({ t: "link", v: tok, href, external: !isEmail });
-    if (trailing) out.push({ t: "text", v: trailing });
+    if (trailing) pushText(out, trailing);
     last = m.index + m[0].length;
   }
-  if (last < src.length) out.push({ t: "text", v: src.slice(last) });
+  if (last < src.length) pushText(out, src.slice(last));
   return out;
 }
 

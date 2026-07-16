@@ -21,6 +21,36 @@ const CLOSE = "https://api.iconify.design/ph:x-bold.svg?color=%23ffffff";
 
 const CHAT_URL = process.env.NEXT_PUBLIC_CHAT_URL || "/api/chat";
 
+// Repère les réponses "cul-de-sac" (bot indisponible / renvoi vers Paul).
+// Dans ces cas on remplace la réponse par la carte /dispo (contact + dispo),
+// pour ne pas laisser le visiteur sans piste.
+const UNAVAILABLE_RE = /(momentan[eé]ment indisponible|indisponible pour le moment|momentarily unavailable|r[eé]essaie dans un instant|try again shortly|[eé]cri(?:s|re)[- ]?(?:lui|moi)?\s+(?:directement\s+)?[àa]\s+paul|write\s+(?:directly\s+)?to\s+paul|reach\s+paul\s+directly|contacte[rz]?\s+paul\s+directement)/i;
+
+// Données de conversation PARTAGÉES entre tous les onglets/iframes de même
+// origine, via localStorage (contrairement à sessionStorage, isolé par onglet).
+// Ainsi une conversation entamée sur le site se retrouve dans le widget embarqué
+// (ex. le CV, ouvert dans un autre onglet). Lecture avec repli sur sessionStorage
+// pour migrer sans perte les sessions déjà en cours.
+const shared = {
+  get(key) {
+    try {
+      const l = localStorage.getItem(key);
+      if (l !== null) return l;
+      // Migration : une session déjà en cours (ancien sessionStorage) est
+      // promue vers localStorage pour devenir partagée entre onglets.
+      const s = sessionStorage.getItem(key);
+      if (s !== null) { localStorage.setItem(key, s); sessionStorage.removeItem(key); }
+      return s;
+    } catch { return null; }
+  },
+  set(key, val) {
+    try { localStorage.setItem(key, val); sessionStorage.removeItem(key); } catch {}
+  },
+  remove(key) {
+    try { localStorage.removeItem(key); sessionStorage.removeItem(key); } catch {}
+  },
+};
+
 const UI = {
   fr: {
     title: "PaulBot",
@@ -235,6 +265,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
   const inputRef = useRef();
   const onbRef = useRef();
   const cidRef = useRef("");
+  const lastMsgsRef = useRef(null); // dernier JSON messages écrit/reçu (anti-boucle de synchro)
   const historyRef = useRef([]);
   const histIdxRef = useRef(-1);
   const recognitionRef = useRef(null);
@@ -265,14 +296,14 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
 
   useEffect(() => {
     try {
-      const saved = sessionStorage.getItem("paulbot_contact");
+      const saved = shared.get("paulbot_contact");
       if (saved) setContact(JSON.parse(saved));
-      let cid = sessionStorage.getItem("paulbot_cid");
-      if (!cid) { cid = newId(); sessionStorage.setItem("paulbot_cid", cid); }
+      let cid = shared.get("paulbot_cid");
+      if (!cid) { cid = newId(); shared.set("paulbot_cid", cid); }
       cidRef.current = cid;
-      const savedMsgs = sessionStorage.getItem("paulbot_messages");
-      if (savedMsgs) { const arr = JSON.parse(savedMsgs); if (Array.isArray(arr)) setMessages(arr); }
-      const ec = Number(sessionStorage.getItem("paulbot_esc_count")) || 0;
+      const savedMsgs = shared.get("paulbot_messages");
+      if (savedMsgs) { const arr = JSON.parse(savedMsgs); if (Array.isArray(arr)) { setMessages(arr); lastMsgsRef.current = savedMsgs; } }
+      const ec = Number(shared.get("paulbot_esc_count")) || 0;
       if (ec) setEscCount(ec);
       if (localStorage.getItem("paulbot_big") === "1") setBig(true);
       setIntroSeed(Math.floor(Math.random() * 997)); // choisit une variante d'accueil
@@ -302,11 +333,30 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
   }, [open, embedded]);
   useEffect(() => {
     if (pending) return; // évite d'écrire à chaque token pendant le streaming
-    try {
-      if (messages.length) sessionStorage.setItem("paulbot_messages", JSON.stringify(messages.slice(-40)));
-      else sessionStorage.removeItem("paulbot_messages");
-    } catch {}
+    const val = messages.length ? JSON.stringify(messages.slice(-40)) : "";
+    if (val === lastMsgsRef.current) return; // rien de neuf (ou écho d'une synchro)
+    lastMsgsRef.current = val;
+    if (val) shared.set("paulbot_messages", val);
+    else shared.remove("paulbot_messages");
   }, [messages, pending]);
+
+  // Synchro live entre onglets/iframes : quand un autre widget (même origine)
+  // met à jour la conversation, l'identité ou les tentatives, on s'aligne.
+  useEffect(() => {
+    const onStorage = (e) => {
+      if (e.storageArea && e.storageArea !== localStorage) return;
+      if (e.key === "paulbot_messages") {
+        lastMsgsRef.current = e.newValue || "";
+        try { const arr = e.newValue ? JSON.parse(e.newValue) : []; if (Array.isArray(arr)) setMessages(arr); } catch {}
+      } else if (e.key === "paulbot_contact") {
+        try { setContact(e.newValue ? JSON.parse(e.newValue) : null); } catch {}
+      } else if (e.key === "paulbot_esc_count") {
+        setEscCount(Number(e.newValue) || 0);
+      }
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
 
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -374,7 +424,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
       c = { mode: "phone", name, value: onbPhone, consent: true };
     }
     c.persona = onbPersona; // "visitor" | "recruiter" — pilote l'accueil (front only)
-    try { sessionStorage.setItem("paulbot_contact", JSON.stringify(c)); } catch {}
+    shared.set("paulbot_contact", JSON.stringify(c));
     setContact(c);
     setTimeout(() => inputRef.current?.focus(), 60);
   };
@@ -384,6 +434,16 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
     el.style.height = "auto";
     el.style.height = Math.min(el.scrollHeight, 120) + "px";
   };
+
+  // Repli /dispo : réponse cliente "dispo" (contact + disponibilité), avec une
+  // intro neutre — jouée quand le modèle est indisponible ou renvoie vers Paul.
+  const dispoFallback = () => ({
+    ...clientAnswer("dispo", lang),
+    content:
+      lang === "fr"
+        ? "Je te partage directement sa disponibilité et de quoi le joindre 👇"
+        : "Here's his availability and how to reach him directly 👇",
+  });
 
   // Appelle le LLM avec un contexte donné (streaming). Marque l'erreur pour
   // permettre un « Réessayer ».
@@ -427,8 +487,15 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
           return copy;
         });
       }
-      const { actions } = extractActions(acc);
-      if (actions[0]) {
+      const { clean: finalShown, actions } = extractActions(acc);
+      if (UNAVAILABLE_RE.test(finalShown)) {
+        // Le modèle a répondu un "cul-de-sac" → on bascule sur /dispo.
+        setMessages((m) => {
+          const copy = m.slice();
+          copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", error: false, waiting: false, action: undefined, ...dispoFallback() };
+          return copy;
+        });
+      } else if (actions[0]) {
         setMessages((m) => {
           const copy = m.slice();
           copy[copy.length - 1] = { ...copy[copy.length - 1], action: actions[0] };
@@ -436,9 +503,11 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
         });
       }
     } catch {
+      // Indisponibilité réseau/serveur → on bascule sur /dispo plutôt qu'un
+      // message d'erreur sans issue.
       setMessages((m) => {
         const copy = m.slice();
-        copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", content: ui.error, error: true, waiting: false };
+        copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", error: false, waiting: false, action: undefined, ...dispoFallback() };
         return copy;
       });
     } finally {
@@ -491,12 +560,12 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
     const value = escEmail.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return;
     const c = { ...(contact || {}), mode: "email", value, name: contact?.name || "Visiteur" };
-    try { sessionStorage.setItem("paulbot_contact", JSON.stringify(c)); } catch {}
+    shared.set("paulbot_contact", JSON.stringify(c));
     setContact(c);
     // Compte la tentative (jusqu'à 5) — le formulaire se cache ensuite.
     const next = escCount + 1;
     setEscCount(next);
-    try { sessionStorage.setItem("paulbot_esc_count", String(next)); } catch {}
+    shared.set("paulbot_esc_count", String(next));
     setEscEmail("");
     try {
       await submitContact({ name: c.name, email: value, message: "Demande de recontact via PaulBot.", source: "bot-recontact" });
@@ -634,14 +703,13 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
     setEscCount(0);
     setTourStep(0);
     setIntroSeed(Math.floor(Math.random() * 997)); // nouvelle variante d'accueil
-    try {
-      sessionStorage.removeItem("paulbot_messages");
-      sessionStorage.removeItem("paulbot_contact");
-      sessionStorage.removeItem("paulbot_esc_count");
-      const cid = newId(); // nouvelle conversation → nouvel identifiant (nouveau PDF)
-      sessionStorage.setItem("paulbot_cid", cid);
-      cidRef.current = cid;
-    } catch {}
+    lastMsgsRef.current = "";
+    shared.remove("paulbot_messages");
+    shared.remove("paulbot_contact");
+    shared.remove("paulbot_esc_count");
+    const cid = newId(); // nouvelle conversation → nouvel identifiant (nouveau PDF)
+    shared.set("paulbot_cid", cid);
+    cidRef.current = cid;
   };
 
   const dismissTeaser = () => {
@@ -843,6 +911,8 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                                     rel="noopener noreferrer"
                                     className={styles.msgLink}
                                   >{tok.v}</a>
+                                ) : tok.t === "bold" ? (
+                                  <b key={k}>{tok.v}</b>
                                 ) : (
                                   <React.Fragment key={k}>{tok.v}</React.Fragment>
                                 )
