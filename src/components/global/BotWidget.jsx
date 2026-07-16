@@ -6,7 +6,8 @@ import "react-phone-number-input/style.css";
 import styles from "../../../styles/global/botwidget.module.css";
 import { useLandingLang } from "../../context/landingLang";
 import { NAV, extractActions, runNavAction, navLabel, navigateRelative, linkTokens } from "../../lib/botActions";
-import { detectProjects, followUps, pageContext } from "../../lib/botExtras";
+import { detectProjects, followUps, pageContext, routeIntent, clientAnswer, tourSteps } from "../../lib/botExtras";
+import { submitContact } from "../../lib/altcha";
 
 const MIC = "https://api.iconify.design/ph:microphone.svg?color=%23000000";
 const MIC_ON = "https://api.iconify.design/ph:microphone-fill.svg?color=%232a1a00";
@@ -60,6 +61,14 @@ const UI = {
     micStop: "Arrêter la dictée",
     readAloud: "Lire à voix haute",
     stopReading: "Arrêter la lecture",
+    retry: "Réessayer",
+    escalatePrompt: "Tu veux que Paul te recontacte ? Laisse ton email 👇",
+    escalatePh: "ton@email.com",
+    escalateSend: "OK",
+    escalateDone: "Parfait, Paul pourra te recontacter. 🙌",
+    tourStepLabel: "Étape",
+    tourGoTo: "Aller à",
+    tourDone: "Tour terminé ✨",
   },
   en: {
     title: "PaulBot",
@@ -100,6 +109,14 @@ const UI = {
     micStop: "Stop dictation",
     readAloud: "Read aloud",
     stopReading: "Stop reading",
+    retry: "Retry",
+    escalatePrompt: "Want Paul to get back to you? Drop your email 👇",
+    escalatePh: "you@email.com",
+    escalateSend: "OK",
+    escalateDone: "Great — Paul will be able to reach you. 🙌",
+    tourStepLabel: "Step",
+    tourGoTo: "Go to",
+    tourDone: "Tour done ✨",
   },
 };
 
@@ -149,11 +166,16 @@ const friendlyTime = (ts, lang, now) => {
   return new Date(ts).toLocaleDateString(fr ? "fr-FR" : "en-US", { day: "numeric", month: "short" });
 };
 
-function BotWidget() {
+/* Composant unique : rendu flottant (défaut) OU intégré dans une fenêtre de
+   l'OS via `embedded` — même code, aucune duplication. En mode embedded, le
+   chat remplit son conteneur (pas de launcher, pas de bulle, toujours ouvert). */
+function BotWidget({ embedded = false, lang: langProp }) {
   const router = useRouter();
-  const { lang } = useLandingLang();
+  const { lang: landingLang } = useLandingLang();
+  const lang = langProp || landingLang;
   const ui = UI[lang] || UI.fr;
   const [open, setOpen] = useState(false);
+  const shown = embedded || open;
   const [messages, setMessages] = useState([]);
   const [pending, setPending] = useState(false);
   const [contact, setContact] = useState(null);
@@ -170,10 +192,15 @@ function BotWidget() {
   const [listening, setListening] = useState(false);
   const [speakingIdx, setSpeakingIdx] = useState(-1);
   const [ctxSuggest, setCtxSuggest] = useState(null);
+  const [tourStep, setTourStep] = useState(0);
+  const [escDone, setEscDone] = useState(false);
+  const [escEmail, setEscEmail] = useState("");
   const scrollRef = useRef();
   const inputRef = useRef();
   const onbRef = useRef();
   const cidRef = useRef("");
+  const historyRef = useRef([]);
+  const histIdxRef = useRef(-1);
   const recognitionRef = useRef(null);
   const voiceSupported = typeof window !== "undefined" && !!(window.SpeechRecognition || window.webkitSpeechRecognition);
   const ttsSupported = typeof window !== "undefined" && "speechSynthesis" in window;
@@ -209,18 +236,20 @@ function BotWidget() {
       cidRef.current = cid;
       const savedMsgs = sessionStorage.getItem("paulbot_messages");
       if (savedMsgs) { const arr = JSON.parse(savedMsgs); if (Array.isArray(arr)) setMessages(arr); }
-      if (sessionStorage.getItem("paulbot_open") === "1") setOpen(true);
+      if (!embedded && sessionStorage.getItem("paulbot_open") === "1") setOpen(true);
     } catch {}
+    if (embedded) return; // pas d'ouverture externe en mode intégré
     // Ouverture déclenchée depuis l'extérieur (ex. le choix "PaulBot" du modal).
     const openHandler = () => setOpen(true);
     window.addEventListener("paulbot:open", openHandler);
     return () => window.removeEventListener("paulbot:open", openHandler);
-  }, []);
+  }, [embedded]);
 
-  // Persistance : état ouvert/fermé + historique client (bon retour au reload).
+  // Persistance : état ouvert/fermé (widget flottant uniquement).
   useEffect(() => {
+    if (embedded) return;
     try { sessionStorage.setItem("paulbot_open", open ? "1" : "0"); } catch {}
-  }, [open]);
+  }, [open, embedded]);
   useEffect(() => {
     if (pending) return; // évite d'écrire à chaque token pendant le streaming
     try {
@@ -233,19 +262,20 @@ function BotWidget() {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, [messages, open]);
 
-  // Rafraîchit les dates relatives tant que le widget est ouvert.
+  // Rafraîchit les dates relatives tant que le chat est visible.
   useEffect(() => {
-    if (!open) return;
+    if (!shown) return;
     setNow(Date.now());
     const id = setInterval(() => setNow(Date.now()), 30000);
     return () => clearInterval(id);
-  }, [open]);
+  }, [shown]);
 
   useEffect(() => { setSlashIndex(0); }, [draft]);
   useEffect(() => { autoGrow(inputRef.current); }, [draft]);
 
-  // Raccourci clavier ⌘K / Ctrl+K pour ouvrir/fermer le bot de n'importe où.
+  // Raccourci clavier ⌘K / Ctrl+K (widget flottant uniquement).
   useEffect(() => {
+    if (embedded) return;
     const onKey = (e) => {
       if ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "K")) {
         e.preventDefault();
@@ -254,28 +284,29 @@ function BotWidget() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [embedded]);
 
-  // Bulle d'accroche proactive après 15 s d'inactivité (une fois par session).
+  // Bulle d'accroche proactive après 15 s d'inactivité (widget flottant, 1×/session).
   useEffect(() => {
-    if (typeof window === "undefined" || open) return;
+    if (embedded || typeof window === "undefined" || open) return;
     try { if (sessionStorage.getItem("paulbot_teaser") === "1") return; } catch {}
     const id = setTimeout(() => setTeaser(true), 15000);
     return () => clearTimeout(id);
-  }, [open]);
+  }, [open, embedded]);
 
-  // Conscience de la page : suggestion liée à la section regardée, à l'ouverture.
+  // Conscience de la page : suggestion liée à la section regardée, à l'affichage.
   useEffect(() => {
-    if (!open) return;
-    setTeaser(false);
-    try { sessionStorage.setItem("paulbot_teaser", "1"); } catch {}
+    if (!shown) return;
+    if (!embedded) { setTeaser(false); try { sessionStorage.setItem("paulbot_teaser", "1"); } catch {} }
     if (messages.length === 0) setCtxSuggest(pageContext(lang));
-  }, [open, lang, messages.length]);
+  }, [shown, embedded, lang, messages.length]);
 
-  // Coupe la synthèse vocale quand le widget se ferme.
+  // Coupe la synthèse vocale quand le chat est masqué / démonté.
   useEffect(() => {
-    if (!open && ttsSupported) { window.speechSynthesis.cancel(); setSpeakingIdx(-1); }
-  }, [open, ttsSupported]);
+    if (!ttsSupported) return;
+    if (!shown) { window.speechSynthesis.cancel(); setSpeakingIdx(-1); }
+    return () => { window.speechSynthesis.cancel(); };
+  }, [shown, ttsSupported]);
 
   const confirmContact = () => {
     setOnbError("");
@@ -304,22 +335,22 @@ function BotWidget() {
     el.style.height = Math.min(el.scrollHeight, 120) + "px";
   };
 
-  const send = async (text) => {
-    const content = (text || "").trim();
-    if (!content || pending) return;
-    const next = [...messages, { role: "user", content, at: Date.now() }];
-    setMessages([...next, { role: "assistant", content: "", at: Date.now() }]);
+  // Appelle le LLM avec un contexte donné (streaming). Marque l'erreur pour
+  // permettre un « Réessayer ».
+  const callModel = async (contextMessages) => {
     setPending(true);
+    setMessages((m) => [...m, { role: "assistant", content: "", at: Date.now() }]);
+    let acc = "";
     try {
       const url = (typeof window !== "undefined" && window.__CHAT_URL) || CHAT_URL;
       const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: next, lang, conversationId: cidRef.current, contact }),
+        body: JSON.stringify({ messages: contextMessages, lang, conversationId: cidRef.current, contact }),
       });
+      if (!res.ok || !res.body) throw new Error(`http ${res.status}`);
       const reader = res.body.getReader();
       const dec = new TextDecoder();
-      let acc = "";
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
@@ -327,12 +358,10 @@ function BotWidget() {
         const shown = extractActions(acc).clean;
         setMessages((m) => {
           const copy = m.slice();
-          copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", content: shown };
+          copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", content: shown, error: false };
           return copy;
         });
       }
-      // Pas de navigation automatique : on attache la cible au message pour
-      // proposer un bouton cliquable — c'est le visiteur qui décide.
       const { actions } = extractActions(acc);
       if (actions[0]) {
         setMessages((m) => {
@@ -344,12 +373,66 @@ function BotWidget() {
     } catch {
       setMessages((m) => {
         const copy = m.slice();
-        copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", content: ui.error };
+        copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", content: ui.error, error: true };
         return copy;
       });
     } finally {
       setPending(false);
     }
+  };
+
+  const send = (text) => {
+    const content = (text || "").trim();
+    if (!content || pending) return;
+    historyRef.current.push(content);
+    histIdxRef.current = -1;
+    const userMsg = { role: "user", content, at: Date.now() };
+
+    // 1) Réponse déterministe côté client → AUCUN appel modèle.
+    const intent = routeIntent(content);
+    if (intent) {
+      const ans = clientAnswer(intent, lang);
+      setMessages((m) => [...m, userMsg, { role: "assistant", at: Date.now(), ...ans }]);
+      return;
+    }
+
+    // 2) Sinon seulement, on sollicite le modèle.
+    const next = [...messages, userMsg];
+    setMessages(next);
+    callModel(next);
+  };
+
+  // Réémet la requête pour un message en erreur (offline).
+  const retry = (failedIdx) => {
+    if (pending) return;
+    const context = messages.slice(0, failedIdx); // se termine sur le message user
+    setMessages(context);
+    callModel(context);
+  };
+
+  // Escalade recontact : met à jour le contact ET envoie à Paul via le MÊME
+  // service que le formulaire (captcha ALTCHA + rate-limit côté backend).
+  const submitEscalate = async () => {
+    const value = escEmail.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return;
+    const c = { ...(contact || {}), mode: "email", value, name: contact?.name || "Visiteur" };
+    try { sessionStorage.setItem("paulbot_contact", JSON.stringify(c)); } catch {}
+    setContact(c);
+    setEscDone(true); // optimiste : le contact reste capté même si l'email échoue
+    try {
+      await submitContact({ name: c.name, email: value, message: "Demande de recontact via PaulBot.", source: "bot-recontact" });
+    } catch {
+      /* silencieux : le contact figure aussi dans le PDF de conversation */
+    }
+  };
+
+  // Tour guidé : navigue vers la section courante puis avance.
+  const tourNext = () => {
+    const steps = tourSteps(lang);
+    const s = steps[tourStep];
+    if (!s) return;
+    runNavAction(s.nav, router);
+    setTourStep((i) => Math.min(i + 1, steps.length));
   };
 
   const chooseSlash = (item) => {
@@ -377,6 +460,24 @@ function BotWidget() {
       if (e.key === "ArrowUp") { e.preventDefault(); setSlashIndex((i) => Math.max(i - 1, 0)); return; }
       if (e.key === "Escape") { e.preventDefault(); setDraft(""); return; }
       if (e.key === "Enter" || e.key === "Tab") { e.preventDefault(); submit(); return; }
+    }
+    // Historique de saisie (↑/↓) — comme un terminal. Seulement si champ vide
+    // ou déjà en navigation d'historique, pour ne pas gêner l'édition.
+    if (!slashActive && (e.key === "ArrowUp" || e.key === "ArrowDown")) {
+      const hist = historyRef.current;
+      if (hist.length && (draft === "" || histIdxRef.current >= 0)) {
+        e.preventDefault();
+        if (e.key === "ArrowUp") {
+          histIdxRef.current = histIdxRef.current < 0 ? hist.length - 1 : Math.max(0, histIdxRef.current - 1);
+          setDraft(hist[histIdxRef.current]);
+        } else {
+          if (histIdxRef.current < 0) return;
+          histIdxRef.current += 1;
+          if (histIdxRef.current >= hist.length) { histIdxRef.current = -1; setDraft(""); }
+          else setDraft(hist[histIdxRef.current]);
+        }
+        return;
+      }
     }
     if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); submit(); }
   };
@@ -469,8 +570,8 @@ function BotWidget() {
 
   return (
     <>
-      {open && (
-        <div className={styles.panel} role="dialog" aria-label={ui.title}>
+      {shown && (
+        <div className={embedded ? styles.embed : styles.panel} role="dialog" aria-label={ui.title}>
           <header className={styles.head}>
             <img src={ROBOT + "?color=%23110068"} alt="" className={styles.headIcon} />
             <div className={styles.headText}>
@@ -498,9 +599,11 @@ function BotWidget() {
                 )}
               </div>
             )}
-            <button className={styles.headClose} onClick={() => setOpen(false)} aria-label="Fermer">
-              <img src={CLOSE} alt="" />
-            </button>
+            {!embedded && (
+              <button className={styles.headClose} onClick={() => setOpen(false)} aria-label="Fermer">
+                <img src={CLOSE} alt="" />
+              </button>
+            )}
           </header>
 
           {!contact ? (
@@ -620,6 +723,69 @@ function BotWidget() {
                             </>
                           )}
                         </div>
+
+                        {/* Widgets de réponse cliente (construits par le front) */}
+                        {!isUser && m.widget && m.widget.type === "info" && (
+                          <div className={styles.infoCard}>
+                            {(m.widget.rows || []).map((r, k) => (
+                              <div key={k} className={styles.infoRow}>
+                                <span className={styles.infoLabel}>{r.label}</span>
+                                {r.href ? (
+                                  <a className={styles.infoValue} href={r.href} target={/^(mailto|tel):/.test(r.href) ? undefined : "_blank"} rel="noopener noreferrer">{r.value}</a>
+                                ) : (
+                                  <span className={styles.infoValue}>{r.value}</span>
+                                )}
+                              </div>
+                            ))}
+                            {m.widget.actions && (
+                              <div className={styles.infoActions}>
+                                {m.widget.actions.map((a, k) => a.nav ? (
+                                  <button key={k} type="button" className={styles.infoBtn} onClick={() => runNavAction(a.nav, router)}>{a.label} →</button>
+                                ) : (
+                                  <a key={k} className={styles.infoBtn} href={a.href} target={/^(mailto|tel):/.test(a.href) ? undefined : "_blank"} rel="noopener noreferrer">{a.label} →</a>
+                                ))}
+                              </div>
+                            )}
+                            {m.widget.askEmail && contact?.mode === "incognito" && !escDone && (
+                              <div className={styles.escalate}>
+                                <span className={styles.escText}>{ui.escalatePrompt}</span>
+                                <div className={styles.escRow}>
+                                  <input type="email" className={styles.escInput} placeholder={ui.escalatePh} value={escEmail} onChange={(e) => setEscEmail(e.target.value)} onKeyDown={(e) => e.key === "Enter" && submitEscalate()} />
+                                  <button type="button" className={styles.escBtn} onClick={submitEscalate}>{ui.escalateSend}</button>
+                                </div>
+                              </div>
+                            )}
+                            {m.widget.askEmail && escDone && <div className={styles.escDone}>{ui.escalateDone}</div>}
+                          </div>
+                        )}
+                        {!isUser && m.widget && m.widget.type === "timeline" && (
+                          <div className={styles.timeline}>
+                            {m.widget.items.map((it, k) => (
+                              <div key={k} className={styles.tlItem}>
+                                <span className={styles.tlDot} />
+                                <div className={styles.tlBody}>
+                                  <b>{it.role}</b>
+                                  <span className={styles.tlOrg}>{it.org}</span>
+                                  <span className={styles.tlPeriod}>{it.period}</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        {!isUser && m.widget && m.widget.type === "tour" && (() => {
+                          const steps = tourSteps(lang);
+                          const done = tourStep >= steps.length;
+                          return (
+                            <div className={styles.tour}>
+                              <span className={styles.tourProg}>{done ? ui.tourDone : `${ui.tourStepLabel} ${tourStep + 1}/${steps.length}`}</span>
+                              {!done && <button type="button" className={styles.tourBtn} onClick={tourNext}>{ui.tourGoTo} : {steps[tourStep].label} →</button>}
+                            </div>
+                          );
+                        })()}
+
+                        {!isUser && m.error && !pending && (
+                          <button type="button" className={styles.retryBtn} onClick={() => retry(i)}>↻ {ui.retry}</button>
+                        )}
                         {!isUser && m.action && !streaming && (
                           <button
                             type="button"
@@ -737,21 +903,25 @@ function BotWidget() {
         </div>
       )}
 
-      {teaser && !open && (
-        <div className={styles.teaser} role="button" tabIndex={0} onClick={() => setOpen(true)} onKeyDown={(e) => e.key === "Enter" && setOpen(true)}>
-          {ui.teaser}
-          <button className={styles.teaserClose} onClick={(e) => { e.stopPropagation(); dismissTeaser(); }} aria-label="Fermer">×</button>
-        </div>
+      {/* Chrome flottant (launcher + bulle) — absent en mode intégré à l'OS. */}
+      {!embedded && (
+        <>
+          {teaser && !open && (
+            <div className={styles.teaser} role="button" tabIndex={0} onClick={() => setOpen(true)} onKeyDown={(e) => e.key === "Enter" && setOpen(true)}>
+              {ui.teaser}
+              <button className={styles.teaserClose} onClick={(e) => { e.stopPropagation(); dismissTeaser(); }} aria-label="Fermer">×</button>
+            </div>
+          )}
+          <button
+            className={`${styles.launcher} ${open ? styles.launcherOpen : ""}`}
+            onClick={() => setOpen((o) => !o)}
+            aria-label={ui.open}
+            title={ui.open}
+          >
+            <img src={open ? CLOSE : CHAT} alt="" />
+          </button>
+        </>
       )}
-
-      <button
-        className={`${styles.launcher} ${open ? styles.launcherOpen : ""}`}
-        onClick={() => setOpen((o) => !o)}
-        aria-label={ui.open}
-        title={ui.open}
-      >
-        <img src={open ? CLOSE : CHAT} alt="" />
-      </button>
     </>
   );
 }

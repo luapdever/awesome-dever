@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import axios from "axios";
 import React, { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 import styles from "../../../../../styles/specific/portfolio/windows/contact.module.css";
 import { socialMedias } from "../../../../rawDatas/aboutMe";
 import { useLang } from "../lang";
+import { submitContact } from "../../../../lib/altcha";
 
 const EMAIL = "pzannou511@gmail.com";
 const PHONE = "+229 01 90 66 73 33";
@@ -21,26 +21,26 @@ function Contact() {
 
   const change = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const sendMessage = (e) => {
+  const sendMessage = async (e) => {
     e.preventDefault();
     if (sent || loading) return;
     if (!(EMAIL_RE.test(form.email) && form.name && form.body)) return;
 
     setLoading(true);
-    axios
-      .post(process.env.apiUrl + "contact", {
-        headers: { "Content-Type": "application/json", Accept: "application/json, text-plain, */*" },
-        email: form.email, name: form.name, body: form.body,
-      })
-      .then(() => {
-        toast.success("Message sent to Paul");
-        setLoading(false);
-        setSent(true);
-      })
-      .catch((err) => {
-        toast.error(String(err));
-        setLoading(false);
-      });
+    try {
+      // Résout le captcha ALTCHA (proof-of-work) puis envoie au backend PaulBot.
+      await submitContact({ name: form.name, email: form.email, message: form.body, source: "os-contact" });
+      toast.success(t.cSentBadge || "Message envoyé à Paul.");
+      setSent(true);
+    } catch (err) {
+      toast.error(
+        err?.status === 429
+          ? "Trop de messages — réessaie dans quelques minutes."
+          : "Envoi impossible pour le moment, réessaie plus tard."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -95,6 +95,12 @@ function Contact() {
             <button ref={btnSend} className={styles.sendBtn} type="submit" disabled={loading}>
               {loading ? t.cSending : t.cSend}
             </button>
+          )}
+          {!sent && (
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: "0.72rem", opacity: 0.55, marginTop: 8 }}>
+              <img src="https://api.iconify.design/ph:shield-check.svg?color=%23ffa500" alt="" width={14} height={14} />
+              Anti-spam ALTCHA
+            </span>
           )}
         </form>
       </div>

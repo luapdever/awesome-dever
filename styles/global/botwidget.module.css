@@ -69,6 +69,20 @@
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+/* Mode intégré (app PaulBot dans l'OS) : même rendu, remplit la fenêtre,
+   sans positionnement fixe, coins ni ombre (la fenêtre de l'OS les fournit). */
+.embed {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  color: #eef0fb;
+  background: linear-gradient(180deg, rgba(13, 7, 40, 0.96), rgba(6, 3, 26, 0.98));
+  overflow: hidden;
+}
+
 .head {
   display: flex; align-items: center; gap: 11px;
   padding: 13px 14px;
@@ -239,6 +253,45 @@
 .followRow { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 2px 2px; }
 .followChip { padding: 7px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--glass-border); color: #eae7ff; font-family: inherit; font-size: 0.78rem; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease; }
 .followChip:hover { background: rgba(255, 165, 0, 0.12); border-color: var(--color-accent); }
+
+/* Cartes d'info déterministes (email, dispo, CV…) */
+.infoCard { align-self: stretch; margin-top: 2px; padding: 10px 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); display: flex; flex-direction: column; gap: 8px; }
+.infoRow { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.infoLabel { font-size: 0.72rem; color: rgba(255, 255, 255, 0.55); white-space: nowrap; }
+.infoValue { font-size: 0.85rem; color: #fff; font-weight: 600; text-align: right; word-break: break-word; }
+a.infoValue { color: var(--color-accent-soft); text-decoration: underline; text-underline-offset: 2px; }
+.infoActions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+.infoBtn { display: inline-flex; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--color-accent); background: rgba(255, 165, 0, 0.14); color: #ffd9a0; font-family: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.2s ease; }
+.infoBtn:hover { background: rgba(255, 165, 0, 0.24); }
+
+/* Escalade contact (visiteur incognito → capture email) */
+.escalate { border-top: 1px dashed var(--glass-border); padding-top: 8px; margin-top: 2px; display: flex; flex-direction: column; gap: 6px; }
+.escText { font-size: 0.76rem; color: rgba(255, 255, 255, 0.7); }
+.escRow { display: flex; gap: 6px; }
+.escInput { flex: 1; min-width: 0; padding: 8px 10px; border-radius: 9px; background: rgba(255, 255, 255, 0.07); border: 1px solid var(--glass-border); color: #fff; font-family: inherit; font-size: 16px; outline: none; }
+.escInput:focus { border-color: var(--color-accent); }
+.escBtn { padding: 8px 14px; border-radius: 9px; border: none; background: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent)); color: #2a1a00; font-family: inherit; font-weight: 700; font-size: 0.8rem; cursor: pointer; }
+.escDone { font-size: 0.8rem; color: #35d07f; }
+
+/* Frise de carrière inline */
+.timeline { align-self: stretch; margin-top: 2px; display: flex; flex-direction: column; }
+.tlItem { display: flex; gap: 10px; padding-bottom: 12px; position: relative; }
+.tlItem:not(:last-child)::before { content: ""; position: absolute; left: 4px; top: 13px; bottom: 0; width: 1px; background: var(--glass-border); }
+.tlDot { width: 9px; height: 9px; margin-top: 4px; border-radius: 50%; background: var(--color-accent); flex: 0 0 auto; box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.15); z-index: 1; }
+.tlBody { display: flex; flex-direction: column; line-height: 1.3; }
+.tlBody b { font-size: 0.85rem; }
+.tlOrg { font-size: 0.78rem; color: var(--color-accent-soft); font-weight: 600; }
+.tlPeriod { font-size: 0.72rem; color: rgba(255, 255, 255, 0.5); }
+
+/* Tour guidé */
+.tour { align-self: stretch; margin-top: 2px; display: flex; flex-direction: column; gap: 8px; padding: 10px 12px; border-radius: 12px; background: rgba(120, 70, 220, 0.12); border: 1px solid rgba(120, 70, 220, 0.4); }
+.tourProg { font-size: 0.74rem; color: rgba(255, 255, 255, 0.62); font-weight: 600; }
+.tourBtn { padding: 9px 14px; border-radius: 999px; border: none; background: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent)); color: #2a1a00; font-family: inherit; font-weight: 700; font-size: 0.82rem; cursor: pointer; text-align: left; }
+.tourBtn:hover { filter: brightness(1.06); }
+
+/* Réessayer (message en erreur) */
+.retryBtn { align-self: flex-start; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.06); color: #fff; font-family: inherit; font-size: 0.78rem; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease; }
+.retryBtn:hover { border-color: var(--color-accent); background: rgba(255, 165, 0, 0.12); }
 
 /* Bouton micro (dictée) */
 .micBtn { width: 38px; height: 38px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.06); cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease; }

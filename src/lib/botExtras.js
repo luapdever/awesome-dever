@@ -6,6 +6,98 @@
    - pageContext : suggestion liée à la page/section courante.
    ============================================================ */
 import { L, tx } from "../rawDatas/i18n";
+import { experiences } from "../rawDatas/experiences";
+
+/* Faits déterministes sur Paul (répondus SANS le modèle).
+   BOOKING : mailto par défaut (fonctionne partout) — remplace par un lien
+   Cal.com/Calendly le jour où tu en as un. */
+export const PAUL_FACTS = {
+  email: "pzannou511@gmail.com",
+  phone: "+2290190667333",
+  phoneDisplay: "+229 01 90 66 73 33",
+  location: "Cotonou / Abomey-Calavi, Bénin",
+  booking: "https://cal.com/paul-zannou/15min",
+};
+
+/* Routeur d'intention CÔTÉ CLIENT.
+   Renvoie une intention si la question a une réponse déterministe (email,
+   téléphone, CV, dispo, parcours, tour…) → le modèle N'EST PAS sollicité.
+   Renvoie null sinon → on laisse le LLM répondre. */
+export function routeIntent(text) {
+  const t = (text || "").toLowerCase().trim();
+  if (!t) return null;
+  const re = (r) => r.test(t);
+  if (re(/qui\s+es[- ]?tu|t'?es qui|tu es qui|who are you|c'est quoi ce bot/)) return "who";
+  if (re(/tour guid|visite guid|fais[- ]?moi visiter|guide[- ]?moi|guided tour|show me around|un petit tour/)) return "tour";
+  if (re(/\bcv\b|curriculum|résumé|resume/)) return "cv";
+  if (re(/e-?mail|courriel|adresse mail|son mail\b/)) return "email";
+  if (re(/numéro|numero|téléphone|telephone|\bphone\b|whatsapp|l'appeler/)) return "phone";
+  if (re(/où\s+(est|habite|vit|se trouve)|localisation|quelle ville|quel pays|based in|il habite/)) return "location";
+  if (re(/rendez[- ]?vous|réserver|reserver|créneau|creneau|échanger|echanger|meeting|book a|rencontr|call with|prendre contact/)) return "meeting";
+  if (re(/disponible|dispo\b|freelance|recrut|embauch|mission|tjm|tarif|available|for hire|hire him/)) return "dispo";
+  if (re(/parcours|carrière|carriere|timeline|cheminement|ses?\s+expériences?|son\s+parcours|his experience|career path/)) return "timeline";
+  return null; // → le modèle est nécessaire
+}
+
+// Construit la réponse cliente (contenu + widget) pour une intention.
+export function clientAnswer(intent, lang) {
+  const fr = lang !== "en";
+  const S = (f, e) => (fr ? f : e);
+  const F = PAUL_FACTS;
+  switch (intent) {
+    case "who":
+      return { content: S("Je suis PaulBot, l'assistant du portfolio de Paul — je réponds sur son parcours, ses compétences et ses projets, et je peux t'emmener sur la bonne page.", "I'm PaulBot, Paul's portfolio assistant — I answer about his background, skills and projects, and can take you to the right page.") };
+    case "email":
+      return { content: S("Pour joindre Paul par email :", "Reach Paul by email:"), widget: { type: "info", rows: [{ label: "Email", value: F.email, href: `mailto:${F.email}` }] } };
+    case "phone":
+      return { content: S("Son numéro (WhatsApp aussi) :", "His number (WhatsApp too):"), widget: { type: "info", rows: [{ label: S("Téléphone", "Phone"), value: F.phoneDisplay, href: `tel:${F.phone}` }] } };
+    case "location":
+      return { content: S("Il est basé ici :", "He's based here:"), widget: { type: "info", rows: [{ label: S("Localisation", "Location"), value: F.location }] } };
+    case "cv":
+      return { content: S("Son CV interactif est juste là :", "His interactive résumé is right here:"), widget: { type: "info", actions: [{ label: S("Ouvrir le CV", "Open the résumé"), nav: "cv" }] } };
+    case "meeting":
+      return { content: S("Je te mets en relation avec lui :", "Let me connect you with him:"), widget: { type: "info", actions: [{ label: S("Proposer un échange", "Propose a chat"), href: F.booking }, { label: S("Écrire un email", "Send an email"), href: `mailto:${F.email}` }], askEmail: true } };
+    case "dispo":
+      return {
+        content: S("Bonne nouvelle 🎯", "Good news 🎯"),
+        widget: {
+          type: "info",
+          rows: [
+            { label: S("Disponibilité", "Availability"), value: S("Ouvert aux missions freelance & collaborations", "Open to freelance & collaborations") },
+            { label: S("Télétravail", "Remote"), value: S("Oui", "Yes") },
+            { label: S("Basé à", "Based in"), value: F.location },
+            { label: "Focus", value: "Web · Mobile · Backend · DevOps" },
+          ],
+          actions: [{ label: S("Proposer un échange", "Propose a chat"), href: F.booking }],
+          askEmail: true,
+        },
+      };
+    case "timeline":
+      return { content: S("Son parcours en un coup d'œil :", "His journey at a glance:"), widget: { type: "timeline", items: careerTimeline(lang) } };
+    case "tour":
+      return { content: S("C'est parti pour un mini-tour guidé — je t'emmène section par section :", "Let's take a quick guided tour — I'll walk you through it:"), widget: { type: "tour" } };
+    default:
+      return { content: "" };
+  }
+}
+
+// Frise de carrière compacte (depuis experiences.js), résolue par langue.
+export function careerTimeline(lang) {
+  return (experiences || []).map((e) => ({ role: tx(e.role, lang), org: e.org, period: tx(e.period, lang) }));
+}
+
+// Étapes du tour guidé (cible de navigation + libellé).
+export function tourSteps(lang) {
+  const fr = lang !== "en";
+  const S = (f, e) => (fr ? f : e);
+  return [
+    { nav: "bio", label: S("Qui est Paul", "Who Paul is") },
+    { nav: "skills", label: S("Ses compétences", "His skills") },
+    { nav: "experiences", label: S("Son parcours", "His experience") },
+    { nav: "collaborations", label: S("Ses projets", "His projects") },
+    { nav: "contact", label: S("Le contacter", "Contact him") },
+  ];
+}
 
 const fav = (d) => `https://www.google.com/s2/favicons?sz=64&domain=${d}`;
 
