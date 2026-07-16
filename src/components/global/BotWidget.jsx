@@ -8,7 +8,7 @@ import { useLandingLang } from "../../context/landingLang";
 import { NAV, extractActions, runNavAction, navLabel, navigateRelative, linkTokens } from "../../lib/botActions";
 import { detectProjects, followUps, pageContext } from "../../lib/botExtras";
 
-const MIC = "https://api.iconify.design/ph:microphone.svg?color=%23ffffff";
+const MIC = "https://api.iconify.design/ph:microphone.svg?color=%23000000";
 const MIC_ON = "https://api.iconify.design/ph:microphone-fill.svg?color=%232a1a00";
 const SPEAK = "https://api.iconify.design/ph:speaker-high.svg?color=%23ffd9a0";
 const SPEAK_ON = "https://api.iconify.design/ph:speaker-simple-x.svg?color=%23ffd9a0";
