@@ -15,7 +15,7 @@ const ACTIONS = [
   { id: "bot", label: L("PaulBot", "PaulBot"), sub: L("Chat about me then book a meeting", "Discuter à propos de moi puis RDV"), icon: ph("robot"), recommended: true },
   { id: "os", label: L("PaulBrain OS", "PaulBrain OS"), sub: L("My brain in operating system mode", "Mon cerveau en mode système d'exploitation"), icon: ph("desktop") },
   { id: "terminal", label: L("Terminal mode", "Mode terminal"), sub: L("For the brave — type help", "Pour les vrais, tapez help"), icon: ph("terminal-window") },
-  { id: "3d", label: L("3D mode", "Mode 3D"), sub: L("Soon — still modelling…", "Bientôt — je modélise…"), icon: ph("cube", "8a8aa0"), disabled: true },
+  { id: "3d", label: L("3D mode", "Mode 3D"), sub: L("Wander through my 3D world", "Balade-toi dans mon univers 3D"), icon: ph("cube") },
 ];
 
 const MODAL_UI = {
@@ -96,6 +96,12 @@ function ExperienceModal() {
       dropClose(() => { if (typeof window !== "undefined") window.dispatchEvent(new CustomEvent("paulbot:open")); });
     }
     else if (id === "terminal") { remember("terminal"); setChosen(true); setMode("terminal"); }
+    else if (id === "3d") {
+      remember("3d");
+      // Univers 3D hébergé à part → nouvel onglet, langue courante.
+      window.open(`https://3d-luapdever.netlify.app/?lang=${lang}`, "_blank", "noopener");
+      dropClose();
+    }
   };
 
   // "Keep scrolling" is a deliberate choice too (classic site) — it records the
