@@ -65,7 +65,8 @@ const UI = {
     escalatePrompt: "Tu veux que Paul te recontacte ? Laisse ton email 👇",
     escalatePh: "ton@email.com",
     escalateSend: "OK",
-    escalateDone: "Parfait, Paul pourra te recontacter. 🙌",
+    escalateAgain: (n, max) => `Envoyé ✅ — tu peux en laisser un autre (${n}/${max}).`,
+    escalateMax: "Merci, on s'arrête là (5 max) 🙂",
     tourStepLabel: "Étape",
     tourGoTo: "Aller à",
     tourDone: "Tour terminé ✨",
@@ -113,7 +114,8 @@ const UI = {
     escalatePrompt: "Want Paul to get back to you? Drop your email 👇",
     escalatePh: "you@email.com",
     escalateSend: "OK",
-    escalateDone: "Great — Paul will be able to reach you. 🙌",
+    escalateAgain: (n, max) => `Sent ✅ — you can add another (${n}/${max}).`,
+    escalateMax: "Thanks, that's the limit (5 max) 🙂",
     tourStepLabel: "Step",
     tourGoTo: "Go to",
     tourDone: "Tour done ✨",
@@ -193,8 +195,9 @@ function BotWidget({ embedded = false, lang: langProp }) {
   const [speakingIdx, setSpeakingIdx] = useState(-1);
   const [ctxSuggest, setCtxSuggest] = useState(null);
   const [tourStep, setTourStep] = useState(0);
-  const [escDone, setEscDone] = useState(false);
+  const [escCount, setEscCount] = useState(0); // tentatives de recontact (max 5)
   const [escEmail, setEscEmail] = useState("");
+  const ESC_MAX = 5;
   const scrollRef = useRef();
   const inputRef = useRef();
   const onbRef = useRef();
@@ -236,6 +239,8 @@ function BotWidget({ embedded = false, lang: langProp }) {
       cidRef.current = cid;
       const savedMsgs = sessionStorage.getItem("paulbot_messages");
       if (savedMsgs) { const arr = JSON.parse(savedMsgs); if (Array.isArray(arr)) setMessages(arr); }
+      const ec = Number(sessionStorage.getItem("paulbot_esc_count")) || 0;
+      if (ec) setEscCount(ec);
       if (!embedded && sessionStorage.getItem("paulbot_open") === "1") setOpen(true);
     } catch {}
     if (embedded) return; // pas d'ouverture externe en mode intégré
@@ -413,12 +418,17 @@ function BotWidget({ embedded = false, lang: langProp }) {
   // Escalade recontact : met à jour le contact ET envoie à Paul via le MÊME
   // service que le formulaire (captcha ALTCHA + rate-limit côté backend).
   const submitEscalate = async () => {
+    if (escCount >= ESC_MAX) return;
     const value = escEmail.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return;
     const c = { ...(contact || {}), mode: "email", value, name: contact?.name || "Visiteur" };
     try { sessionStorage.setItem("paulbot_contact", JSON.stringify(c)); } catch {}
     setContact(c);
-    setEscDone(true); // optimiste : le contact reste capté même si l'email échoue
+    // Compte la tentative (jusqu'à 5) — le formulaire se cache ensuite.
+    const next = escCount + 1;
+    setEscCount(next);
+    try { sessionStorage.setItem("paulbot_esc_count", String(next)); } catch {}
+    setEscEmail("");
     try {
       await submitContact({ name: c.name, email: value, message: "Demande de recontact via PaulBot.", source: "bot-recontact" });
     } catch {
@@ -746,16 +756,16 @@ function BotWidget({ embedded = false, lang: langProp }) {
                                 ))}
                               </div>
                             )}
-                            {m.widget.askEmail && contact?.mode === "incognito" && !escDone && (
+                            {m.widget.askEmail && (contact?.mode === "incognito" || escCount > 0) && escCount < ESC_MAX && (
                               <div className={styles.escalate}>
-                                <span className={styles.escText}>{ui.escalatePrompt}</span>
+                                <span className={styles.escText}>{escCount > 0 ? ui.escalateAgain(escCount, ESC_MAX) : ui.escalatePrompt}</span>
                                 <div className={styles.escRow}>
                                   <input type="email" className={styles.escInput} placeholder={ui.escalatePh} value={escEmail} onChange={(e) => setEscEmail(e.target.value)} onKeyDown={(e) => e.key === "Enter" && submitEscalate()} />
                                   <button type="button" className={styles.escBtn} onClick={submitEscalate}>{ui.escalateSend}</button>
                                 </div>
                               </div>
                             )}
-                            {m.widget.askEmail && escDone && <div className={styles.escDone}>{ui.escalateDone}</div>}
+                            {m.widget.askEmail && escCount >= ESC_MAX && <div className={styles.escDone}>{ui.escalateMax}</div>}
                           </div>
                         )}
                         {!isUser && m.widget && m.widget.type === "timeline" && (
