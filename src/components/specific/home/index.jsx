@@ -11,6 +11,7 @@ import { tx, SKILL_CAT } from "../../../rawDatas/i18n";
 import { useLandingLang } from "../../../context/landingLang";
 import { useExperience } from "../../../context/experience";
 import { skillSet } from "../../../rawDatas/skillset";
+import ContactForm from "../../global/ContactForm";
 
 const YEARS = yearsOfExperience();
 const initials = (name) => name.split(/\s+/).map((w) => w[0]).join("").slice(0, 2).toUpperCase();
@@ -399,8 +400,11 @@ function HomePage() {
       <section id="collaborer" className={styles.cta}>
         <h2 className={styles.ctaBig} data-mask><MaskWords text={ui.ctaTitle} /></h2>
         <p data-reveal>{ui.ctaText}</p>
+        <div className={styles.ctaForm} data-reveal>
+          <ContactForm lang={lang} source="home-cta" />
+        </div>
         <div className={styles.ctaActions} data-reveal>
-          <a className={styles.btnPrimary} href="mailto:pzannou511@gmail.com" data-magnetic>{ui.ctaMail}</a>
+          <a className={styles.btnGhost} href="mailto:pzannou511@gmail.com" data-magnetic>{ui.ctaMail}</a>
           <button className={styles.btnGhost} onClick={openChooser} data-magnetic>{ui.ctaOther}</button>
         </div>
       </section>

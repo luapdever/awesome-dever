@@ -69,6 +69,7 @@ a.reachItem:hover { border-color: rgba(255, 165, 0, 0.45); background: rgba(255,
 
 /* Form */
 .form { display: flex; flex-direction: column; gap: 12px; }
+.formCol { min-width: 0; }
 .row { display: flex; flex-direction: column; gap: 5px; }
 .row label { font-size: 0.72rem; color: rgba(255, 255, 255, 0.6); font-weight: 600; }
 .row input, .row textarea {

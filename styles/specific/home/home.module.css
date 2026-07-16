@@ -207,6 +207,7 @@
 .cta { max-width: 1000px; margin: 0 auto; padding: clamp(80px, 12vw, 160px) clamp(20px, 5vw, 64px); text-align: center; }
 .ctaBig { margin: 0 0 20px; font-size: clamp(2.4rem, 9vw, 6rem); font-weight: 800; letter-spacing: -2px; line-height: 1; }
 .cta p { color: rgba(255, 255, 255, 0.7); max-width: 520px; margin: 0 auto 30px; font-size: 1.05rem; line-height: 1.6; }
+.ctaForm { margin: 10px auto 26px; }
 .ctaActions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
 /* ---------- Useful links ---------- */
