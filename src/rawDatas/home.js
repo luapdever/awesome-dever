@@ -108,7 +108,7 @@ export const usefulLinks = [
   { label: L("About me", "À propos de moi"), href: "/about-me", icon: ph("user-focus") },
   { label: L("GitHub", "GitHub"), href: "https://github.com/luapdever", target: "_blank", icon: ph("github-logo") },
   { label: L("LinkedIn", "LinkedIn"), href: "https://linkedin.com/in/paul-zannou-b253a2205", target: "_blank", icon: ph("linkedin-logo") },
-  { label: L("My blog", "Mon blog"), href: "https://blog-luap-dever.netlify.app/", target: "_blank", icon: ph("pen-nib") },
+  { label: L("My blog", "Mon blog"), href: "https://luap-dever.netlify.app/blog", target: "_blank", icon: ph("pen-nib") },
 ];
 
 // Hero headline as accent-aware tokens (per language).
