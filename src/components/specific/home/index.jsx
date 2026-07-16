@@ -373,7 +373,9 @@ function HomePage() {
           const suffix = s.n.replace(/[0-9]/g, "");
           return (
             <div className={styles.statBig} key={i}>
-              <b data-count={num} data-suffix={suffix}>0{suffix}</b>
+              {/* Valeur réelle en fallback (SSR / sans JS / anim qui plante) ;
+                  le compteur JS repart de 0 au scroll pour l'effet. */}
+              <b data-count={num} data-suffix={suffix}>{num}{suffix}</b>
               <span>{tx(s.l, lang)}</span>
             </div>
           );

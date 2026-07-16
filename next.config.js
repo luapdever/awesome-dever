@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   env: {
     appUrl: "https://luap-dever.netlify.app/",
-    apiUrl: "https://dever-luapdever511.koyeb.app/api/"
+    // apiUrl: "https://dever-luapdever511.koyeb.app/api/"
   },
   images: {
     remotePatterns: [
