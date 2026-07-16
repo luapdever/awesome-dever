@@ -6,7 +6,7 @@ import "react-phone-number-input/style.css";
 import styles from "../../../styles/global/botwidget.module.css";
 import { useLandingLang } from "../../context/landingLang";
 import { NAV, extractActions, runNavAction, navLabel, navigateRelative, linkTokens } from "../../lib/botActions";
-import { detectProjects, followUps, pageContext, routeIntent, clientAnswer, tourSteps } from "../../lib/botExtras";
+import { detectProjects, followUps, pageContext, routeIntent, clientAnswer, tourSteps, smalltalk, smalltalkReply, waitingMessage } from "../../lib/botExtras";
 import { submitContact } from "../../lib/altcha";
 
 const MIC = "https://api.iconify.design/ph:microphone.svg?color=%23000000";
@@ -25,7 +25,13 @@ const UI = {
   fr: {
     title: "PaulBot",
     subtitle: "Assistant du portfolio",
-    intro: "Bonjour et bienvenue 👋 Je suis PaulBot, ravi de t'accueillir. N'hésite pas à me poser tes questions sur le parcours, les compétences ou les projets de Paul — je peux aussi t'emmener sur la bonne page avec plaisir.",
+    intros: [
+      (n) => `Salut${n ? ` ${n}` : ""} 👋 Moi c'est PaulBot. Pose-moi tes questions sur le parcours, les compétences ou les projets de Paul — je peux même t'emmener sur la bonne page.`,
+      (n) => `Hey${n ? ` ${n}` : ""} ✨ Ravi de te voir ! Je suis PaulBot : parcours, compétences, projets de Paul… ou une petite visite guidée, comme tu préfères.`,
+      (n) => `Bonjour${n ? ` ${n}` : ""} 🙂 PaulBot à ton service. Curieux du parcours, des compétences ou des projets de Paul ? Je t'explique et je peux te guider sur le site.`,
+      (n) => `Coucou${n ? ` ${n}` : ""} 👋 Ici PaulBot. Demande-moi ce que tu veux sur Paul — parcours, compétences, projets — je réponds et je t'oriente.`,
+      (n) => `Content de t'accueillir${n ? `, ${n}` : ""} ! 🚀 Je suis PaulBot. Parcours, compétences, projets de Paul : dis-moi juste ce qui t'intéresse.`,
+    ],
     placeholder: "Écris ton message…",
     error: "Je suis momentanément indisponible. Réessaie dans un instant, ou écris directement à Paul : pzannou511@gmail.com.",
     suggestions: ["Il maîtrise quoi ?", "Montre-moi ses projets", "Est-il disponible ?"],
@@ -34,9 +40,10 @@ const UI = {
     onbText: "Comment Paul peut-il te recontacter au besoin ?",
     pseudoLabel: "Pseudo",
     pseudoPh: "Comment t'appelles-tu ?",
+    onbModeLabel: "Me recontacter par",
     tabEmail: "Email",
     tabPhone: "Téléphone",
-    tabIncognito: "Incognito",
+    tabIncognito: "Rester anonyme",
     emailPh: "ton@email.com",
     phonePh: "N° de téléphone",
     phoneConsent: "Ton numéro pourra être utilisé pour te recontacter.",
@@ -48,13 +55,19 @@ const UI = {
     slashTip: "Astuce : tape « / » pour des commandes rapides.",
     goHint: "Choisis une section, ou tape un lien relatif (#section ou /page) puis Entrée.",
     options: "Options",
+    enlarge: "Agrandir le widget",
+    reduce: "Réduire le widget",
     exportPdf: "Exporter en PDF",
     clearConvo: "Effacer la conversation",
     available: "Disponible",
-    hello: (n) => `Salut ${n} 👋 `,
     personaVisitor: "Visiteur",
     personaRecruiter: "Je recrute",
-    recruiterIntro: "Ravi de t'accueillir. Pose-moi tout sur sa disponibilité, sa stack, ses projets — ou récupère son CV en un clic.",
+    recruiterIntros: [
+      (n) => `Bonjour${n ? ` ${n}` : ""} 👋 Je suis PaulBot. Pose-moi tout sur la disponibilité de Paul, sa stack ou ses projets — ou récupère son CV en un clic.`,
+      (n) => `Ravi de t'accueillir${n ? `, ${n}` : ""} 🙂 PaulBot ici. Dispo, stack technique, réalisations… ou son CV directement : dis-moi ce qu'il te faut.`,
+      (n) => `Hey${n ? ` ${n}` : ""} ✨ Tu recrutes ? Parfait. Disponibilité, compétences, projets de Paul — je te réponds vite, et son CV est à un clic.`,
+      (n) => `Bienvenue${n ? `, ${n}` : ""} 🚀 Je suis PaulBot. Évalue Paul en deux minutes : dispo, stack, projets, contact — je te guide.`,
+    ],
     recruiterSuggestions: ["Est-il disponible ?", "Sa stack technique ?", "Ouvre son CV", "Comment le contacter ?"],
     teaser: "Une question sur Paul ? 👋",
     mic: "Dicter",
@@ -74,7 +87,13 @@ const UI = {
   en: {
     title: "PaulBot",
     subtitle: "Portfolio assistant",
-    intro: "Hello and welcome 👋 I'm PaulBot, glad to have you here. Feel free to ask me anything about Paul's background, skills or projects — I'd be happy to take you to the right page too.",
+    intros: [
+      (n) => `Hi${n ? ` ${n}` : ""} 👋 I'm PaulBot. Ask me anything about Paul's background, skills or projects — I can even take you to the right page.`,
+      (n) => `Hey${n ? ` ${n}` : ""} ✨ Great to see you! I'm PaulBot: Paul's background, skills, projects… or a quick guided tour, your call.`,
+      (n) => `Hello${n ? ` ${n}` : ""} 🙂 PaulBot here. Curious about Paul's journey, skills or projects? I'll explain and can guide you around.`,
+      (n) => `Welcome${n ? `, ${n}` : ""}! 🚀 I'm PaulBot. Background, skills, projects — just tell me what you'd like to explore.`,
+      (n) => `Hi there${n ? `, ${n}` : ""} 👋 PaulBot at your service. Anything about Paul — I'll answer and point you the right way.`,
+    ],
     placeholder: "Type your message…",
     error: "I'm momentarily unavailable. Please try again shortly, or reach Paul directly at pzannou511@gmail.com.",
     suggestions: ["What's his stack?", "Show me his projects", "Is he available?"],
@@ -83,9 +102,10 @@ const UI = {
     onbText: "How can Paul get back to you if needed?",
     pseudoLabel: "Nickname",
     pseudoPh: "What should we call you?",
+    onbModeLabel: "Reach me via",
     tabEmail: "Email",
     tabPhone: "Phone",
-    tabIncognito: "Incognito",
+    tabIncognito: "Stay anonymous",
     emailPh: "you@email.com",
     phonePh: "Phone number",
     phoneConsent: "Your number may be used to get back to you.",
@@ -97,13 +117,19 @@ const UI = {
     slashTip: "Tip: type “/” for quick commands.",
     goHint: "Pick a section, or type a relative link (#section or /page) then Enter.",
     options: "Options",
+    enlarge: "Enlarge widget",
+    reduce: "Reduce widget",
     exportPdf: "Export to PDF",
     clearConvo: "Clear conversation",
     available: "Available",
-    hello: (n) => `Hi ${n} 👋 `,
     personaVisitor: "Visitor",
     personaRecruiter: "I'm hiring",
-    recruiterIntro: "Glad to have you here. Ask me anything about his availability, stack and projects — or grab his résumé in one click.",
+    recruiterIntros: [
+      (n) => `Hello${n ? ` ${n}` : ""} 👋 I'm PaulBot. Ask me anything about Paul's availability, stack or projects — or grab his résumé in one click.`,
+      (n) => `Glad to have you${n ? `, ${n}` : ""} 🙂 PaulBot here. Availability, tech stack, shipped projects… or his résumé directly: tell me what you need.`,
+      (n) => `Hey${n ? ` ${n}` : ""} ✨ Hiring? Perfect. Paul's availability, skills and projects — quick answers, and his résumé is one click away.`,
+      (n) => `Welcome${n ? `, ${n}` : ""} 🚀 I'm PaulBot. Size Paul up in two minutes: availability, stack, projects, contact — I'll guide you.`,
+    ],
     recruiterSuggestions: ["Is he available?", "His tech stack?", "Open his résumé", "How to reach him?"],
     teaser: "A question about Paul? 👋",
     mic: "Dictate",
@@ -192,6 +218,9 @@ function BotWidget({ embedded = false, lang: langProp }) {
   const [draft, setDraft] = useState("");
   const [slashIndex, setSlashIndex] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+const [big, setBig] = useState(false); // desktop : agrandir un peu le widget
+const [introSeed, setIntroSeed] = useState(0); // variante d'accueil (aléatoire, client)
+const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — réactif
   const [now, setNow] = useState(0);
   const [onbPersona, setOnbPersona] = useState("visitor");
   const [teaser, setTeaser] = useState(false);
@@ -245,6 +274,8 @@ function BotWidget({ embedded = false, lang: langProp }) {
       if (savedMsgs) { const arr = JSON.parse(savedMsgs); if (Array.isArray(arr)) setMessages(arr); }
       const ec = Number(sessionStorage.getItem("paulbot_esc_count")) || 0;
       if (ec) setEscCount(ec);
+      if (localStorage.getItem("paulbot_big") === "1") setBig(true);
+      setIntroSeed(Math.floor(Math.random() * 997)); // choisit une variante d'accueil
       if (!embedded && sessionStorage.getItem("paulbot_open") === "1") setOpen(true);
     } catch {}
     if (embedded) return; // pas d'ouverture externe en mode intégré
@@ -253,6 +284,16 @@ function BotWidget({ embedded = false, lang: langProp }) {
     window.addEventListener("paulbot:open", openHandler);
     return () => window.removeEventListener("paulbot:open", openHandler);
   }, [embedded]);
+
+  // Suit la largeur du viewport (pour savoir si « Agrandir » a du sens).
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(max-width: 560px)");
+    const on = () => setNarrow(mq.matches);
+    on();
+    mq.addEventListener ? mq.addEventListener("change", on) : mq.addListener(on);
+    return () => (mq.removeEventListener ? mq.removeEventListener("change", on) : mq.removeListener(on));
+  }, []);
 
   // Persistance : état ouvert/fermé (widget flottant uniquement).
   useEffect(() => {
@@ -350,6 +391,20 @@ function BotWidget({ embedded = false, lang: langProp }) {
     setPending(true);
     setMessages((m) => [...m, { role: "assistant", content: "", at: Date.now() }]);
     let acc = "";
+    let started = false;
+    // Si le modèle tarde (> 2 s) et que rien n'est encore arrivé, on glisse un
+    // petit message d'attente sympa dans la bulle (remplacé dès le 1er token).
+    const waitTimer = setTimeout(() => {
+      if (started) return;
+      setMessages((m) => {
+        const copy = m.slice();
+        const last = copy[copy.length - 1];
+        if (last && last.role === "assistant" && !last.content) {
+          copy[copy.length - 1] = { ...last, content: waitingMessage(lang), waiting: true };
+        }
+        return copy;
+      });
+    }, 2000);
     try {
       const url = (typeof window !== "undefined" && window.__CHAT_URL) || CHAT_URL;
       const res = await fetch(url, {
@@ -364,10 +419,11 @@ function BotWidget({ embedded = false, lang: langProp }) {
         const { done, value } = await reader.read();
         if (done) break;
         acc += dec.decode(value, { stream: true });
+        if (!started) { started = true; clearTimeout(waitTimer); }
         const shown = extractActions(acc).clean;
         setMessages((m) => {
           const copy = m.slice();
-          copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", content: shown, error: false };
+          copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", content: shown, error: false, waiting: false };
           return copy;
         });
       }
@@ -382,10 +438,11 @@ function BotWidget({ embedded = false, lang: langProp }) {
     } catch {
       setMessages((m) => {
         const copy = m.slice();
-        copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", content: ui.error, error: true };
+        copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", content: ui.error, error: true, waiting: false };
         return copy;
       });
     } finally {
+      clearTimeout(waitTimer);
       setPending(false);
     }
   };
@@ -397,7 +454,15 @@ function BotWidget({ embedded = false, lang: langProp }) {
     histIdxRef.current = -1;
     const userMsg = { role: "user", content, at: Date.now() };
 
-    // 1) Réponse déterministe côté client → AUCUN appel modèle.
+    // 1) Politesse évidente (bonjour, merci, au revoir, ça va) → preset, AUCUN modèle.
+    const st = smalltalk(content);
+    if (st) {
+      const reply = smalltalkReply(st, lang, contact?.name);
+      setMessages((m) => [...m, userMsg, { role: "assistant", at: Date.now(), content: reply }]);
+      return;
+    }
+
+    // 2) Réponse déterministe côté client → AUCUN appel modèle.
     const intent = routeIntent(content);
     if (intent) {
       const ans = clientAnswer(intent, lang);
@@ -447,6 +512,16 @@ function BotWidget({ embedded = false, lang: langProp }) {
   const runNav = (fn) => {
     fn();
     if (!embedded && isMobile()) setOpen(false);
+  };
+
+  // Desktop : agrandir/réduire un peu le widget (préférence mémorisée).
+  const toggleBig = () => {
+    setBig((b) => {
+      const next = !b;
+      try { localStorage.setItem("paulbot_big", next ? "1" : "0"); } catch {}
+      return next;
+    });
+    setMenuOpen(false);
   };
 
   // Tour guidé : navigue vers la section courante puis avance.
@@ -549,8 +624,24 @@ function BotWidget({ embedded = false, lang: langProp }) {
     setMessages([]);
     setDraft("");
     setMenuOpen(false);
-    try { sessionStorage.removeItem("paulbot_messages"); } catch {}
-    setTimeout(() => inputRef.current?.focus(), 40);
+    // On repart de zéro : on oublie aussi l'identité du visiteur et on la redemande.
+    setContact(null);
+    setOnbName("");
+    setOnbPhone("");
+    setOnbError("");
+    setOnbMode("email");
+    setOnbPersona("visitor");
+    setEscCount(0);
+    setTourStep(0);
+    setIntroSeed(Math.floor(Math.random() * 997)); // nouvelle variante d'accueil
+    try {
+      sessionStorage.removeItem("paulbot_messages");
+      sessionStorage.removeItem("paulbot_contact");
+      sessionStorage.removeItem("paulbot_esc_count");
+      const cid = newId(); // nouvelle conversation → nouvel identifiant (nouveau PDF)
+      sessionStorage.setItem("paulbot_cid", cid);
+      cidRef.current = cid;
+    } catch {}
   };
 
   const dismissTeaser = () => {
@@ -594,34 +685,45 @@ function BotWidget({ embedded = false, lang: langProp }) {
   return (
     <>
       {shown && (
-        <div className={embedded ? styles.embed : styles.panel} role="dialog" aria-label={ui.title}>
+        <div className={embedded ? styles.embed : `${styles.panel} ${big ? styles.panelBig : ""}`} role="dialog" aria-label={ui.title}>
           <header className={styles.head}>
             <img src={ROBOT + "?color=%23110068"} alt="" className={styles.headIcon} />
             <div className={styles.headText}>
               <b>{ui.title}</b>
               <span className={styles.headStatus}><i className={styles.statusDot} />{ui.available}</span>
             </div>
-            {contact && (
-              <div className={styles.headMenuWrap}>
-                <button
-                  className={styles.headKebab}
-                  onClick={() => setMenuOpen((o) => !o)}
-                  aria-label={ui.options}
-                  aria-expanded={menuOpen}
-                >⋯</button>
-                {menuOpen && (
-                  <>
-                    <div className={styles.menuScrim} onClick={() => setMenuOpen(false)} />
-                    <div className={styles.menuPop} role="menu">
-                      {messages.some((mm) => mm.content && mm.content.trim()) && (
-                        <button type="button" onClick={exportPdf} role="menuitem">{ui.exportPdf}</button>
-                      )}
-                      <button type="button" className={styles.menuDanger} onClick={clearConversation} role="menuitem">{ui.clearConvo}</button>
-                    </div>
-                  </>
-                )}
-              </div>
-            )}
+            {(() => {
+              const canEnlarge = !embedded && !narrow;
+              const canExport = messages.some((mm) => mm.content && mm.content.trim());
+              const canClear = !!contact || messages.length > 0;
+              if (!canEnlarge && !canExport && !canClear) return null; // rien à afficher
+              return (
+                <div className={styles.headMenuWrap}>
+                  <button
+                    className={styles.headKebab}
+                    onClick={() => setMenuOpen((o) => !o)}
+                    aria-label={ui.options}
+                    aria-expanded={menuOpen}
+                  >⋯</button>
+                  {menuOpen && (
+                    <>
+                      <div className={styles.menuScrim} onClick={() => setMenuOpen(false)} />
+                      <div className={styles.menuPop} role="menu">
+                        {canEnlarge && (
+                          <button type="button" onClick={toggleBig} role="menuitem">{big ? ui.reduce : ui.enlarge}</button>
+                        )}
+                        {canExport && (
+                          <button type="button" onClick={exportPdf} role="menuitem">{ui.exportPdf}</button>
+                        )}
+                        {canClear && (
+                          <button type="button" className={styles.menuDanger} onClick={clearConversation} role="menuitem">{ui.clearConvo}</button>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </div>
+              );
+            })()}
             {!embedded && (
               <button className={styles.headClose} onClick={() => setOpen(false)} aria-label="Fermer">
                 <img src={CLOSE} alt="" />
@@ -651,18 +753,18 @@ function BotWidget({ embedded = false, lang: langProp }) {
                 maxLength={40}
               />
 
-              <div className={styles.onbTabs}>
-                {["email", "phone", "incognito"].map((m) => (
-                  <button
-                    key={m}
-                    type="button"
-                    className={onbMode === m ? styles.onbTabOn : ""}
-                    onClick={() => { setOnbMode(m); setOnbError(""); }}
-                  >
-                    {m === "email" ? ui.tabEmail : m === "phone" ? ui.tabPhone : ui.tabIncognito}
-                  </button>
-                ))}
-              </div>
+              <label className={styles.onbSelectRow}>
+                <span>{ui.onbModeLabel}</span>
+                <select
+                  className={styles.onbSelect}
+                  value={onbMode}
+                  onChange={(e) => { setOnbMode(e.target.value); setOnbError(""); }}
+                >
+                  <option value="email">{ui.tabEmail}</option>
+                  <option value="phone">{ui.tabPhone}</option>
+                  <option value="incognito">{ui.tabIncognito}</option>
+                </select>
+              </label>
 
               {onbMode === "email" && (
                 <input
@@ -698,8 +800,11 @@ function BotWidget({ embedded = false, lang: langProp }) {
                 {messages.length === 0 && (
                   <div className={styles.intro}>
                     <p>
-                      {contact?.name ? ui.hello(contact.name) : ""}
-                      {contact?.persona === "recruiter" ? ui.recruiterIntro : ui.intro}
+                      {(() => {
+                        const variants = contact?.persona === "recruiter" ? ui.recruiterIntros : ui.intros;
+                        const pick = variants[introSeed % variants.length];
+                        return pick(contact?.name || "");
+                      })()}
                     </p>
                     <div className={styles.suggest}>
                       {ctxSuggest && (

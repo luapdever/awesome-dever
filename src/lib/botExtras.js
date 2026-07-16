@@ -81,6 +81,122 @@ export function clientAnswer(intent, lang) {
   }
 }
 
+/* ---------- Smalltalk : bonjour / merci / au revoir / ça va ----------
+   Ces messages « évidents » ne déclenchent AUCUN appel modèle : on répond
+   avec un preset choisi aléatoirement. On ne classe comme smalltalk que si
+   le message est court ET composé uniquement de mots de politesse (+ filler),
+   pour ne jamais avaler une vraie question du style « Bonjour, il est dispo ? ». */
+const pickRand = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+export function smalltalk(text) {
+  const t = (text || "").toLowerCase().trim();
+  if (!t || t.length > 48) return null;
+  // « ça va ? », « comment vas-tu », « how are you »… (peut contenir une salutation)
+  const HOW = /(ç?ca va|comment (ç?ca va|vas[- ]?tu|tu vas)|tu vas bien|how are (you|u|ya)|how'?s it going|quoi de neuf|what'?s up|wassup)/;
+  if (HOW.test(t)) return "how";
+
+  const words = t
+    .replace(/[^a-zàâäéèêëîïôöùûüç'\s]/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(" ")
+    .filter(Boolean);
+  if (!words.length || words.length > 6) return null;
+
+  const GREET = ["salut", "bonjour", "bonsoir", "coucou", "hello", "hi", "hey", "yo", "wesh", "hola", "slt", "cc", "hiya", "yop", "re", "helo", "hellow"];
+  const THANKS = ["merci", "mercii", "thanks", "thank", "thx", "ty", "cheers"];
+  const BYE = ["bye", "byebye", "ciao", "goodbye", "revoir", "adieu", "cya"];
+  const FILL = ["beaucoup", "bien", "paul", "paulbot", "le", "la", "les", "toi", "vous", "you", "there", "much", "a", "à", "stp", "svp", "please", "cool", "the", "bot", "et", "and", "mon", "cher", "salutations"];
+
+  const has = (arr) => words.some((w) => arr.includes(w));
+  const only = (arr) => words.every((w) => arr.includes(w) || FILL.includes(w));
+
+  if (has(THANKS) && only(THANKS)) return "thanks";
+  if (has(BYE) && only(BYE)) return "bye";
+  if (has(GREET) && only(GREET)) return "greet";
+  return null;
+}
+
+// Réponse smalltalk : variante aléatoire (le prénom est glissé si connu).
+export function smalltalkReply(kind, lang, name) {
+  const fr = lang !== "en";
+  const n = (name || "").trim();
+  const FR = {
+    greet: [
+      `Salut${n ? ` ${n}` : ""} 👋 Ravi de te parler ! Tu veux que je te parle du parcours de Paul, de ses compétences ou de ses projets ?`,
+      `Hey${n ? ` ${n}` : ""} 😊 Je suis là. Curieux de quoi — parcours, compétences, projets ou dispo ?`,
+      `Coucou${n ? ` ${n}` : ""} 👋 Dis-moi ce qui t'amène : je peux te parler de Paul ou te guider sur le site.`,
+      `Bonjour${n ? ` ${n}` : ""} 🙂 On commence par quoi — ses compétences, ses projets, ou sa disponibilité ?`,
+    ],
+    thanks: [
+      "De rien ! 🙌 Besoin d'autre chose sur Paul ?",
+      "Je t'en prie 😊 Je reste dispo si tu as d'autres questions.",
+      "Quand tu veux ! Tu veux voir ses projets ou sa disponibilité ?",
+      "Content d'avoir aidé 🙌 Autre chose ?",
+    ],
+    bye: [
+      "À bientôt 👋 Reviens quand tu veux !",
+      "Bonne continuation ! 🙂 N'hésite pas à repasser.",
+      "Ciao ! Je reste là si besoin. 👋",
+      "À plus ! Tu peux aussi laisser ton email à Paul pour un suivi.",
+    ],
+    how: [
+      "Au top, merci 😄 Et toi ? En attendant, je peux te parler du parcours ou des projets de Paul.",
+      "Toujours d'attaque ! ⚡ Dis-moi ce qui t'intéresse chez Paul.",
+      "Ça roule 🙂 Et toi ? Je peux te montrer ses compétences ou sa dispo.",
+    ],
+  };
+  const EN = {
+    greet: [
+      `Hi${n ? ` ${n}` : ""} 👋 Nice to chat! Want to hear about Paul's background, skills or projects?`,
+      `Hey${n ? ` ${n}` : ""} 😊 I'm here. Curious about what — background, skills, projects or availability?`,
+      `Hello${n ? ` ${n}` : ""} 👋 Tell me what brings you: I can talk about Paul or guide you around.`,
+      `Hi${n ? ` ${n}` : ""} 🙂 Where do we start — his skills, his projects, or his availability?`,
+    ],
+    thanks: [
+      "You're welcome! 🙌 Anything else about Paul?",
+      "Anytime 😊 I'm here if you have more questions.",
+      "Happy to help! Want to see his projects or availability?",
+      "Glad that helped 🙌 Anything else?",
+    ],
+    bye: [
+      "See you soon 👋 Come back anytime!",
+      "Take care! 🙂 Feel free to drop by again.",
+      "Cheers! I'll be here if you need me. 👋",
+      "Bye! You can also leave Paul your email for a follow-up.",
+    ],
+    how: [
+      "Doing great, thanks 😄 And you? Meanwhile, I can tell you about Paul's background or projects.",
+      "Full of energy! ⚡ Tell me what interests you about Paul.",
+      "All good 🙂 And you? I can show you his skills or availability.",
+    ],
+  };
+  const set = (fr ? FR : EN)[kind] || (fr ? FR.greet : EN.greet);
+  return pickRand(set);
+}
+
+// Message d'attente sympa (affiché si le modèle tarde > ~2 s) — variante aléatoire.
+export function waitingMessage(lang) {
+  const fr = lang !== "en";
+  return pickRand(
+    fr
+      ? [
+          "Je réfléchis à ça… 🤔",
+          "Deux secondes, je te trouve la meilleure réponse ⏳",
+          "Je fouille un peu la mémoire de Paul… 🧠",
+          "J'écris ça au propre, j'arrive 👀",
+          "Un instant, je peaufine ma réponse ✨",
+        ]
+      : [
+          "Thinking this through… 🤔",
+          "One sec, finding the best answer ⏳",
+          "Digging through Paul's memory… 🧠",
+          "Writing this up, almost there 👀",
+          "Just a moment, polishing my answer ✨",
+        ]
+  );
+}
+
 // Frise de carrière compacte (depuis experiences.js), résolue par langue.
 export function careerTimeline(lang) {
   return (experiences || []).map((e) => ({ role: tx(e.role, lang), org: e.org, period: tx(e.period, lang) }));
