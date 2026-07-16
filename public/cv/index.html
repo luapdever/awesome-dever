@@ -920,7 +920,7 @@
             role: "Ingénieur Logiciel Full-Stack", org: "KAMGOKO Technologies", period: "Janvier 2022 – Présent",
             note: "Prestations web pour grands comptes télécoms et médias",
             bullets: [
-              "<b>2026 · Celtiis (via KAMGOKO)</b> — Mission confidentielle sous accord de non-divulgation (NDA).",
+              "<b>2026 · Celtiis (via KAMGOKO)</b> — Développement web pour un opérateur télécom.",
               "<b>2022 – 2025 · MTN & Moov</b> — Sites corporate MTN Bénin, MTN Congo et Moov Africa Togo, application Selfcare MyMTN (Vue.js) et page d'activation MonRouteur : thèmes/plugins WordPress sur mesure, intégration d'APIs RESTful et optimisation des performances."
             ]
           },
@@ -935,9 +935,9 @@
           },
           {
             role: "Développeur Backend", org: "CCIB — Chambre de Commerce et d'Industrie du Bénin", period: "2022 – 2023",
-            note: "Prestation pour une institution publique — sous NDA",
+            note: "Prestation pour une institution publique",
             bullets: [
-              "Détails du projet couverts par un accord de confidentialité (NDA)."
+              "Développement backend d'une application web pour une institution publique."
             ]
           },
           {
@@ -957,7 +957,7 @@
         ],
         projects: [
           {
-            id: "celtiis", hidden: true, company: "Celtiis (via KAMGOKO)", year: "2026"
+            id: "celtiis", hidden: true, company: "Celtiis (via KAMGOKO)", year: "2026", type: "Développement web — opérateur télécom"
           },
           {
             id: "mtn-sites", name: "Sites corporate MTN Bénin & MTN Congo", year: "2022 – 2025", role: "Développeur WordPress",
@@ -987,7 +987,7 @@
             stack: ["NestJS", "TypeScript", "Groq / Llama 3.3", "Ollama", "Streaming SSE", "Next.js", "Docker"]
           },
           {
-            id: "invoicepay", hidden: true, company: "CCIB — Chambre de Commerce et d'Industrie du Bénin", year: "2022 – 2023"
+            id: "invoicepay", hidden: true, company: "CCIB — Chambre de Commerce et d'Industrie du Bénin", year: "2022 – 2023", type: "Développement backend — institution publique"
           }
         ],
         skills: [
@@ -1045,7 +1045,7 @@
             role: "Full-Stack Software Engineer", org: "KAMGOKO Technologies", period: "January 2022 – Present",
             note: "Web services for major telecom and media accounts",
             bullets: [
-              "<b>2026 · Celtiis (via KAMGOKO)</b> — Confidential engagement under a non-disclosure agreement (NDA).",
+              "<b>2026 · Celtiis (via KAMGOKO)</b> — Web development for a telecom operator.",
               "<b>2022 – 2025 · MTN & Moov</b> — Corporate websites for MTN Benin, MTN Congo and Moov Africa Togo, the MyMTN Selfcare app (Vue.js) and the MonRouteur activation page: custom WordPress themes/plugins, RESTful API integration and performance optimization."
             ]
           },
@@ -1060,9 +1060,9 @@
           },
           {
             role: "Backend Developer", org: "CCIB — Chamber of Commerce and Industry of Benin", period: "2022 – 2023",
-            note: "Contract for a public institution — under NDA",
+            note: "Contract for a public institution",
             bullets: [
-              "Project details are covered by a non-disclosure agreement (NDA)."
+              "Backend development of a web application for a public institution."
             ]
           },
           {
@@ -1082,7 +1082,7 @@
         ],
         projects: [
           {
-            id: "celtiis", hidden: true, company: "Celtiis (via KAMGOKO)", year: "2026"
+            id: "celtiis", hidden: true, company: "Celtiis (via KAMGOKO)", year: "2026", type: "Web development — telecom operator"
           },
           {
             id: "mtn-sites", name: "MTN Benin & MTN Congo corporate websites", year: "2022 – 2025", role: "WordPress Developer",
@@ -1112,7 +1112,7 @@
             stack: ["NestJS", "TypeScript", "Groq / Llama 3.3", "Ollama", "SSE streaming", "Next.js", "Docker"]
           },
           {
-            id: "invoicepay", hidden: true, company: "CCIB — Chamber of Commerce and Industry of Benin", year: "2022 – 2023"
+            id: "invoicepay", hidden: true, company: "CCIB — Chamber of Commerce and Industry of Benin", year: "2022 – 2023", type: "Backend development — public institution"
           }
         ],
         skills: [
@@ -1261,16 +1261,12 @@
       const projMap = byField(base.projects, "id");
       const projList = conf.projectOrder.map(id => projMap[id]).filter(Boolean);
       const projects = projList.map(p => {
-        // Confidential projects: shown blurred on screen, hidden from the PDF export.
+        // Projets sous NDA : mention sobre (entreprise + type de projet), sans
+        // nom ni détails, sans flou ni cadenas — pour ne pas surcharger le CV.
         if (p.hidden) {
-          return `<div class="proj proj-confidential">
-       <div class="proj-head"><span class="proj-name">${ui.confidential}</span><span class="proj-year">${p.year}</span></div>
-       <div class="proj-meta"><span class="proj-client">${ui.client}&nbsp;: <b>${p.company || ""}</b></span></div>
-       <div class="proj-blur" aria-hidden="true">
-         <div class="proj-desc">&#9608;&#9608;&#9608;&#9608;&#9608; &#9608;&#9608;&#9608; &#9608;&#9608;&#9608;&#9608;&#9608;&#9608; &#9608;&#9608;&#9608;&#9608; &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608; &#9608;&#9608;&#9608; &#9608;&#9608;&#9608;&#9608;&#9608; &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608; &#9608;&#9608;&#9608;&#9608; &#9608;&#9608;&#9608;&#9608;&#9608;&#9608; &#9608;&#9608;&#9608;.</div>
-         <div class="proj-stack"><span class="chip">&#9608;&#9608;&#9608;&#9608;</span><span class="chip">&#9608;&#9608;&#9608;</span><span class="chip">&#9608;&#9608;&#9608;&#9608;&#9608;</span></div>
-       </div>
-       <div class="proj-nda">${ICONS.lock} ${ui.ndaNote}</div></div>`;
+          return `<div class="proj">
+       <div class="proj-head"><span class="proj-name">${p.type || ui.confidential}</span><span class="proj-year">${p.year}</span></div>
+       <div class="proj-meta"><span class="proj-client">${ui.client}&nbsp;: <b>${p.company || ""}</b></span></div></div>`;
         }
         const links = (p.links && p.links.length)
           ? p.links.map(l => `<a href="${l.href}" target="_blank" rel="noopener">${ICONS.link}${l.label}</a>`).join("") : "";

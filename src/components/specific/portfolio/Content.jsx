@@ -28,7 +28,7 @@ import Clock from "../../global/clock";
 import { OS } from "../../../rawDatas/os";
 import { yearsOfExperience } from "../../../rawDatas/xp";
 import { useLang } from "./lang";
-import { playOsSound, setOsAudioConfig, unlockOsAudio } from "../../../lib/osSounds";
+import { playOsSound, playStartupSound, setOsAudioConfig, unlockOsAudio } from "../../../lib/osSounds";
 
 // Parse a shareable hash like "app=skills&lang=fr" (or bare "skills").
 function parseHash(h) {
@@ -77,6 +77,14 @@ function Content() {
   // Petits sons contextuels : tick à l'ouverture d'un menu, clic pour un dossier.
   useEffect(() => { if (openMenu) playOsSound("toggle"); }, [openMenu]);
   useEffect(() => { if (openFolder) playOsSound("click"); }, [openFolder]);
+  // Carillon de démarrage de l'OS. Audible quand on arrive depuis une autre page
+  // (le clic de navigation a débloqué l'audio) ; muet sur un hard reload, faute
+  // de geste préalable — comportement voulu.
+  useEffect(() => {
+    unlockOsAudio();
+    const id = setTimeout(() => playStartupSound(), 300);
+    return () => clearTimeout(id);
+  }, []);
   // Touch / small screens: a single tap opens apps (double-click is unreliable on mobile).
   useEffect(() => {
     const check = () =>

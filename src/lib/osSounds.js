@@ -60,13 +60,40 @@ const RECIPES = {
     voice(c, { freq: 523, dur: 0.07, type: "sine", peak: 0.11 });
     voice(c, { freq: 784, dur: 0.09, when: 0.05, type: "sine", peak: 0.11 });
   },
-  close: (c) => voice(c, { freq: 480, glideTo: 240, dur: 0.11, type: "sine", peak: 0.11 }),
+  // Fermeture : petit arpège descendant consonant (G5→D5→G4) — court et joyeux.
+  close: (c) => {
+    voice(c, { freq: 784, dur: 0.07, type: "sine", peak: 0.10 });
+    voice(c, { freq: 587, dur: 0.07, when: 0.045, type: "sine", peak: 0.10 });
+    voice(c, { freq: 392, dur: 0.12, when: 0.09, type: "triangle", peak: 0.10 });
+  },
   minimize: (c) => voice(c, { freq: 560, glideTo: 300, dur: 0.09, type: "sine", peak: 0.09 }),
   maximize: (c) => voice(c, { freq: 400, glideTo: 620, dur: 0.09, type: "sine", peak: 0.09 }),
   toggle: (c) => voice(c, { freq: 660, dur: 0.035, type: "square", peak: 0.045 }),
   pop: (c) => voice(c, { freq: 880, dur: 0.05, type: "sine", peak: 0.11 }),
   error: (c) => voice(c, { freq: 190, dur: 0.15, type: "sawtooth", peak: 0.09 }),
 };
+
+// Son de démarrage de l'OS : fichier mp3 dédié (plutôt qu'une synthèse).
+// Respecte le volume/mute de la barre. Silencieux si l'autoplay est bloqué
+// (aucun geste préalable, ex. hard reload) — comportement voulu.
+const STARTUP_SRC = "/songs/startup-sound-variation.mp3";
+let startupAudio = null;
+export function playStartupSound() {
+  try {
+    if (cfg.muted) return;
+    if (typeof Audio === "undefined") return;
+    if (!startupAudio) {
+      startupAudio = new Audio(STARTUP_SRC);
+      startupAudio.preload = "auto";
+    }
+    startupAudio.volume = Math.max(0, Math.min(1, cfg.volume / 100));
+    startupAudio.currentTime = 0;
+    const p = startupAudio.play();
+    if (p && p.catch) p.catch(() => {}); // autoplay bloqué → on ignore
+  } catch {
+    /* audio indisponible */
+  }
+}
 
 // Joue un petit son. Sans effet si coupé, indisponible, ou avant tout geste.
 export function playOsSound(type = "click") {
