@@ -6,12 +6,12 @@ import Seo from "../src/components/global/seo";
 function Custom404() {
   return (
     <>
-      <Seo path="/404" title="Dever - Page Not Found | Paul M. ZANNOU" />
+      <Seo path="/404" title="Page introuvable (404) — Paul Mèdédji ZANNOU" noindex />
       <div className={styles.block404}>
-        <h1>404 - You&apos;re not on road !</h1>
+        <h1>404 — cette page a pris un autre chemin.</h1>
         <div>
           <Link href={"/"}>
-            <div className="button">Go to home</div>
+            <div className="button">Retour à l&apos;accueil</div>
           </Link>
         </div>
       </div>

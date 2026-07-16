@@ -1,16 +1,16 @@
 import Head from "next/head";
 
-const SITE_NAME = "Dever - Awesome portfolio | Paul M. ZANNOU";
+const SITE_NAME = "Paul Mèdédji ZANNOU — Luap Dever";
 const DEFAULT_DESCRIPTION =
-  "Paul M. ZANNOU (Luap Dever) is a fullstack developer of digital solutions, creative interfaces, web services and APIs. With years of experience in Internet and Multimedia, he merges 2D, 3D and code to build interactive, experimental applications.";
+  "Paul Mèdédji ZANNOU (Luap Dever) — ingénieur logiciel full-stack à Cotonou : web, mobile, temps réel et DevOps. Backend distribué (NestJS, Node.js, PostgreSQL), interfaces réactives (Vue.js, Flutter), paiements, streaming vidéo et écosystèmes WordPress d'entreprise.";
+const TWITTER = "@SmithZannou";
 
-// Normalize the configured app URL (it ships with a trailing slash) into a
-// clean origin we can safely concatenate paths and assets onto.
-const ORIGIN = (process.env.appUrl || "https://luap-dever.netlify.app").replace(/\/+$/, "");
+// Origine canonique (sans slash final) — source unique : appUrl (next.config).
+const ORIGIN = (process.env.appUrl || "https://luap-dever.me").replace(/\/+$/, "");
 
 /**
- * Centralized <head> for SEO: title, description, canonical, Open Graph,
- * Twitter cards and optional JSON-LD structured data.
+ * <head> centralisé pour le SEO : title, description, canonical, robots,
+ * Open Graph, Twitter cards, locale et JSON-LD optionnel.
  */
 function Seo({
   title = SITE_NAME,
@@ -18,6 +18,8 @@ function Seo({
   path = "/",
   image = "awesome-dever.png",
   type = "website",
+  locale = "fr_FR",
+  noindex = false,
   jsonLd,
 }) {
   const url = `${ORIGIN}${path}`;
@@ -28,7 +30,11 @@ function Seo({
       <title>{title}</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="description" content={description} />
-      <meta name="author" content="Paul M. ZANNOU" />
+      <meta name="author" content="Paul Mèdédji ZANNOU" />
+      <meta
+        name="robots"
+        content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1"}
+      />
       <link rel="canonical" href={url} />
       <link rel="image_src" href={imageUrl} />
 
@@ -38,15 +44,19 @@ function Seo({
       <meta property="og:description" content={description} key="ogdesc" />
       <meta property="og:type" content={type} key="ogtype" />
       <meta property="og:url" content={url} key="ogurl" />
+      <meta property="og:locale" content={locale} key="oglocale" />
+      <meta property="og:locale:alternate" content={locale === "fr_FR" ? "en_US" : "fr_FR"} key="oglocalealt" />
       <meta property="og:image" content={imageUrl} key="ogimage" />
       <meta property="og:image:secure_url" content={imageUrl} key="ogimagesecure" />
       <meta property="og:image:type" content="image/png" key="ogimagetype" />
-      <meta property="og:image:width" content="1490" key="ogimagew" />
-      <meta property="og:image:height" content="990" key="ogimageh" />
+      <meta property="og:image:width" content="1492" key="ogimagew" />
+      <meta property="og:image:height" content="993" key="ogimageh" />
       <meta property="og:image:alt" content={title} key="ogimagealt" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content={TWITTER} />
+      <meta name="twitter:creator" content={TWITTER} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={imageUrl} />

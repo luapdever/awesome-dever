@@ -126,22 +126,26 @@ const UI = {
 // question au bot ; type "go" → ouvre le sélecteur de navigation.
 const COMMANDS = {
   fr: [
-    { cmd: "/projets", desc: "Voir ses projets", type: "ask", prompt: "Montre-moi ses projets." },
+    { cmd: "/visite", desc: "Visite guidée du portfolio", type: "ask", prompt: "Fais-moi une visite guidée." },
+    { cmd: "/parcours", desc: "Sa carrière en frise", type: "ask", prompt: "Montre-moi son parcours." },
+    { cmd: "/dispo", desc: "Disponibilité + recontact", type: "ask", prompt: "Est-il disponible ?" },
+    { cmd: "/rdv", desc: "Proposer un échange (Cal.com)", type: "ask", prompt: "Réserver un créneau avec Paul." },
+    { cmd: "/projets", desc: "Ses projets (avec liens)", type: "ask", prompt: "Montre-moi ses projets." },
     { cmd: "/competences", desc: "Ses compétences", type: "ask", prompt: "Quelles sont ses compétences ?" },
-    { cmd: "/experience", desc: "Son parcours", type: "ask", prompt: "Parle-moi de son expérience." },
-    { cmd: "/stack", desc: "Sa stack technique", type: "ask", prompt: "C'est quoi sa stack technique ?" },
-    { cmd: "/dispo", desc: "Est-il disponible ?", type: "ask", prompt: "Est-il disponible pour une mission ?" },
-    { cmd: "/contact", desc: "Comment le contacter", type: "ask", prompt: "Comment puis-je le contacter ?" },
+    { cmd: "/email", desc: "Son email", type: "ask", prompt: "Son email ?" },
+    { cmd: "/cv", desc: "Ouvrir son CV", type: "ask", prompt: "Son CV ?" },
     { cmd: "/go", desc: "Naviguer vers une page ou section", type: "go" },
   ],
   en: [
-    { cmd: "/projects", desc: "See his projects", type: "ask", prompt: "Show me his projects." },
+    { cmd: "/tour", desc: "Guided portfolio tour", type: "ask", prompt: "Give me a guided tour." },
+    { cmd: "/journey", desc: "His career timeline", type: "ask", prompt: "Show me his experience." },
+    { cmd: "/available", desc: "Availability + follow-up", type: "ask", prompt: "Is he available?" },
+    { cmd: "/meet", desc: "Propose a chat (Cal.com)", type: "ask", prompt: "Book a slot with Paul." },
+    { cmd: "/projects", desc: "His projects (with links)", type: "ask", prompt: "Show me his projects." },
     { cmd: "/skills", desc: "His skills", type: "ask", prompt: "What are his skills?" },
-    { cmd: "/experience", desc: "His background", type: "ask", prompt: "Tell me about his experience." },
-    { cmd: "/stack", desc: "His tech stack", type: "ask", prompt: "What's his tech stack?" },
-    { cmd: "/available", desc: "Is he available?", type: "ask", prompt: "Is he available for a project?" },
-    { cmd: "/contact", desc: "How to reach him", type: "ask", prompt: "How can I contact him?" },
-    { cmd: "/go", desc: "Navigate to a page or section", type: "go" },
+    { cmd: "/email", desc: "His email", type: "ask", prompt: "His email?" },
+    { cmd: "/cv", desc: "Open his résumé", type: "ask", prompt: "His CV?" },
+    { cmd: "/go", desc: "Go to a page or section", type: "go" },
   ],
 };
 

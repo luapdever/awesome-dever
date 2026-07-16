@@ -15,8 +15,8 @@ function MyPortfolio() {
     <div className={"osShell"}>
       <Seo
         path="/paulfolio"
-        title={`${OS.name} — Paul M. ZANNOU`}
-        description="Explore Paul M. ZANNOU's mind booted as an operating system: open windows, run the terminal, browse projects, skills, career timeline and the vault of enterprise apps."
+        title={`${OS.name} — Paul Mèdédji ZANNOU (Luap Dever)`}
+        description="Le portfolio de Paul Mèdédji ZANNOU en version « système d'exploitation » : ouvrez les fenêtres, lancez le terminal, explorez ses projets, compétences, parcours, son CV et le coffre des prestations d'entreprise."
       />
       <main>
         <Portfolio />

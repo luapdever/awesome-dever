@@ -8,7 +8,7 @@ const personJsonLd = {
   alternateName: "Luap Dever",
   jobTitle: "Ingénieur logiciel full-stack",
   url: "https://luap-dever.me",
-  image: "https://luap-dever.netlify.app/luap.png",
+  image: "https://luap-dever.me/luap.png",
   address: { "@type": "PostalAddress", addressLocality: "Cotonou", addressCountry: "BJ" },
   description:
     "Ingénieur logiciel full-stack : web, mobile, temps réel et DevOps. Backend distribué, interfaces réactives, paiements, streaming vidéo et écosystèmes WordPress d'entreprise.",

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://luap-dever.netlify.app/sitemap.xml
+Sitemap: https://luap-dever.me/sitemap.xml
