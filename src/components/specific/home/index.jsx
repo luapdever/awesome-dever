@@ -388,7 +388,11 @@ function HomePage() {
       </section>
       <div className={styles.testiScroller} ref={testiRef}>
         {[...testimonials, ...testimonials].map((t, i) => (
-          <blockquote className={styles.testi} key={i}>
+          <blockquote
+            className={styles.testi}
+            key={i}
+            aria-hidden={i >= testimonials.length ? "true" : undefined}
+          >
             <p>“{tx(t.text, lang)}”</p>
             <footer>
               <span className={styles.avatar}>{initials(t.name)}</span>
@@ -407,7 +411,12 @@ function HomePage() {
         </div>
         <div className={styles.ctaActions} data-reveal>
           <a className={styles.btnGhost} href="mailto:pzannou511@gmail.com" data-magnetic>{ui.ctaMail}</a>
-          <button className={styles.btnGhost} onClick={openChooser} data-magnetic>{ui.ctaOther}</button>
+          <button
+            className={styles.btnGhost}
+            onClick={openChooser}
+            data-magnetic
+            title={lang === "fr" ? "Changer d'expérience — version classique ou PaulBrain OS" : "Change experience — classic version or PaulBrain OS"}
+          >{ui.ctaOther}</button>
         </div>
       </section>
 
