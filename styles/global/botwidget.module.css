@@ -205,9 +205,73 @@
 .onbStart { width: 100%; padding: 12px; border-radius: 12px; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.9rem; color: #2a1a00; background: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent)); transition: filter 0.2s ease; }
 .onbStart:hover { filter: brightness(1.07); }
 
+/* Statut « disponible » dans le header */
+.headStatus { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; color: rgba(255, 255, 255, 0.62); }
+.statusDot { width: 7px; height: 7px; border-radius: 50%; background: #35d07f; animation: bwPulse 2.2s ease-in-out infinite; }
+@keyframes bwPulse { 0%, 100% { box-shadow: 0 0 0 2px rgba(53, 208, 127, 0.25); } 50% { box-shadow: 0 0 0 5px rgba(53, 208, 127, 0); } }
+
+/* Onboarding — sélecteur de persona (Visiteur / Recruteur) */
+.personaTabs { display: flex; gap: 6px; width: 100%; margin-bottom: 2px; }
+.personaTabs button { flex: 1; padding: 8px 6px; border-radius: 999px; border: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.05); color: rgba(255, 255, 255, 0.7); font-family: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+.personaTabs button:hover { color: #fff; }
+.personaOn { background: rgba(255, 165, 0, 0.16) !important; border-color: var(--color-accent) !important; color: #fff !important; }
+
+/* Suggestion contextuelle (liée à la page regardée) */
+.suggestCtx { background: rgba(255, 165, 0, 0.12) !important; border-color: var(--color-accent) !important; color: #ffd9a0 !important; font-weight: 600; }
+
+/* Cartes projet inline (construites par le front) */
+.projCards { display: flex; flex-direction: column; gap: 6px; align-self: stretch; margin-top: 2px; }
+.projCard { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); color: #fff; text-decoration: none; transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease; }
+.projCard:hover { background: rgba(255, 165, 0, 0.1); border-color: var(--color-accent); transform: translateX(2px); }
+.projIcon { width: 26px; height: 26px; border-radius: 7px; background: #fff; padding: 3px; flex: 0 0 auto; }
+.projInfo { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.projInfo b { font-size: 0.82rem; }
+.projInfo > span { font-size: 0.72rem; color: rgba(255, 255, 255, 0.6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.projArrow { margin-left: auto; color: var(--color-accent-soft); font-size: 0.9rem; }
+
+/* Pied de message : heure + lecture à voix haute */
+.msgFoot { display: inline-flex; align-items: center; gap: 6px; }
+.ttsBtn { width: 20px; height: 20px; display: grid; place-items: center; padding: 0; border: none; background: none; cursor: pointer; opacity: 0.55; transition: opacity 0.2s ease; }
+.ttsBtn:hover { opacity: 1; }
+.ttsBtn img { width: 14px; height: 14px; }
+
+/* Chips de questions de suivi */
+.followRow { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 2px 2px; }
+.followChip { padding: 7px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.06); border: 1px solid var(--glass-border); color: #eae7ff; font-family: inherit; font-size: 0.78rem; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease; }
+.followChip:hover { background: rgba(255, 165, 0, 0.12); border-color: var(--color-accent); }
+
+/* Bouton micro (dictée) */
+.micBtn { width: 38px; height: 38px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.06); cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease; }
+.micBtn:hover { border-color: var(--color-accent); }
+.micBtn img { width: 18px; height: 18px; }
+.micOn { background: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent)); border-color: transparent; animation: bwMic 1.2s ease-in-out infinite; }
+@keyframes bwMic { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.5); } 50% { box-shadow: 0 0 0 6px rgba(255, 165, 0, 0); } }
+
+/* Bulle d'accroche proactive */
+.teaser { position: fixed; right: 22px; bottom: 92px; z-index: 99999; max-width: 210px; padding: 12px 32px 12px 14px; border-radius: 16px 16px 4px 16px; background: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent)); color: #2a1a00; font-size: 0.84rem; font-weight: 600; line-height: 1.35; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35); cursor: pointer; animation: bwPop 0.4s var(--ease-spring); }
+.teaserClose { position: absolute; top: 6px; right: 7px; width: 18px; height: 18px; display: grid; place-items: center; padding: 0; border: none; border-radius: 50%; background: rgba(0, 0, 0, 0.14); color: #2a1a00; font-size: 0.9rem; line-height: 1; cursor: pointer; }
+
 @media (max-width: 560px) {
   .panel { right: 10px; left: 10px; width: auto; bottom: 84px; height: min(70vh, calc(100vh - 110px)); }
   .launcher { right: 16px; bottom: 16px; width: 52px; height: 52px; }
+  .teaser { right: 14px; bottom: 78px; }
+}
+
+/* Accessibilité : respecte prefers-reduced-motion (coupe les animations) */
+@media (prefers-reduced-motion: reduce) {
+  .launcher,
+  .launcher img,
+  .launcher::after,
+  .statusDot,
+  .micOn,
+  .panel,
+  .teaser,
+  .menuPop,
+  .avatarLive,
+  .dots i,
+  .caret,
+  .row { animation: none !important; }
+  .launcher:hover { transform: none; }
 }
 
 /* iOS Safari zoome sur un champ dont la police est < 16px au focus.

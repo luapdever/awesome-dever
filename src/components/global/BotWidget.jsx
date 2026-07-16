@@ -6,6 +6,12 @@ import "react-phone-number-input/style.css";
 import styles from "../../../styles/global/botwidget.module.css";
 import { useLandingLang } from "../../context/landingLang";
 import { NAV, extractActions, runNavAction, navLabel, navigateRelative, linkTokens } from "../../lib/botActions";
+import { detectProjects, followUps, pageContext } from "../../lib/botExtras";
+
+const MIC = "https://api.iconify.design/ph:microphone.svg?color=%23ffffff";
+const MIC_ON = "https://api.iconify.design/ph:microphone-fill.svg?color=%232a1a00";
+const SPEAK = "https://api.iconify.design/ph:speaker-high.svg?color=%23ffd9a0";
+const SPEAK_ON = "https://api.iconify.design/ph:speaker-simple-x.svg?color=%23ffd9a0";
 
 const ROBOT = "https://api.iconify.design/ph:robot.svg";
 const SEND = "https://api.iconify.design/ph:paper-plane-tilt-fill.svg?color=%232a1a00";
@@ -43,6 +49,17 @@ const UI = {
     options: "Options",
     exportPdf: "Exporter en PDF",
     clearConvo: "Effacer la conversation",
+    available: "Disponible",
+    hello: (n) => `Salut ${n} 👋 `,
+    personaVisitor: "Visiteur",
+    personaRecruiter: "Je recrute",
+    recruiterIntro: "Ravi de t'accueillir. Pose-moi tout sur sa disponibilité, sa stack, ses projets — ou récupère son CV en un clic.",
+    recruiterSuggestions: ["Est-il disponible ?", "Sa stack technique ?", "Ouvre son CV", "Comment le contacter ?"],
+    teaser: "Une question sur Paul ? 👋",
+    mic: "Dicter",
+    micStop: "Arrêter la dictée",
+    readAloud: "Lire à voix haute",
+    stopReading: "Arrêter la lecture",
   },
   en: {
     title: "PaulBot",
@@ -72,6 +89,17 @@ const UI = {
     options: "Options",
     exportPdf: "Export to PDF",
     clearConvo: "Clear conversation",
+    available: "Available",
+    hello: (n) => `Hi ${n} 👋 `,
+    personaVisitor: "Visitor",
+    personaRecruiter: "I'm hiring",
+    recruiterIntro: "Glad to have you here. Ask me anything about his availability, stack and projects — or grab his résumé in one click.",
+    recruiterSuggestions: ["Is he available?", "His tech stack?", "Open his résumé", "How to reach him?"],
+    teaser: "A question about Paul? 👋",
+    mic: "Dictate",
+    micStop: "Stop dictation",
+    readAloud: "Read aloud",
+    stopReading: "Stop reading",
   },
 };
 
@@ -137,10 +165,18 @@ function BotWidget() {
   const [slashIndex, setSlashIndex] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [now, setNow] = useState(0);
+  const [onbPersona, setOnbPersona] = useState("visitor");
+  const [teaser, setTeaser] = useState(false);
+  const [listening, setListening] = useState(false);
+  const [speakingIdx, setSpeakingIdx] = useState(-1);
+  const [ctxSuggest, setCtxSuggest] = useState(null);
   const scrollRef = useRef();
   const inputRef = useRef();
   const onbRef = useRef();
   const cidRef = useRef("");
+  const recognitionRef = useRef(null);
+  const voiceSupported = typeof window !== "undefined" && !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+  const ttsSupported = typeof window !== "undefined" && "speechSynthesis" in window;
 
   const commands = COMMANDS[lang] || COMMANDS.fr;
 
@@ -208,6 +244,39 @@ function BotWidget() {
   useEffect(() => { setSlashIndex(0); }, [draft]);
   useEffect(() => { autoGrow(inputRef.current); }, [draft]);
 
+  // Raccourci clavier ⌘K / Ctrl+K pour ouvrir/fermer le bot de n'importe où.
+  useEffect(() => {
+    const onKey = (e) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "K")) {
+        e.preventDefault();
+        setOpen((o) => !o);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  // Bulle d'accroche proactive après 15 s d'inactivité (une fois par session).
+  useEffect(() => {
+    if (typeof window === "undefined" || open) return;
+    try { if (sessionStorage.getItem("paulbot_teaser") === "1") return; } catch {}
+    const id = setTimeout(() => setTeaser(true), 15000);
+    return () => clearTimeout(id);
+  }, [open]);
+
+  // Conscience de la page : suggestion liée à la section regardée, à l'ouverture.
+  useEffect(() => {
+    if (!open) return;
+    setTeaser(false);
+    try { sessionStorage.setItem("paulbot_teaser", "1"); } catch {}
+    if (messages.length === 0) setCtxSuggest(pageContext(lang));
+  }, [open, lang, messages.length]);
+
+  // Coupe la synthèse vocale quand le widget se ferme.
+  useEffect(() => {
+    if (!open && ttsSupported) { window.speechSynthesis.cancel(); setSpeakingIdx(-1); }
+  }, [open, ttsSupported]);
+
   const confirmContact = () => {
     setOnbError("");
     const name = onbName.trim();
@@ -223,6 +292,7 @@ function BotWidget() {
       if (!onbPhone || !isValidPhoneNumber(onbPhone)) { setOnbError(ui.invalidPhone); return; }
       c = { mode: "phone", name, value: onbPhone, consent: true };
     }
+    c.persona = onbPersona; // "visitor" | "recruiter" — pilote l'accueil (front only)
     try { sessionStorage.setItem("paulbot_contact", JSON.stringify(c)); } catch {}
     setContact(c);
     setTimeout(() => inputRef.current?.focus(), 60);
@@ -359,6 +429,44 @@ function BotWidget() {
     setTimeout(() => inputRef.current?.focus(), 40);
   };
 
+  const dismissTeaser = () => {
+    setTeaser(false);
+    try { sessionStorage.setItem("paulbot_teaser", "1"); } catch {}
+  };
+
+  // Dictée vocale (Web Speech API) — remplit le champ, aucun appel modèle.
+  const toggleMic = () => {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) return;
+    if (listening) { recognitionRef.current?.stop(); return; }
+    const rec = new SR();
+    rec.lang = lang === "en" ? "en-US" : "fr-FR";
+    rec.interimResults = true;
+    rec.continuous = false;
+    rec.onresult = (e) => {
+      const txt = Array.from(e.results).map((r) => r[0].transcript).join("");
+      setDraft(txt);
+    };
+    rec.onend = () => setListening(false);
+    rec.onerror = () => setListening(false);
+    recognitionRef.current = rec;
+    setListening(true);
+    try { rec.start(); } catch { setListening(false); }
+  };
+
+  // Lecture à voix haute de la réponse du bot (SpeechSynthesis).
+  const speakMsg = (text, idx) => {
+    if (!ttsSupported) return;
+    window.speechSynthesis.cancel();
+    if (speakingIdx === idx) { setSpeakingIdx(-1); return; }
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = lang === "en" ? "en-US" : "fr-FR";
+    u.onend = () => setSpeakingIdx(-1);
+    u.onerror = () => setSpeakingIdx(-1);
+    setSpeakingIdx(idx);
+    window.speechSynthesis.speak(u);
+  };
+
   return (
     <>
       {open && (
@@ -367,7 +475,7 @@ function BotWidget() {
             <img src={ROBOT + "?color=%23110068"} alt="" className={styles.headIcon} />
             <div className={styles.headText}>
               <b>{ui.title}</b>
-              <span>{ui.subtitle}</span>
+              <span className={styles.headStatus}><i className={styles.statusDot} />{ui.available}</span>
             </div>
             {contact && (
               <div className={styles.headMenuWrap}>
@@ -400,6 +508,11 @@ function BotWidget() {
               <img src={ROBOT + "?color=%23ffffff"} alt="" className={styles.onbIcon} />
               <b className={styles.onbTitle}>{ui.onbTitle}</b>
               <p className={styles.onbText}>{ui.onbText}</p>
+
+              <div className={styles.personaTabs}>
+                <button type="button" className={onbPersona === "visitor" ? styles.personaOn : ""} onClick={() => setOnbPersona("visitor")}>{ui.personaVisitor}</button>
+                <button type="button" className={onbPersona === "recruiter" ? styles.personaOn : ""} onClick={() => setOnbPersona("recruiter")}>{ui.personaRecruiter}</button>
+              </div>
 
               <input
                 className={styles.onbInput}
@@ -455,12 +568,18 @@ function BotWidget() {
             </div>
           ) : (
             <>
-              <div className={styles.stream} ref={scrollRef}>
+              <div className={styles.stream} ref={scrollRef} role="log" aria-live="polite" aria-relevant="additions text">
                 {messages.length === 0 && (
                   <div className={styles.intro}>
-                    <p>{ui.intro}</p>
+                    <p>
+                      {contact?.name ? ui.hello(contact.name) : ""}
+                      {contact?.persona === "recruiter" ? ui.recruiterIntro : ui.intro}
+                    </p>
                     <div className={styles.suggest}>
-                      {ui.suggestions.map((s, i) => (
+                      {ctxSuggest && (
+                        <button type="button" className={styles.suggestCtx} onClick={() => send(ctxSuggest.prompt)}>{ctxSuggest.label}</button>
+                      )}
+                      {(contact?.persona === "recruiter" ? ui.recruiterSuggestions : ui.suggestions).map((s, i) => (
                         <button key={i} type="button" onClick={() => send(s)}>{s}</button>
                       ))}
                     </div>
@@ -510,13 +629,55 @@ function BotWidget() {
                             {navLabel(m.action, lang)} →
                           </button>
                         )}
+                        {!isUser && !streaming && m.content && detectProjects(m.content, lang).length > 0 && (
+                          <div className={styles.projCards}>
+                            {detectProjects(m.content, lang).map((p, k) => (
+                              <a key={k} href={p.url} target="_blank" rel="noopener noreferrer" className={styles.projCard}>
+                                <img src={p.icon} alt="" className={styles.projIcon} />
+                                <span className={styles.projInfo}>
+                                  <b>{p.name}</b>
+                                  <span>{p.tag}</span>
+                                </span>
+                                <span className={styles.projArrow} aria-hidden="true">↗</span>
+                              </a>
+                            ))}
+                          </div>
+                        )}
                         {!thinking && m.at && (
-                          <span className={styles.msgTime}>{friendlyTime(m.at, lang, now)}</span>
+                          <span className={styles.msgFoot}>
+                            <span className={styles.msgTime}>{friendlyTime(m.at, lang, now)}</span>
+                            {!isUser && !streaming && m.content && ttsSupported && (
+                              <button
+                                type="button"
+                                className={styles.ttsBtn}
+                                onClick={() => speakMsg(m.content, i)}
+                                aria-label={speakingIdx === i ? ui.stopReading : ui.readAloud}
+                                title={speakingIdx === i ? ui.stopReading : ui.readAloud}
+                              >
+                                <img src={speakingIdx === i ? SPEAK_ON : SPEAK} alt="" />
+                              </button>
+                            )}
+                          </span>
                         )}
                       </div>
                     </div>
                   );
                 })}
+
+                {/* Questions de suivi contextuelles (front, aucun appel modèle) */}
+                {!pending && messages.length > 0 && (() => {
+                  const last = messages[messages.length - 1];
+                  if (!last || last.role !== "assistant" || !last.content) return null;
+                  const prevUser = [...messages].reverse().find((mm) => mm.role === "user");
+                  const chips = followUps(prevUser?.content, last.content, lang);
+                  return chips.length ? (
+                    <div className={styles.followRow}>
+                      {chips.map((c, k) => (
+                        <button key={k} type="button" className={styles.followChip} onClick={() => send(c)}>{c}</button>
+                      ))}
+                    </div>
+                  ) : null;
+                })()}
               </div>
 
               {slashActive && (
@@ -558,10 +719,28 @@ function BotWidget() {
                   onChange={(e) => setDraft(e.target.value)}
                   onKeyDown={onKeyDown}
                 />
+                {voiceSupported && (
+                  <button
+                    type="button"
+                    className={`${styles.micBtn} ${listening ? styles.micOn : ""}`}
+                    onClick={toggleMic}
+                    aria-label={listening ? ui.micStop : ui.mic}
+                    title={listening ? ui.micStop : ui.mic}
+                  >
+                    <img src={listening ? MIC_ON : MIC} alt="" />
+                  </button>
+                )}
                 <button type="submit" disabled={pending} aria-label="Envoyer"><img src={SEND} alt="" /></button>
               </form>
             </>
           )}
+        </div>
+      )}
+
+      {teaser && !open && (
+        <div className={styles.teaser} role="button" tabIndex={0} onClick={() => setOpen(true)} onKeyDown={(e) => e.key === "Enter" && setOpen(true)}>
+          {ui.teaser}
+          <button className={styles.teaserClose} onClick={(e) => { e.stopPropagation(); dismissTeaser(); }} aria-label="Fermer">×</button>
         </div>
       )}
 
