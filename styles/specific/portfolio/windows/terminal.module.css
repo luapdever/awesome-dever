@@ -52,3 +52,12 @@
 .terminal b { color: var(--color-accent); }
 .terminal b.or { color: var(--color-accent); }
 .terminal pre { font-family: inherit; }
+
+/* Caret clignotant pendant le streaming de la réponse `ask`. */
+.terminal .caret {
+  display: inline-block;
+  margin-left: 1px;
+  color: var(--color-accent);
+  animation: termBlink 1s step-end infinite;
+}
+@keyframes termBlink { 50% { opacity: 0; } }

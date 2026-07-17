@@ -208,6 +208,16 @@ export function buildCommands() {
     return <p>Language set to <b className="or">{l.toUpperCase()}</b>.</p>;
   });
 
+  // NB : `ask` est intercepté par useConsole (asynchrone + streaming + onboarding).
+  // Cette entrée sert uniquement au `help`, au `man ask` et à l'autocomplétion.
+  def(
+    "ask",
+    "Chat with PaulBot (streaming). Prompts for a nickname & reach-back on first use.",
+    "ask [question]   ·   ask reset   ·   ask whoami",
+    () => <p>Starting PaulBot…</p>,
+    ["chat"]
+  );
+
   def("echo", "Print text.", "echo <text>", (ctx) => <p>{ctx.args.join(" ")}</p>);
 
   def("date", "Show date & time.", "date", () => <p>{new Date().toString()}</p>);
