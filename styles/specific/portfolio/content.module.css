@@ -285,6 +285,10 @@
 /*============ Desktop + icons =========================================*/
 
 .contentBlk .desktop {
+    /* NB : garder le position:absolute hérité de `.contentBlk > section`
+       (les écrans se superposent ; l'accueil s'efface pour révéler le bureau).
+       overflow:hidden sert à masquer les bords de la couche wallpaper floutée. */
+    overflow: hidden;
     padding: 44px 14px 14px;
     background:
         radial-gradient(circle at 16% 20%, rgba(74, 52, 214, 0.6), transparent 44%),
@@ -292,6 +296,21 @@
         radial-gradient(circle at 52% 50%, #150d3e, #06031a);
     background-size: 200% 200%, 200% 200%, 100% 100%;
     animation: auroraShift 22s ease-in-out infinite;
+}
+/* Couche wallpaper : floutée + assombrie, DERRIÈRE les icônes (point #1 —
+   le fond « code » ne domine plus, icônes/fenêtres ressortent). */
+.contentBlk .desktop .wallLayer {
+    position: absolute;
+    inset: -24px;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px) brightness(0.52) saturate(0.92);
+    pointer-events: none;
+}
+.contentBlk .desktop .performances {
+    position: relative;
+    z-index: 1;
 }
 .contentBlk .desktop .performances {
     display: flex;
@@ -330,9 +349,12 @@
     white-space: inherit;
 }
 .contentBlk .desktop .performances > div > img {
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
     background-color: white;
-    padding: 6px;
-    border-radius: 12px;
+    padding: 8px;
+    border-radius: 15px;
     box-shadow: var(--shadow-1);
 }
 .contentBlk .desktop .performances > div > span {
@@ -435,7 +457,8 @@
     bottom: 12px;
     left: 50%;
     transform: translate(-50%, 0);
-    max-width: 86%;
+    max-width: 92%;
+    min-width: 0;
     height: 62px;
     padding: 0 12px;
     /* Liquid glass */
@@ -457,6 +480,11 @@
     overflow: visible;
     user-select: none;
 }
+@media screen and (min-width: 992px) {
+    .contentBlk .taskbar {
+        max-width: 80%;
+    }
+}
 /* Specular sheen on top of the dock */
 .contentBlk .taskbar::before {
     content: "";
@@ -473,6 +501,8 @@
 .contentBlk .taskbar .task {
     width: 46px;
     height: 46px;
+    flex: 0 1 46px;
+    min-width: 30px; /* les icônes se compressent au lieu de déborder du dock */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -508,9 +538,14 @@
     animation: turnInto 2s infinite var(--ease-spring);
 }
 .contentBlk .taskbar .task > img {
+    width: 100%;
+    height: auto;
+    max-width: 30px;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
     background-color: white;
-    padding: 3px;
-    border-radius: 10px;
+    padding: 4px;
+    border-radius: 9px;
     box-shadow: var(--shadow-1);
 }
 .contentBlk .taskbar .task_bars {

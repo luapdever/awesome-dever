@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Head from "next/head";
 
 /* Page-cadre pour embarquer le widget PaulBot dans une page tierce (ex. le CV
-   statique /cv/index.html) via un <iframe>. Elle ne rend AUCUN widget elle-même :
+   statique /cv) via un <iframe>. Elle ne rend AUCUN widget elle-même :
    le <BotWidget/> global de _app s'affiche déjà (avec ses providers) — donc zéro
    duplication de code.
 

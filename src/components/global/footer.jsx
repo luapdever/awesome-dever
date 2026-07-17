@@ -42,7 +42,7 @@ function TheFooter() {
         <div className={styles.col}>
           <h4>Explorer</h4>
           <Link href="/paulfolio">PaulBrain OS</Link>
-          <a href="/cv/index.html" target="_blank" rel="noopener noreferrer">Mon CV interactif</a>
+          <a href="/cv" target="_blank" rel="noopener noreferrer">Mon CV interactif</a>
           <Link href="/#temoignages">Témoignages</Link>
           <a href="https://luap-dever.netlify.app/blog" target="_blank" rel="noopener noreferrer">Mon blog</a>
           <button

@@ -20,6 +20,7 @@ const STUDIO = "Fidèle SODOGA · Fresnel AGLOSSI";
 
 /* Company / theme folders (iOS-style groups). Apps carrying `group` are folded here. */
 export const groupsMeta = {
+  Apps: { name: "Apps", icon: "/icons/ph/squares-four__ffffff.svg", bg: "#1a1033" },
   MTN: { name: "MTN", icon: MTN_LOGO, bg: "#FFFFFF" },
   Trainings: { name: "Trainings", icon: "/icons/ph/graduation-cap__ffffff.svg", bg: "#0e0730" },
 };
@@ -31,6 +32,7 @@ export const performances = [
     icon: "/icons/ph/briefcase__ffffff.svg",
     bg: "#4a34d6",
     label: "Career",
+    group: "Apps",
     get content() { return <Career />; },
     properties: {
       category: L("System · Experience", "Système · Expérience"),
@@ -47,6 +49,7 @@ export const performances = [
     icon: "/icons/ph/brain__ffffff.svg",
     bg: "#d98400",
     label: "Skills",
+    group: "Apps",
     get content() { return <Skills />; },
     properties: {
       category: L("System · Stack", "Système · Stack"),
@@ -79,6 +82,7 @@ export const performances = [
     icon: "/icons/ph/lock-key__ffffff.svg",
     bg: "#2a1f5c",
     label: "Enterprise",
+    group: "Apps",
     get content() { return <Vault />; },
     properties: {
       category: L("System · Confidential", "Système · Confidentiel"),
@@ -98,7 +102,7 @@ export const performances = [
     embed: true,
     fullscreenOnly: true,
     syncLang: true,
-    url: "/cv/index.html",
+    url: "/cv",
     get content() { return appWindow(this); },
     properties: {
       category: L("System · Résumé", "Système · CV"),
@@ -168,6 +172,7 @@ export const performances = [
     id: "terminal",
     icon: console.src,
     label: "Terminal",
+    group: "Apps",
     bg: "#00000000",
     content: <Terminal />,
     properties: {
@@ -200,6 +205,7 @@ export const performances = [
     icon: appIcon.src,
     bg: "#999",
     label: "App Store",
+    group: "Apps",
     get content() { return <AppStore />; },
     properties: {
       category: L("Mobile · Store", "Mobile · Store"),

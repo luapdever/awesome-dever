@@ -42,7 +42,7 @@ function PremiumModal({ onClose }) {
   const [mode, setMode] = useState("menu");
 
   const run = (id) => {
-    if (id === "cv") window.open("/cv/index.html", "_blank");
+    if (id === "cv") window.open("/cv", "_blank");
     else if (id === "os") router.push("/paulfolio");
     else if (id === "terminal") setMode("terminal");
   };

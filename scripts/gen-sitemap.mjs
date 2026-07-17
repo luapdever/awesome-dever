@@ -18,7 +18,7 @@ const ROUTES = [
   { path: "/book", priority: "0.9", changefreq: "monthly" }, // la biographie (SEO Book+Person)
   { path: "/about-me", priority: "0.7", changefreq: "monthly" },
   { path: "/paulfolio", priority: "0.7", changefreq: "monthly" },
-  { path: "/cv", priority: "0.6", changefreq: "monthly" }, // rewrite → public/cv/index.html (URL propre, sans redirection)
+  { path: "/cv", priority: "0.6", changefreq: "monthly" }, // rewrite → public/cv (URL propre, sans redirection)
 ];
 
 const lastmod = new Date().toISOString().slice(0, 10);

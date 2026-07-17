@@ -37,7 +37,7 @@ import { skillSet, experiences, testimonials } from "../../data";
 | Fonds d'écran | `wallpapers`, `pickWallpaper` | `rawDatas/wallpapers.js` |
 
 **Hors de ce dépôt (dupliqué aujourd'hui, à unifier en Phases 2–3) :**
-- CV statique → objets inline dans `public/cv/index.html` (générateur : `public/cv/data/generate.mjs`).
+- CV statique → objets inline dans `public/cv` (générateur : `public/cv/data/generate.mjs`).
 - Backend PaulBot → `paulbot-backend/src/paulbot/paul.context.ts` (`EXPERIENCES`, `SKILLS`, `COLLABS`).
 
 ## Plan des phases

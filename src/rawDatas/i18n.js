@@ -83,6 +83,7 @@ export const STR = {
     wDo: [
       "Web & mobile apps — Vue.js, React/Next.js, Flutter",
       "Distributed & real-time backends — NestJS, Node.js, WebSocket",
+      "AI automation & agents — streaming LLMs, RAG, tool calling, prompt guardrails",
       "Payments, KYC, RBAC/SSO & multilingual WordPress",
       "Containerized DevOps — Docker, CI/CD, monitoring",
     ],
@@ -139,6 +140,7 @@ export const STR = {
     wDo: [
       "Apps web & mobiles — Vue.js, React/Next.js, Flutter",
       "Backends distribués & temps réel — NestJS, Node.js, WebSocket",
+      "Automatisation & agents IA — LLM en streaming, RAG, tool calling, garde-fous de prompt",
       "Paiements, KYC, RBAC/SSO & WordPress multilingue",
       "DevOps conteneurisé — Docker, CI/CD, supervision",
     ],

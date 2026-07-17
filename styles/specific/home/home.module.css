@@ -220,7 +220,7 @@
 .linkCard:hover .linkArrow { transform: translateX(4px); }
 
 /* ============ PREMIUM MODAL ============ */
-.modalOverlay { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; background: rgba(6, 3, 26, 0.62); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); animation: fadeIn 0.25s ease; }
+.modalOverlay { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; background: rgba(6, 3, 26, 0.42); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); animation: fadeIn 0.25s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 .modal { position: relative; width: min(600px, 100%); max-height: 88vh; overflow-y: auto; background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)), var(--glass-bg-strong); backdrop-filter: blur(28px) saturate(160%); -webkit-backdrop-filter: blur(28px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 22px; box-shadow: var(--shadow-2), inset 0 1px 0 rgba(255, 255, 255, 0.28); padding: 30px 28px 26px; color: #fff; animation: modalPop 0.35s var(--ease-spring); }
 @keyframes modalPop { from { opacity: 0; transform: translateY(20px) scale(0.97); } to { opacity: 1; transform: none; } }

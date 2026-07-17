@@ -14,7 +14,7 @@ export const NAV = {
   testimonials: { type: "section", id: "temoignages" },
   stack: { type: "section", id: "stack" },
   contact: { type: "section", id: "collaborer" },
-  cv: { type: "external", url: "/cv/index.html" },
+  cv: { type: "external", url: "/cv" },
   os: { type: "route", url: "/paulfolio" },
 };
 

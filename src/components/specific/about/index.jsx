@@ -168,7 +168,7 @@ function AboutMe() {
           <Link href="/#collaborer" className={styles.btnPrimary}>{ui.ctaContact}</Link>
           <Link href="/book" className={styles.btnGhost}>{ui.ctaBook}</Link>
           <Link href="/paulfolio" className={styles.btnGhost}>{ui.ctaOS}</Link>
-          <a href="/cv/index.html" target="_blank" rel="noopener noreferrer" className={styles.btnGhost}>{ui.ctaCV}</a>
+          <a href="/cv" target="_blank" rel="noopener noreferrer" className={styles.btnGhost}>{ui.ctaCV}</a>
         </div>
       </section>
     </div>

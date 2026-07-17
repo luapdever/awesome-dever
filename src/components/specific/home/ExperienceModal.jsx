@@ -96,7 +96,7 @@ function ExperienceModal() {
   };
 
   const run = (id) => {
-    if (id === "cv") { remember("cv"); window.open("/cv/index.html", "_blank"); dropClose(); }
+    if (id === "cv") { remember("cv"); window.open("/cv", "_blank"); dropClose(); }
     else if (id === "os") { remember("os"); dismiss(); router.push("/paulfolio"); }
     else if (id === "bot") {
       remember("bot");

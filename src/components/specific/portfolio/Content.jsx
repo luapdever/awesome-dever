@@ -95,14 +95,9 @@ function Content() {
     return () => window.removeEventListener("resize", check);
   }, []);
   const tapOpen = (e, app) => { if (isTouch) openWindow(e, app); };
-  const desktopStyle = wallpaper
-    ? {
-        backgroundImage: `linear-gradient(135deg, rgba(9,5,34,0.82), rgba(6,3,26,0.7)), url("${wallpaper}")`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        animation: "none",
-      }
-    : undefined;
+  // Le wallpaper est rendu dans une COUCHE dédiée (floutée + assombrie) derrière
+  // les icônes → le code du fond ne domine plus, fenêtres et icônes ressortent.
+  const desktopStyle = wallpaper ? { animation: "none" } : undefined;
 
   const {
     currentWindow,
@@ -124,7 +119,12 @@ function Content() {
     welcomeWindow,
    } = useWindowScreen();
 
-  // Build the desktop layout: standalone apps + one folder per company group.
+  // Apps épinglées au dock (barre de navigation système). Elles sont EXCLUES du
+  // bureau pour éviter la duplication : le bureau présente les projets + dossiers,
+  // le dock sert de navigation — plus clair, moins d'icônes au premier écran.
+  const PINNED = ["cv", "bot", "contact"];
+
+  // Build the desktop layout: standalone (non épinglées) + un dossier par groupe.
   const desktopItems = [];
   const seenGroups = new Set();
   performances.forEach((p) => {
@@ -133,7 +133,7 @@ function Content() {
         seenGroups.add(p.group);
         desktopItems.push({ type: "folder", group: p.group });
       }
-    } else {
+    } else if (!PINNED.includes(p.id)) {
       desktopItems.push({ type: "app", app: p });
     }
   });
@@ -144,9 +144,8 @@ function Content() {
     setOpenFolder(null);
   };
 
-  // App launcher (Windows-like) + pinned dock apps
+  // App launcher (Windows-like)
   const perfById = Object.fromEntries(performances.map((p) => [p.id, p]));
-  const PINNED = ["cv", "career", "skills", "bot", "vault", "appStore", "terminal", "contact"];
   const launcherList = performances.filter((p) =>
     p.label.toLowerCase().includes(q.trim().toLowerCase())
   );
@@ -477,6 +476,7 @@ function Content() {
 
       {/* The desktop shortcut */}
       <section className={styles.desktop} style={desktopStyle}>
+        {wallpaper && <div className={styles.wallLayer} style={{ backgroundImage: `url("${wallpaper}")` }} aria-hidden="true" />}
         <div className={styles.performances}>
           {desktopItems.map((item, index) =>
             item.type === "app" ? (

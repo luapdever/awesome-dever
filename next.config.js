@@ -15,7 +15,7 @@ const nextConfig = {
   // les icônes self-hostées et le Consent Mode stabilisé, avec des nonces).
   // NB : microphone=(self) est laissé ouvert car PaulBot utilise le Web Speech
   // API (dictée vocale).
-  // /cv et /cv/ servent le CV statique (public/cv/index.html) — évite le 404
+  // /cv et /cv/ servent le CV statique (public/cv) — évite le 404
   // sur l'URL propre (celle du sitemap), en dev comme en prod. L'URL reste /cv.
   async rewrites() {
     return [

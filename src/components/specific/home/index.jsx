@@ -238,7 +238,7 @@ function HomePage() {
           </div>
           <div className={styles.heroActions} data-hero-fade>
             <Link href="/paulfolio" className={styles.btnPrimary} data-magnetic>{ui.btnOS}</Link>
-            <a href="/cv/index.html" target="_blank" rel="noopener noreferrer" className={styles.btnGhost} data-magnetic>{ui.btnCV}</a>
+            <a href="/cv" target="_blank" rel="noopener noreferrer" className={styles.btnGhost} data-magnetic>{ui.btnCV}</a>
           </div>
         </div>
         <div className={styles.heroFoot}>
