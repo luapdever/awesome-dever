@@ -240,6 +240,14 @@
 .modalActionReco { border-color: rgba(255, 165, 0, 0.45); }
 .maBadge { position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent-soft), var(--color-accent)); box-shadow: 0 3px 8px rgba(255, 140, 0, 0.4); }
 .maBadge img { width: 11px; height: 11px; margin: 0; }
+/* Variations secondaires « pour les curieux » — discrètes sous les 3 registres. */
+.modalMore { margin-top: 14px; text-align: center; }
+.modalMoreLabel { display: block; font-size: 0.72rem; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255, 255, 255, 0.42); margin-bottom: 8px; }
+.modalMoreRow { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.modalMoreBtn { display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; border-radius: 999px; border: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.04); color: rgba(255, 255, 255, 0.8); font-family: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+.modalMoreBtn:hover { background: rgba(255, 165, 0, 0.12); border-color: var(--color-accent); color: #fff; }
+.modalMoreBtn img { width: 16px; height: 16px; }
+
 .modalContinue { display: block; width: 100%; margin-top: 16px; padding: 12px; border: 1px dashed var(--glass-border); border-radius: 12px; background: none; color: rgba(255, 255, 255, 0.7); font-family: inherit; font-size: 0.85rem; cursor: pointer; }
 .modalContinue:hover { color: #fff; border-color: var(--color-accent); }
 .modalTerminal { display: flex; flex-direction: column; }

@@ -10,12 +10,17 @@ import { useExperience } from "../../../context/experience";
 
 const ph = (name, color = "ffa500") => `https://api.iconify.design/ph:${name}.svg?color=%23${color}`;
 
-const ACTIONS = [
-  { id: "cv", label: L("Read my résumé", "Lire mon CV"), sub: L("Short version, hold the coffee", "Version courte, sans le café"), icon: ph("file-text") },
-  { id: "bot", label: L("PaulBot", "PaulBot"), sub: L("Chat about me then book a meeting", "Discuter à propos de moi puis RDV"), icon: ph("robot"), recommended: true },
-  { id: "os", label: L("PaulBrain OS", "PaulBrain OS"), sub: L("My brain in operating system mode", "Mon cerveau en mode système d'exploitation"), icon: ph("desktop") },
-  { id: "terminal", label: L("Terminal mode", "Mode terminal"), sub: L("For the brave — type help", "Pour les vrais, tapez help"), icon: ph("terminal-window") },
-  { id: "3d", label: L("3D mode", "Mode 3D"), sub: L("Wander through my 3D world", "Balade-toi dans mon univers 3D"), icon: ph("cube") },
+// Trois registres principaux : converser (PaulBot, recommandé), explorer
+// (PaulBrain OS) ou aller à l'essentiel (CV).
+const PRIMARY = [
+  { id: "cv", label: L("Read my résumé", "Lire mon CV"), sub: L("Straight to the facts", "Droit aux faits"), icon: ph("file-text") },
+  { id: "bot", label: L("PaulBot", "PaulBot"), sub: L("Chat about me, then book a meeting", "Discuter à propos de moi, puis RDV"), icon: ph("robot"), recommended: true },
+  { id: "os", label: L("PaulBrain OS", "PaulBrain OS"), sub: L("Explore my world, desktop-style", "Explorer mon univers façon bureau"), icon: ph("desktop") },
+];
+// Variations secondaires, pour les curieux.
+const SECONDARY = [
+  { id: "terminal", label: L("Terminal", "Terminal"), icon: ph("terminal-window") },
+  { id: "3d", label: L("3D mode", "Mode 3D"), icon: ph("cube") },
 ];
 
 const MODAL_UI = {
@@ -27,6 +32,7 @@ const MODAL_UI = {
     shell: "type",
     back: "Back",
     recommended: "Recommended",
+    more: "Also, for the curious",
   },
   fr: {
     badge: "Édition Premium (gratuite, promis)",
@@ -36,6 +42,7 @@ const MODAL_UI = {
     shell: "tapez",
     back: "Retour",
     recommended: "Recommandé",
+    more: "Aussi, pour les curieux",
   },
 };
 
@@ -122,12 +129,11 @@ function ExperienceModal() {
             <p className={styles.modalText}>{m.text}</p>
 
             <div className={styles.modalGrid}>
-              {ACTIONS.map((a) => (
+              {PRIMARY.map((a) => (
                 <button
                   key={a.id}
-                  className={`${styles.modalAction} ${a.disabled ? styles.modalActionOff : ""} ${a.recommended ? styles.modalActionReco : ""}`}
-                  onClick={() => !a.disabled && run(a.id)}
-                  disabled={a.disabled}
+                  className={`${styles.modalAction} ${a.recommended ? styles.modalActionReco : ""}`}
+                  onClick={() => run(a.id)}
                 >
                   {a.recommended && (
                     <span className={styles.maBadge} title={m.recommended} aria-label={m.recommended}>
@@ -139,6 +145,18 @@ function ExperienceModal() {
                   <span className={styles.maSub}>{tx(a.sub, lang)}</span>
                 </button>
               ))}
+            </div>
+
+            <div className={styles.modalMore}>
+              <span className={styles.modalMoreLabel}>{m.more}</span>
+              <div className={styles.modalMoreRow}>
+                {SECONDARY.map((a) => (
+                  <button key={a.id} type="button" className={styles.modalMoreBtn} onClick={() => run(a.id)}>
+                    <img src={a.icon} alt="" />
+                    {tx(a.label, lang)}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <button className={styles.modalContinue} onClick={keepScrolling}>{m.continue}</button>
