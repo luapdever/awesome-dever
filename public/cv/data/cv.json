@@ -36,11 +36,14 @@
         "mtn-sites",
         "mymtn",
         "emilia",
+        "paulbot",
+        "portfolio",
         "invoicepay"
       ],
       "skillOrder": [
         "languages",
         "backend",
+        "ai",
         "frontend",
         "mobile",
         "cms",
@@ -64,10 +67,12 @@
     },
     "frontend": {
       "projectOrder": [
+        "portfolio",
         "mymtn",
         "mtn-sites",
         "celtiis",
         "emilia",
+        "paulbot",
         "invoicepay"
       ],
       "skillOrder": [
@@ -76,6 +81,7 @@
         "mobile",
         "cms",
         "backend",
+        "ai",
         "cloud",
         "devops",
         "db",
@@ -102,6 +108,8 @@
     "backend": {
       "projectOrder": [
         "emilia",
+        "paulbot",
+        "portfolio",
         "invoicepay",
         "celtiis",
         "mtn-sites",
@@ -109,6 +117,7 @@
       ],
       "skillOrder": [
         "backend",
+        "ai",
         "languages",
         "db",
         "cloud",
@@ -121,9 +130,9 @@
       ],
       "focus": [
         "backend",
+        "ai",
         "db",
-        "cloud",
-        "languages"
+        "cloud"
       ],
       "fr": {
         "role": "Ingénieur Backend",
@@ -141,6 +150,8 @@
         "emilia",
         "celtiis",
         "invoicepay",
+        "paulbot",
+        "portfolio",
         "mtn-sites",
         "mymtn"
       ],
@@ -149,6 +160,7 @@
         "cloud",
         "obs",
         "backend",
+        "ai",
         "db",
         "vcs",
         "languages",
@@ -189,6 +201,8 @@
         "interets": "Centres d'intérêt",
         "client": "Client",
         "privateProj": "Projet privé (institutionnel)",
+        "confidential": "Projet confidentiel",
+        "ndaNote": "Détails masqués — accord de confidentialité (NDA)",
         "exportPdf": "Exporter en PDF",
         "profilLabel": "Profil",
         "langLabel": "Langue"
@@ -222,7 +236,7 @@
           "period": "Janvier 2022 – Présent",
           "note": "Prestations web pour grands comptes télécoms et médias",
           "bullets": [
-            "2026 · Celtiis (via KAMGOKO) — Mission confidentielle sous accord de non-divulgation (NDA).",
+            "2026 · Celtiis (via KAMGOKO) — Développement web pour un opérateur télécom.",
             "2022 – 2025 · MTN & Moov — Sites corporate MTN Bénin, MTN Congo et Moov Africa Togo, application Selfcare MyMTN (Vue.js) et page d'activation MonRouteur : thèmes/plugins WordPress sur mesure, intégration d'APIs RESTful et optimisation des performances."
           ]
         },
@@ -238,12 +252,12 @@
           ]
         },
         {
-          "role": "Développeur Desktop & Mobile",
+          "role": "Développeur Backend",
           "org": "CCIB — Chambre de Commerce et d'Industrie du Bénin",
           "period": "2022 – 2023",
-          "note": "Prestation pour une institution publique — sous NDA",
+          "note": "Prestation pour une institution publique",
           "bullets": [
-            "Détails du projet couverts par un accord de confidentialité (NDA)."
+            "Développement backend d'une application web pour une institution publique."
           ]
         },
         {
@@ -272,7 +286,8 @@
           "id": "celtiis",
           "hidden": true,
           "company": "Celtiis (via KAMGOKO)",
-          "year": "2026"
+          "year": "2026",
+          "type": "Développement web — opérateur télécom"
         },
         {
           "id": "mtn-sites",
@@ -349,10 +364,53 @@
           ]
         },
         {
+          "id": "paulbot",
+          "name": "PaulBot — assistant IA du portfolio",
+          "year": "2025",
+          "role": "Full-stack & intégration IA",
+          "client": "Projet personnel",
+          "desc": "Assistant conversationnel intégré à mon portfolio, qui répond aux questions des visiteurs sur mon parcours. Backend NestJS dédié diffusant les tokens en streaming (SSE) depuis un LLM compatible OpenAI (Groq — Llama 3.3 70B), avec bascule à chaud vers un Ollama auto-hébergé sans changer le code. Stratégie de context-stuffing (tout le profil tient dans la fenêtre de contexte du modèle, donc pas de RAG nécessaire pour l'instant) sur une architecture prête pour le RAG. Des garde-fous au niveau du prompt le maintiennent sur le sujet et respectent les NDA, un système de marqueurs lui permet de naviguer sur le site, et les sessions en mémoire génèrent un PDF de la conversation envoyé par email à la fin de chaque échange.",
+          "stack": [
+            "NestJS",
+            "TypeScript",
+            "Groq / Llama 3.3",
+            "Ollama",
+            "Streaming SSE",
+            "Next.js",
+            "Docker"
+          ]
+        },
+        {
+          "id": "portfolio",
+          "name": "Luap Dever — Portfolio interactif « PaulBrain OS »",
+          "year": "2025 – 2026",
+          "role": "Conception, design & développement full-stack",
+          "client": "Projet personnel",
+          "desc": "Portfolio nouvelle génération à trois expériences au choix : une landing animée façon awwwards (GSAP/ScrollTrigger — préchargeur, scroll horizontal épinglé, typographie cinétique, marquees), un système d'exploitation dans le navigateur (« PaulBrain OS » — gestionnaire de fenêtres, barre des tâches, lanceur d'apps, sons d'interface synthétisés en Web Audio) et un mode terminal interactif. Intègre PaulBot, un assistant IA branché sur un LLM en streaming (SSE), avec dictée et synthèse vocale (Web Speech), un captcha open-source anti-spam (ALTCHA) et l'export PDF de conversation par email. Bilingue (FR/EN), accessible (ARIA, prefers-reduced-motion), responsive et optimisé SEO.",
+          "stack": [
+            "Next.js",
+            "React",
+            "GSAP / ScrollTrigger",
+            "Web Audio API",
+            "Web Speech API",
+            "NestJS",
+            "LLM · SSE",
+            "ALTCHA",
+            "CSS Modules"
+          ],
+          "links": [
+            {
+              "label": "luap-dever.netlify.app",
+              "href": "https://luap-dever.netlify.app"
+            }
+          ]
+        },
+        {
           "id": "invoicepay",
           "hidden": true,
           "company": "CCIB — Chambre de Commerce et d'Industrie du Bénin",
-          "year": "2022 – 2023"
+          "year": "2022 – 2023",
+          "type": "Développement backend — institution publique"
         }
       ],
       "skills": [
@@ -367,9 +425,14 @@
           "items": "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize"
         },
         {
+          "key": "ai",
+          "cat": "IA / LLM",
+          "items": "Intégration LLM (agnostique du modèle), API OpenAI standard, RAG (génération augmentée par récupération), fine-tuning, prompt engineering & garde-fous, function/tool calling, automatisation IA"
+        },
+        {
           "key": "frontend",
           "cat": "Frontend",
-          "items": "Vue.js, Nuxt.js, SASS, Webpack"
+          "items": "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n"
         },
         {
           "key": "mobile",
@@ -487,6 +550,8 @@
         "interets": "Interests",
         "client": "Client",
         "privateProj": "Private project (institutional)",
+        "confidential": "Confidential project",
+        "ndaNote": "Details hidden — non-disclosure agreement (NDA)",
         "exportPdf": "Export to PDF",
         "profilLabel": "Profile",
         "langLabel": "Language"
@@ -520,7 +585,7 @@
           "period": "January 2022 – Present",
           "note": "Web services for major telecom and media accounts",
           "bullets": [
-            "2026 · Celtiis (via KAMGOKO) — Confidential engagement under a non-disclosure agreement (NDA).",
+            "2026 · Celtiis (via KAMGOKO) — Web development for a telecom operator.",
             "2022 – 2025 · MTN & Moov — Corporate websites for MTN Benin, MTN Congo and Moov Africa Togo, the MyMTN Selfcare app (Vue.js) and the MonRouteur activation page: custom WordPress themes/plugins, RESTful API integration and performance optimization."
           ]
         },
@@ -536,12 +601,12 @@
           ]
         },
         {
-          "role": "Desktop & Mobile Developer",
+          "role": "Backend Developer",
           "org": "CCIB — Chamber of Commerce and Industry of Benin",
           "period": "2022 – 2023",
-          "note": "Contract for a public institution — under NDA",
+          "note": "Contract for a public institution",
           "bullets": [
-            "Project details are covered by a non-disclosure agreement (NDA)."
+            "Backend development of a web application for a public institution."
           ]
         },
         {
@@ -570,7 +635,8 @@
           "id": "celtiis",
           "hidden": true,
           "company": "Celtiis (via KAMGOKO)",
-          "year": "2026"
+          "year": "2026",
+          "type": "Web development — telecom operator"
         },
         {
           "id": "mtn-sites",
@@ -647,10 +713,53 @@
           ]
         },
         {
+          "id": "paulbot",
+          "name": "PaulBot — AI portfolio assistant",
+          "year": "2025",
+          "role": "Full-stack & AI integration",
+          "client": "Personal project",
+          "desc": "A conversational assistant embedded in my portfolio that answers visitors' questions about my background. Dedicated NestJS backend streaming tokens (SSE) from an OpenAI-compatible LLM (Groq — Llama 3.3 70B), hot-swappable to a self-hosted Ollama with no code change. Context-stuffing strategy (the full profile fits the model's context window, so no RAG needed yet) on a RAG-ready architecture. Prompt-level guardrails keep it on-topic and NDA-safe, a marker system lets it navigate the site, and in-memory sessions auto-generate a PDF transcript emailed at the end of each conversation.",
+          "stack": [
+            "NestJS",
+            "TypeScript",
+            "Groq / Llama 3.3",
+            "Ollama",
+            "SSE streaming",
+            "Next.js",
+            "Docker"
+          ]
+        },
+        {
+          "id": "portfolio",
+          "name": "Luap Dever — Interactive portfolio “PaulBrain OS”",
+          "year": "2025 – 2026",
+          "role": "Design & full-stack development",
+          "client": "Personal project",
+          "desc": "Next-generation portfolio with three experiences to choose from: an awwwards-style animated landing (GSAP/ScrollTrigger — preloader, pinned horizontal scroll, kinetic typography, marquees), an in-browser operating system (“PaulBrain OS” — window manager, taskbar, app launcher, Web-Audio-synthesized UI sounds) and an interactive terminal mode. Ships PaulBot, an AI assistant wired to a streaming LLM (SSE), with voice dictation and text-to-speech (Web Speech), an open-source anti-spam captcha (ALTCHA) and PDF conversation export by email. Bilingual (FR/EN), accessible (ARIA, prefers-reduced-motion), responsive and SEO-optimized.",
+          "stack": [
+            "Next.js",
+            "React",
+            "GSAP / ScrollTrigger",
+            "Web Audio API",
+            "Web Speech API",
+            "NestJS",
+            "LLM · SSE",
+            "ALTCHA",
+            "CSS Modules"
+          ],
+          "links": [
+            {
+              "label": "luap-dever.netlify.app",
+              "href": "https://luap-dever.netlify.app"
+            }
+          ]
+        },
+        {
           "id": "invoicepay",
           "hidden": true,
           "company": "CCIB — Chamber of Commerce and Industry of Benin",
-          "year": "2022 – 2023"
+          "year": "2022 – 2023",
+          "type": "Backend development — public institution"
         }
       ],
       "skills": [
@@ -665,9 +774,14 @@
           "items": "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize"
         },
         {
+          "key": "ai",
+          "cat": "AI / LLM",
+          "items": "LLM integration (model-agnostic), standard OpenAI API, RAG (retrieval-augmented generation), fine-tuning, prompt engineering & guardrails, function/tool calling, AI workflow automation"
+        },
+        {
           "key": "frontend",
           "cat": "Frontend",
-          "items": "Vue.js, Nuxt.js, SASS, Webpack"
+          "items": "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n"
         },
         {
           "key": "mobile",

@@ -4,8 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap/dist/gsap";
 import dever from "../../assets/img/icons/DEVER.svg";
 import styles from "../../../styles/global/nav.module.css";
-import { socialMedias } from "../../rawDatas/aboutMe";
-import { L, tx } from "../../rawDatas/i18n";
+import { socialMedias, L, tx } from "../../data";
 import { useLandingLang } from "../../context/landingLang";
 import { useExperience } from "../../context/experience";
 

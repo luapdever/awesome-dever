@@ -12,6 +12,8 @@
     "interets": "Interests",
     "client": "Client",
     "privateProj": "Private project (institutional)",
+    "confidential": "Confidential project",
+    "ndaNote": "Details hidden — non-disclosure agreement (NDA)",
     "exportPdf": "Export to PDF",
     "profilLabel": "Profile",
     "langLabel": "Language"
@@ -45,7 +47,7 @@
       "period": "January 2022 – Present",
       "note": "Web services for major telecom and media accounts",
       "bullets": [
-        "2026 · Celtiis (via KAMGOKO) — Confidential engagement under a non-disclosure agreement (NDA).",
+        "2026 · Celtiis (via KAMGOKO) — Web development for a telecom operator.",
         "2022 – 2025 · MTN & Moov — Corporate websites for MTN Benin, MTN Congo and Moov Africa Togo, the MyMTN Selfcare app (Vue.js) and the MonRouteur activation page: custom WordPress themes/plugins, RESTful API integration and performance optimization."
       ]
     },
@@ -61,12 +63,12 @@
       ]
     },
     {
-      "role": "Desktop & Mobile Developer",
+      "role": "Backend Developer",
       "org": "CCIB — Chamber of Commerce and Industry of Benin",
       "period": "2022 – 2023",
-      "note": "Contract for a public institution — under NDA",
+      "note": "Contract for a public institution",
       "bullets": [
-        "Project details are covered by a non-disclosure agreement (NDA)."
+        "Backend development of a web application for a public institution."
       ]
     },
     {
@@ -95,7 +97,8 @@
       "id": "celtiis",
       "hidden": true,
       "company": "Celtiis (via KAMGOKO)",
-      "year": "2026"
+      "year": "2026",
+      "type": "Web development — telecom operator"
     },
     {
       "id": "mtn-sites",
@@ -189,10 +192,36 @@
       ]
     },
     {
+      "id": "portfolio",
+      "name": "Luap Dever — Interactive portfolio “PaulBrain OS”",
+      "year": "2025 – 2026",
+      "role": "Design & full-stack development",
+      "client": "Personal project",
+      "desc": "Next-generation portfolio with three experiences to choose from: an awwwards-style animated landing (GSAP/ScrollTrigger — preloader, pinned horizontal scroll, kinetic typography, marquees), an in-browser operating system (“PaulBrain OS” — window manager, taskbar, app launcher, Web-Audio-synthesized UI sounds) and an interactive terminal mode. Ships PaulBot, an AI assistant wired to a streaming LLM (SSE), with voice dictation and text-to-speech (Web Speech), an open-source anti-spam captcha (ALTCHA) and PDF conversation export by email. Bilingual (FR/EN), accessible (ARIA, prefers-reduced-motion), responsive and SEO-optimized.",
+      "stack": [
+        "Next.js",
+        "React",
+        "GSAP / ScrollTrigger",
+        "Web Audio API",
+        "Web Speech API",
+        "NestJS",
+        "LLM · SSE",
+        "ALTCHA",
+        "CSS Modules"
+      ],
+      "links": [
+        {
+          "label": "luap-dever.netlify.app",
+          "href": "https://luap-dever.netlify.app"
+        }
+      ]
+    },
+    {
       "id": "invoicepay",
       "hidden": true,
       "company": "CCIB — Chamber of Commerce and Industry of Benin",
-      "year": "2022 – 2023"
+      "year": "2022 – 2023",
+      "type": "Backend development — public institution"
     }
   ],
   "skills": [
@@ -214,7 +243,7 @@
     {
       "key": "frontend",
       "cat": "Frontend",
-      "items": "Vue.js, Nuxt.js, SASS, Webpack"
+      "items": "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n"
     },
     {
       "key": "mobile",

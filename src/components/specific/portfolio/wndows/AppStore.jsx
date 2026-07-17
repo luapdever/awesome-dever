@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import styles from "../../../../../styles/specific/portfolio/windows/appStore.module.css";
-import { mobilePerformances } from "../../../../rawDatas/mobilePerformances";
+import { mobilePerformances } from "../../../../data";
 import { useLang } from "../lang";
 
 const stars = (r) => {

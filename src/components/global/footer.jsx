@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styles from "../../../styles/global/footer.module.css";
-import { socialMedias } from "../../rawDatas/aboutMe";
+import { socialMedias } from "../../data";
 import { useExperience } from "../../context/experience";
 import { useLandingLang } from "../../context/landingLang";
 

@@ -6,8 +6,7 @@ import consl from '../../../assets/img/icons/console.png'
 
 import gsap from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { performances, groupsMeta } from "../../../rawDatas/performances";
-import { pickWallpaper } from "../../../rawDatas/wallpapers";
+import { performances, groupsMeta, pickWallpaper, OS, yearsOfExperience } from "../../../data";
 import {
   FaRegSquare,
   FaRegWindowMinimize,
@@ -25,8 +24,6 @@ import {
 import { toast } from "react-toastify";
 import useWindowScreen from "../../../hooks/useWindowScreen";
 import Clock from "../../global/clock";
-import { OS } from "../../../rawDatas/os";
-import { yearsOfExperience } from "../../../rawDatas/xp";
 import { useLang } from "./lang";
 import { playOsSound, playStartupSound, playStartupReversed, setOsAudioConfig, unlockOsAudio } from "../../../lib/osSounds";
 

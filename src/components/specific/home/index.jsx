@@ -4,13 +4,12 @@ import Link from "next/link";
 import gsap from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "../../../../styles/specific/home/home.module.css";
-import { stats, capabilities, journey, testimonials, usefulLinks, collaborations, HERO_TITLE, HOME_UI } from "../../../rawDatas/home";
-import { experiences } from "../../../rawDatas/experiences";
-import { yearsOfExperience } from "../../../rawDatas/xp";
-import { tx, SKILL_CAT } from "../../../rawDatas/i18n";
+import {
+  stats, capabilities, journey, testimonials, usefulLinks, collaborations, HERO_TITLE, HOME_UI,
+  experiences, yearsOfExperience, tx, SKILL_CAT, skillSet,
+} from "../../../data";
 import { useLandingLang } from "../../../context/landingLang";
 import { useExperience } from "../../../context/experience";
-import { skillSet } from "../../../rawDatas/skillset";
 import ContactForm from "../../global/ContactForm";
 
 const YEARS = yearsOfExperience();

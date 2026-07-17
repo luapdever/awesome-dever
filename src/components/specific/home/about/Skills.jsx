@@ -3,7 +3,7 @@ import styles from "../../../../../styles/specific/home/about/skills.module.css"
 import imgSkills from "../../../../assets/img/awesome/skills.jpg";
 import gsap from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { listSkills } from "../../../../rawDatas/aboutMe";
+import { listSkills } from "../../../../data";
 
 
 function Skills() {

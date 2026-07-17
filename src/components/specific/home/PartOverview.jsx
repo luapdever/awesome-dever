@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import styles from "../../../../styles/specific/home/partOverview.module.css";
 import real1 from "../../../assets/img/awesome/realisations/header_img.jpg";
 import real2 from "../../../assets/img/awesome/realisations/header_img_old.jpg";
-import { skillList } from "../../../rawDatas/skill";
+import { skillList } from "../../../data";
 
 function PartOverview() {
 	const downImg = (e) => {

@@ -4,8 +4,7 @@ import Link from "next/link";
 import gsap from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "../../../../styles/specific/about/about.module.css";
-import { socialMedias } from "../../../rawDatas/aboutMe";
-import { L, tx } from "../../../rawDatas/i18n";
+import { socialMedias, L, tx } from "../../../data";
 import { useLandingLang } from "../../../context/landingLang";
 import luap from "../../../assets/img/awesome/luap-thinking.png";
 
@@ -32,7 +31,7 @@ const MILESTONES = [
   { y: "2019", t: L("First steps in code", "Premiers pas en code"), d: L("Self-taught, between volunteering, tutorials and sleepless nights.", "Autodidacte, entre bénévolat, tutos et nuits blanches.") },
   { y: "2021", t: L("IFRI/UAC & first contracts", "IFRI/UAC & premiers contrats"), d: L("Internet & Multimedia by day, client projects by night.", "Internet & Multimédia le jour, projets clients le soir.") },
   { y: "2022", t: L("KAMGOKO Technologies", "KAMGOKO Technologies"), d: L("Sites & apps for major accounts (MTN, Moov…).", "Sites & apps pour de grands comptes (MTN, Moov…).") },
-  { y: "2024", t: L("Emilia Cross — France Assist", "Emilia Cross — France Assist"), d: L("Architecture of a real-time video streaming platform.", "Architecture d'une plateforme de streaming vidéo temps réel.") },
+  { y: "2024", t: L("Emilia Cross — France Assist", "Emilia Cross — France Assist"), d: L("Architecture of a dating site (live video, KYC, payments & payouts).", "Architecture d'un site de rencontre (visio, KYC, paiements & payouts).") },
   { y: "2026", t: L("Celtiis ecosystem — KAMGOKO", "Écosystème Celtiis — KAMGOKO"), d: L("Multilingual corporate portal & internal platforms, built at KAMGOKO Technologies.", "Portail corporate multilingue & plateformes internes, réalisés chez KAMGOKO Technologies.") },
 ];
 
@@ -54,6 +53,7 @@ const ABOUT_UI = {
     ctaContact: "Contact me",
     ctaOS: "Explore PaulBrain OS",
     ctaCV: "My résumé",
+    ctaBook: "Read my biography (the book)",
   },
   fr: {
     heroTitle: { pre: "Développeur le jour,", accent: "compositeur", post: "à mes heures." },
@@ -72,6 +72,7 @@ const ABOUT_UI = {
     ctaContact: "Me contacter",
     ctaOS: "Explorer PaulBrain OS",
     ctaCV: "Mon CV",
+    ctaBook: "Lire ma biographie (le livre)",
   },
 };
 
@@ -165,6 +166,7 @@ function AboutMe() {
         <h2>{ui.ctaTitle}</h2>
         <div className={styles.ctaActions}>
           <Link href="/#collaborer" className={styles.btnPrimary}>{ui.ctaContact}</Link>
+          <Link href="/book" className={styles.btnGhost}>{ui.ctaBook}</Link>
           <Link href="/paulfolio" className={styles.btnGhost}>{ui.ctaOS}</Link>
           <a href="/cv/index.html" target="_blank" rel="noopener noreferrer" className={styles.btnGhost}>{ui.ctaCV}</a>
         </div>

@@ -17,7 +17,7 @@ export const experiences = [
     end: null,
     current: true,
     location: "Cotonou, Benin",
-    summary: L("Web engineering for major telecom and media accounts.", "Ingénierie web pour de grands comptes télécoms et médias."),
+    summary: L("Broad skills acquired through projects for MTN, Moov, Celtiis, Orabank and other major accounts (telecom, media, banking).", "Nombreuses compétences acquises via des projets pour MTN, Moov, Celtiis, Orabank et d'autres grands comptes (télécoms, médias, banque)."),
     highlights: [
       L(
         "2026 · Celtiis (via KAMGOKO): confidential engagement under a non-disclosure agreement (NDA).",
@@ -42,15 +42,15 @@ export const experiences = [
     end: "2025-12",
     current: false,
     location: "Remote",
-    summary: L("Emilia Cross — social video streaming platform.", "Emilia Cross — plateforme de streaming vidéo social."),
+    summary: L("Emilia Cross — a dating site with live video.", "Emilia Cross — un site de rencontre avec visio en direct."),
     highlights: [
       L(
-        "Architected a real-time video streaming platform in NestJS (multi-service API + dedicated WebSocket server).",
-        "Architecture d'une plateforme de streaming vidéo temps réel en NestJS (API multi-services + serveur WebSocket dédié)."
+        "Architected Emilia Cross, a dating platform, in NestJS (multi-service API + dedicated WebSocket server).",
+        "Architecture d'Emilia Cross, un site de rencontre, en NestJS (API multi-services + serveur WebSocket dédié)."
       ),
       L(
-        "Per-minute credit-based billing, Stripe payments, KYC verification, RBAC and 2FA.",
-        "Facturation à la minute par crédits, paiements Stripe, vérification KYC, RBAC et 2FA."
+        "Live video streaming, KYC verification, Stripe payments & payouts, credit-based billing, RBAC and 2FA.",
+        "Streaming vidéo en direct, vérification KYC, paiements & reversements (payouts) Stripe, facturation par crédits, RBAC et 2FA."
       ),
       L(
         "Agora RTC video, Firebase notifications, Google Cloud storage and application monitoring.",
@@ -92,12 +92,12 @@ export const experiences = [
     end: "2021-12",
     current: false,
     location: "Cotonou, Benin",
-    summary: L("Interactive, responsive interfaces.", "Interfaces interactives et responsives."),
+    summary: L("Foundations in PHP, Vue.js and Nuxt.js; first steps in Node.js.", "Bases en PHP, Vue.js et Nuxt.js ; premiers pas en Node.js."),
     highlights: [
-      L("Developed interactive, responsive interfaces with HTML5, CSS3 and JavaScript.", "Développement d'interfaces interactives et responsives en HTML5, CSS3 et JavaScript."),
-      L("Reusable Vue.js (Nuxt.js) components, Webpack optimization, Agile collaboration.", "Composants Vue.js (Nuxt.js) réutilisables, optimisation Webpack, collaboration Agile."),
+      L("Consolidated foundations in PHP, Vue.js and Nuxt.js — reusable components, Webpack optimization, Agile collaboration.", "Consolidation des bases en PHP, Vue.js et Nuxt.js — composants réutilisables, optimisation Webpack, collaboration Agile."),
+      L("Very first steps in Node.js, still learning the ropes.", "Tout premiers pas en Node.js, encore en apprentissage."),
     ],
-    stack: ["Vue.js", "Nuxt.js", "JavaScript", "Webpack"],
+    stack: ["PHP", "Vue.js", "Nuxt.js", "Node.js", "Webpack"],
     links: [],
   },
   {

@@ -1,9 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import styles from "../../../../../styles/specific/portfolio/windows/apps.module.css";
-import { vaultProjects } from "../../../../rawDatas/vaultProjects";
+import { vaultProjects, tx, STATUS_LABEL } from "../../../../data";
 import { useLang } from "../lang";
-import { tx, STATUS_LABEL } from "../../../../rawDatas/i18n";
 
 function Vault() {
   const { t, lang } = useLang();

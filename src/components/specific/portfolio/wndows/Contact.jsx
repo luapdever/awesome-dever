@@ -2,7 +2,7 @@
 import React from "react";
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 import styles from "../../../../../styles/specific/portfolio/windows/contact.module.css";
-import { socialMedias } from "../../../../rawDatas/aboutMe";
+import { socialMedias } from "../../../../data";
 import { useLang } from "../lang";
 import ContactForm from "../../../global/ContactForm";
 

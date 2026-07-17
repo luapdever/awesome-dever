@@ -19,6 +19,7 @@ const PRIMARY = [
 ];
 // Variations secondaires, pour les curieux.
 const SECONDARY = [
+  { id: "book", label: L("The book", "Le livre"), icon: ph("book-open") },
   { id: "terminal", label: L("Terminal", "Terminal"), icon: ph("terminal-window") },
   { id: "3d", label: L("3D mode", "Mode 3D"), icon: ph("cube") },
 ];
@@ -102,6 +103,7 @@ function ExperienceModal() {
       // Ouvre le widget PaulBot (on reste sur la page) au lieu d'aller vers l'OS.
       dropClose(() => { if (typeof window !== "undefined") window.dispatchEvent(new CustomEvent("paulbot:open")); });
     }
+    else if (id === "book") { remember("book"); dismiss(); router.push("/book"); }
     else if (id === "terminal") { remember("terminal"); setChosen(true); setMode("terminal"); }
     else if (id === "3d") {
       remember("3d");

@@ -1,9 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import styles from "../../../../../styles/specific/portfolio/windows/apps.module.css";
-import { experiences } from "../../../../rawDatas/experiences";
+import { experiences, tx } from "../../../../data";
 import { useLang } from "../lang";
-import { tx } from "../../../../rawDatas/i18n";
 
 function Career() {
   const { t, lang } = useLang();

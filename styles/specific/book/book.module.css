@@ -1,0 +1,252 @@
+/* ============================================================
+   Mode « Livre » — ouvrage relié : couverture premium, tomes &
+   chapitres, sommaire, cabinet de lecture. Mobile-first, feuilletage
+   3D avec reliure, images non coupées, export PDF.
+   ============================================================ */
+.root {
+  --paper: #f7f3ea;
+  --paper2: #fbf8f1;
+  --ink: #2c2640;
+  --ink-soft: #6d6685;
+  --accent: #c67c22;
+  --bind: #3a2712;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  background: #140b2d;
+  font-family: var(--font-book), Georgia, "Times New Roman", serif;
+  overflow: hidden;
+}
+
+.topbar { position: fixed; top: 12px; right: 12px; z-index: 6; display: flex; gap: 8px; align-items: center; }
+.iconBtn {
+  width: 40px; height: 40px; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.22); background: rgba(255, 255, 255, 0.08);
+  color: #f2e9da; font-size: 1rem; cursor: pointer; text-decoration: none; backdrop-filter: blur(8px);
+}
+.iconBtn:hover { background: rgba(255, 255, 255, 0.16); }
+.exportBtn {
+  padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08); color: #f2e9da; font-family: inherit;
+  font-size: 0.95rem; font-weight: 600; cursor: pointer; backdrop-filter: blur(8px);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.exportBtn:hover { background: rgba(198, 124, 34, 0.92); border-color: transparent; color: #1a0f02; }
+
+.reader { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 56px 12px 8px; }
+
+/* ---------- Navigation chapitres (barre latérale + hamburger) ---------- */
+.hamburger { position: fixed; top: 12px; left: 12px; z-index: 9; width: 42px; height: 42px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.22); background: rgba(255, 255, 255, 0.08); color: #f2e9da; font-size: 1.2rem; cursor: pointer; backdrop-filter: blur(8px); }
+.hamburger:hover { background: rgba(255, 255, 255, 0.16); }
+.scrim { position: fixed; inset: 0; z-index: 7; background: rgba(0, 0, 0, 0.5); }
+.sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 8;
+  width: 274px; max-width: 82vw;
+  background: #1a1040; border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 58px 12px 24px; overflow-y: auto; scrollbar-width: thin;
+  transform: translateX(-100%); transition: transform 0.3s ease;
+}
+.sidebarOpen { transform: translateX(0); box-shadow: 12px 0 40px rgba(0, 0, 0, 0.5); }
+.sidebarHead { color: var(--accent); font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px 12px; }
+.navList { list-style: none; margin: 0; padding: 0; }
+.navTome { margin-top: 12px; }
+.navSub { padding-left: 10px; }
+.navItem { display: block; width: 100%; text-align: left; padding: 8px 11px; border: none; background: none; color: #d5cde8; font-family: inherit; font-size: 0.97rem; border-radius: 7px; cursor: pointer; transition: background 0.15s ease, color 0.15s ease; }
+.navTome .navItem { font-weight: 700; font-style: italic; font-size: 1.06rem; color: #f2e9da; }
+.navItem:hover { background: rgba(255, 255, 255, 0.07); color: #fff; }
+.navItemOn { background: rgba(198, 124, 34, 0.22); color: #fff; }
+
+@media (min-width: 980px) {
+  .hamburger, .scrim { display: none; }
+  .sidebar { transform: translateX(0); box-shadow: none; }
+  .reader { padding-left: 300px; }
+}
+
+/* Volume relié : reliure (spine) + zone de page en perspective */
+.book { position: relative; width: 100%; max-width: 700px; flex: 1; min-height: 0; display: flex; filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.55)); }
+.spine {
+  width: 15px; flex: 0 0 auto;
+  background: var(--bind);
+  border-radius: 7px 2px 2px 7px;
+  box-shadow: inset -4px 0 7px rgba(0, 0, 0, 0.55), inset 2px 0 0 rgba(255, 210, 150, 0.12);
+}
+.pageArea { flex: 1; min-width: 0; position: relative; perspective: 2200px; }
+
+/* Une feuille (page) — papier chaud */
+.leaf {
+  position: absolute; inset: 0;
+  display: block;
+  background: var(--paper2);
+  color: var(--ink);
+  border-radius: 2px 10px 10px 2px;
+  box-shadow: inset 7px 0 16px -10px rgba(0, 0, 0, 0.4);
+  padding: 30px 24px 48px 28px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+/* Page suivante : la feuille s'ouvre depuis le bord DROIT vers la gauche.
+   Page précédente : l'inverse (depuis le bord gauche vers la droite). */
+.turnNext { transform-origin: right center; animation: turnNext 0.6s cubic-bezier(0.3, 0.7, 0.2, 1) both; }
+.turnPrev { transform-origin: left center; animation: turnPrev 0.6s cubic-bezier(0.3, 0.7, 0.2, 1) both; }
+@keyframes turnNext {
+  0% { transform: rotateY(-92deg); opacity: 0.1; box-shadow: -50px 0 70px -30px rgba(0, 0, 0, 0.55), inset 7px 0 16px -10px rgba(0, 0, 0, 0.4); }
+  100% { transform: rotateY(0); opacity: 1; }
+}
+@keyframes turnPrev {
+  0% { transform: rotateY(92deg); opacity: 0.1; box-shadow: 50px 0 70px -30px rgba(0, 0, 0, 0.5), inset 7px 0 16px -10px rgba(0, 0, 0, 0.4); }
+  100% { transform: rotateY(0); opacity: 1; }
+}
+
+.chap { display: flex; flex-direction: column; min-height: 100%; }
+.kicker { font-size: 0.82rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.chapNo { font-style: italic; font-size: 0.95rem; color: var(--ink-soft); letter-spacing: 1px; margin-bottom: 2px; }
+.chapTitle { font-size: clamp(1.65rem, 5.6vw, 2.2rem); font-weight: 700; line-height: 1.12; margin: 0 0 14px; }
+.chapText { font-size: clamp(1.05rem, 3.8vw, 1.2rem); line-height: 1.7; margin: 0 0 14px; text-align: justify; hyphens: auto; }
+.chap .chapText:first-of-type::first-letter { font-size: 3.1em; float: left; line-height: 0.72; padding: 8px 10px 0 0; color: var(--accent); font-weight: 700; }
+/* Pages-liste (réalisations, leçons) : pas de lettrine, texte compact. */
+.dense .chapText:first-of-type::first-letter { font-size: inherit; float: none; padding: 0; color: inherit; font-weight: inherit; }
+.dense .chapText { font-size: 1rem; line-height: 1.5; margin-bottom: 10px; text-align: left; }
+.sign { text-align: right; font-style: italic; color: var(--ink-soft); margin-top: 6px; }
+
+/* Illustrations — jamais coupées (matées) + légende */
+.figure { margin: 2px 0 18px; }
+.chapImg {
+  display: block; width: fit-content; margin: auto; max-height: 34vh;
+  object-fit: contain; object-position: center;
+  background: rgba(44, 38, 64, 0.045);
+  border: 1px solid rgba(44, 38, 64, 0.14);
+  border-radius: 5px; padding: 7px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+}
+.caption { text-align: center; font-style: italic; font-size: 0.86rem; color: var(--ink-soft); margin-top: 7px; }
+
+/* ---------- Couverture premium ---------- */
+.cover { align-items: center; text-align: center; justify-content: center; gap: 2px; }
+.publisher { font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-soft); }
+.coverRule { width: 62px; height: 2px; background: var(--accent); margin: 16px auto; opacity: 0.8; }
+.coverKicker { font-style: italic; font-size: 1rem; color: var(--ink-soft); }
+.coverTitle { font-size: clamp(2.1rem, 8.5vw, 3rem); font-weight: 700; font-style: italic; line-height: 1.06; margin: 14px 0; }
+.monogram { font-size: 2.6rem; font-weight: 700; color: var(--accent); letter-spacing: 2px; margin: 6px 0 12px; }
+.monogram span { color: var(--ink); }
+.coverAuthor { font-size: 1.25rem; font-weight: 600; letter-spacing: 0.5px; margin: 0; }
+.coverEd { font-size: 0.9rem; letter-spacing: 1px; color: var(--ink-soft); }
+
+/* ---------- Page d'édition / auteur ---------- */
+.edition { align-items: center; text-align: center; justify-content: center; }
+.authorPhoto {
+  width: 122px; height: 152px; object-fit: cover; object-position: top center;
+  border-radius: 6px; border: 1px solid rgba(44, 38, 64, 0.2);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22); margin: 0 auto 16px; display: block;
+}
+.edition .chapTitle { font-size: 1.8rem; }
+.authorBlurb { font-size: 1.05rem; line-height: 1.6; color: var(--ink); max-width: 44ch; margin: 0 auto 20px; }
+.edLines { border-top: 1px solid rgba(44, 38, 64, 0.15); padding-top: 14px; }
+.edLines p { margin: 3px 0; font-size: 0.9rem; color: var(--ink-soft); }
+
+/* ---------- Sommaire ---------- */
+/* Neutralise la puce « ▸ » globale (ul li::before) dans le livre. */
+.root ul li::before { content: none; margin: 0; }
+
+.toc { list-style: none; margin: 12px 0 0; padding: 0; }
+.tocTome { margin: 18px 0 2px; }
+.tocTome:first-child { margin-top: 4px; }
+.tocSub { padding-left: 20px; border-left: 1px solid rgba(44, 38, 64, 0.14); margin-left: 6px; }
+.tocItem { display: flex; align-items: baseline; width: 100%; gap: 12px; padding: 7px 8px; background: none; border: none; border-radius: 6px; cursor: pointer; color: var(--ink); font-family: inherit; text-align: left; transition: background 0.15s ease; }
+.tocItem:hover { background: rgba(44, 38, 64, 0.06); }
+.tocRoman { flex: 0 0 auto; font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+.tocLabel { flex: 1; transition: color 0.2s ease; }
+.tocTome .tocLabel { font-size: 1.24rem; font-weight: 700; font-style: italic; }
+.tocSub .tocLabel { font-size: 1.05rem; font-weight: 500; color: #4a4360; }
+.tocItem:hover .tocLabel { color: var(--accent); }
+.tocPage { flex: 0 0 auto; font-style: italic; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+
+/* ---------- Séparateur de Tome ---------- */
+.part { align-items: center; text-align: center; justify-content: center; }
+.partRoman { font-size: 1.05rem; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); }
+.partTitle { font-size: clamp(2rem, 8vw, 2.8rem); font-weight: 700; font-style: italic; margin: 4px 0 18px; }
+.epigraph { font-style: italic; font-size: 1.12rem; color: var(--ink-soft); max-width: 40ch; }
+
+/* ---------- Réalisations ---------- */
+.proj { border-left: 3px solid var(--accent); padding: 4px 0 6px 14px; margin: 0 0 18px; }
+.projName { font-size: 1.2rem; font-weight: 700; margin: 0 0 6px; }
+.projName span { font-weight: 500; font-style: italic; color: var(--ink-soft); font-size: 0.95rem; }
+.projLine { font-size: 1rem; line-height: 1.55; margin: 0 0 5px; text-align: left; }
+.projLink { display: inline-block; margin-top: 3px; color: var(--accent); font-weight: 600; text-decoration: none; word-break: break-all; }
+.projLink:hover { text-decoration: underline; }
+.ndaNote { font-style: italic; font-size: 0.95rem; color: var(--ink-soft); border-top: 1px solid rgba(44, 38, 64, 0.15); padding-top: 12px; }
+
+/* ---------- Leçons ---------- */
+.lessons { margin: 4px 0 0; padding-left: 1.3em; }
+.lessons li { font-size: 1.06rem; line-height: 1.6; margin: 0 0 12px; padding-left: 4px; }
+.lessons li::marker { color: var(--accent); font-weight: 700; }
+.lessons b { color: var(--ink); }
+
+/* ---------- Cabinet de lecture ---------- */
+.shelf { list-style: none; margin: 6px 0 0; padding: 0; }
+.bookItem { display: flex; gap: 12px; align-items: stretch; margin: 0 0 16px; }
+.bookSpine { flex: 0 0 7px; border-radius: 2px; background: var(--accent); }
+.bookTitle { font-weight: 700; font-size: 1.12rem; font-style: italic; }
+.bookAuthor { color: var(--ink-soft); }
+.bookWhy { margin: 3px 0 0; font-size: 0.98rem; line-height: 1.5; color: var(--ink); }
+
+/* ---------- Colophon ---------- */
+.colophon { align-items: center; text-align: center; justify-content: center; }
+.colophon .chapText:first-of-type::first-letter { font-size: inherit; float: none; padding: 0; color: inherit; font-weight: inherit; }
+.colophon .chapText { text-align: center; }
+.links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 16px; }
+.link { padding: 8px 15px; border-radius: 999px; border: 1px solid rgba(44, 38, 64, 0.25); color: var(--ink); text-decoration: none; font-size: 0.98rem; font-weight: 600; transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+.link:hover { background: var(--accent); color: #fff; border-color: transparent; }
+.finis { margin-top: 22px; font-style: italic; letter-spacing: 2px; color: var(--ink-soft); }
+
+/* Folio (numéro de page) + masque papier */
+.folio { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 0 12px; text-align: center; font-style: italic; font-size: 0.9rem; color: var(--ink-soft); background: var(--paper2); border-radius: 0 0 10px 2px; pointer-events: none; }
+
+/* Navigation */
+.nav { display: flex; align-items: center; justify-content: center; gap: 16px; width: 100%; max-width: 700px; padding: 12px 6px calc(12px + env(safe-area-inset-bottom)); }
+.navBtn { width: 46px; height: 46px; flex: 0 0 auto; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.08); color: #f2e9da; font-size: 1.7rem; line-height: 1; cursor: pointer; transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease; }
+.navBtn:hover:not(:disabled) { background: rgba(198, 124, 34, 0.9); color: #1a0f02; }
+.navBtn:active:not(:disabled) { transform: scale(0.93); }
+.navBtn:disabled { opacity: 0.3; cursor: default; }
+.progress { flex: 1; max-width: 320px; height: 4px; border-radius: 999px; background: rgba(255, 255, 255, 0.14); overflow: hidden; }
+.progressFill { height: 100%; background: var(--accent); border-radius: 999px; transition: width 0.4s ease; }
+
+@media (min-width: 760px) {
+  .leaf { padding: 46px 54px 54px; }
+}
+
+/* Sur mobile, on remonte la barre de navigation au-dessus du widget PaulBot
+   (coin bas-droite) pour que le bouton « suivant » ne soit jamais masqué. */
+@media (max-width: 760px) {
+  .reader { padding: 46px 10px 4px; }
+  .leaf { padding: 22px 18px 40px 22px; }
+  .nav { padding: 8px 6px calc(70px + env(safe-area-inset-bottom)); }
+  /* pages denses (réalisations, leçons) : on resserre pour tenir sur une page */
+  .proj { margin-bottom: 12px; padding-left: 12px; }
+  .projLine { margin-bottom: 3px; font-size: 0.96rem; line-height: 1.45; }
+  .projName { font-size: 1.1rem; margin-bottom: 4px; }
+  .lessons li { margin-bottom: 9px; font-size: 1rem; line-height: 1.45; }
+}
+
+/* ---------------- Impression / Export PDF ---------------- */
+.printDoc { display: none; }
+@media print {
+  .root { position: static; overflow: visible; background: var(--paper2); display: block; }
+  .topbar, .reader, .hamburger, .scrim, .sidebar { display: none !important; }
+  .printDoc { display: block; }
+  /* Le PDF reflète le rendu écran : pages « papier » chaud, même typographie,
+     lettrines, ambre, images matées. */
+  .printPage { page-break-after: always; break-after: page; padding: 20mm 18mm; color: var(--ink); background: var(--paper2); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .printPage:last-child { page-break-after: auto; }
+  .printPage .chap { min-height: auto; }
+  .printPage .folio { display: none; }
+  .printPage .leaf { position: static; box-shadow: none; }
+  .printPage .chapImg { max-height: 95mm; }
+  .printPage .cover, .printPage .part, .printPage .edition { min-height: 180mm; display: flex; flex-direction: column; justify-content: center; }
+  .link { border-color: rgba(44, 38, 64, 0.4); }
+  .projLink { color: var(--ink); }
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import styles from "../../../../../styles/specific/home/about/formations.module.css";
-import { formations } from "../../../../rawDatas/aboutMe";
+import { formations } from "../../../../data";
 import gsap from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 

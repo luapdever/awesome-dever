@@ -14,7 +14,7 @@ const YEARS = yearsOfExperience();
 /* Mes collaborations — 10 projets clés, tirés du portfolio (PaulBrain OS).
    Chaque carte pointe vers le projet en ligne ; « Voir plus » ouvre l'OS. */
 export const collaborations = [
-  { name: "Emilia Cross", client: "France Assist", url: "https://emiliacross.com/", icon: favicon("emiliacross.com"), tag: L("Real-time video streaming", "Streaming vidéo temps réel") },
+  { name: "Emilia Cross", client: "France Assist", url: "https://emiliacross.com/", icon: favicon("emiliacross.com"), tag: L("Dating site · live video", "Site de rencontre · visio") },
   { name: "My MTN · Selfcare", client: "MTN Bénin", url: "https://my.mtn.bj/", icon: favicon("my.mtn.bj"), tag: L("Vue.js self-care portal", "Portail selfcare Vue.js") },
   { name: "MTN Bénin", client: "MTN Bénin", url: "https://www.mtn.bj/", icon: favicon("mtn.bj"), tag: L("Corporate WordPress", "Site corporate WordPress") },
   { name: "Mon Routeur", client: "MTN Bénin", url: "https://monrouteur.mtn.bj/?ref=noref", icon: favicon("monrouteur.mtn.bj"), tag: L("Activation journey", "Parcours d'activation") },

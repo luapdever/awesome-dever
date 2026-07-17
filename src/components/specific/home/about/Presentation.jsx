@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 import styles from "../../../../../styles/specific/home/about/presentation.module.css";
 import luap from "../../../../assets/img/awesome/luap.jpg";
 import luap2 from "../../../../assets/img/awesome/luap2.jpg";
-import { me, socialMedias } from "../../../../rawDatas/aboutMe";
+import { me, socialMedias } from "../../../../data";
 
 
 function Presentation() {

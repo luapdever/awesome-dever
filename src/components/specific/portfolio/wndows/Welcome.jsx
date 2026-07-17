@@ -1,8 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import styles from "../../../../../styles/specific/portfolio/windows/welcome.module.css";
-import { socialMedias } from "../../../../rawDatas/aboutMe";
-import { OS } from "../../../../rawDatas/os";
+import { socialMedias, OS } from "../../../../data";
 import luap from "../../../../assets/img/awesome/luap-thinking.png";
 import { useLang } from "../lang";
 

@@ -122,7 +122,7 @@ export const performances = [
     url: "https://emiliacross.com/",
     get content() { return appWindow(this); },
     properties: {
-      category: L("Social · Live video streaming", "Social · Streaming vidéo en direct"),
+      category: L("Dating · live video", "Rencontre · visio en direct"),
       status: "Live",
       role: L("Architect & Backend / Real-Time Developer", "Architecte & développeur backend / temps réel"),
       client: "France Assist",
@@ -137,8 +137,8 @@ export const performances = [
       createdAt: "January 2024",
       addedAt: "Today",
       more: L(
-        "Live video matchmaking platform: per-minute credit billing, Stripe payments, KYC, partner discovery and real-time messaging. Multi-service NestJS architecture with a dedicated WebSocket server, RBAC, 2FA and monitoring.",
-        "Plateforme de mise en relation par visio en direct : facturation à la minute par crédits, paiements Stripe, KYC, découverte de partenaires et messagerie temps réel. Architecture NestJS multi-services avec serveur WebSocket dédié, RBAC, 2FA et supervision."
+        "A dating site where connections are made over live video: video streaming, KYC verification, Stripe payments & payouts, credit billing, partner discovery and real-time messaging. Multi-service NestJS architecture with a dedicated WebSocket server, RBAC, 2FA and monitoring.",
+        "Un site de rencontre où la relation se noue en visio : streaming vidéo, vérification KYC, paiements & reversements (payouts) Stripe, facturation par crédits, découverte de partenaires et messagerie temps réel. Architecture NestJS multi-services avec serveur WebSocket dédié, RBAC, 2FA et supervision."
       ),
     },
   },

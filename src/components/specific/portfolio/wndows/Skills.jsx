@@ -1,9 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import styles from "../../../../../styles/specific/portfolio/windows/apps.module.css";
-import { skillSet } from "../../../../rawDatas/skillset";
+import { skillSet, SKILL_CAT, tx } from "../../../../data";
 import { useLang } from "../lang";
-import { SKILL_CAT, tx } from "../../../../rawDatas/i18n";
 
 function Skills() {
   const { t, lang } = useLang();

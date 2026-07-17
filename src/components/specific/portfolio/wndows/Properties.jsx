@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../../../../styles/specific/portfolio/windows/properties.module.css";
 import { useLang } from "../lang";
-import { tx, STATUS_LABEL } from "../../../../rawDatas/i18n";
+import { tx, STATUS_LABEL } from "../../../../data";
 
 function Row({ label, children }) {
   if (!children) return null;
