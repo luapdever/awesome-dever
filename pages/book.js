@@ -11,30 +11,19 @@ const serif = Cormorant_Garamond({ subsets: ["latin"], weight: ["500", "600", "7
 const T = (fr, en) => ({ fr, en });
 const ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
 
-/* --------- Son de page qui se tourne (bruit « papier » synthétisé) --------- */
-let actx = null;
+/* --------- Son de page qui se tourne (fichier audio réel) --------- */
+let pageAudio = null;
 function playPageTurn() {
   try {
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return;
-    if (!actx) actx = new AC();
-    const ctx = actx;
-    if (ctx.state === "suspended") ctx.resume().catch(() => {});
-    const dur = 0.24;
-    const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate);
-    const d = buf.getChannelData(0);
-    for (let i = 0; i < d.length; i++) { const t = i / d.length; d[i] = (Math.random() * 2 - 1) * (1 - t) * (1 - t); }
-    const src = ctx.createBufferSource(); src.buffer = buf;
-    const bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.Q.value = 0.7;
-    const now = ctx.currentTime;
-    bp.frequency.setValueAtTime(2600, now);
-    bp.frequency.exponentialRampToValueAtTime(650, now + dur);
-    const g = ctx.createGain();
-    g.gain.setValueAtTime(0.0001, now);
-    g.gain.exponentialRampToValueAtTime(0.34, now + 0.03);
-    g.gain.exponentialRampToValueAtTime(0.0001, now + dur);
-    src.connect(bp); bp.connect(g); g.connect(ctx.destination);
-    src.start(now); src.stop(now + dur + 0.02);
+    if (typeof Audio === "undefined") return; // SSR / audio indisponible
+    if (!pageAudio) {
+      pageAudio = new Audio("/songs/flipping-book-page.mp3");
+      pageAudio.preload = "auto";
+      pageAudio.volume = 0.55;
+    }
+    pageAudio.currentTime = 0; // rejoue depuis le début à chaque tour
+    const p = pageAudio.play();
+    if (p && p.catch) p.catch(() => {}); // ignore les blocages autoplay
   } catch { /* audio indisponible */ }
 }
 
