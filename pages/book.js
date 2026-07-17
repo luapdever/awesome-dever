@@ -55,6 +55,8 @@ const LEAVES = [
 
   { kind: "chapter", chap: 1, kicker: T("2019 · Les commencements", "2019 · The Beginnings"), title: T("Apprendre, sans filet", "Learning Without a Net"), img: "/history/01-benevolat.jpeg", caption: T("Les débuts — bénévolat, 2019.", "The beginnings — volunteering, 2019."), paras: [
     T("Tout commence sans budget, sans titre, sans certitude — mais avec une soif d'apprendre qui me tient lieu de capital. Bénévole, je mets la main à tout ce qui se présente, convaincu qu'on n'apprend jamais mieux qu'en bâtissant pour de vrai.", "It all begins with no budget, no title, no certainty — but with a thirst to learn that serves me as capital. As a volunteer, I turn my hand to whatever comes, convinced that nothing teaches better than building for real."),
+  ] },
+  { kind: "chapter", kicker: T("2019 · Les commencements — suite", "2019 · The Beginnings — cont."), paras: [
     T("Le tout premier appel vient d'un ami, Jafette, qui me demande un coup de main sur un site touchant à la cryptomonnaie. Je m'y jette avec joie : j'y apprends le C, le C++, le Java, le PHP — et surtout, on me sollicite. Dans ma bande du quartier, j'étais le seul à coder ; ce jour-là, je me sens utile, presque important.", "The very first call comes from a friend, Jafette, who asks me to lend a hand on a site touching on cryptocurrency. I throw myself into it with joy: I learn C, C++, Java, PHP — and above all, I am asked. In my neighbourhood crew I was the only one who coded; that day, I feel useful, almost important."),
     T("De ces mois modestes, je retiens une leçon qui ne me quittera plus : la compétence ne se décrète pas, elle se gagne — ligne après ligne, café après café.", "From those humble months I draw a lesson that never leaves me: skill is not decreed, it is earned — line by line, coffee by coffee."),
   ] },
@@ -66,6 +68,8 @@ const LEAVES = [
 
   { kind: "chapter", chap: 3, kicker: T("2021 · Le premier engagement", "2021 · The First Commitment"), title: T("La première pierre", "The First Stone"), img: "/history/03-premier-contrat.jpg", caption: T("Premier contrat, 2021.", "First contract, 2021."), paras: [
     T("Le premier contrat arrive, syndrome de l'imposteur en prime. Chez Octogone Trading, je consolide mes bases — PHP, Vue.js et Nuxt.js — et je fais mes tout premiers pas en Node.js, sans encore rien y maîtriser. Qu'importe : je comprends déjà qu'un pixel bien placé vaut parfois mille explications.", "The first contract arrives, impostor syndrome included. At Octogone Trading, I consolidate my foundations — PHP, Vue.js and Nuxt.js — and take my very first, unsteady steps in Node.js, mastering nothing yet. No matter: I already learn that a well-placed pixel is sometimes worth a thousand explanations."),
+  ] },
+  { kind: "chapter", kicker: T("2021 · Le premier engagement — suite", "2021 · The First Commitment — cont."), paras: [
     T("Mon tout premier contrat ne pesait que cent mille francs, et pourtant il m'a bouleversé. Je me sentais important ; je me voyais déjà « le futur Dangoté », promis à un empire. Le rêve n'aura tenu que quatre mois — mais il m'aura appris à rêver grand, puis à me remettre au travail pour de vrai.", "My very first contract was worth a mere hundred thousand francs, and yet it moved me deeply. I felt important; I already saw myself as “the future Dangote,” bound for an empire. The dream lasted only four months — but it taught me to dream big, then to get back to work for real."),
     T("Je n'en ai pas encore conscience, mais je viens de poser la première pierre d'une carrière qui mêlera, sans relâche, exigence technique et souci de l'utilisateur.", "I don't yet know it, but I have just laid the first stone of a career that will relentlessly blend technical rigour with care for the user."),
   ] },
@@ -308,7 +312,7 @@ function Leaf({ c, lang, tr, jumpTo, toc }) {
     <div className={styles.chap}>
       {c.chap != null && <span className={styles.chapNo}>{lang === "fr" ? "Chapitre" : "Chapter"} {ROMAN[c.chap]}</span>}
       {K}
-      <h2 className={styles.chapTitle}>{tr(c.title)}</h2>
+      {c.title && <h2 className={styles.chapTitle}>{tr(c.title)}</h2>}
       {c.img && (
         <figure className={styles.figure}>
           <img className={styles.chapImg} src={c.img} alt="" />
