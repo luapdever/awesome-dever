@@ -450,7 +450,7 @@ function Book() {
 
       <div className={styles.topbar}>
         <Link href="/" className={styles.iconBtn} title={ui.home} aria-label={ui.home}>
-          <img src="https://api.iconify.design/ph:house-fill.svg?color=%23f2e9da" alt="" width={18} height={18} />
+          <img src="/icons/ph/house-fill__f2e9da.svg" alt="" width={18} height={18} />
         </Link>
         <button className={styles.iconBtn} onClick={() => setMuted((m) => !m)} title={ui.sound} aria-label={ui.sound}>{muted ? "🔇" : "🔊"}</button>
         <button className={styles.exportBtn} onClick={() => window.print()}>{ui.exportPdf}</button>

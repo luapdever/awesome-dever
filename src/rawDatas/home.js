@@ -6,7 +6,7 @@
 import { yearsOfExperience } from "./xp";
 import { L } from "./i18n";
 
-const ph = (name, color = "ffa500") => `https://api.iconify.design/ph:${name}.svg?color=%23${color}`;
+const ph = (name, color = "ffa500") => `/icons/ph/${name}__${color}.svg`;
 const favicon = (domain) => `https://www.google.com/s2/favicons?sz=64&domain=${domain}`;
 
 const YEARS = yearsOfExperience();

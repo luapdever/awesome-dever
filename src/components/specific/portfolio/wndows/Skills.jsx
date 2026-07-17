@@ -10,7 +10,7 @@ function Skills() {
     <div className={styles.app}>
       <div className={styles.head}>
         <span className={styles.headIcon}>
-          <img src="https://api.iconify.design/ph:brain.svg?color=%23ffa500" alt="Skills" />
+          <img src="/icons/ph/brain__ffa500.svg" alt="Skills" />
         </span>
         <div>
           <h1>{t.skTitle}</h1>

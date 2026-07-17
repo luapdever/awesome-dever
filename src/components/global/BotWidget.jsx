@@ -9,15 +9,15 @@ import { NAV, extractActions, runNavAction, navLabel, navigateRelative, linkToke
 import { detectProjects, followUps, pageContext, routeIntent, clientAnswer, tourSteps, smalltalk, smalltalkReply, waitingMessage } from "../../lib/botExtras";
 import { submitContact } from "../../lib/altcha";
 
-const MIC = "https://api.iconify.design/ph:microphone.svg?color=%23000000";
-const MIC_ON = "https://api.iconify.design/ph:microphone-fill.svg?color=%232a1a00";
-const SPEAK = "https://api.iconify.design/ph:speaker-high.svg?color=%23ffd9a0";
-const SPEAK_ON = "https://api.iconify.design/ph:speaker-simple-x.svg?color=%23ffd9a0";
+const MIC = "/icons/ph/microphone__000000.svg";
+const MIC_ON = "/icons/ph/microphone-fill__2a1a00.svg";
+const SPEAK = "/icons/ph/speaker-high__ffd9a0.svg";
+const SPEAK_ON = "/icons/ph/speaker-simple-x__ffd9a0.svg";
 
-const ROBOT = "https://api.iconify.design/ph:robot.svg";
-const SEND = "https://api.iconify.design/ph:paper-plane-tilt-fill.svg?color=%232a1a00";
-const CHAT = "https://api.iconify.design/ph:chat-circle-dots-fill.svg?color=%231a0a00";
-const CLOSE = "https://api.iconify.design/ph:x-bold.svg?color=%23ffffff";
+const ROBOT = "/icons/ph/robot.svg";
+const SEND = "/icons/ph/paper-plane-tilt-fill__2a1a00.svg";
+const CHAT = "/icons/ph/chat-circle-dots-fill__1a0a00.svg";
+const CLOSE = "/icons/ph/x-bold__ffffff.svg";
 
 const CHAT_URL = process.env.NEXT_PUBLIC_CHAT_URL || "/api/chat";
 

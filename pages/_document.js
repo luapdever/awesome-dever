@@ -4,6 +4,18 @@ export default function Document() {
   return (
     <Html lang="fr">
       <Head>
+        {/* Consent Mode v2 — défaut « granted » (modèle opt-out : la mesure
+            démarre dès la 1re page ; la bannière permet de se désinscrire).
+            Un refus déjà exprimé (retour de visite) est ré-appliqué. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});
+try{if(localStorage.getItem('cookie_consent')==='denied'){gtag('consent','update',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});}}catch(e){}`,
+          }}
+        />
+        {/* End Consent Mode default */}
         {/* Google Tag Manager — le plus haut possible dans <head> */}
         <script
           dangerouslySetInnerHTML={{
@@ -31,9 +43,8 @@ gtag('config', 'G-H5387SXY6D');`,
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
         <link rel="manifest" href="/site.webmanifest" />
-        {/* Icônes/logos servis à l'exécution : on ouvre la connexion en avance. */}
-        <link rel="preconnect" href="https://api.iconify.design" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://api.iconify.design" />
+        {/* Icônes Phosphor désormais self-hostées (/icons/ph/*.svg) — plus de
+            dépendance runtime à api.iconify.design. */}
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
         <link rel="dns-prefetch" href="https://www.google.com" />
       </Head>

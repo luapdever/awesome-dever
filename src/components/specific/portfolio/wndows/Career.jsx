@@ -10,7 +10,7 @@ function Career() {
     <div className={styles.app}>
       <div className={styles.head}>
         <span className={styles.headIcon}>
-          <img src="https://api.iconify.design/ph:briefcase.svg?color=%23ffa500" alt="Career" />
+          <img src="/icons/ph/briefcase__ffa500.svg" alt="Career" />
         </span>
         <div>
           <h1>{t.caTitle}</h1>

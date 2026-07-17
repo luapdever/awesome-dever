@@ -1,4 +1,5 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
+import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Montserrat } from "next/font/google";
@@ -12,6 +13,7 @@ import { ExperienceProvider } from "../src/context/experience";
 import ExperienceModal from "../src/components/specific/home/ExperienceModal";
 import ExperienceButton from "../src/components/global/ExperienceButton";
 import BotWidget from "../src/components/global/BotWidget";
+import CookieConsent from "../src/components/global/CookieConsent";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -24,6 +26,23 @@ function MyApp({ Component, pageProps }) {
   // Pages can opt out of the global chrome (nav + footer) — e.g. the OS
   // at /paulfolio runs full-screen without header/footer.
   const hideChrome = Component.hideChrome === true;
+
+  // SPA page views : Next navigue côté client (pas de rechargement), donc
+  // gtag n'envoie qu'UN page_view au 1er chargement. On en émet un à chaque
+  // changement de route → GA4 voit /book, /paulfolio, /about-me, etc.
+  const router = useRouter();
+  useEffect(() => {
+    const onRouteChange = (url) => {
+      if (typeof window.gtag !== "function") return;
+      window.gtag("event", "page_view", {
+        page_path: url,
+        page_location: window.location.origin + url,
+        page_title: document.title,
+      });
+    };
+    router.events.on("routeChangeComplete", onRouteChange);
+    return () => router.events.off("routeChangeComplete", onRouteChange);
+  }, [router.events]);
 
   return (
     <div
@@ -43,6 +62,7 @@ function MyApp({ Component, pageProps }) {
                 démonte jamais lors d'une navigation client, donc il reste ouvert
                 si le visiteur l'avait ouvert. */}
             <BotWidget />
+            <CookieConsent />
             {!hideChrome && <ExperienceModal />}
           </ExperienceProvider>
         </LandingLangProvider>

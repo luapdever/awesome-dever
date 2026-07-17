@@ -67,7 +67,7 @@ function TheFooter() {
         <span>&copy; {year} Paul Mèdédji ZANNOU — Luap Dever. Tous droits réservés.</span>
         <span className={styles.made}>
           Conçu &amp; codé avec
-          <img src="https://api.iconify.design/ph:coffee-fill.svg?color=%23ffa500" alt="café" className={styles.madeIcon} />
+          <img src="/icons/ph/coffee-fill__ffa500.svg" alt="café" className={styles.madeIcon} />
           · passion
         </span>
       </div>

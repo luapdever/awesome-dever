@@ -6,7 +6,7 @@ import Terminal from "../portfolio/wndows/Terminal";
 import { L, tx } from "../../../rawDatas/i18n";
 import { useLandingLang } from "../../../context/landingLang";
 
-const ph = (name, color = "ffa500") => `https://api.iconify.design/ph:${name}.svg?color=%23${color}`;
+const ph = (name, color = "ffa500") => `/icons/ph/${name}__${color}.svg`;
 
 const ACTIONS = [
   { id: "cv", label: L("Read my résumé", "Lire mon CV"), sub: L("Short version, hold the coffee", "Version courte, sans le café"), icon: ph("file-text") },

@@ -2,6 +2,14 @@
 <html lang="fr">
 
 <head>
+  <!-- Consent Mode v2 — défaut « granted » (opt-out) AVANT tout tag Google -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});
+    try{if(localStorage.getItem('cookie_consent')==='denied'){gtag('consent','update',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});}}catch(e){}
+  </script>
+  <!-- End Consent Mode default -->
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -1421,6 +1429,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- Widget PaulBot embarqué (iframe vers le vrai composant React, sans duplication) -->
   <script src="/paulbot-widget.js" defer></script>
+
+  <!-- Bannière de consentement (sobre) — partage la clé cookie_consent avec le site -->
+  <div id="cookieBar" style="display:none;position:fixed;bottom:20px;left:20px;z-index:9998;max-width:420px;display:none;align-items:center;gap:14px;padding:12px 14px;border-radius:12px;background:rgba(17,0,104,.92);color:#f2edff;border:1px solid rgba(255,255,255,.14);box-shadow:0 10px 30px rgba(0,0,0,.35);font-size:13px;line-height:1.45;font-family:system-ui,-apple-system,'Segoe UI',sans-serif">
+    <p id="cookieTxt" style="margin:0;flex:1"></p>
+    <div style="display:flex;gap:8px;flex-shrink:0">
+      <button id="cookieNo" style="font:inherit;font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:8px;cursor:pointer;background:transparent;color:#cfc6ee;border:1px solid rgba(255,255,255,.22)"></button>
+      <button id="cookieYes" style="font:inherit;font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:8px;cursor:pointer;background:#ffa500;color:#1a0a00;border:1px solid transparent"></button>
+    </div>
+  </div>
+  <script>
+    (function(){
+      var fr = !/^en/i.test(navigator.language || 'fr');
+      var t = fr
+        ? { txt:"Ce site utilise des cookies de mesure d'audience pour améliorer l'expérience.", yes:"Accepter", no:"Refuser" }
+        : { txt:"This site uses analytics cookies to improve your experience.", yes:"Accept", no:"Decline" };
+      var bar = document.getElementById('cookieBar');
+      document.getElementById('cookieTxt').textContent = t.txt;
+      document.getElementById('cookieYes').textContent = t.yes;
+      document.getElementById('cookieNo').textContent = t.no;
+      function decide(granted){
+        try{ localStorage.setItem('cookie_consent', granted?'granted':'denied'); }catch(e){}
+        try{ if(typeof gtag==='function'){ var v=granted?'granted':'denied'; gtag('consent','update',{ad_storage:v,ad_user_data:v,ad_personalization:v,analytics_storage:v}); } }catch(e){}
+        bar.style.display='none';
+      }
+      document.getElementById('cookieYes').onclick=function(){decide(true);};
+      document.getElementById('cookieNo').onclick=function(){decide(false);};
+      try{ if(!localStorage.getItem('cookie_consent')) bar.style.display='flex'; }catch(e){ bar.style.display='flex'; }
+    })();
+  </script>
 </body>
 
 </html>

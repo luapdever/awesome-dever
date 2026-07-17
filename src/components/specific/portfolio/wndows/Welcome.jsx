@@ -6,12 +6,12 @@ import luap from "../../../../assets/img/awesome/luap-thinking.png";
 import { useLang } from "../lang";
 
 const QUICK = [
-  { id: "skills", label: "Skills", icon: "https://api.iconify.design/ph:brain.svg?color=%23ffc25c" },
-  { id: "career", label: "Career", icon: "https://api.iconify.design/ph:briefcase.svg?color=%23ffc25c" },
-  { id: "vault", label: "Enterprise", icon: "https://api.iconify.design/ph:lock-key.svg?color=%23ffc25c" },
-  { id: "appStore", label: "Apps", icon: "https://api.iconify.design/ph:device-mobile.svg?color=%23ffc25c" },
-  { id: "terminal", label: "Terminal", icon: "https://api.iconify.design/ph:desktop.svg?color=%23ffc25c" },
-  { id: "contact", label: "Contact", icon: "https://api.iconify.design/ph:envelope-simple.svg?color=%23ffc25c" },
+  { id: "skills", label: "Skills", icon: "/icons/ph/brain__ffc25c.svg" },
+  { id: "career", label: "Career", icon: "/icons/ph/briefcase__ffc25c.svg" },
+  { id: "vault", label: "Enterprise", icon: "/icons/ph/lock-key__ffc25c.svg" },
+  { id: "appStore", label: "Apps", icon: "/icons/ph/device-mobile__ffc25c.svg" },
+  { id: "terminal", label: "Terminal", icon: "/icons/ph/desktop__ffc25c.svg" },
+  { id: "contact", label: "Contact", icon: "/icons/ph/envelope-simple__ffc25c.svg" },
 ];
 
 function open(e, id) {

@@ -19,7 +19,7 @@ function Contact() {
     <div className={styles.contact}>
       <header className={styles.head}>
         <span className={styles.headIcon}>
-          <img src="https://api.iconify.design/ph:envelope-simple.svg?color=%23ffa500" alt="" />
+          <img src="/icons/ph/envelope-simple__ffa500.svg" alt="" />
         </span>
         <div>
           <h1>{t.cTitle}</h1>

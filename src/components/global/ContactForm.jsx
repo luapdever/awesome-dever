@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { submitContact } from "../../lib/altcha";
 import styles from "../../../styles/global/contactform.module.css";
 
-const SHIELD = "https://api.iconify.design/ph:shield-check.svg?color=%23ffa500";
+const SHIELD = "/icons/ph/shield-check__ffa500.svg";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const T = {
@@ -54,7 +54,7 @@ export default function ContactForm({ lang = "fr", source = "home-cta" }) {
   if (state === "sent") {
     return (
       <div className={styles.sent}>
-        <img src="https://api.iconify.design/ph:check-circle-fill.svg?color=%2335d07f" alt="" />
+        <img src="/icons/ph/check-circle-fill__35d07f.svg" alt="" />
         <span>{t.ok}</span>
       </div>
     );

@@ -2,7 +2,7 @@ import React from "react";
 import { useExperience } from "../../context/experience";
 import { useLandingLang } from "../../context/landingLang";
 
-const ICON = "https://api.iconify.design/ph:sparkle-fill.svg?color=%232a1a00";
+const ICON = "/icons/ph/sparkle-fill__2a1a00.svg";
 
 /* Sticky round FAB on the left edge — reopens the experience chooser.
    The modal's close animation "drops" into this button (see ExperienceModal). */

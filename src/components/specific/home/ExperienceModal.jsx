@@ -8,7 +8,7 @@ import { L, tx } from "../../../rawDatas/i18n";
 import { useLandingLang } from "../../../context/landingLang";
 import { useExperience } from "../../../context/experience";
 
-const ph = (name, color = "ffa500") => `https://api.iconify.design/ph:${name}.svg?color=%23${color}`;
+const ph = (name, color = "ffa500") => `/icons/ph/${name}__${color}.svg`;
 
 // Trois registres principaux : converser (PaulBot, recommandé), explorer
 // (PaulBrain OS) ou aller à l'essentiel (CV).

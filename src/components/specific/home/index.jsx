@@ -17,7 +17,7 @@ const initials = (name) => name.split(/\s+/).map((w) => w[0]).join("").slice(0, 
 const ROLES = ["Full-Stack Engineer", "Creative Developer", "Problem Solver", "Real-Time Architect"];
 
 // Phosphor category icons for the stack (no emojis on the landing).
-const ph = (name, color = "ffa500") => `https://api.iconify.design/ph:${name}.svg?color=%23${color}`;
+const ph = (name, color = "ffa500") => `/icons/ph/${name}__${color}.svg`;
 const CAT_PH = {
   languages: ph("code"),
   frontend: ph("browser"),

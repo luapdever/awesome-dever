@@ -8,7 +8,7 @@ import { socialMedias, L, tx } from "../../../data";
 import { useLandingLang } from "../../../context/landingLang";
 import luap from "../../../assets/img/awesome/luap-thinking.png";
 
-const ph = (name, color = "ffa500") => `https://api.iconify.design/ph:${name}.svg?color=%23${color}`;
+const ph = (name, color = "ffa500") => `/icons/ph/${name}__${color}.svg`;
 
 const INTERESTS = [
   { icon: ph("music-notes"), t: L("Music composition", "Composition musicale"), d: L("Writing melodies like I write code: by structure and by emotion.", "Écrire des mélodies comme j'écris du code : par structure et par émotion.") },
