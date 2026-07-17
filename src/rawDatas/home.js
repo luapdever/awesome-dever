@@ -15,9 +15,9 @@ const YEARS = yearsOfExperience();
    Chaque carte pointe vers le projet en ligne ; « Voir plus » ouvre l'OS. */
 export const collaborations = [
   { name: "Emilia Cross", client: "France Assist", url: "https://emiliacross.com/", icon: favicon("emiliacross.com"), tag: L("Dating site · live video", "Site de rencontre · visio") },
-  { name: "My MTN · Selfcare", client: "MTN Bénin", url: "https://my.mtn.bj/", icon: favicon("my.mtn.bj"), tag: L("Vue.js self-care portal", "Portail selfcare Vue.js") },
-  { name: "MTN Bénin", client: "MTN Bénin", url: "https://www.mtn.bj/", icon: favicon("mtn.bj"), tag: L("Corporate WordPress", "Site corporate WordPress") },
-  { name: "Mon Routeur", client: "MTN Bénin", url: "https://monrouteur.mtn.bj/?ref=noref", icon: favicon("monrouteur.mtn.bj"), tag: L("Activation journey", "Parcours d'activation") },
+  { name: "My MTN · Selfcare", client: "MTN — via KAMGOKO", url: "https://my.mtn.bj/", icon: favicon("my.mtn.bj"), tag: L("Vue.js self-care portal", "Portail selfcare Vue.js") },
+  { name: "MTN Bénin", client: "MTN — via KAMGOKO", url: "https://www.mtn.bj/", icon: favicon("mtn.bj"), tag: L("Corporate WordPress", "Site corporate WordPress") },
+  { name: "Mon Routeur", client: "MTN — via KAMGOKO", url: "https://monrouteur.mtn.bj/?ref=noref", icon: favicon("monrouteur.mtn.bj"), tag: L("Activation journey", "Parcours d'activation") },
   { name: "WAPIFY", client: L("Studio · SaaS", "Studio · SaaS"), url: "https://wapify.co/", icon: favicon("wapify.co"), tag: L("WhatsApp AI marketing", "Marketing IA WhatsApp") },
   { name: "GoCoachings", client: L("Studio · SaaS", "Studio · SaaS"), url: "https://www.gocoachings.com", icon: favicon("gocoachings.com"), tag: L("Coaching platform", "Plateforme de coaching") },
   { name: "NinjaLinking", client: L("Studio · France", "Studio · France"), url: "https://app.ninjalinking.fr", icon: favicon("ninjalinking.fr"), tag: L("SEO backlinks SaaS", "SaaS backlinks SEO") },

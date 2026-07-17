@@ -107,13 +107,13 @@ const LEAVES = [
   // ==================== TOME II ====================
   { kind: "part", id: "tome2", roman: T("Tome Deuxième", "Part Two"), title: T("Réalisations & Leçons", "Works & Lessons"), epigraph: T("« Un projet se juge au problème qu'il résout. »", "“A project is judged by the problem it solves.”") },
 
-  { kind: "projects", kicker: T("Réalisations", "Selected Works"), title: T("Des problèmes, des réponses", "Problems, and Answers"), intro: T("Quelques chantiers marquants — non pas des lignes de CV, mais des problèmes concrets et la façon dont je les ai résolus.", "A few notable projects — not résumé lines, but concrete problems and how I solved them."), projects: [
+  { kind: "projects", kicker: T("Réalisations", "Selected Works"), title: T("Des problèmes, des réponses", "Problems, and Answers"), intro: T("Quelques chantiers marquants — des problèmes concrets et leur réponse. Plusieurs (MTN, Moov, Celtiis, Orabank…) ont été menés en tant que développeur au sein de KAMGOKO, en équipe.", "A few notable projects — concrete problems and their answers. Several (MTN, Moov, Celtiis, Orabank…) were delivered as a developer within KAMGOKO, as a team."), projects: [
     { name: "Emilia Cross", client: "France Assist", href: "https://emiliacross.com/", problem: T("Un site de rencontre où la relation se noue en visio en direct — sécurisé, monétisé et scalable.", "A dating site where connections are made over live video — secure, monetized and scalable."), solution: T("Architecture NestJS multi-services + serveur WebSocket dédié, streaming vidéo, KYC, paiements & reversements (payouts), crédits, RBAC & 2FA, supervision.", "Multi-service NestJS + dedicated WebSocket server, video streaming, KYC, payments & payouts, credits, RBAC & 2FA, monitoring.") },
-    { name: "MyMTN Selfcare", client: "MTN Bénin", href: "https://my.mtn.bj/", problem: T("Des milliers d'abonnés doivent gérer forfaits et compte sans passer par le support.", "Thousands of subscribers need to manage plans and account without going through support."), solution: T("Application SPA Vue.js/Nuxt, intégration d'APIs REST, gestion d'état avancée et optimisation du rendu.", "Vue.js/Nuxt SPA, REST API integration, advanced state management and rendering optimization.") },
+    { name: "MyMTN Selfcare", client: "MTN Bénin · via KAMGOKO", href: "https://my.mtn.bj/", problem: T("Des milliers d'abonnés doivent gérer forfaits et compte sans passer par le support.", "Thousands of subscribers need to manage plans and account without going through support."), solution: T("Application SPA Vue.js/Nuxt, intégration d'APIs REST, gestion d'état avancée et optimisation du rendu.", "Vue.js/Nuxt SPA, REST API integration, advanced state management and rendering optimization.") },
   ] },
 
   { kind: "projects", kicker: T("Réalisations — suite", "Selected Works — cont."), title: T("… et quelques autres", "… and a few more"), projects: [
-    { name: T("Sites corporate MTN", "MTN corporate sites"), client: "MTN Bénin & Congo", href: "https://www.mtn.bj/", problem: T("Offrir une présence corporate multilingue, rapide et bien référencée pour deux opérateurs.", "Deliver a fast, well-ranked, multilingual corporate presence for two operators."), solution: T("Thèmes & plugins WordPress sur mesure, contenu multilingue, optimisation performances et SEO.", "Custom WordPress themes & plugins, multilingual content, performance and SEO optimization.") },
+    { name: T("Sites corporate MTN", "MTN corporate sites"), client: "MTN · via KAMGOKO", href: "https://www.mtn.bj/", problem: T("Offrir une présence corporate multilingue, rapide et bien référencée pour deux opérateurs.", "Deliver a fast, well-ranked, multilingual corporate presence for two operators."), solution: T("Thèmes & plugins WordPress sur mesure, contenu multilingue, optimisation performances et SEO.", "Custom WordPress themes & plugins, multilingual content, performance and SEO optimization.") },
     { name: T("PaulBot & le portfolio", "PaulBot & the portfolio"), client: T("Projet personnel", "Personal project"), href: "https://luap-dever.netlify.app", problem: T("Prouver des compétences autrement qu'avec une liste — et laisser le visiteur interroger le profil.", "Prove skills otherwise than with a list — and let the visitor question the profile."), solution: T("Portfolio « OS dans le navigateur » (GSAP) + assistant IA en streaming (NestJS, LLM/SSE), captcha open-source, export PDF.", "In-browser “OS” portfolio (GSAP) + streaming AI assistant (NestJS, LLM/SSE), open-source captcha, PDF export.") },
   ], ndaNote: T("D'autres missions — pour Celtiis, Orabank et une institution publique (CCIB) — restent couvertes par la confidentialité.", "Other engagements — for Celtiis, Orabank and a public institution (CCIB) — remain under confidentiality.") },
 
@@ -342,11 +342,11 @@ function Book() {
   const tr = (v) => (v && v.fr !== undefined ? (lang === "en" ? v.en : v.fr) : v);
   const N = LEAVES.length;
   const [page, setPage] = useState(0);
-  const [dir, setDir] = useState("next");
+  const [turning, setTurning] = useState(null); // { from, to, dir } pendant l'animation
   const [muted, setMuted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const touch = useRef(null);
-  const stageRef = useRef(null);
+  const busy = useRef(false);
 
   // Table des matières hiérarchisée : Tomes (niveau 0) + sections (niveau 1).
   const toc = LEAVES.map((l, i) => ({ l, i }))
@@ -356,12 +356,14 @@ function Book() {
   const navList = LEAVES.map((l, i) => ({ target: i, label: labelOf(l), level: l.kind === "part" ? 0 : 1 }));
 
   const turn = (d, to) => {
-    setPage((p) => {
-      const next = to != null ? to : Math.min(Math.max(p + d, 0), N - 1);
-      if (next !== p) { setDir(next > p ? "next" : "prev"); if (!muted) playPageTurn(); }
-      return next;
-    });
+    if (busy.current) return;
+    const next = to != null ? to : Math.min(Math.max(page + d, 0), N - 1);
+    if (next === page) return;
+    busy.current = true;
+    if (!muted) playPageTurn();
+    setTurning({ from: page, to: next, dir: next > page ? "next" : "prev" });
   };
+  const endTurn = (t) => { setPage(t.to); setTurning(null); busy.current = false; };
   const jumpTo = (i) => turn(0, i);
 
   // Restaure la page lue (persistée) après le montage — pas de mismatch SSR.
@@ -376,9 +378,6 @@ function Book() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [muted]);
-
-  // Remet le défilement en haut à chaque tourné de page.
-  useEffect(() => { if (stageRef.current) stageRef.current.scrollTop = 0; }, [page]);
 
   const onTouchStart = (e) => { const t = e.touches[0]; touch.current = { x: t.clientX, y: t.clientY }; };
   const onTouchEnd = (e) => {
@@ -398,7 +397,11 @@ function Book() {
     menu: lang === "fr" ? "Ouvrir les chapitres" : "Open chapters",
     home: lang === "fr" ? "Retour au portfolio" : "Back to the portfolio",
   };
-  const pct = N > 1 ? Math.round((page / (N - 1)) * 100) : 0;
+  const pct = N > 1 ? Math.round(((turning ? turning.to : page) / (N - 1)) * 100) : 0;
+  // Deux couches : la page « dessous » (statique) et la page « qui tourne » (au-dessus).
+  const bottomIndex = turning ? (turning.dir === "next" ? turning.to : turning.from) : page;
+  const turningIndex = turning ? (turning.dir === "next" ? turning.from : turning.to) : null;
+  const folioNum = (turning ? turning.to : page) + 1;
 
   const title = lang === "fr"
     ? "Paul Mèdédji Zannou — Biographie · « Ce que les idées promettent »"
@@ -468,10 +471,21 @@ function Book() {
         <div className={styles.book}>
           <div className={styles.spine} aria-hidden="true" />
           <div className={styles.pageArea}>
-            <div key={page} ref={stageRef} className={`${styles.leaf} ${dir === "next" ? styles.turnNext : styles.turnPrev}`}>
-              <Leaf c={LEAVES[page]} lang={lang} tr={tr} jumpTo={jumpTo} toc={toc} />
-              <span className={styles.folio}>{page + 1} {ui.of} {N}</span>
+            {/* Page du dessous (statique) — révélée par le tourné */}
+            <div key={"b" + bottomIndex} className={styles.leaf}>
+              <Leaf c={LEAVES[bottomIndex]} lang={lang} tr={tr} jumpTo={jumpTo} toc={toc} />
+              <span className={styles.folio}>{folioNum} {ui.of} {N}</span>
             </div>
+            {/* Page qui tourne (au-dessus, pivote à 180° comme dans un vrai livre) */}
+            {turning && (
+              <div
+                key={"t" + turningIndex + turning.dir}
+                className={`${styles.leaf} ${styles.flip} ${turning.dir === "next" ? styles.flipAway : styles.flipIn}`}
+                onAnimationEnd={(e) => { if (e.target === e.currentTarget) endTurn(turning); }}
+              >
+                <Leaf c={LEAVES[turningIndex]} lang={lang} tr={tr} jumpTo={jumpTo} toc={toc} />
+              </div>
+            )}
           </div>
         </div>
 

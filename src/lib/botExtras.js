@@ -220,9 +220,9 @@ const fav = (d) => `https://www.google.com/s2/favicons?sz=64&domain=${d}`;
 // Base de projets connue du front (dérivée du portfolio). Sert aux cartes.
 export const BOT_PROJECTS = [
   { name: "Emilia Cross", aliases: ["emilia cross", "emilia"], url: "https://emiliacross.com/", icon: fav("emiliacross.com"), tag: L("Dating site · live video", "Site de rencontre · visio") },
-  { name: "My MTN · Selfcare", aliases: ["mymtn", "my mtn", "selfcare"], url: "https://my.mtn.bj/", icon: fav("my.mtn.bj"), tag: L("Vue.js self-care portal", "Portail selfcare Vue.js") },
-  { name: "MTN Bénin", aliases: ["mtn bénin", "mtn benin", "mtn.bj"], url: "https://www.mtn.bj/", icon: fav("mtn.bj"), tag: L("Corporate WordPress", "Site corporate WordPress") },
-  { name: "Mon Routeur", aliases: ["mon routeur", "monrouteur"], url: "https://monrouteur.mtn.bj/?ref=noref", icon: fav("monrouteur.mtn.bj"), tag: L("Activation journey", "Parcours d'activation") },
+  { name: "My MTN · Selfcare", aliases: ["mymtn", "my mtn", "selfcare"], url: "https://my.mtn.bj/", icon: fav("my.mtn.bj"), tag: L("Selfcare Vue.js · via KAMGOKO", "Selfcare Vue.js · via KAMGOKO") },
+  { name: "MTN Bénin", aliases: ["mtn bénin", "mtn benin", "mtn.bj"], url: "https://www.mtn.bj/", icon: fav("mtn.bj"), tag: L("Corporate WordPress · via KAMGOKO", "Site corporate WordPress · via KAMGOKO") },
+  { name: "Mon Routeur", aliases: ["mon routeur", "monrouteur"], url: "https://monrouteur.mtn.bj/?ref=noref", icon: fav("monrouteur.mtn.bj"), tag: L("Activation · via KAMGOKO", "Activation · via KAMGOKO") },
   { name: "WAPIFY", aliases: ["wapify"], url: "https://wapify.co/", icon: fav("wapify.co"), tag: L("WhatsApp AI marketing", "Marketing IA WhatsApp") },
   { name: "GoCoachings", aliases: ["gocoachings", "go coachings"], url: "https://www.gocoachings.com", icon: fav("gocoachings.com"), tag: L("Coaching platform", "Plateforme de coaching") },
   { name: "NinjaLinking", aliases: ["ninjalinking", "ninja linking"], url: "https://app.ninjalinking.fr", icon: fav("ninjalinking.fr"), tag: L("SEO backlinks SaaS", "SaaS backlinks SEO") },
