@@ -43,8 +43,9 @@ export const skillSet = [
       { name: "Express", level: 88, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
       { name: "Laravel", level: 78, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" },
       { name: "REST · WebSocket", level: 88, icon: "/icons/ph/plugs-connected__ffffff.svg" },
+      { name: "Swagger/OpenAPI", level: 82, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swagger/swagger-original.svg" },
     ],
-    concepts: ["Streams & backpressure", "Dependency injection (NestJS)", "Idempotency & outbox pattern", "Rate limiting & circuit breakers", "Lightweight CQRS / event-driven"],
+    concepts: ["Streams & backpressure", "Dependency injection (NestJS)", "Idempotency & outbox pattern", "Rate limiting & circuit breakers", "Lightweight CQRS / event-driven", "API documentation (OpenAPI/Swagger)"],
   },
   {
     key: "ai",

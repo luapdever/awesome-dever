@@ -64,6 +64,7 @@ const UI = {
     ],
     placeholder: "Écris ton message…",
     placeholderRecruiter: "Colle une offre d'emploi — je te dis si Paul colle…",
+    offerCta: "📋 Préciser mon offre",
     error: "Je suis momentanément indisponible. Réessaie dans un instant, ou écris directement à Paul : pzannou511@gmail.com.",
     suggestions: ["Il maîtrise quoi ?", "Montre-moi ses projets", "Est-il disponible ?"],
     open: "Discuter avec PaulBot",
@@ -127,6 +128,7 @@ const UI = {
     ],
     placeholder: "Type your message…",
     placeholderRecruiter: "Paste a job offer — I'll tell you if Paul fits…",
+    offerCta: "📋 Paste my offer",
     error: "I'm momentarily unavailable. Please try again shortly, or reach Paul directly at pzannou511@gmail.com.",
     suggestions: ["What's his stack?", "Show me his projects", "Is he available?"],
     open: "Chat with PaulBot",
@@ -474,6 +476,15 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
     return <div key={k} className={styles.richBlock}>{renderInline(b.value)}</div>;
   };
 
+  // Action « Préciser mon offre » (recruteur) : place le curseur dans le champ
+  // pour qu'il écrive/colle son offre — SANS envoyer (on lui laisse la main).
+  const promptForOffer = () => {
+    const el = inputRef.current;
+    if (!el) return;
+    el.focus();
+    try { el.scrollIntoView({ block: "nearest" }); } catch {}
+  };
+
   // Appelle le LLM avec un contexte donné (streaming). Marque l'erreur pour
   // permettre un « Réessayer ».
   const callModel = async (contextMessages, opts) => {
@@ -519,7 +530,9 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
       }
       const acted = extractActions(acc);
       const { clean: finalShown, suggestions: llmSuggest } = extractSuggestions(acted.clean);
-      if (UNAVAILABLE_RE.test(finalShown)) {
+      // En mode pitch, la réponse finit TOUJOURS par un CTA contact (« écrire à
+      // Paul »…) → ne pas la confondre avec un cul-de-sac « indisponible ».
+      if (!pitch && UNAVAILABLE_RE.test(finalShown)) {
         // Le modèle a répondu un "cul-de-sac" → on bascule sur /dispo.
         setMessages((m) => {
           const copy = m.slice();
@@ -575,8 +588,10 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
       return;
     }
 
-    // 2) Réponse déterministe côté client → AUCUN appel modèle.
-    const intent = routeIntent(content);
+    // 2) Réponse déterministe côté client → AUCUN appel modèle. Réservée aux
+    //    questions COURTES : un long texte collé (offre, brief…) ne doit pas
+    //    être capté par un intent (ex. « email » car l'offre mentionne des e-mails).
+    const intent = content.length < 220 ? routeIntent(content) : null;
     if (intent) {
       const ans = clientAnswer(intent, lang);
       setMessages((m) => [...m, userMsg, { role: "assistant", at: Date.now(), ...ans }]);
@@ -919,6 +934,9 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                       })()}
                     </p>
                     <div className={styles.suggest}>
+                      {contact?.persona === "recruiter" && (
+                        <button type="button" className={styles.suggestCtx} onClick={promptForOffer}>{ui.offerCta}</button>
+                      )}
                       {ctxSuggest && (
                         <button type="button" className={styles.suggestCtx} onClick={() => send(ctxSuggest.prompt)}>{ctxSuggest.label}</button>
                       )}

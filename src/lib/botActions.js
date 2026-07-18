@@ -114,9 +114,15 @@ export function extractActions(raw) {
 // Une offre est longue ET contient plusieurs signaux (missions, profil, stack…).
 // → déclenche le mode « pitch » (analyse de fit) côté backend.
 const JD_SIGNALS = [
-  "recherch", "recrut", "poste", "mission", "profil", "responsabilit", "compétences", "competences",
-  "requirements", "responsibilities", "we are looking", "you will", "cdi", "cdd", "freelance", "h/f",
-  "expérience", "experience", "salaire", "salary", "qualifications", "join our", "role", "stack technique",
+  // intitulés / intentions
+  "recherch", "recrut", "poste", "mission", "prestation", "profil", "freelance", "cdi", "cdd", "h/f",
+  "postuler", "qualifications", "we are looking", "you will", "join our", "join us", "hiring", "role",
+  // sections structurantes d'une offre
+  "responsabilit", "responsibilities", "requirements", "compétence", "competence", "compétences", "competences",
+  "domaine", "contexte", "conditions", "livrable", "prérequis", "prerequis", "missions détaillées",
+  // conditions
+  "expérience", "experience", "salaire", "salary", "tjm", "remote", "télétravail", "teletravail",
+  "renouvelable", "stack technique",
 ];
 export function looksLikeJobOffer(text) {
   const t = (text || "").toLowerCase();
