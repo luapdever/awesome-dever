@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /bot-embed
 
 Sitemap: https://luap-dever.netlify.app/sitemap.xml

@@ -63,6 +63,14 @@ gtag('config', 'G-H5387SXY6D');`,
             dépendance runtime à api.iconify.design. */}
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
         <link rel="dns-prefetch" href="https://www.google.com" />
+        {/* Vérification des moteurs (Search Console / Bing) — renseigne la valeur
+            dans les variables d'env Netlify, puis redéploie. Vide = rien rendu. */}
+        {process.env.GOOGLE_SITE_VERIFICATION && (
+          <meta name="google-site-verification" content={process.env.GOOGLE_SITE_VERIFICATION} />
+        )}
+        {process.env.BING_SITE_VERIFICATION && (
+          <meta name="msvalidate.01" content={process.env.BING_SITE_VERIFICATION} />
+        )}
       </Head>
       <body>
         {/* Google Tag Manager (noscript) — juste après <body> */}
