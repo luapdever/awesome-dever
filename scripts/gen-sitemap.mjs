@@ -7,11 +7,18 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { blogPosts } from "../src/rawDatas/blog.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(__dirname, "..", "public", "sitemap.xml");
 const ORIGIN = "https://luap-dever.netlify.app";
+
+// Articles du blog : on PARSE blog.js (slug + date) au lieu de l'importer.
+// (Un import ESM nommé casse sur Node 18 en prod Netlify, où blog.js est
+// vu comme du CommonJS. Le parsing n'a aucune dépendance au système de modules.)
+const blogSrc = fs.readFileSync(path.join(__dirname, "..", "src", "rawDatas", "blog.js"), "utf8");
+const blogArticles = [
+  ...blogSrc.matchAll(/slug:\s*["']([a-z0-9-]+)["'],\s*date:\s*["'](\d{4}-\d{2}-\d{2})["']/g),
+].map((m) => ({ slug: m[1], date: m[2] }));
 
 const lastmod = new Date().toISOString().slice(0, 10);
 
@@ -23,8 +30,8 @@ const ROUTES = [
   { path: "/about-me", priority: "0.7", changefreq: "monthly" },
   { path: "/paulfolio", priority: "0.7", changefreq: "monthly" },
   { path: "/cv", priority: "0.6", changefreq: "monthly" }, // rewrite → public/cv (URL propre, sans redirection)
-  // Articles du blog (générés depuis la source unique)
-  ...blogPosts.map((p) => ({ path: `/blog/${p.slug}`, priority: "0.6", changefreq: "monthly", lastmod: p.date })),
+  // Articles du blog (parsés depuis blog.js)
+  ...blogArticles.map((p) => ({ path: `/blog/${p.slug}`, priority: "0.6", changefreq: "monthly", lastmod: p.date })),
 ];
 
 const body = ROUTES.map(
