@@ -2,6 +2,7 @@ import Link from "next/link";
 import Seo from "../../src/components/global/seo";
 import ShareBar from "../../src/components/global/ShareBar";
 import ArticleReader from "../../src/components/global/ArticleReader";
+import BlogUseCases from "../../src/components/global/BlogUseCases";
 import { blogPosts, readingMinutes, tr } from "../../src/rawDatas/blog";
 import { useLandingLang } from "../../src/context/landingLang";
 import styles from "../../styles/specific/blog/article.module.css";
@@ -63,6 +64,8 @@ export default function Article({ post, prev, next }) {
           )}
 
           <ArticleReader paragraphs={post.content.map((c) => tr(c, L))} lang={L} />
+
+          {post.useCases && post.useCases.length > 0 && <BlogUseCases useCases={post.useCases} lang={L} />}
 
           {post.ctas && post.ctas.length > 0 && (
             <div className={styles.ctaGrid}>

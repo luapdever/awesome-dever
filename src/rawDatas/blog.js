@@ -112,6 +112,29 @@ export const blogPosts = [
       { label: L("Parler à PaulBot", "Talk to PaulBot"), href: "/", desc: L("L'assistant sur le portfolio", "The assistant on the portfolio") },
       { label: L("Le code sur GitHub", "The code on GitHub"), href: "https://github.com/luapdever", desc: L("Mes dépôts", "My repositories"), external: true },
     ],
+    useCases: [
+      {
+        title: L("Mode recruteur — colle une offre, obtiens une analyse honnête", "Recruiter mode — paste an offer, get an honest analysis"),
+        prompt: `Développeur Full-Stack Senior — Plateforme temps réel (CDI / Freelance)
+Domaine : Marketplace & communication temps réel.
+Missions : APIs backend NestJS + messagerie temps réel (WebSocket) ; paiements & reversements Stripe (avec vérification d'identité) ; app mobile Flutter + front web React ; e-commerce ; Docker + déploiement automatisé.
+Prérequis additionnels : Kubernetes en production, microservices en Go, API GraphQL fédérée, app desktop native Swift/Kotlin.
+Conditions : 100% remote, TJM selon profil.`,
+        steps: [
+          { q: L("Il a déjà fait de la facturation à la minute ?", "Has he done per-minute billing?"), a: L("Oui — Emilia Cross : visio facturée à la minute via un système de crédits, en temps réel.", "Yes — Emilia Cross: per-minute video billing via a credit system, in real time.") },
+          { q: L("Fait-il du natif Swift ou Kotlin ?", "Does he do native Swift or Kotlin?"), a: L("Non — pas de natif. iOS/Android via Flutter, desktop via Electron.", "No — no native. iOS/Android via Flutter, desktop via Electron.") },
+          { q: L("Il est disponible quand ?", "When is he available?"), a: L("Ouvert aux missions freelance & collaborations, en télétravail.", "Open to freelance & collaborations, remote.") },
+        ],
+      },
+      {
+        title: L("Mode visiteur — découvrir Paul", "Visitor mode — get to know Paul"),
+        steps: [
+          { q: L("Raconte-moi une anecdote sur Paul", "Tell me an anecdote about Paul"), a: L("Pas d'invention : « je n'ai pas ce détail perso » — puis il propose d'ouvrir un chapitre du livre.", "No made-up story: “I don't have that personal detail” — then it offers to open a book chapter.") },
+          { q: L("C'est quoi Emilia Cross ?", "What is Emilia Cross?"), a: L("Une app (Flutter + PWA) de rencontre en visio facturée à la minute — KYC, paiements, reversements.", "A Flutter + PWA dating app with per-minute billed live video — KYC, payments, payouts.") },
+          { q: L("Comment PaulBot est construit ?", "How is PaulBot built?"), a: L("Failover multi-LLM, garde-fous anti-hallucination, réponses déterministes côté client (voir cet article).", "Multi-LLM failover, anti-hallucination guardrails, client-side deterministic answers (see this article).") },
+        ],
+      },
+    ],
   },
   {
     slug: "ce-portfolio-nouvelle-generation",

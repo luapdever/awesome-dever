@@ -1,0 +1,116 @@
+/* ---- Cas d'usage interactifs (article PaulBot) ---- */
+.wrap { margin: 36px 0 8px; }
+.heading { font-size: 1.15rem; font-weight: 800; color: #eae6ff; margin: 0 0 16px; }
+
+.case {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.caseTitle {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--color-accent-soft, #ffc25c);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.caseTitle::-webkit-details-marker { display: none; }
+.caseTitle::before { content: "▾ "; color: var(--color-accent, #ffa500); }
+.case:not([open]) .caseTitle::before { content: "▸ "; }
+
+/* Prompt éditable + copie */
+.promptBox {
+  margin: 12px 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.28);
+}
+.promptArea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  background: transparent;
+  color: #e7e2ff;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  padding: 12px 13px;
+  resize: vertical;
+  min-height: 64px;
+}
+.promptArea:focus { outline: 2px solid rgba(255, 165, 0, 0.35); outline-offset: -2px; }
+.promptFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+.editHint { font-size: 0.72rem; color: rgba(234, 230, 255, 0.55); }
+.copyBtn {
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 6px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #241100;
+  background: linear-gradient(135deg, var(--color-accent-soft, #ffc25c), var(--color-accent, #ffa500));
+  border: none;
+  white-space: nowrap;
+}
+.copyBtn:hover { filter: brightness(1.05); }
+
+/* Timeline questions → réponses */
+.timeline {
+  list-style: none;
+  margin: 12px 0 2px;
+  padding: 0 0 0 6px;
+  border-left: 2px solid rgba(255, 165, 0, 0.28);
+}
+.step { position: relative; padding: 0 0 16px 16px; }
+.step:last-child { padding-bottom: 2px; }
+.step::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-accent, #ffa500);
+  box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.15);
+}
+.q { display: flex; align-items: flex-start; gap: 10px; }
+.qText { flex: 1; font-weight: 600; color: #eae6ff; font-size: 0.86rem; line-height: 1.45; }
+.qCopy {
+  font: inherit;
+  font-size: 0.68rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  color: #eae6ff;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  white-space: nowrap;
+  flex: none;
+}
+.qCopy:hover { background: rgba(255, 255, 255, 0.13); }
+.a { margin-top: 6px; font-size: 0.84rem; line-height: 1.5; color: rgba(234, 230, 255, 0.82); }
+.who {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(234, 230, 255, 0.5);
+  margin-right: 7px;
+}
+
+@media (max-width: 560px) {
+  .q { flex-direction: column; gap: 6px; }
+}
