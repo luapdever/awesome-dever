@@ -4,6 +4,22 @@ export default function Document() {
   return (
     <Html lang="fr">
       <Head>
+        {/* Hygiène analytics — DOIT s'exécuter AVANT GTM/gtag. Désactive la
+            mesure GA4 pour le trafic INTERNE (toi) et dev/preview, afin de ne
+            pas polluer les stats. Toi : visite « ?ga=internal » une fois par
+            navigateur/appareil (persistant) ; « ?ga=external » pour réactiver. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{
+var h=location.hostname,q=new URLSearchParams(location.search);
+if(q.get('ga')==='internal')localStorage.setItem('ga_internal','1');
+if(q.get('ga')==='external')localStorage.removeItem('ga_internal');
+var internal=h==='localhost'||h==='127.0.0.1'||h.indexOf('deploy-preview')>-1||h.indexOf('--')>-1||localStorage.getItem('ga_internal')==='1';
+if(internal){window['ga-disable-G-H5387SXY6D']=true;}
+}catch(e){}})();`,
+          }}
+        />
+        {/* End hygiène analytics */}
         {/* Consent Mode v2 — défaut « granted » (modèle opt-out : la mesure
             démarre dès la 1re page ; la bannière permet de se désinscrire).
             Un refus déjà exprimé (retour de visite) est ré-appliqué. */}
