@@ -63,13 +63,14 @@ export const skillSet = [
   },
   {
     key: "mobile",
-    category: "Mobile",
+    category: "Mobile & Desktop",
     icon: "/icons/ph/device-mobile__ffa500.svg",
     skills: [
       { name: "Flutter", level: 84, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
       { name: "GetX / Bloc", level: 78, icon: "/icons/ph/tree-structure__ffffff.svg" },
+      { name: "Electron", level: 80, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg" },
     ],
-    concepts: ["Dart isolates & concurrency", "Reactive state (Bloc/GetX)", "Native platform channels", "Custom render objects"],
+    concepts: ["Dart isolates & concurrency", "Reactive state (Bloc/GetX)", "Native platform channels", "Electron desktop apps (offline SQLite, auto-update)", "PWA (installable, offline)"],
   },
   {
     key: "cms",
@@ -77,10 +78,11 @@ export const skillSet = [
     icon: "/icons/ph/globe-hemisphere-west__ffa500.svg",
     skills: [
       { name: "WordPress (themes & plugins)", level: 90, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" },
+      { name: "WooCommerce", level: 82, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/woocommerce/woocommerce-original.svg" },
       { name: "ACF · Polylang · LearnPress", level: 85, icon: "/icons/ph/puzzle-piece__ffffff.svg" },
       { name: "Strapi", level: 72, icon: "https://www.svgrepo.com/show/354399/strapi-icon.svg" },
     ],
-    concepts: ["Hooks & filters internals", "Custom Gutenberg blocks", "WP REST + JWT auth", "Multisite & i18n (Polylang)"],
+    concepts: ["Hooks & filters internals", "Custom Gutenberg blocks", "WP REST + JWT auth", "WooCommerce e-commerce", "Multisite & i18n (Polylang)"],
   },
   {
     key: "data",
@@ -114,9 +116,10 @@ export const skillSet = [
       { name: "Git · GitHub · GitLab", level: 92, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
       { name: "Prometheus · Grafana", level: 74, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" },
       { name: "Blender (3D)", level: 68, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg" },
+      { name: "Playwright (E2E)", level: 80, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/playwright/playwright-original.svg" },
       { name: "Photoshop · XD", level: 72, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" },
     ],
-    concepts: ["Interactive rebase & bisect", "PromQL & Grafana dashboards", "Correlated traces/metrics/logs", "Design tokens"],
+    concepts: ["End-to-end testing (Playwright)", "Interactive rebase & bisect", "PromQL & Grafana dashboards", "Correlated traces/metrics/logs", "Design tokens"],
   },
 ];
 

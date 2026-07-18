@@ -816,7 +816,9 @@
       }
 
       .switch,
-      .toolbar {
+      .toolbar,
+      iframe[title="PaulBot"],
+      iframe[aria-label="PaulBot"] {
         display: none !important;
       }
 
@@ -1049,7 +1051,8 @@
           { icon: "phone", text: "+229 01 90 66 73 33", href: "tel:+2290190667333" },
           { icon: "mail", text: "pzannou511@gmail.com", href: "mailto:pzannou511@gmail.com" },
           { icon: "pin", text: "Abomey-Calavi / Dèkoungbé, Bénin", href: "" },
-          { icon: "briefcase", text: "KAMGOKO Technologies", href: "" }
+          { icon: "briefcase", text: "KAMGOKO Technologies", href: "" },
+          { icon: "briefcase", text: "luap-dever.netlify.app", href: "https://luap-dever.netlify.app/" }
         ],
         experiences: [
           {
@@ -1061,10 +1064,10 @@
             ]
           },
           {
-            role: "Ingénieur Backend & Realtime", org: "France Assist", period: "2024 – 2025",
-            note: "Collaboration — Emilia Cross, site de rencontre (visio en direct)",
+            role: "Ingénieur Full-Stack & Realtime", org: "France Assist", period: "2024 – 2025",
+            note: "Collaboration — Emilia Cross, application (Flutter + PWA) de rencontre en visio",
             bullets: [
-              "Architecture d'Emilia Cross, un site de rencontre, en NestJS (API multi-services + serveur WebSocket dédié) — streaming vidéo, KYC, paiements & payouts.",
+              "Conception de bout en bout d'Emilia Cross — clients Flutter (app mobile + PWA) et backend NestJS (API multi-services + serveur WebSocket dédié) : streaming vidéo, KYC, paiements & payouts.",
               "Facturation à la minute par système de crédits, paiements Stripe, vérification KYC, contrôle d'accès (RBAC) et 2FA.",
               "Intégration vidéo Agora RTC, notifications Firebase, stockage Google Cloud et supervision applicative."
             ]
@@ -1110,10 +1113,10 @@
             links: [{ label: "my.mtn.bj", href: "https://my.mtn.bj/" }, { label: "monrouteur.mtn.bj", href: "https://monrouteur.mtn.bj/forfaits/" }]
           },
           {
-            id: "emilia", name: "Emilia Cross — Site de rencontre", year: "2024 – 2025", role: "Architecte & développeur backend / realtime",
+            id: "emilia", name: "Emilia Cross — App de rencontre en visio", year: "2024 – 2025", role: "Full-stack (Flutter + NestJS) & temps réel",
             client: "France Assist",
-            desc: "Site de rencontre où la relation se noue en visio : streaming vidéo, vérification KYC, paiements & reversements (payouts) Stripe, facturation par crédits, découverte de partenaires et messagerie temps réel. Architecture NestJS multi-services (API + serveur WebSocket dédié) avec RBAC, 2FA et supervision.",
-            stack: ["NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker", "GitLab CI/CD"],
+            desc: "Application mobile (Flutter) + PWA où la relation se noue en visio facturée à la minute : streaming vidéo, KYC (Stripe Identity), paiements & reversements Stripe, découverte de partenaires et messagerie temps réel. Clients Flutter + backend NestJS multi-services (API + serveur WebSocket dédié), RBAC, 2FA et supervision.",
+            stack: ["Flutter", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker", "GitLab CI/CD"],
             links: [{ label: "emiliacross.com", href: "https://emiliacross.com/" }]
           },
           {
@@ -1138,10 +1141,11 @@
           { key: "backend", cat: "Backend", items: "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize" },
           { key: "ai", cat: "IA / LLM", items: "Intégration LLM (agnostique du modèle), API OpenAI standard, RAG (génération augmentée par récupération), fine-tuning, prompt engineering & garde-fous, function/tool calling, automatisation IA" },
           { key: "frontend", cat: "Frontend", items: "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection" },
-          { key: "mobile", cat: "Mobile", items: "Flutter, GetX, Bloc" },
-          { key: "cms", cat: "CMS", items: "WordPress (thèmes & plugins), ACF Pro, Elementor, Polylang, LearnPress" },
+          { key: "mobile", cat: "Mobile & Desktop", items: "Flutter, GetX, Bloc, Electron (desktop cross-plateforme), PWA" },
+          { key: "cms", cat: "CMS & E-commerce", items: "WordPress (thèmes & plugins), WooCommerce, ACF Pro, Elementor, Polylang, LearnPress" },
           { key: "db", cat: "Bases de données", items: "PostgreSQL, MySQL / MariaDB" },
           { key: "devops", cat: "DevOps", items: "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS" },
+          { key: "tests", cat: "Tests", items: "Playwright (tests E2E automatisés)" },
           { key: "cloud", cat: "Cloud & Services", items: "Google Cloud Storage, Firebase, Stripe, Agora RTC, Twilio, Keycloak SSO" },
           { key: "obs", cat: "Observabilité", items: "Prometheus, Grafana, Uptime Kuma, Swagger/OpenAPI" },
           { key: "vcs", cat: "Versioning", items: "Git, GitHub, GitLab, npm, Yarn" }
@@ -1181,7 +1185,8 @@
           { icon: "phone", text: "+229 01 90 66 73 33", href: "tel:+2290190667333" },
           { icon: "mail", text: "pzannou511@gmail.com", href: "mailto:pzannou511@gmail.com" },
           { icon: "pin", text: "Abomey-Calavi / Dèkoungbé, Benin", href: "" },
-          { icon: "briefcase", text: "KAMGOKO Technologies", href: "" }
+          { icon: "briefcase", text: "KAMGOKO Technologies", href: "" },
+          { icon: "briefcase", text: "luap-dever.netlify.app", href: "https://luap-dever.netlify.app/" }
         ],
         experiences: [
           {
@@ -1193,10 +1198,10 @@
             ]
           },
           {
-            role: "Backend & Real-Time Engineer", org: "France Assist", period: "2024 – 2025",
-            note: "Collaboration — Emilia Cross, a dating site (live video)",
+            role: "Full-Stack & Real-Time Engineer", org: "France Assist", period: "2024 – 2025",
+            note: "Collaboration — Emilia Cross, a dating app (Flutter + PWA), live video",
             bullets: [
-              "Architected Emilia Cross, a dating site, in NestJS (multi-service API + dedicated WebSocket server) — video streaming, KYC, payments & payouts.",
+              "Built Emilia Cross end to end — Flutter clients (mobile app + PWA) and a NestJS backend (multi-service API + dedicated WebSocket server): video streaming, KYC, payments & payouts.",
               "Per-minute credit-based billing, Stripe payments, KYC verification, access control (RBAC) and 2FA.",
               "Agora RTC video integration, Firebase notifications, Google Cloud storage and application monitoring."
             ]
@@ -1242,10 +1247,10 @@
             links: [{ label: "my.mtn.bj", href: "https://my.mtn.bj/" }, { label: "monrouteur.mtn.bj", href: "https://monrouteur.mtn.bj/forfaits/" }]
           },
           {
-            id: "emilia", name: "Emilia Cross — Dating site", year: "2024 – 2025", role: "Architect & backend / real-time developer",
+            id: "emilia", name: "Emilia Cross — Live-video dating app", year: "2024 – 2025", role: "Full-stack (Flutter + NestJS) & real-time",
             client: "France Assist",
-            desc: "A dating site where connections are made over live video: video streaming, KYC verification, Stripe payments & payouts, credit-based billing, partner discovery and real-time messaging. Multi-service NestJS architecture (API + dedicated WebSocket server) with RBAC, 2FA and monitoring.",
-            stack: ["NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker", "GitLab CI/CD"],
+            desc: "A Flutter mobile app + PWA where connections are made over per-minute billed live video: video streaming, KYC (Stripe Identity), Stripe payments & payouts, partner discovery and real-time messaging. Flutter clients + multi-service NestJS backend (API + dedicated WebSocket server) with RBAC, 2FA and monitoring.",
+            stack: ["Flutter", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker", "GitLab CI/CD"],
             links: [{ label: "emiliacross.com", href: "https://emiliacross.com/" }]
           },
           {
@@ -1270,10 +1275,11 @@
           { key: "backend", cat: "Backend", items: "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize" },
           { key: "ai", cat: "AI / LLM", items: "LLM integration (model-agnostic), standard OpenAI API, RAG (retrieval-augmented generation), fine-tuning, prompt engineering & guardrails, function/tool calling, AI workflow automation" },
           { key: "frontend", cat: "Frontend", items: "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection" },
-          { key: "mobile", cat: "Mobile", items: "Flutter, GetX, Bloc" },
-          { key: "cms", cat: "CMS", items: "WordPress (themes & plugins), ACF Pro, Elementor, Polylang, LearnPress" },
+          { key: "mobile", cat: "Mobile & Desktop", items: "Flutter, GetX, Bloc, Electron (cross-platform desktop), PWA" },
+          { key: "cms", cat: "CMS & E-commerce", items: "WordPress (themes & plugins), WooCommerce, ACF Pro, Elementor, Polylang, LearnPress" },
           { key: "db", cat: "Databases", items: "PostgreSQL, MySQL / MariaDB" },
           { key: "devops", cat: "DevOps", items: "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS" },
+          { key: "tests", cat: "Testing", items: "Playwright (automated E2E tests)" },
           { key: "cloud", cat: "Cloud & Services", items: "Google Cloud Storage, Firebase, Stripe, Agora RTC, Twilio, Keycloak SSO" },
           { key: "obs", cat: "Observability", items: "Prometheus, Grafana, Uptime Kuma, Swagger/OpenAPI" },
           { key: "vcs", cat: "Version Control", items: "Git, GitHub, GitLab, npm, Yarn" }

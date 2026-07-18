@@ -16,7 +16,8 @@
     "ndaNote": "Détails masqués — accord de confidentialité (NDA)",
     "exportPdf": "Exporter en PDF",
     "profilLabel": "Profil",
-    "langLabel": "Langue"
+    "langLabel": "Langue",
+    "home": "Le portfolio"
   },
   "contact": [
     {
@@ -38,6 +39,11 @@
       "icon": "briefcase",
       "text": "KAMGOKO Technologies",
       "href": ""
+    },
+    {
+      "icon": "briefcase",
+      "text": "luap-dever.netlify.app",
+      "href": "https://luap-dever.netlify.app/"
     }
   ],
   "experiences": [
@@ -45,19 +51,19 @@
       "role": "Ingénieur Logiciel Full-Stack",
       "org": "KAMGOKO Technologies",
       "period": "Janvier 2022 – Présent",
-      "note": "Prestations web pour grands comptes télécoms et médias",
+      "note": "Prestations web pour grands comptes (télécoms, médias, banque) — MTN, Moov, Celtiis, Orabank",
       "bullets": [
         "2026 · Celtiis (via KAMGOKO) — Développement web pour un opérateur télécom.",
         "2022 – 2025 · MTN & Moov — Sites corporate MTN Bénin, MTN Congo et Moov Africa Togo, application Selfcare MyMTN (Vue.js) et page d'activation MonRouteur : thèmes/plugins WordPress sur mesure, intégration d'APIs RESTful et optimisation des performances."
       ]
     },
     {
-      "role": "Ingénieur Backend & Realtime",
+      "role": "Ingénieur Full-Stack & Realtime",
       "org": "France Assist",
       "period": "2024 – 2025",
-      "note": "Collaboration — Emilia Cross, plateforme de streaming vidéo social",
+      "note": "Collaboration — Emilia Cross, application (Flutter + PWA) de rencontre en visio",
       "bullets": [
-        "Architecture d'une plateforme de streaming vidéo realtime en NestJS (API multi-services + serveur WebSocket dédié).",
+        "Conception de bout en bout d'Emilia Cross — clients Flutter (app mobile + PWA) et backend NestJS (API multi-services + serveur WebSocket dédié) : streaming vidéo, KYC, paiements & payouts.",
         "Facturation à la minute par système de crédits, paiements Stripe, vérification KYC, contrôle d'accès (RBAC) et 2FA.",
         "Intégration vidéo Agora RTC, notifications Firebase, stockage Google Cloud et supervision applicative."
       ]
@@ -77,8 +83,8 @@
       "period": "Oct. 2021 – Déc. 2021",
       "note": "",
       "bullets": [
-        "Développement d'interfaces interactives et responsives en HTML5, CSS3 et JavaScript.",
-        "Composants réutilisables Vue.js (Nuxt.js), optimisation Webpack et collaboration Agile avec designers et équipe de dev."
+        "Consolidation des bases en PHP, Vue.js et Nuxt.js : interfaces réactives, composants réutilisables, optimisation Webpack et collaboration Agile.",
+        "Tout premiers pas en Node.js — encore en apprentissage."
       ]
     },
     {
@@ -105,7 +111,7 @@
       "name": "Sites corporate MTN Bénin & MTN Congo",
       "year": "2022 – 2025",
       "role": "Développeur WordPress",
-      "client": "MTN Group",
+      "client": "MTN Group (via KAMGOKO)",
       "desc": "Sites vitrines corporate pour deux opérateurs télécoms majeurs : construction de thèmes personnalisés, plugins sur mesure, gestion de contenus multilingue et optimisation des performances et du référencement.",
       "stack": [
         "WordPress",
@@ -129,7 +135,7 @@
       "name": "MyMTN Selfcare & MonRouteur",
       "year": "2022 – 2025",
       "role": "Développeur Frontend",
-      "client": "MTN Bénin",
+      "client": "MTN Bénin (via KAMGOKO)",
       "desc": "Application Selfcare abonnés (SPA) — consultation de forfaits, achats et gestion de compte — et page MonRouteur d'activation de forfaits/data en cas de solde ou de forfait épuisé. Intégration d'APIs RESTful, gestion d'état avancée et optimisation de l'expérience utilisateur.",
       "stack": [
         "Vue.js",
@@ -151,12 +157,13 @@
     },
     {
       "id": "emilia",
-      "name": "Emilia Cross — Streaming vidéo social",
+      "name": "Emilia Cross — App de rencontre en visio",
       "year": "2024 – 2025",
-      "role": "Architecte & développeur backend / realtime",
+      "role": "Full-stack (Flutter + NestJS) & temps réel",
       "client": "France Assist",
-      "desc": "Plateforme de mise en relation par visio en direct : facturation à la minute par système de crédits, paiements Stripe, vérification KYC, découverte de partenaires et messagerie realtime. Architecture NestJS multi-services (API + serveur WebSocket dédié) avec RBAC, 2FA et supervision.",
+      "desc": "Application mobile (Flutter) + PWA où la relation se noue en visio facturée à la minute : streaming vidéo, KYC (Stripe Identity), paiements & reversements Stripe, découverte de partenaires et messagerie temps réel. Clients Flutter + backend NestJS multi-services (API + serveur WebSocket dédié), RBAC, 2FA et supervision.",
       "stack": [
+        "Flutter",
         "NestJS",
         "TypeScript",
         "PostgreSQL",
@@ -243,17 +250,17 @@
     {
       "key": "frontend",
       "cat": "Frontend",
-      "items": "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n"
+      "items": "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection"
     },
     {
       "key": "mobile",
-      "cat": "Mobile",
-      "items": "Flutter, GetX, Bloc"
+      "cat": "Mobile & Desktop",
+      "items": "Flutter, GetX, Bloc, Electron (desktop cross-plateforme), PWA"
     },
     {
       "key": "cms",
-      "cat": "CMS",
-      "items": "WordPress (thèmes & plugins), ACF Pro, Elementor, Polylang, LearnPress"
+      "cat": "CMS & E-commerce",
+      "items": "WordPress (thèmes & plugins), WooCommerce, ACF Pro, Elementor, Polylang, LearnPress"
     },
     {
       "key": "db",
@@ -264,6 +271,11 @@
       "key": "devops",
       "cat": "DevOps",
       "items": "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS"
+    },
+    {
+      "key": "tests",
+      "cat": "Tests",
+      "items": "Playwright (tests E2E automatisés)"
     },
     {
       "key": "cloud",

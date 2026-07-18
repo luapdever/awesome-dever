@@ -16,7 +16,8 @@
     "ndaNote": "Details hidden — non-disclosure agreement (NDA)",
     "exportPdf": "Export to PDF",
     "profilLabel": "Profile",
-    "langLabel": "Language"
+    "langLabel": "Language",
+    "home": "The portfolio"
   },
   "contact": [
     {
@@ -38,6 +39,11 @@
       "icon": "briefcase",
       "text": "KAMGOKO Technologies",
       "href": ""
+    },
+    {
+      "icon": "briefcase",
+      "text": "luap-dever.netlify.app",
+      "href": "https://luap-dever.netlify.app/"
     }
   ],
   "experiences": [
@@ -45,19 +51,19 @@
       "role": "Full-Stack Software Engineer",
       "org": "KAMGOKO Technologies",
       "period": "January 2022 – Present",
-      "note": "Web services for major telecom and media accounts",
+      "note": "Web services for major accounts (telecom, media, banking) — MTN, Moov, Celtiis, Orabank",
       "bullets": [
         "2026 · Celtiis (via KAMGOKO) — Web development for a telecom operator.",
         "2022 – 2025 · MTN & Moov — Corporate websites for MTN Benin, MTN Congo and Moov Africa Togo, the MyMTN Selfcare app (Vue.js) and the MonRouteur activation page: custom WordPress themes/plugins, RESTful API integration and performance optimization."
       ]
     },
     {
-      "role": "Backend & Real-Time Engineer",
+      "role": "Full-Stack & Real-Time Engineer",
       "org": "France Assist",
       "period": "2024 – 2025",
-      "note": "Collaboration — Emilia Cross, social video streaming platform",
+      "note": "Collaboration — Emilia Cross, a dating app (Flutter + PWA), live video",
       "bullets": [
-        "Architected a real-time video streaming platform in NestJS (multi-service API + dedicated WebSocket server).",
+        "Built Emilia Cross end to end — Flutter clients (mobile app + PWA) and a NestJS backend (multi-service API + dedicated WebSocket server): video streaming, KYC, payments & payouts.",
         "Per-minute credit-based billing, Stripe payments, KYC verification, access control (RBAC) and 2FA.",
         "Agora RTC video integration, Firebase notifications, Google Cloud storage and application monitoring."
       ]
@@ -77,8 +83,8 @@
       "period": "Oct. 2021 – Dec. 2021",
       "note": "",
       "bullets": [
-        "Developed interactive, responsive interfaces with HTML5, CSS3 and JavaScript.",
-        "Reusable Vue.js (Nuxt.js) components, Webpack optimization and Agile collaboration with designers and the dev team."
+        "Consolidated foundations in PHP, Vue.js and Nuxt.js: reactive interfaces, reusable components, Webpack optimization and Agile collaboration.",
+        "Very first steps in Node.js — still learning the ropes."
       ]
     },
     {
@@ -105,7 +111,7 @@
       "name": "MTN Benin & MTN Congo corporate websites",
       "year": "2022 – 2025",
       "role": "WordPress Developer",
-      "client": "MTN Group",
+      "client": "MTN Group (via KAMGOKO)",
       "desc": "Corporate showcase websites for two major telecom operators: custom themes, tailored plugins, multilingual content management and performance/SEO optimization.",
       "stack": [
         "WordPress",
@@ -129,7 +135,7 @@
       "name": "MyMTN Selfcare & MonRouteur",
       "year": "2022 – 2025",
       "role": "Frontend Developer",
-      "client": "MTN Benin",
+      "client": "MTN Benin (via KAMGOKO)",
       "desc": "Subscriber Selfcare app (SPA) — plans, purchases and account management — and the MonRouteur page for activating plans/data when the balance or bundle is depleted. RESTful API integration, advanced state management and UX optimization.",
       "stack": [
         "Vue.js",
@@ -151,12 +157,13 @@
     },
     {
       "id": "emilia",
-      "name": "Emilia Cross — Social video streaming",
+      "name": "Emilia Cross — Live-video dating app",
       "year": "2024 – 2025",
-      "role": "Architect & backend / real-time developer",
+      "role": "Full-stack (Flutter + NestJS) & real-time",
       "client": "France Assist",
-      "desc": "Live video matchmaking platform: per-minute credit-based billing, Stripe payments, KYC verification, partner discovery and real-time messaging. Multi-service NestJS architecture (API + dedicated WebSocket server) with RBAC, 2FA and monitoring.",
+      "desc": "A Flutter mobile app + PWA where connections are made over per-minute billed live video: video streaming, KYC (Stripe Identity), Stripe payments & payouts, partner discovery and real-time messaging. Flutter clients + multi-service NestJS backend (API + dedicated WebSocket server) with RBAC, 2FA and monitoring.",
       "stack": [
+        "Flutter",
         "NestJS",
         "TypeScript",
         "PostgreSQL",
@@ -243,17 +250,17 @@
     {
       "key": "frontend",
       "cat": "Frontend",
-      "items": "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n"
+      "items": "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection"
     },
     {
       "key": "mobile",
-      "cat": "Mobile",
-      "items": "Flutter, GetX, Bloc"
+      "cat": "Mobile & Desktop",
+      "items": "Flutter, GetX, Bloc, Electron (cross-platform desktop), PWA"
     },
     {
       "key": "cms",
-      "cat": "CMS",
-      "items": "WordPress (themes & plugins), ACF Pro, Elementor, Polylang, LearnPress"
+      "cat": "CMS & E-commerce",
+      "items": "WordPress (themes & plugins), WooCommerce, ACF Pro, Elementor, Polylang, LearnPress"
     },
     {
       "key": "db",
@@ -264,6 +271,11 @@
       "key": "devops",
       "cat": "DevOps",
       "items": "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS"
+    },
+    {
+      "key": "tests",
+      "cat": "Testing",
+      "items": "Playwright (automated E2E tests)"
     },
     {
       "key": "cloud",

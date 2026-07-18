@@ -106,12 +106,12 @@
     "fr": {
       "role": "Ingénieur Backend",
       "roleSub": "APIs · Realtime · Paiements · Data",
-      "profile": "Ingénieur backend expert en conception d'APIs robustes et de systèmes distribués à fort trafic. Je maîtrise NestJS, Node.js et Express, les architectures multi-services et realtime (WebSocket, Agora), les systèmes de paiement (Stripe), la sécurité (RBAC, SSO, 2FA) et les bases de données relationnelles (PostgreSQL, MySQL). J'ai livré des plateformes critiques : streaming vidéo facturé à la minute et e-facturation pour le secteur public."
+      "profile": "Ingénieur backend expert en conception d'APIs robustes et de systèmes distribués à fort trafic. Je maîtrise NestJS, Node.js et Express, les architectures multi-services et realtime (WebSocket, Agora), les systèmes de paiement (Stripe), la sécurité (RBAC, SSO, 2FA) et les bases de données relationnelles (PostgreSQL, MySQL). J'ai livré des plateformes critiques : un site de rencontre en visio (streaming vidéo, paiements) et de l'e-facturation pour le secteur public."
     },
     "en": {
       "role": "Backend Engineer",
       "roleSub": "APIs · Real-Time · Payments · Data",
-      "profile": "Backend engineer expert in designing robust APIs and distributed systems for high traffic. I master NestJS, Node.js and Express, multi-service and real-time architectures (WebSocket, Agora), payment systems (Stripe), security (RBAC, SSO, 2FA) and relational databases (PostgreSQL, MySQL). I have delivered mission-critical platforms: per-minute-billed video streaming and public-sector e-invoicing."
+      "profile": "Backend engineer expert in designing robust APIs and distributed systems for high traffic. I master NestJS, Node.js and Express, multi-service and real-time architectures (WebSocket, Agora), payment systems (Stripe), security (RBAC, SSO, 2FA) and relational databases (PostgreSQL, MySQL). I have delivered mission-critical platforms: a live-video dating site (video streaming, payments) and public-sector e-invoicing."
     }
   },
   "devops": {

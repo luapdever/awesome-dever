@@ -14,6 +14,102 @@ export const CATEGORIES = ["Tous", "Projet", "Dev", "IA", "Carrière", "Voyage"]
 
 export const blogPosts = [
   {
+    slug: "emilia-cross-visio-facturee-a-la-minute",
+    date: "2026-07-18",
+    category: "Projet",
+    tags: ["Emilia Cross", "NestJS", "Flutter", "WebSocket", "Agora", "Stripe", "Temps réel"],
+    title: L("Emilia Cross : une visio facturée à la minute, de bout en bout", "Emilia Cross: per-minute billed live video, end to end"),
+    excerpt: L(
+      "Étude de cas — une app de rencontre (Flutter + PWA) où la relation se noue en visio, facturée à la minute en temps réel. Architecture, décisions, et le problème le plus dur.",
+      "Case study — a dating app (Flutter + PWA) where connections happen over live video, billed per minute in real time. Architecture, decisions, and the hardest problem."
+    ),
+    cover: "/projects/emilia.png",
+    content: [
+      L(
+        "Emilia Cross, pour France Assist, est une application de rencontre où la relation se noue en visio en direct. Je l'ai conçue de bout en bout : les clients Flutter (application mobile publiée + PWA) et le backend NestJS.",
+        "Emilia Cross, for France Assist, is a dating app where connections are made over live video. I built it end to end: the Flutter clients (published mobile app + PWA) and the NestJS backend."
+      ),
+      L(
+        "Le vrai défi n'était pas une brique, mais trois choses difficiles à tenir ensemble : le temps réel (la visio), la confiance (une plateforme de rencontre attire fraude et abus) et la monétisation (de l'argent qui entre, et des reversements aux hôtes).",
+        "The real challenge wasn't one piece, but three hard things held together: real time (the video), trust (a dating platform attracts fraud and abuse) and monetization (money coming in, and payouts to hosts)."
+      ),
+      L(
+        "Décision d'architecture n°1 : séparer l'API REST et le serveur WebSocket. Ils tournent sur deux processus distincts (ports et déploiements séparés), pour scaler le temps réel — présence, signalisation, facturation en direct — sans jamais bloquer l'API HTTP.",
+        "Architecture decision #1: split the REST API and the WebSocket server. They run as two separate processes (separate ports and deployments), so the real-time layer — presence, signaling, live billing — scales without ever blocking the HTTP API."
+      ),
+      L(
+        "Décision n°2 : Agora RTC plutôt qu'une stack WebRTC maison. Monter soi-même les relais TURN et la scalabilité vidéo aurait coûté des semaines pour un résultat moins fiable. Agora gère la qualité et les relais ; je me concentre sur le produit.",
+        "Decision #2: Agora RTC rather than a home-grown WebRTC stack. Building your own TURN relays and video scalability would have cost weeks for a less reliable result. Agora handles quality and relaying; I focus on the product."
+      ),
+      L(
+        "Le problème le plus dur : facturer la visio à la minute, en temps réel. Après deux minutes gratuites, le backend débite des crédits à intervalle régulier via le serveur WebSocket, vérifie le solde en continu, et coupe l'appel dès qu'il n'y a plus de crédits — sans jamais double-débiter. C'est le cœur du modèle économique, et ça combine temps réel, crédits, paiements et reversements.",
+        "The hardest problem: billing live video per minute, in real time. After a two-minute free window, the backend deducts credits at a regular interval over the WebSocket server, checks the balance continuously, and ends the call the moment credits run out — without ever double-charging. It's the core of the business model, and it ties together real time, credits, payments and payouts."
+      ),
+      L(
+        "Côté argent et confiance : paiements et reversements via Stripe, vérification d'identité (KYC) via Stripe Identity, contrôle d'accès par rôles (RBAC) et double authentification (2FA). L'idempotence est partout où de l'argent circule — un même événement ne peut jamais débiter ou payer deux fois.",
+        "On money and trust: payments and payouts via Stripe, identity verification (KYC) via Stripe Identity, role-based access control (RBAC) and two-factor auth (2FA). Idempotency lives everywhere money moves — a single event can never charge or pay twice."
+      ),
+      L(
+        "Le backend a grandi en une vraie plateforme : une vingtaine de domaines métier (crédits, paiements, reversements, cadeaux, abonnements, parrainage, feed, notifications push Firebase, pipeline média FFmpeg/Sharp, supervision). Le tout conteneurisé (Docker) et documenté (Swagger).",
+        "The backend grew into a real platform: around twenty business domains (credits, payments, payouts, gifts, subscriptions, referrals, feed, Firebase push notifications, an FFmpeg/Sharp media pipeline, monitoring). All containerized (Docker) and documented (Swagger)."
+      ),
+      L(
+        "Ce que j'en retiens : séparer le temps réel de l'API dès le départ, rendre idempotent tout flux d'argent, et ne pas réinventer ce qu'un service spécialisé (Agora, Stripe) fait mieux. Le mot de la fin revient au client : « Paul a pris une idée ambitieuse — du streaming vidéo facturé à la minute — et en a fait une plateforme stable et scalable. »",
+        "What I take away: split real time from the API from day one, make every money flow idempotent, and don't reinvent what a specialized service (Agora, Stripe) does better. The last word goes to the client: “Paul took an ambitious idea — per-minute billed video streaming — and turned it into a stable, scalable platform.”"
+      ),
+    ],
+    ctas: [
+      { label: L("Voir Emilia Cross", "See Emilia Cross"), href: "https://emiliacross.com/", desc: L("Le projet en ligne", "The live project"), external: true },
+      { label: L("Discuter d'un projet", "Discuss a project"), href: "https://www.linkedin.com/in/paul-zannou-b253a2205", desc: L("Sur LinkedIn", "On LinkedIn"), external: true },
+    ],
+  },
+  {
+    slug: "paulbot-assistant-ia-fiable-budget-quasi-nul",
+    date: "2026-07-18",
+    category: "IA",
+    tags: ["PaulBot", "LLM", "NestJS", "Streaming", "Failover", "IA appliquée"],
+    title: L("Comment j'ai construit PaulBot : un assistant IA fiable à budget quasi nul", "How I built PaulBot: a reliable AI assistant on a near-zero budget"),
+    excerpt: L(
+      "Un assistant LLM en streaming qui ne ment pas et ne tombe jamais : réponses déterministes côté client, bascule multi-fournisseurs, garde-fous anti-hallucination. Retour technique.",
+      "A streaming LLM assistant that doesn't lie and never goes down: client-side deterministic answers, multi-provider failover, anti-hallucination guardrails. A technical deep-dive."
+    ),
+    cover: "/blog/portfolio-showcase-os.jpg",
+    content: [
+      L(
+        "PaulBot, c'est l'assistant IA de mon portfolio : il répond en streaming aux questions sur mon parcours, mes compétences et mes projets. Le vrai défi n'était pas de brancher un LLM, mais de le rendre fiable et honnête… sans budget.",
+        "PaulBot is my portfolio's AI assistant: it answers questions about my background, skills and projects, in streaming. The real challenge wasn't wiring up an LLM, but making it reliable and honest… on no budget."
+      ),
+      L(
+        "Contrainte n°1 : les tokens. Les offres gratuites sont vite limitées. Ma parade : répondre côté client, sans appeler le modèle, à toutes les questions déterministes — « est-il dispo ? », « son email ? », « son CV ? », « son parcours ? ». Un routeur d'intention les intercepte et renvoie une réponse toute prête. Résultat : les questions les plus fréquentes coûtent zéro token.",
+        "Constraint #1: tokens. Free tiers get limited fast. My workaround: answer client-side, without calling the model, every deterministic question — “is he available?”, “his email?”, “his résumé?”, “his background?”. An intent router intercepts them and returns a ready-made answer. As a result, the most common questions cost zero tokens."
+      ),
+      L(
+        "Contrainte n°2 : la fiabilité. Un fournisseur gratuit peut renvoyer un 429 (quota) à tout moment. J'ai donc mis en place une bascule multi-fournisseurs : Groq en primaire, puis Cerebras, puis Gemini — tous en API compatible OpenAI. Si l'un échoue avant le premier octet, on passe au suivant, de façon transparente. C'est de la résilience légitime (un compte par fournisseur), pas du multi-comptes.",
+        "Constraint #2: reliability. A free provider can return a 429 (quota) at any time. So I built multi-provider failover: Groq primary, then Cerebras, then Gemini — all on OpenAI-compatible APIs. If one fails before the first byte, we move to the next, transparently. It's legitimate resilience (one account per provider), not multi-accounting."
+      ),
+      L(
+        "L'honnêteté, ensuite. Un LLM adore inventer pour « faire plaisir ». J'ai posé des garde-fous stricts : répondre uniquement à partir des connaissances fournies, distinguer une capacité (iOS via Flutter) d'une techno absente (Swift), et — pour toute demande d'anecdote — ne rien broder mais renvoyer vers le livre. Mieux vaut dire « je n'ai pas ce détail » que d'halluciner.",
+        "Then honesty. An LLM loves to make things up to “please” you. I set strict guardrails: answer only from the provided knowledge, distinguish a capability (iOS via Flutter) from an absent tech (Swift), and — for any anecdote request — invent nothing but point to the book. Better to say “I don't have that detail” than to hallucinate."
+      ),
+      L(
+        "La fonctionnalité dont je suis le plus fier : le pitch sur-mesure. Un recruteur colle une offre d'emploi, et PaulBot produit une analyse de correspondance honnête — un tableau exigence par exigence, avec ce que je couvre vraiment (preuve nommée) et ce qui manque, plutôt qu'un « je suis parfait pour tout ». La franchise vend mieux.",
+        "The feature I'm proudest of: the tailored pitch. A recruiter pastes a job offer, and PaulBot produces an honest fit analysis — a requirement-by-requirement table, with what I genuinely cover (named proof) and what's missing, rather than “I'm perfect for everything.” Candor sells better."
+      ),
+      L(
+        "Un dernier détail d'ingénierie : les relances. Plutôt qu'un second appel au modèle pour suggérer les questions suivantes, le LLM les glisse dans sa réponse via un marqueur invisible que le front transforme en pastilles. Qualité d'un LLM, coût de zéro appel supplémentaire.",
+        "One last engineering detail: follow-ups. Rather than a second model call to suggest next questions, the LLM slips them into its answer via an invisible marker that the front turns into chips. LLM quality, at the cost of zero extra call."
+      ),
+      L(
+        "La leçon : la contrainte force la créativité. Pas de budget m'a poussé à répondre sans le modèle quand c'est possible, à répartir la charge proprement, et à faire de l'honnêteté un argument. Le tout tient sur un backend NestJS, en streaming (SSE), et tourne aujourd'hui sur mon portfolio.",
+        "The lesson: constraints force creativity. No budget pushed me to answer without the model where possible, to spread load cleanly, and to make honesty a selling point. It all runs on a NestJS backend, streaming (SSE), live on my portfolio today."
+      ),
+    ],
+    ctas: [
+      { label: L("Parler à PaulBot", "Talk to PaulBot"), href: "/", desc: L("L'assistant sur le portfolio", "The assistant on the portfolio") },
+      { label: L("Le code sur GitHub", "The code on GitHub"), href: "https://github.com/luapdever", desc: L("Mes dépôts", "My repositories"), external: true },
+    ],
+  },
+  {
     slug: "ce-portfolio-nouvelle-generation",
     date: "2026-07-17",
     category: "Projet",

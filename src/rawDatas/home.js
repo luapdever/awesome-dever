@@ -17,6 +17,8 @@ export const collaborations = [
   { name: "Emilia Cross", client: "France Assist", url: "https://emiliacross.com/", icon: favicon("emiliacross.com"), tag: L("Dating app (Flutter) · per-minute video", "App de rencontre (Flutter) · visio facturée") },
   { name: "My MTN · Selfcare", client: "MTN — via KAMGOKO", url: "https://my.mtn.bj/", icon: favicon("my.mtn.bj"), tag: L("Vue.js self-care portal", "Portail selfcare Vue.js") },
   { name: "MTN Bénin", client: "MTN — via KAMGOKO", url: "https://www.mtn.bj/", icon: favicon("mtn.bj"), tag: L("Corporate WordPress", "Site corporate WordPress") },
+  { name: "Y'ello Market", client: "MTN — via KAMGOKO", url: "https://shop.mtn.bj/", icon: favicon("shop.mtn.bj"), tag: L("MTN e-commerce marketplace (WooCommerce)", "Marketplace e-commerce MTN (WooCommerce)") },
+  { name: "MTN Yello Connect", client: "MTN — via KAMGOKO", url: "https://auth.mtn.bj/", icon: favicon("auth.mtn.bj"), tag: L("Centralized SSO portal", "Portail SSO centralisé") },
   { name: "Mon Routeur", client: "MTN — via KAMGOKO", url: "https://monrouteur.mtn.bj/?ref=noref", icon: favicon("monrouteur.mtn.bj"), tag: L("Activation journey", "Parcours d'activation") },
   { name: "WAPIFY", client: L("Studio · SaaS", "Studio · SaaS"), url: "https://wapify.co/", icon: favicon("wapify.co"), tag: L("WhatsApp AI marketing", "Marketing IA WhatsApp") },
   { name: "GoCoachings", client: L("Studio · SaaS", "Studio · SaaS"), url: "https://www.gocoachings.com", icon: favicon("gocoachings.com"), tag: L("Coaching platform", "Plateforme de coaching") },

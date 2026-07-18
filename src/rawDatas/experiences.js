@@ -58,7 +58,7 @@ export const experiences = [
       ),
     ],
     stack: ["Flutter", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker"],
-    links: [{ label: "emiliacross.com", url: "https://emiliacross.com/" }],
+    links: [{ label: "emiliacross.com", url: "https://emiliacross.com/" }, { label: "Étude de cas", url: "/blog/emilia-cross-visio-facturee-a-la-minute" }],
   },
   {
     id: "ccib",

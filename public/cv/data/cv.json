@@ -26,7 +26,7 @@
   "identity": {
     "firstName": "PAUL MEDEDJI",
     "lastName": "ZANNOU",
-    "photo": "photo.jpg",
+    "photo": "/cv/photo.jpg",
     "initials": "PZ"
   },
   "variants": {
@@ -137,12 +137,12 @@
       "fr": {
         "role": "Ingénieur Backend",
         "roleSub": "APIs · Realtime · Paiements · Data",
-        "profile": "Ingénieur backend expert en conception d'APIs robustes et de systèmes distribués à fort trafic. Je maîtrise NestJS, Node.js et Express, les architectures multi-services et realtime (WebSocket, Agora), les systèmes de paiement (Stripe), la sécurité (RBAC, SSO, 2FA) et les bases de données relationnelles (PostgreSQL, MySQL). J'ai livré des plateformes critiques : streaming vidéo facturé à la minute et e-facturation pour le secteur public."
+        "profile": "Ingénieur backend expert en conception d'APIs robustes et de systèmes distribués à fort trafic. Je maîtrise NestJS, Node.js et Express, les architectures multi-services et realtime (WebSocket, Agora), les systèmes de paiement (Stripe), la sécurité (RBAC, SSO, 2FA) et les bases de données relationnelles (PostgreSQL, MySQL). J'ai livré des plateformes critiques : un site de rencontre en visio (streaming vidéo, paiements) et de l'e-facturation pour le secteur public."
       },
       "en": {
         "role": "Backend Engineer",
         "roleSub": "APIs · Real-Time · Payments · Data",
-        "profile": "Backend engineer expert in designing robust APIs and distributed systems for high traffic. I master NestJS, Node.js and Express, multi-service and real-time architectures (WebSocket, Agora), payment systems (Stripe), security (RBAC, SSO, 2FA) and relational databases (PostgreSQL, MySQL). I have delivered mission-critical platforms: per-minute-billed video streaming and public-sector e-invoicing."
+        "profile": "Backend engineer expert in designing robust APIs and distributed systems for high traffic. I master NestJS, Node.js and Express, multi-service and real-time architectures (WebSocket, Agora), payment systems (Stripe), security (RBAC, SSO, 2FA) and relational databases (PostgreSQL, MySQL). I have delivered mission-critical platforms: a live-video dating site (video streaming, payments) and public-sector e-invoicing."
       }
     },
     "devops": {
@@ -205,7 +205,8 @@
         "ndaNote": "Détails masqués — accord de confidentialité (NDA)",
         "exportPdf": "Exporter en PDF",
         "profilLabel": "Profil",
-        "langLabel": "Langue"
+        "langLabel": "Langue",
+        "home": "Le portfolio"
       },
       "contact": [
         {
@@ -227,6 +228,11 @@
           "icon": "briefcase",
           "text": "KAMGOKO Technologies",
           "href": ""
+        },
+        {
+          "icon": "briefcase",
+          "text": "luap-dever.netlify.app",
+          "href": "https://luap-dever.netlify.app/"
         }
       ],
       "experiences": [
@@ -234,19 +240,19 @@
           "role": "Ingénieur Logiciel Full-Stack",
           "org": "KAMGOKO Technologies",
           "period": "Janvier 2022 – Présent",
-          "note": "Prestations web pour grands comptes télécoms et médias",
+          "note": "Prestations web pour grands comptes (télécoms, médias, banque) — MTN, Moov, Celtiis, Orabank",
           "bullets": [
             "2026 · Celtiis (via KAMGOKO) — Développement web pour un opérateur télécom.",
             "2022 – 2025 · MTN & Moov — Sites corporate MTN Bénin, MTN Congo et Moov Africa Togo, application Selfcare MyMTN (Vue.js) et page d'activation MonRouteur : thèmes/plugins WordPress sur mesure, intégration d'APIs RESTful et optimisation des performances."
           ]
         },
         {
-          "role": "Ingénieur Backend & Realtime",
+          "role": "Ingénieur Full-Stack & Realtime",
           "org": "France Assist",
           "period": "2024 – 2025",
-          "note": "Collaboration — Emilia Cross, plateforme de streaming vidéo social",
+          "note": "Collaboration — Emilia Cross, application (Flutter + PWA) de rencontre en visio",
           "bullets": [
-            "Architecture d'une plateforme de streaming vidéo realtime en NestJS (API multi-services + serveur WebSocket dédié).",
+            "Conception de bout en bout d'Emilia Cross — clients Flutter (app mobile + PWA) et backend NestJS (API multi-services + serveur WebSocket dédié) : streaming vidéo, KYC, paiements & payouts.",
             "Facturation à la minute par système de crédits, paiements Stripe, vérification KYC, contrôle d'accès (RBAC) et 2FA.",
             "Intégration vidéo Agora RTC, notifications Firebase, stockage Google Cloud et supervision applicative."
           ]
@@ -266,8 +272,8 @@
           "period": "Oct. 2021 – Déc. 2021",
           "note": "",
           "bullets": [
-            "Développement d'interfaces interactives et responsives en HTML5, CSS3 et JavaScript.",
-            "Composants réutilisables Vue.js (Nuxt.js), optimisation Webpack et collaboration Agile avec designers et équipe de dev."
+            "Consolidation des bases en PHP, Vue.js et Nuxt.js : interfaces réactives, composants réutilisables, optimisation Webpack et collaboration Agile.",
+            "Tout premiers pas en Node.js — encore en apprentissage."
           ]
         },
         {
@@ -294,7 +300,7 @@
           "name": "Sites corporate MTN Bénin & MTN Congo",
           "year": "2022 – 2025",
           "role": "Développeur WordPress",
-          "client": "MTN Group",
+          "client": "MTN Group (via KAMGOKO)",
           "desc": "Sites vitrines corporate pour deux opérateurs télécoms majeurs : construction de thèmes personnalisés, plugins sur mesure, gestion de contenus multilingue et optimisation des performances et du référencement.",
           "stack": [
             "WordPress",
@@ -318,7 +324,7 @@
           "name": "MyMTN Selfcare & MonRouteur",
           "year": "2022 – 2025",
           "role": "Développeur Frontend",
-          "client": "MTN Bénin",
+          "client": "MTN Bénin (via KAMGOKO)",
           "desc": "Application Selfcare abonnés (SPA) — consultation de forfaits, achats et gestion de compte — et page MonRouteur d'activation de forfaits/data en cas de solde ou de forfait épuisé. Intégration d'APIs RESTful, gestion d'état avancée et optimisation de l'expérience utilisateur.",
           "stack": [
             "Vue.js",
@@ -340,12 +346,13 @@
         },
         {
           "id": "emilia",
-          "name": "Emilia Cross — Streaming vidéo social",
+          "name": "Emilia Cross — App de rencontre en visio",
           "year": "2024 – 2025",
-          "role": "Architecte & développeur backend / realtime",
+          "role": "Full-stack (Flutter + NestJS) & temps réel",
           "client": "France Assist",
-          "desc": "Plateforme de mise en relation par visio en direct : facturation à la minute par système de crédits, paiements Stripe, vérification KYC, découverte de partenaires et messagerie realtime. Architecture NestJS multi-services (API + serveur WebSocket dédié) avec RBAC, 2FA et supervision.",
+          "desc": "Application mobile (Flutter) + PWA où la relation se noue en visio facturée à la minute : streaming vidéo, KYC (Stripe Identity), paiements & reversements Stripe, découverte de partenaires et messagerie temps réel. Clients Flutter + backend NestJS multi-services (API + serveur WebSocket dédié), RBAC, 2FA et supervision.",
           "stack": [
+            "Flutter",
             "NestJS",
             "TypeScript",
             "PostgreSQL",
@@ -432,17 +439,17 @@
         {
           "key": "frontend",
           "cat": "Frontend",
-          "items": "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n"
+          "items": "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection"
         },
         {
           "key": "mobile",
-          "cat": "Mobile",
-          "items": "Flutter, GetX, Bloc"
+          "cat": "Mobile & Desktop",
+          "items": "Flutter, GetX, Bloc, Electron (desktop cross-plateforme), PWA"
         },
         {
           "key": "cms",
-          "cat": "CMS",
-          "items": "WordPress (thèmes & plugins), ACF Pro, Elementor, Polylang, LearnPress"
+          "cat": "CMS & E-commerce",
+          "items": "WordPress (thèmes & plugins), WooCommerce, ACF Pro, Elementor, Polylang, LearnPress"
         },
         {
           "key": "db",
@@ -453,6 +460,11 @@
           "key": "devops",
           "cat": "DevOps",
           "items": "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS"
+        },
+        {
+          "key": "tests",
+          "cat": "Tests",
+          "items": "Playwright (tests E2E automatisés)"
         },
         {
           "key": "cloud",
@@ -554,7 +566,8 @@
         "ndaNote": "Details hidden — non-disclosure agreement (NDA)",
         "exportPdf": "Export to PDF",
         "profilLabel": "Profile",
-        "langLabel": "Language"
+        "langLabel": "Language",
+        "home": "The portfolio"
       },
       "contact": [
         {
@@ -576,6 +589,11 @@
           "icon": "briefcase",
           "text": "KAMGOKO Technologies",
           "href": ""
+        },
+        {
+          "icon": "briefcase",
+          "text": "luap-dever.netlify.app",
+          "href": "https://luap-dever.netlify.app/"
         }
       ],
       "experiences": [
@@ -583,19 +601,19 @@
           "role": "Full-Stack Software Engineer",
           "org": "KAMGOKO Technologies",
           "period": "January 2022 – Present",
-          "note": "Web services for major telecom and media accounts",
+          "note": "Web services for major accounts (telecom, media, banking) — MTN, Moov, Celtiis, Orabank",
           "bullets": [
             "2026 · Celtiis (via KAMGOKO) — Web development for a telecom operator.",
             "2022 – 2025 · MTN & Moov — Corporate websites for MTN Benin, MTN Congo and Moov Africa Togo, the MyMTN Selfcare app (Vue.js) and the MonRouteur activation page: custom WordPress themes/plugins, RESTful API integration and performance optimization."
           ]
         },
         {
-          "role": "Backend & Real-Time Engineer",
+          "role": "Full-Stack & Real-Time Engineer",
           "org": "France Assist",
           "period": "2024 – 2025",
-          "note": "Collaboration — Emilia Cross, social video streaming platform",
+          "note": "Collaboration — Emilia Cross, a dating app (Flutter + PWA), live video",
           "bullets": [
-            "Architected a real-time video streaming platform in NestJS (multi-service API + dedicated WebSocket server).",
+            "Built Emilia Cross end to end — Flutter clients (mobile app + PWA) and a NestJS backend (multi-service API + dedicated WebSocket server): video streaming, KYC, payments & payouts.",
             "Per-minute credit-based billing, Stripe payments, KYC verification, access control (RBAC) and 2FA.",
             "Agora RTC video integration, Firebase notifications, Google Cloud storage and application monitoring."
           ]
@@ -615,8 +633,8 @@
           "period": "Oct. 2021 – Dec. 2021",
           "note": "",
           "bullets": [
-            "Developed interactive, responsive interfaces with HTML5, CSS3 and JavaScript.",
-            "Reusable Vue.js (Nuxt.js) components, Webpack optimization and Agile collaboration with designers and the dev team."
+            "Consolidated foundations in PHP, Vue.js and Nuxt.js: reactive interfaces, reusable components, Webpack optimization and Agile collaboration.",
+            "Very first steps in Node.js — still learning the ropes."
           ]
         },
         {
@@ -643,7 +661,7 @@
           "name": "MTN Benin & MTN Congo corporate websites",
           "year": "2022 – 2025",
           "role": "WordPress Developer",
-          "client": "MTN Group",
+          "client": "MTN Group (via KAMGOKO)",
           "desc": "Corporate showcase websites for two major telecom operators: custom themes, tailored plugins, multilingual content management and performance/SEO optimization.",
           "stack": [
             "WordPress",
@@ -667,7 +685,7 @@
           "name": "MyMTN Selfcare & MonRouteur",
           "year": "2022 – 2025",
           "role": "Frontend Developer",
-          "client": "MTN Benin",
+          "client": "MTN Benin (via KAMGOKO)",
           "desc": "Subscriber Selfcare app (SPA) — plans, purchases and account management — and the MonRouteur page for activating plans/data when the balance or bundle is depleted. RESTful API integration, advanced state management and UX optimization.",
           "stack": [
             "Vue.js",
@@ -689,12 +707,13 @@
         },
         {
           "id": "emilia",
-          "name": "Emilia Cross — Social video streaming",
+          "name": "Emilia Cross — Live-video dating app",
           "year": "2024 – 2025",
-          "role": "Architect & backend / real-time developer",
+          "role": "Full-stack (Flutter + NestJS) & real-time",
           "client": "France Assist",
-          "desc": "Live video matchmaking platform: per-minute credit-based billing, Stripe payments, KYC verification, partner discovery and real-time messaging. Multi-service NestJS architecture (API + dedicated WebSocket server) with RBAC, 2FA and monitoring.",
+          "desc": "A Flutter mobile app + PWA where connections are made over per-minute billed live video: video streaming, KYC (Stripe Identity), Stripe payments & payouts, partner discovery and real-time messaging. Flutter clients + multi-service NestJS backend (API + dedicated WebSocket server) with RBAC, 2FA and monitoring.",
           "stack": [
+            "Flutter",
             "NestJS",
             "TypeScript",
             "PostgreSQL",
@@ -781,17 +800,17 @@
         {
           "key": "frontend",
           "cat": "Frontend",
-          "items": "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n"
+          "items": "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection"
         },
         {
           "key": "mobile",
-          "cat": "Mobile",
-          "items": "Flutter, GetX, Bloc"
+          "cat": "Mobile & Desktop",
+          "items": "Flutter, GetX, Bloc, Electron (cross-platform desktop), PWA"
         },
         {
           "key": "cms",
-          "cat": "CMS",
-          "items": "WordPress (themes & plugins), ACF Pro, Elementor, Polylang, LearnPress"
+          "cat": "CMS & E-commerce",
+          "items": "WordPress (themes & plugins), WooCommerce, ACF Pro, Elementor, Polylang, LearnPress"
         },
         {
           "key": "db",
@@ -802,6 +821,11 @@
           "key": "devops",
           "cat": "DevOps",
           "items": "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS"
+        },
+        {
+          "key": "tests",
+          "cat": "Testing",
+          "items": "Playwright (automated E2E tests)"
         },
         {
           "key": "cloud",
