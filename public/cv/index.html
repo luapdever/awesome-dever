@@ -5,23 +5,26 @@
   <!-- Consent Mode v2 — défaut « granted » (opt-out) AVANT tout tag Google -->
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});
-    try{if(localStorage.getItem('cookie_consent')==='denied'){gtag('consent','update',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});}}catch(e){}
+    function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+    try { if (localStorage.getItem('cookie_consent') === 'denied') { gtag('consent', 'update', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' }); } } catch (e) { }
   </script>
   <!-- End Consent Mode default -->
   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-T8C9B5P9');</script>
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-T8C9B5P9');</script>
   <!-- End Google Tag Manager -->
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-H5387SXY6D"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-H5387SXY6D');
   </script>
@@ -621,12 +624,14 @@
       position: relative;
       border-left-color: var(--faint);
     }
+
     .proj-blur {
       filter: blur(4px);
       opacity: .55;
       user-select: none;
       pointer-events: none;
     }
+
     .proj-nda {
       display: inline-flex;
       align-items: center;
@@ -636,6 +641,7 @@
       font-weight: 700;
       color: var(--accent-deep);
     }
+
     .proj-nda svg {
       width: 12px;
       height: 12px;
@@ -731,7 +737,7 @@
       align-items: center;
       gap: 8px;
       padding: 11px 18px;
-      border-radius: 999px;
+      border-radius: 9px;
       font-family: inherit;
       font-size: 13px;
       font-weight: 700;
@@ -742,12 +748,22 @@
       box-shadow: 0 10px 26px rgba(255, 165, 0, .38), 0 2px 6px rgba(17, 0, 104, .18);
       transition: transform .18s ease, box-shadow .18s ease;
     }
+
     .home-pill:hover {
       transform: translateY(-2px);
       box-shadow: 0 14px 32px rgba(255, 165, 0, .5), 0 3px 8px rgba(17, 0, 104, .2);
     }
-    .home-pill svg { width: 16px; height: 16px; }
-    @media print { .home-pill { display: none !important; } }
+
+    .home-pill svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media print {
+      .home-pill {
+        display: none !important;
+      }
+    }
 
     .btn {
       border: none;
@@ -895,6 +911,7 @@
     }
 
     @media screen and (max-width: 840px) {
+
       /* Actions regroupées en une barre fixe propre en haut (fini les 3 blocs
          flottants qui se chevauchaient) : profils scrollables sur une ligne,
          langue + export sur la suivante. */
@@ -912,6 +929,7 @@
         -webkit-backdrop-filter: blur(8px);
         box-shadow: 0 4px 16px rgba(17, 0, 104, .12);
       }
+
       .switch-variant,
       .switch-lang,
       .toolbar {
@@ -924,6 +942,7 @@
         background: transparent;
         box-shadow: none;
       }
+
       .switch-variant {
         flex: 1 1 100%;
         flex-wrap: nowrap;
@@ -931,10 +950,23 @@
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
       }
-      .switch-variant::-webkit-scrollbar { display: none; }
-      .switch-variant button { flex: 0 0 auto; }
-      .toolbar { margin-left: auto; }
-      .switch button { font-size: 12.5px; padding: 8px 12px; }
+
+      .switch-variant::-webkit-scrollbar {
+        display: none;
+      }
+
+      .switch-variant button {
+        flex: 0 0 auto;
+      }
+
+      .toolbar {
+        margin-left: auto;
+      }
+
+      .switch button {
+        font-size: 12.5px;
+        padding: 8px 12px;
+      }
 
       .page {
         width: 100%;
@@ -961,10 +993,10 @@
 </head>
 
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T8C9B5P9"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T8C9B5P9" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <!-- Contrôles : fixes aux coins sur desktop, regroupés en barre en haut sur mobile -->
   <div class="controls">
@@ -1105,7 +1137,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           { key: "languages", cat: "Langages", items: "JavaScript, TypeScript, PHP, Dart, Java, HTML5, CSS3/SASS, SQL" },
           { key: "backend", cat: "Backend", items: "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize" },
           { key: "ai", cat: "IA / LLM", items: "Intégration LLM (agnostique du modèle), API OpenAI standard, RAG (génération augmentée par récupération), fine-tuning, prompt engineering & garde-fous, function/tool calling, automatisation IA" },
-          { key: "frontend", cat: "Frontend", items: "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n" },
+          { key: "frontend", cat: "Frontend", items: "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection" },
           { key: "mobile", cat: "Mobile", items: "Flutter, GetX, Bloc" },
           { key: "cms", cat: "CMS", items: "WordPress (thèmes & plugins), ACF Pro, Elementor, Polylang, LearnPress" },
           { key: "db", cat: "Bases de données", items: "PostgreSQL, MySQL / MariaDB" },
@@ -1237,7 +1269,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           { key: "languages", cat: "Languages", items: "JavaScript, TypeScript, PHP, Dart, Java, HTML5, CSS3/SASS, SQL" },
           { key: "backend", cat: "Backend", items: "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize" },
           { key: "ai", cat: "AI / LLM", items: "LLM integration (model-agnostic), standard OpenAI API, RAG (retrieval-augmented generation), fine-tuning, prompt engineering & guardrails, function/tool calling, AI workflow automation" },
-          { key: "frontend", cat: "Frontend", items: "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n" },
+          { key: "frontend", cat: "Frontend", items: "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection" },
           { key: "mobile", cat: "Mobile", items: "Flutter, GetX, Bloc" },
           { key: "cms", cat: "CMS", items: "WordPress (themes & plugins), ACF Pro, Elementor, Polylang, LearnPress" },
           { key: "db", cat: "Databases", items: "PostgreSQL, MySQL / MariaDB" },
@@ -1464,31 +1496,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script src="/paulbot-widget.js" defer></script>
 
   <!-- Bannière de consentement (sobre) — partage la clé cookie_consent avec le site -->
-  <div id="cookieBar" style="display:none;position:fixed;bottom:20px;left:20px;z-index:9998;max-width:420px;display:none;align-items:center;gap:14px;padding:12px 14px;border-radius:12px;background:rgba(17,0,104,.92);color:#f2edff;border:1px solid rgba(255,255,255,.14);box-shadow:0 10px 30px rgba(0,0,0,.35);font-size:13px;line-height:1.45;font-family:system-ui,-apple-system,'Segoe UI',sans-serif">
+  <div id="cookieBar"
+    style="display:none;position:fixed;bottom:20px;left:20px;z-index:9998;max-width:420px;display:none;align-items:center;gap:14px;padding:12px 14px;border-radius:12px;background:rgba(17,0,104,.92);color:#f2edff;border:1px solid rgba(255,255,255,.14);box-shadow:0 10px 30px rgba(0,0,0,.35);font-size:13px;line-height:1.45;font-family:system-ui,-apple-system,'Segoe UI',sans-serif">
     <p id="cookieTxt" style="margin:0;flex:1"></p>
     <div style="display:flex;gap:8px;flex-shrink:0">
-      <button id="cookieNo" style="font:inherit;font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:8px;cursor:pointer;background:transparent;color:#cfc6ee;border:1px solid rgba(255,255,255,.22)"></button>
-      <button id="cookieYes" style="font:inherit;font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:8px;cursor:pointer;background:#ffa500;color:#1a0a00;border:1px solid transparent"></button>
+      <button id="cookieNo"
+        style="font:inherit;font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:8px;cursor:pointer;background:transparent;color:#cfc6ee;border:1px solid rgba(255,255,255,.22)"></button>
+      <button id="cookieYes"
+        style="font:inherit;font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:8px;cursor:pointer;background:#ffa500;color:#1a0a00;border:1px solid transparent"></button>
     </div>
   </div>
   <script>
-    (function(){
+    (function () {
       var fr = !/^en/i.test(navigator.language || 'fr');
       var t = fr
-        ? { txt:"Ce site utilise des cookies de mesure d'audience pour améliorer l'expérience.", yes:"Accepter", no:"Refuser" }
-        : { txt:"This site uses analytics cookies to improve your experience.", yes:"Accept", no:"Decline" };
+        ? { txt: "Ce site utilise des cookies de mesure d'audience pour améliorer l'expérience.", yes: "Accepter", no: "Refuser" }
+        : { txt: "This site uses analytics cookies to improve your experience.", yes: "Accept", no: "Decline" };
       var bar = document.getElementById('cookieBar');
       document.getElementById('cookieTxt').textContent = t.txt;
       document.getElementById('cookieYes').textContent = t.yes;
       document.getElementById('cookieNo').textContent = t.no;
-      function decide(granted){
-        try{ localStorage.setItem('cookie_consent', granted?'granted':'denied'); }catch(e){}
-        try{ if(typeof gtag==='function'){ var v=granted?'granted':'denied'; gtag('consent','update',{ad_storage:v,ad_user_data:v,ad_personalization:v,analytics_storage:v}); } }catch(e){}
-        bar.style.display='none';
+      function decide(granted) {
+        try { localStorage.setItem('cookie_consent', granted ? 'granted' : 'denied'); } catch (e) { }
+        try { if (typeof gtag === 'function') { var v = granted ? 'granted' : 'denied'; gtag('consent', 'update', { ad_storage: v, ad_user_data: v, ad_personalization: v, analytics_storage: v }); } } catch (e) { }
+        bar.style.display = 'none';
       }
-      document.getElementById('cookieYes').onclick=function(){decide(true);};
-      document.getElementById('cookieNo').onclick=function(){decide(false);};
-      try{ if(!localStorage.getItem('cookie_consent')) bar.style.display='flex'; }catch(e){ bar.style.display='flex'; }
+      document.getElementById('cookieYes').onclick = function () { decide(true); };
+      document.getElementById('cookieNo').onclick = function () { decide(false); };
+      try { if (!localStorage.getItem('cookie_consent')) bar.style.display = 'flex'; } catch (e) { bar.style.display = 'flex'; }
     })();
   </script>
 </body>

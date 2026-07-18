@@ -1,0 +1,83 @@
+/* Nudge de guidage — carte discrète, bas-centre, au-dessus des launchers. */
+.nudge {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9997;
+  width: min(440px, calc(100vw - 32px));
+  padding: 16px 18px 14px;
+  border-radius: 16px;
+  color: #f2edff;
+  background: linear-gradient(150deg, rgba(24, 14, 66, 0.96), rgba(12, 6, 34, 0.96));
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 18px 44px rgba(4, 2, 20, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: nudgeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes nudgeIn {
+  from { opacity: 0; transform: translate(-50%, 14px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.msg {
+  margin: 0 22px 12px 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: #fff;
+}
+
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.pick {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 13px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #2a1500;
+  background: linear-gradient(135deg, var(--color-accent-soft, #ffc25c), var(--color-accent, #ffa500));
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.pick:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(255, 165, 0, 0.35); }
+.pick b { font-weight: 800; }
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: rgba(242, 237, 255, 0.55);
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.close:hover { color: #fff; background: rgba(255, 255, 255, 0.1); }
+
+.optout {
+  margin-top: 10px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: rgba(242, 237, 255, 0.4);
+  font-size: 0.72rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.optout:hover { color: rgba(242, 237, 255, 0.7); }
+
+@media (max-width: 560px) {
+  /* au-dessus des launchers de coin sur mobile */
+  .nudge { bottom: 92px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nudge { animation-duration: 0.01ms; }
+  .pick { transition: none; }
+}

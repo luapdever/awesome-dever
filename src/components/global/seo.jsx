@@ -24,6 +24,8 @@ function Seo({
 }) {
   const url = `${ORIGIN}${path}`;
   const imageUrl = image?.startsWith("http") ? image : `${ORIGIN}/${image.replace(/^\/+/, "")}`;
+  const imgType = /\.jpe?g($|\?)/i.test(imageUrl) ? "image/jpeg" : "image/png";
+  const isDefaultImage = image === "awesome-dever.png"; // seule image dont on connaît les dims
 
   return (
     <Head>
@@ -48,9 +50,9 @@ function Seo({
       <meta property="og:locale:alternate" content={locale === "fr_FR" ? "en_US" : "fr_FR"} key="oglocalealt" />
       <meta property="og:image" content={imageUrl} key="ogimage" />
       <meta property="og:image:secure_url" content={imageUrl} key="ogimagesecure" />
-      <meta property="og:image:type" content="image/png" key="ogimagetype" />
-      <meta property="og:image:width" content="1492" key="ogimagew" />
-      <meta property="og:image:height" content="993" key="ogimageh" />
+      <meta property="og:image:type" content={imgType} key="ogimagetype" />
+      {isDefaultImage && <meta property="og:image:width" content="1492" key="ogimagew" />}
+      {isDefaultImage && <meta property="og:image:height" content="993" key="ogimageh" />}
       <meta property="og:image:alt" content={title} key="ogimagealt" />
 
       {/* Twitter */}
