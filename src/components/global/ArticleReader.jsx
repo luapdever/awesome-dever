@@ -97,6 +97,11 @@ export default function ArticleReader({ paragraphs, lang }) {
 
   const speakFrom = (si) => {
     const synth = window.speechSynthesis;
+    // Nouvelle génération : invalide les callbacks (onend/onboundary/onerror) de
+    // l'utterance qu'on s'apprête à annuler. Sinon le onend de la phrase annulée
+    // se déclenche (cancel est asynchrone) et relance speakFrom(currentRef+1),
+    // ce qui écrase la cible du seek / précédent / suivant / vitesse.
+    const gen = ++genRef.current;
     synth.cancel();
     if (si < 0 || si >= model.flat.length) { finish(); return; }
     setCur(si);
@@ -105,14 +110,16 @@ export default function ArticleReader({ paragraphs, lang }) {
     const u = new window.SpeechSynthesisUtterance(sent.text);
     u.lang = L === "en" ? "en-US" : "fr-FR";
     u.rate = rateRef.current;
-    u.onboundary = (e) => { const wi = lastIndexLE(sent.wordOffsets, e.charIndex || 0); highlightWord(si, wi); };
-    u.onend = () => { if (statusRef.current === "playing") speakFrom(currentRef.current + 1); };
-    u.onerror = () => { if (statusRef.current === "playing") speakFrom(currentRef.current + 1); };
-    synth.speak(u);
+    u.onboundary = (e) => { if (gen !== genRef.current) return; const wi = lastIndexLE(sent.wordOffsets, e.charIndex || 0); highlightWord(si, wi); };
+    u.onend = () => { if (gen === genRef.current && statusRef.current === "playing") speakFrom(currentRef.current + 1); };
+    u.onerror = () => { if (gen === genRef.current && statusRef.current === "playing") speakFrom(currentRef.current + 1); };
     setSt("playing");
+    // Chrome ignore parfois un speak() appelé juste après cancel() : on diffère
+    // d'un tick. La garde de génération n'émet que la dernière demande.
+    setTimeout(() => { if (gen === genRef.current) { try { synth.speak(u); } catch {} } }, 0);
   };
 
-  const finish = () => { try { window.speechSynthesis.cancel(); } catch {} setSt("idle"); setCur(-1); highlightSentence(-1); };
+  const finish = () => { genRef.current++; try { window.speechSynthesis.cancel(); } catch {} setSt("idle"); setCur(-1); highlightSentence(-1); };
 
   const start = () => { speakFrom(0); ga("start"); };
   const toggle = () => {
