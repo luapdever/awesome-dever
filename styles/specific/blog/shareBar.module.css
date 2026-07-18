@@ -1,0 +1,59 @@
+.share {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 14px 0 4px;
+}
+.label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: rgba(234, 230, 255, 0.55);
+}
+.btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  cursor: pointer;
+  transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease;
+}
+.btn img { width: 18px; height: 18px; display: block; }
+.btn:hover {
+  transform: translateY(-2px);
+  background: var(--color-accent);
+  border-color: transparent;
+}
+/* le picto devient sombre au survol (fond ambre) */
+.btn:hover img { filter: brightness(0) saturate(100%) invert(9%) sepia(30%) saturate(1200%) hue-rotate(4deg); }
+
+/* Bouton « copier » : pilule avec libellé */
+.copy {
+  width: auto;
+  border-radius: 999px;
+  padding: 0 14px 0 12px;
+  gap: 7px;
+}
+.copyLabel { font-size: 0.82rem; font-weight: 600; color: #eae6ff; white-space: nowrap; }
+.copy:hover .copyLabel { color: #2a1500; }
+.copiedBtn {
+  background: #35d07f;
+  border-color: transparent;
+}
+.copiedBtn .copyLabel { color: #06231a; }
+.copiedBtn:hover { background: #35d07f; transform: none; }
+.copiedBtn:hover img { filter: none; }
+.copiedBtn .copyLabel { color: #06231a; }
+
+@media (max-width: 480px) {
+  .copyLabel { display: none; }
+  .copy { width: 38px; padding: 0; }
+}

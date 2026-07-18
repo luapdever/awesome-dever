@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Seo from "../../src/components/global/seo";
 import { blogPosts, CATEGORIES, readingMinutes, tr } from "../../src/rawDatas/blog";
 import { useLandingLang } from "../../src/context/landingLang";
@@ -29,6 +30,9 @@ const UI = {
 
 const CAT_EN = { Tous: "All", Projet: "Project", Dev: "Dev", IA: "AI", "Carrière": "Career", Voyage: "Travel" };
 const catLabel = (c, lang) => (lang === "en" ? CAT_EN[c] || c : c);
+
+// Normalise : minuscules + suppression des accents (recherche tolérante).
+const norm = (s) => (s || "").toString().toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
 
 function BlogCard({ p, L, minRead, fmtDate }) {
   const [loaded, setLoaded] = useState(false);
@@ -78,6 +82,7 @@ function SkeletonCard() {
 }
 
 export default function BlogIndex() {
+  const router = useRouter();
   const { lang } = useLandingLang();
   const L = lang === "en" ? "en" : "fr";
   const t = UI[L];
@@ -85,6 +90,7 @@ export default function BlogIndex() {
   const [q, setQ] = useState("");
   const [page, setPage] = useState(1);
   const [ready, setReady] = useState(false);
+  const inited = useRef(false);
 
   // Petit squelette au montage (ressenti « chargement »), puis contenu.
   useEffect(() => {
@@ -93,13 +99,38 @@ export default function BlogIndex() {
   }, []);
   useEffect(() => setPage(1), [cat, q]);
 
+  // Init depuis les query params (?search= & ?cat=) — état partageable / persistant.
+  useEffect(() => {
+    if (!router.isReady || inited.current) return;
+    inited.current = true;
+    const { search, cat: qcat } = router.query;
+    if (typeof search === "string") setQ(search);
+    if (typeof qcat === "string" && CATEGORIES.includes(qcat)) setCat(qcat);
+  }, [router.isReady, router.query]);
+
+  // Reflète l'état dans l'URL (debounce léger, remplacement shallow → pas de reload).
+  useEffect(() => {
+    if (!inited.current) return;
+    const id = setTimeout(() => {
+      const query = {};
+      if (q.trim()) query.search = q.trim();
+      if (cat !== "Tous") query.cat = cat;
+      router.replace({ pathname: "/blog", query }, undefined, { shallow: true, scroll: false });
+    }, 300);
+    return () => clearTimeout(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cat, q]);
+
   const filtered = useMemo(() => {
-    const query = q.trim().toLowerCase();
+    // Recherche tolérante : insensible aux accents/casse, par mots (tous requis).
+    const tokens = norm(q).split(/\s+/).filter(Boolean);
     return blogPosts.filter((p) => {
-      const okCat = cat === "Tous" || p.category === cat;
-      // Recherche dans les DEUX langues (titre + extrait) + tags + catégorie.
-      const hay = `${tr(p.title, "fr")} ${tr(p.title, "en")} ${tr(p.excerpt, "fr")} ${tr(p.excerpt, "en")} ${p.tags.join(" ")} ${p.category}`.toLowerCase();
-      return okCat && (!query || hay.includes(query));
+      if (cat !== "Tous" && p.category !== cat) return false;
+      if (!tokens.length) return true;
+      const hay = norm(
+        `${tr(p.title, "fr")} ${tr(p.title, "en")} ${tr(p.excerpt, "fr")} ${tr(p.excerpt, "en")} ${p.tags.join(" ")} ${p.category}`
+      );
+      return tokens.every((tok) => hay.includes(tok));
     });
   }, [cat, q]);
 

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Seo from "../../src/components/global/seo";
+import ShareBar from "../../src/components/global/ShareBar";
+import ArticleReader from "../../src/components/global/ArticleReader";
 import { blogPosts, readingMinutes, tr } from "../../src/rawDatas/blog";
 import { useLandingLang } from "../../src/context/landingLang";
 import styles from "../../styles/specific/blog/article.module.css";
@@ -60,11 +62,7 @@ export default function Article({ post, prev, next }) {
             </figure>
           )}
 
-          <div className={styles.body}>
-            {post.content.map((para, i) => (
-              <p key={i}>{tr(para, L)}</p>
-            ))}
-          </div>
+          <ArticleReader paragraphs={post.content.map((c) => tr(c, L))} lang={L} />
 
           {post.ctas && post.ctas.length > 0 && (
             <div className={styles.ctaGrid}>
@@ -97,6 +95,8 @@ export default function Article({ post, prev, next }) {
               <span key={tg} className={styles.tag}>#{tg}</span>
             ))}
           </div>
+
+          <ShareBar url={`${ORIGIN}/blog/${post.slug}`} title={title} />
         </article>
 
         <nav className={styles.pager}>
