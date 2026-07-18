@@ -73,7 +73,7 @@ export const blogPosts = [
       "Un assistant LLM en streaming qui ne ment pas et ne tombe jamais : réponses déterministes côté client, bascule multi-fournisseurs, garde-fous anti-hallucination. Retour technique.",
       "A streaming LLM assistant that doesn't lie and never goes down: client-side deterministic answers, multi-provider failover, anti-hallucination guardrails. A technical deep-dive."
     ),
-    cover: "/blog/portfolio-showcase-os.jpg",
+    cover: "/blog/paulbot-recruiter.png",
     content: [
       L(
         "PaulBot, c'est l'assistant IA de mon portfolio : il répond en streaming aux questions sur mon parcours, mes compétences et mes projets. Le vrai défi n'était pas de brancher un LLM, mais de le rendre fiable et honnête… sans budget.",
@@ -94,6 +94,10 @@ export const blogPosts = [
       L(
         "La fonctionnalité dont je suis le plus fier : le pitch sur-mesure. Un recruteur colle une offre d'emploi, et PaulBot produit une analyse de correspondance honnête — un tableau exigence par exigence, avec ce que je couvre vraiment (preuve nommée) et ce qui manque, plutôt qu'un « je suis parfait pour tout ». La franchise vend mieux.",
         "The feature I'm proudest of: the tailored pitch. A recruiter pastes a job offer, and PaulBot produces an honest fit analysis — a requirement-by-requirement table, with what I genuinely cover (named proof) and what's missing, rather than “I'm perfect for everything.” Candor sells better."
+      ),
+      L(
+        "Un exemple concret — le mode recruteur (capture ci-dessus) : le visiteur choisit « Je recrute », colle une offre d'emploi, et PaulBot renvoie un tableau exigence par exigence (✅ couvert, ≈ proche, ❌ absent), sans jamais gonfler le profil. Il termine par un point de contact ; si le recruteur laisse son email, Paul reçoit l'offre et les détails par mail, et le recruteur un accusé de réception.",
+        "A concrete example — recruiter mode (screenshot above): the visitor picks “I'm hiring”, pastes a job offer, and PaulBot returns a requirement-by-requirement fit table (✅ covered, ≈ close, ❌ absent), never inflating the profile. It ends with a contact entry point; if the recruiter leaves their email, Paul receives the offer and details by email, and the recruiter gets an acknowledgment."
       ),
       L(
         "Un dernier détail d'ingénierie : les relances. Plutôt qu'un second appel au modèle pour suggérer les questions suivantes, le LLM les glisse dans sa réponse via un marqueur invisible que le front transforme en pastilles. Qualité d'un LLM, coût de zéro appel supplémentaire.",

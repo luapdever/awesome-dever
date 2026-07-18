@@ -582,10 +582,12 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
       }
       const acted = extractActions(acc);
       const { clean: finalShown, suggestions: llmSuggest } = extractSuggestions(acted.clean);
-      // En mode pitch, la réponse finit TOUJOURS par un CTA contact (« écrire à
-      // Paul »…) → ne pas la confondre avec un cul-de-sac « indisponible ».
-      if (!pitch && UNAVAILABLE_RE.test(finalShown)) {
-        // Le modèle a répondu un "cul-de-sac" → on bascule sur /dispo.
+      // Vraie impasse = message hors-ligne ou vide. On ne REMPLACE la réponse que
+      // dans ce cas ; sinon on AFFICHE la réponse de l'IA (jamais écrasée), et si
+      // elle renvoie vers le contact, on AJOUTE le repli dispo APRÈS (message séparé).
+      const isDeadEnd = !finalShown.trim() || /momentan[eé]ment indisponible|momentarily unavailable/i.test(finalShown);
+      if (!pitch && isDeadEnd && UNAVAILABLE_RE.test(finalShown)) {
+        // Cul-de-sac réel (hors-ligne / vide) → on bascule sur /dispo.
         setMessages((m) => {
           const copy = m.slice();
           copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", error: false, waiting: false, action: undefined, ...dispoFallback() };
@@ -602,6 +604,11 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
           };
           return copy;
         });
+        // La réponse renvoie vers le contact/dispo → on l'AJOUTE en message séparé
+        // (après la réponse), au lieu de l'écraser.
+        if (!pitch && UNAVAILABLE_RE.test(finalShown)) {
+          setMessages((m) => [...m, { role: "assistant", at: Date.now(), ...dispoFallback() }]);
+        }
         // Mémorise la réponse (idempotence) — uniquement une vraie réponse.
         if (cacheKey) {
           const entry = { content: finalShown };
