@@ -16,6 +16,7 @@ export const NAV = {
   contact: { type: "section", id: "collaborer" },
   cv: { type: "external", url: "/cv" },
   os: { type: "route", url: "/paulfolio" },
+  book: { type: "route", url: "/book" },
 };
 
 // Libellés du bouton d'action proposé au visiteur (jamais de navigation auto :
@@ -31,12 +32,24 @@ export const NAV_LABEL = {
   contact: { fr: "Aller au contact", en: "Go to contact" },
   cv: { fr: "Ouvrir le CV", en: "Open the résumé" },
   os: { fr: "Ouvrir PaulBrain OS", en: "Open PaulBrain OS" },
+  book: { fr: "Lire le livre", en: "Read the book" },
 };
 
+// Un marqueur peut porter un argument après « : » (ex. « book:3 » = chapitre 3
+// du livre). On sépare la CIBLE de son argument ; l'argument ne sert qu'au livre.
+export function parseAction(raw) {
+  const [key, arg] = String(raw || "").split(":");
+  return { key, arg: arg || "" };
+}
+const BOOK_CHAP_LABEL = { fr: "Lire ce chapitre", en: "Read this chapter" };
+
 export function navLabel(key, lang) {
-  const l = NAV_LABEL[key];
+  const { key: base, arg } = parseAction(key);
+  const fr = lang !== "en";
+  if (base === "book" && arg) return fr ? BOOK_CHAP_LABEL.fr : BOOK_CHAP_LABEL.en;
+  const l = NAV_LABEL[base];
   if (!l) return "";
-  return l[lang === "en" ? "en" : "fr"];
+  return fr ? l.fr : l.en;
 }
 
 /* Découpe un texte en segments texte / lien cliquable (URL, www., email).
@@ -87,9 +100,10 @@ export function linkTokens(text) {
 // frappe en fin de flux) et renvoie le texte propre + les cibles trouvées.
 export function extractActions(raw) {
   const actions = [];
-  let clean = (raw || "").replace(/\[\[\s*go\s*:\s*([a-z]+)\s*\]\]/gi, (_, key) => {
-    const k = key.toLowerCase();
-    if (NAV[k]) actions.push(k);
+  let clean = (raw || "").replace(/\[\[\s*go\s*:\s*([a-z]+(?::\d+)?)\s*\]\]/gi, (_, key) => {
+    const norm = key.toLowerCase();
+    const base = norm.split(":")[0];
+    if (NAV[base]) actions.push(norm);
     return "";
   });
   clean = clean.replace(/\[\[[^\]]*$/, "").trim(); // marqueur partiel en streaming
@@ -113,10 +127,15 @@ function scrollToHomeSection(id, router) {
 
 // Exécute une cible de la whitelist. `router` = next/router. Retourne true si géré.
 export function runNavAction(key, router) {
-  const nav = NAV[key];
+  const { key: base, arg } = parseAction(key);
+  const nav = NAV[base];
   if (!nav) return false;
   if (nav.type === "external") { window.open(nav.url, "_blank", "noopener"); return true; }
-  if (nav.type === "route") { router.push(nav.url); return true; }
+  if (nav.type === "route") {
+    const url = base === "book" && arg ? `${nav.url}?chap=${encodeURIComponent(arg)}` : nav.url;
+    router.push(url);
+    return true;
+  }
   return scrollToHomeSection(nav.id, router); // type "section"
 }
 

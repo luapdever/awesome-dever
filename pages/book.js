@@ -363,8 +363,17 @@ function Book() {
   const jumpTo = (i) => turn(0, i);
 
   // Restaure la page lue (persistée) après le montage — pas de mismatch SSR.
+  // Priorité au deep-link « ?chap=N » (ex. suggéré par PaulBot) : ouvre le chapitre N.
   useEffect(() => {
-    try { const s = parseInt(localStorage.getItem("book_page"), 10); if (s > 0 && s < N) setPage(s); } catch {}
+    try {
+      const chap = new URLSearchParams(window.location.search).get("chap");
+      if (chap) {
+        const idx = LEAVES.findIndex((l) => l.chap === parseInt(chap, 10));
+        if (idx > 0) { setPage(idx); return; }
+      }
+      const s = parseInt(localStorage.getItem("book_page"), 10);
+      if (s > 0 && s < N) setPage(s);
+    } catch {}
   }, [N]);
   // Mémorise la page courante à chaque changement.
   useEffect(() => { try { localStorage.setItem("book_page", String(page)); } catch {} }, [page]);
