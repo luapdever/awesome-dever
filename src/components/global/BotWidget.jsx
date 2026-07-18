@@ -108,6 +108,8 @@ const UI = {
     stopReading: "Arrêter la lecture",
     retry: "Réessayer",
     escalatePrompt: "Tu veux que Paul te recontacte ? Laisse ton email 👇",
+    escalateOffer: "Laisse ton email — Paul te répond, ou propose un échange 👇",
+    escalateAck: "Bien reçu ✅ — Paul a tous les détails, il revient vers toi (confirmation envoyée par email).",
     escalatePh: "ton@email.com",
     escalateSend: "OK",
     escalateAgain: (n, max) => `Envoyé ✅ — tu peux en laisser un autre (${n}/${max}).`,
@@ -172,6 +174,8 @@ const UI = {
     stopReading: "Stop reading",
     retry: "Retry",
     escalatePrompt: "Want Paul to get back to you? Drop your email 👇",
+    escalateOffer: "Leave your email — Paul will reply, or propose a chat 👇",
+    escalateAck: "Got it ✅ — Paul has all the details and will get back to you (confirmation sent by email).",
     escalatePh: "you@email.com",
     escalateSend: "OK",
     escalateAgain: (n, max) => `Sent ✅ — you can add another (${n}/${max}).`,
@@ -266,6 +270,8 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
   const [escEmail, setEscEmail] = useState("");
   const ESC_MAX = 5;
   const scrollRef = useRef();
+  const pinnedTopRef = useRef(-1); // index du msg assistant long déjà "épinglé en haut"
+  const answeredRef = useRef(new Map()); // idempotence : prompt normalisé → réponse LLM réussie
   const inputRef = useRef();
   const onbRef = useRef();
   const cidRef = useRef("");
@@ -362,9 +368,36 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
+  // À l'ouverture : on montre le bas (dernier échange).
   useEffect(() => {
-    if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-  }, [messages, open]);
+    if (open && scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  }, [open]);
+
+  // À chaque message : dès que la réponse du bot commence à s'afficher, on aligne
+  // son HAUT (pour la lire depuis le début) UNE fois, puis on ne re-scrolle PLUS
+  // pendant le streaming — l'utilisateur descend à son rythme. Le « penseur »
+  // (bulle vide) et les messages visiteur restent affichés en bas.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const lastIdx = messages.length - 1;
+    const last = messages[lastIdx];
+    if (last && last.role === "assistant") {
+      if (pinnedTopRef.current === lastIdx) return; // réponse déjà épinglée → mains libres
+      if (last.content) {
+        // 1er contenu de la réponse → on épingle son HAUT, puis plus aucun scroll auto.
+        pinnedTopRef.current = lastIdx;
+        const rows = el.querySelectorAll(`.${styles.row}`);
+        const lastRow = rows[rows.length - 1];
+        if (lastRow) el.scrollTop += lastRow.getBoundingClientRect().top - el.getBoundingClientRect().top - 8;
+        return;
+      }
+      el.scrollTop = el.scrollHeight; // « penseur » (bulle vide) → visible en bas
+      return;
+    }
+    pinnedTopRef.current = -1;
+    el.scrollTop = el.scrollHeight; // message visiteur / ouverture → bas
+  }, [messages]);
 
   // Rafraîchit les dates relatives tant que le chat est visible.
   useEffect(() => {
@@ -485,10 +518,22 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
     try { el.scrollIntoView({ block: "nearest" }); } catch {}
   };
 
+  // Idempotence : rejoue une réponse LLM déjà obtenue pour ce prompt, SANS
+  // re-solliciter le bot. Une réponse "indispo" n'étant jamais mise en cache,
+  // un renvoi du même prompt retente réellement.
+  const normKey = (s) => (s || "").trim().toLowerCase().replace(/\s+/g, " ");
+  const tryReuseAnswer = (content, userMsg) => {
+    const cached = answeredRef.current.get(normKey(content));
+    if (!cached) return false;
+    setMessages((m) => [...m, userMsg, { role: "assistant", at: Date.now(), ...cached }]);
+    return true;
+  };
+
   // Appelle le LLM avec un contexte donné (streaming). Marque l'erreur pour
   // permettre un « Réessayer ».
   const callModel = async (contextMessages, opts) => {
     const pitch = !!(opts && opts.pitch);
+    const cacheKey = normKey([...contextMessages].reverse().find((mm) => mm.role === "user")?.content || "");
     setPending(true);
     setMessages((m) => [...m, { role: "assistant", content: "", at: Date.now(), ...(pitch ? { rich: true } : {}) }]);
     let acc = "";
@@ -550,6 +595,16 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
           };
           return copy;
         });
+        // Mémorise la réponse (idempotence) — uniquement une vraie réponse.
+        if (cacheKey) {
+          const entry = { content: finalShown };
+          if (acted.actions[0]) entry.action = acted.actions[0];
+          if (llmSuggest.length) entry.suggest = llmSuggest;
+          if (pitch) entry.rich = true;
+          const map = answeredRef.current;
+          map.set(cacheKey, entry);
+          if (map.size > 40) map.delete(map.keys().next().value); // cap mémoire (FIFO)
+        }
       }
     } catch {
       // Indisponibilité réseau/serveur → on bascule sur /dispo plutôt qu'un
@@ -579,6 +634,11 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
       setMessages((m) => [...m, userMsg, { role: "assistant", at: Date.now(), content: reply }]);
       return;
     }
+
+    // Idempotence : si ce prompt a déjà reçu une vraie réponse, on la rejoue
+    // (ni appel modèle, ni email d'offre en double). Les "indispo" ne sont pas
+    // cachées → un renvoi retente réellement.
+    if (tryReuseAnswer(content, userMsg)) return;
 
     // 1.5) Offre d'emploi collée → mode PITCH (analyse de fit), direct au modèle.
     if (looksLikeJobOffer(content)) {
@@ -752,6 +812,8 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
     setMessages([]);
     setDraft("");
     setMenuOpen(false);
+    answeredRef.current.clear(); // on repart de zéro → cache d'idempotence vidé
+    pinnedTopRef.current = -1;
     // On repart de zéro : on oublie aussi l'identité du visiteur et on la redemande.
     setContact(null);
     setOnbName("");
@@ -971,6 +1033,20 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                             </>
                           )}
                         </div>
+
+                        {/* Après une offre (pitch) : inviter à laisser son email → Paul
+                            reçoit les détails et le recruteur un accusé de réception. */}
+                        {!isUser && m.rich && isLast && escCount < ESC_MAX && (contact?.mode === "incognito" || escCount > 0) && (
+                          <div className={styles.escalate}>
+                            <span className={styles.escText}>{escCount > 0 ? ui.escalateAck : ui.escalateOffer}</span>
+                            {escCount === 0 && (
+                              <div className={styles.escRow}>
+                                <input type="email" className={styles.escInput} placeholder={ui.escalatePh} value={escEmail} onChange={(e) => setEscEmail(e.target.value)} onKeyDown={(e) => e.key === "Enter" && submitEscalate()} />
+                                <button type="button" className={styles.escBtn} onClick={submitEscalate}>{ui.escalateSend}</button>
+                              </div>
+                            )}
+                          </div>
+                        )}
 
                         {/* Widgets de réponse cliente (construits par le front) */}
                         {!isUser && m.widget && m.widget.type === "info" && (
