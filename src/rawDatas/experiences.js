@@ -42,22 +42,22 @@ export const experiences = [
     end: "2025-12",
     current: false,
     location: "Remote",
-    summary: L("Emilia Cross — a dating site with live video.", "Emilia Cross — un site de rencontre avec visio en direct."),
+    summary: L("Emilia Cross — a dating app (Flutter mobile + PWA) with per-minute billed live video.", "Emilia Cross — une application de rencontre (Flutter mobile + PWA) à visio facturée à la minute."),
     highlights: [
       L(
-        "Architected Emilia Cross, a dating platform, in NestJS (multi-service API + dedicated WebSocket server).",
-        "Architecture d'Emilia Cross, un site de rencontre, en NestJS (API multi-services + serveur WebSocket dédié)."
+        "Built end to end: Flutter clients (mobile + PWA) + a NestJS backend (multi-service API + dedicated WebSocket server).",
+        "Conçue de bout en bout : clients Flutter (mobile + PWA) + backend NestJS (API multi-services + serveur WebSocket dédié)."
       ),
       L(
-        "Live video streaming, KYC verification, Stripe payments & payouts, credit-based billing, RBAC and 2FA.",
-        "Streaming vidéo en direct, vérification KYC, paiements & reversements (payouts) Stripe, facturation par crédits, RBAC et 2FA."
+        "Live video (Agora) billed per minute via a credit system, identity verification (Stripe Identity/KYC), Stripe payments & payouts, RBAC and 2FA.",
+        "Visio en direct (Agora) facturée à la minute via un système de crédits, vérification d'identité (Stripe Identity/KYC), paiements & reversements (payouts) Stripe, RBAC et 2FA."
       ),
       L(
-        "Agora RTC video, Firebase notifications, Google Cloud storage and application monitoring.",
-        "Vidéo Agora RTC, notifications Firebase, stockage Google Cloud et supervision applicative."
+        "Firebase push notifications, Google Cloud storage, media pipeline (FFmpeg/Sharp) and application monitoring.",
+        "Notifications push Firebase, stockage Google Cloud, pipeline média (FFmpeg/Sharp) et supervision applicative."
       ),
     ],
-    stack: ["NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker"],
+    stack: ["Flutter", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker"],
     links: [{ label: "emiliacross.com", url: "https://emiliacross.com/" }],
   },
   {

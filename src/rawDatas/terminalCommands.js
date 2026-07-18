@@ -21,7 +21,7 @@ const bar = (lvl) => {
 };
 
 const PUBLIC_PROJECTS = [
-  { name: "Emilia Cross", cat: "Live video streaming", year: "2024–2025", url: "https://emiliacross.com/" },
+  { name: "Emilia Cross", cat: "Flutter app + PWA · per-minute video", year: "2024–2025", url: "https://emiliacross.com/" },
   { name: "MyMTN Selfcare", cat: "Telecom · Selfcare", year: "2024", url: "https://my.mtn.bj/" },
   { name: "MTN Bénin", cat: "Telecom · Corporate", year: "2022–2025", url: "https://www.mtn.bj/" },
   { name: "WAPIFY", cat: "WhatsApp AI marketing", year: "2023–2024", url: "https://wapify.co/" },

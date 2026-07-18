@@ -219,7 +219,7 @@ const fav = (d) => `https://www.google.com/s2/favicons?sz=64&domain=${d}`;
 
 // Base de projets connue du front (dérivée du portfolio). Sert aux cartes.
 export const BOT_PROJECTS = [
-  { name: "Emilia Cross", aliases: ["emilia cross", "emilia"], url: "https://emiliacross.com/", icon: fav("emiliacross.com"), tag: L("Dating site · live video", "Site de rencontre · visio") },
+  { name: "Emilia Cross", aliases: ["emilia cross", "emilia"], url: "https://emiliacross.com/", icon: fav("emiliacross.com"), tag: L("Dating app (Flutter) · per-minute video", "App de rencontre (Flutter) · visio facturée") },
   { name: "My MTN · Selfcare", aliases: ["mymtn", "my mtn", "selfcare"], url: "https://my.mtn.bj/", icon: fav("my.mtn.bj"), tag: L("Selfcare Vue.js · via KAMGOKO", "Selfcare Vue.js · via KAMGOKO") },
   { name: "MTN Bénin", aliases: ["mtn bénin", "mtn benin", "mtn.bj"], url: "https://www.mtn.bj/", icon: fav("mtn.bj"), tag: L("Corporate WordPress · via KAMGOKO", "Site corporate WordPress · via KAMGOKO") },
   { name: "Mon Routeur", aliases: ["mon routeur", "monrouteur"], url: "https://monrouteur.mtn.bj/?ref=noref", icon: fav("monrouteur.mtn.bj"), tag: L("Activation · via KAMGOKO", "Activation · via KAMGOKO") },

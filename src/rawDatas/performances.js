@@ -126,23 +126,24 @@ export const performances = [
     url: "https://emiliacross.com/",
     get content() { return appWindow(this); },
     properties: {
-      category: L("Dating · live video", "Rencontre · visio en direct"),
+      category: L("Dating app (Flutter + PWA) · per-minute video", "App de rencontre (Flutter + PWA) · visio facturée"),
       status: "Live",
-      role: L("Architect & Backend / Real-Time Developer", "Architecte & développeur backend / temps réel"),
+      role: L("Full-stack & real-time engineer (Flutter + NestJS)", "Ingénieur full-stack & temps réel (Flutter + NestJS)"),
       client: "France Assist",
       team: "France Assist",
       year: "2024 — 2025",
-      stack: ["NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker"],
+      stack: ["Flutter", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker"],
       features: [
-        L("Per-minute credit-based billing with Stripe", "Facturation à la minute par crédits (Stripe)"),
+        L("Flutter mobile app + PWA clients", "Clients Flutter : app mobile + PWA"),
+        L("Per-minute credit-based billing (Stripe)", "Facturation à la minute par crédits (Stripe)"),
         L("Agora live video + dedicated WebSocket signaling", "Vidéo live Agora + signalisation WebSocket dédiée"),
-        L("KYC verification, RBAC and 2FA", "Vérification KYC, RBAC et 2FA"),
+        L("KYC (Stripe Identity), RBAC and 2FA", "KYC (Stripe Identity), RBAC et 2FA"),
       ],
       createdAt: "January 2024",
       addedAt: "Today",
       more: L(
-        "A dating site where connections are made over live video: video streaming, KYC verification, Stripe payments & payouts, credit billing, partner discovery and real-time messaging. Multi-service NestJS architecture with a dedicated WebSocket server, RBAC, 2FA and monitoring.",
-        "Un site de rencontre où la relation se noue en visio : streaming vidéo, vérification KYC, paiements & reversements (payouts) Stripe, facturation par crédits, découverte de partenaires et messagerie temps réel. Architecture NestJS multi-services avec serveur WebSocket dédié, RBAC, 2FA et supervision."
+        "A dating app (Flutter mobile + PWA) where connections are made over live video billed per minute: Agora video, credit system, KYC verification (Stripe Identity), Stripe payments & payouts, partner discovery and real-time messaging. Multi-service NestJS backend with a dedicated WebSocket server, RBAC, 2FA and monitoring.",
+        "Une application de rencontre (Flutter mobile + PWA) où la relation se noue en visio facturée à la minute : vidéo Agora, système de crédits, vérification d'identité (Stripe Identity/KYC), paiements & reversements (payouts) Stripe, découverte de partenaires et messagerie temps réel. Backend NestJS multi-services avec serveur WebSocket dédié, RBAC, 2FA et supervision."
       ),
     },
   },
