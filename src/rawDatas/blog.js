@@ -57,6 +57,10 @@ export const blogPosts = [
         "Ce que j'en retiens : séparer le temps réel de l'API dès le départ, rendre idempotent tout flux d'argent, et ne pas réinventer ce qu'un service spécialisé (Agora, Stripe) fait mieux. Le mot de la fin revient au client : « Paul a pris une idée ambitieuse — du streaming vidéo facturé à la minute — et en a fait une plateforme stable et scalable. »",
         "What I take away: split real time from the API from day one, make every money flow idempotent, and don't reinvent what a specialized service (Agora, Stripe) does better. The last word goes to the client: “Paul took an ambitious idea — per-minute billed video streaming — and turned it into a stable, scalable platform.”"
       ),
+      L(
+        "Un grand big up à celles et ceux avec qui j'ai bâti ce projet : Clavers au design, et Fresnel Aglossi, qui a mené la partie front du back-office (fresnel-aglossi.netlify.app). Aucune œuvre solide ne se bâtit seul.",
+        "A big shout-out to the people I built this with: Clavers on design, and Fresnel Aglossi, who led the back-office front-end (fresnel-aglossi.netlify.app). No solid work is built alone."
+      ),
     ],
     ctas: [
       { label: L("Voir Emilia Cross", "See Emilia Cross"), href: "https://emiliacross.com/", desc: L("Le projet en ligne", "The live project"), external: true },
