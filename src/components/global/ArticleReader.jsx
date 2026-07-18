@@ -38,6 +38,7 @@ export default function ArticleReader({ paragraphs, lang }) {
   const currentRef = useRef(-1);
   const rateRef = useRef(1);
   const genRef = useRef(0); // jeton : invalide les callbacks des utterances annulées
+  const voicesRef = useRef([]); // voix dispo (peuplées de façon asynchrone)
 
   const [supported, setSupported] = useState(false);
   const [status, setStatus] = useState("idle"); // idle | playing | paused
@@ -62,9 +63,34 @@ export default function ArticleReader({ paragraphs, lang }) {
   }, [paragraphs]);
 
   useEffect(() => {
-    setSupported(typeof window !== "undefined" && "speechSynthesis" in window && "SpeechSynthesisUtterance" in window);
-    return () => { try { window.speechSynthesis.cancel(); } catch {} };
+    const ok = typeof window !== "undefined" && "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+    setSupported(ok);
+    if (!ok) return;
+    const synth = window.speechSynthesis;
+    // getVoices() est souvent vide au 1er appel : la liste arrive via voiceschanged.
+    const loadVoices = () => { voicesRef.current = synth.getVoices() || []; };
+    loadVoices();
+    synth.addEventListener?.("voiceschanged", loadVoices);
+    return () => {
+      try { synth.removeEventListener?.("voiceschanged", loadVoices); } catch {}
+      try { synth.cancel(); } catch {}
+    };
   }, []);
+
+  // Choisit une voix dont la langue correspond au CONTENU (fr pour un article FR),
+  // même si le navigateur est en anglais. Sans ce choix explicite, la synthèse
+  // retombe sur la voix par défaut (anglaise) et lit le français avec un accent
+  // anglais. Préférence : correspondance exacte (fr-FR), sinon même langue (fr-*).
+  const pickVoice = (bcp47) => {
+    const want = bcp47.toLowerCase();
+    const base = want.split("-")[0];
+    const list = voicesRef.current || [];
+    return (
+      list.find((v) => (v.lang || "").toLowerCase() === want) ||
+      list.find((v) => (v.lang || "").toLowerCase().startsWith(base)) ||
+      null
+    );
+  };
 
   // Anti-coupure Chrome (~15 s).
   useEffect(() => {
@@ -109,6 +135,8 @@ export default function ArticleReader({ paragraphs, lang }) {
     const sent = model.flat[si];
     const u = new window.SpeechSynthesisUtterance(sent.text);
     u.lang = L === "en" ? "en-US" : "fr-FR";
+    const voice = pickVoice(u.lang);
+    if (voice) u.voice = voice; // force une voix de la bonne langue si dispo
     u.rate = rateRef.current;
     u.onboundary = (e) => { if (gen !== genRef.current) return; const wi = lastIndexLE(sent.wordOffsets, e.charIndex || 0); highlightWord(si, wi); };
     u.onend = () => { if (gen === genRef.current && statusRef.current === "playing") speakFrom(currentRef.current + 1); };
