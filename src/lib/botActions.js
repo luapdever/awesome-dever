@@ -110,6 +110,56 @@ export function extractActions(raw) {
   return { clean, actions };
 }
 
+// Heuristique : le message ressemble-t-il à une OFFRE D'EMPLOI collée ?
+// Une offre est longue ET contient plusieurs signaux (missions, profil, stack…).
+// → déclenche le mode « pitch » (analyse de fit) côté backend.
+const JD_SIGNALS = [
+  "recherch", "recrut", "poste", "mission", "profil", "responsabilit", "compétences", "competences",
+  "requirements", "responsibilities", "we are looking", "you will", "cdi", "cdd", "freelance", "h/f",
+  "expérience", "experience", "salaire", "salary", "qualifications", "join our", "role", "stack technique",
+];
+export function looksLikeJobOffer(text) {
+  const t = (text || "").toLowerCase();
+  if (t.length < 180) return false; // une offre est rarement courte
+  const hits = JD_SIGNALS.filter((s) => t.includes(s)).length;
+  return hits >= 3;
+}
+
+// Découpe un contenu Markdown « riche » (réponses du mode pitch) en blocs
+// rendables : tableaux, images INTERNES (chemin /…) et paragraphes de texte.
+function splitRow(line) {
+  return line.replace(/^\s*\|/, "").replace(/\|\s*$/, "").split("|").map((c) => c.trim());
+}
+export function richBlocks(raw) {
+  const lines = (raw || "").replace(/\r/g, "").split("\n");
+  const isRow = (s) => /^\s*\|.*\|\s*$/.test(s);
+  const isSep = (s) => /^\s*\|[\s:|-]+\|\s*$/.test(s);
+  const blocks = [];
+  let para = [];
+  const flush = () => { const v = para.join("\n").trim(); if (v) blocks.push({ type: "text", value: v }); para = []; };
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const t = line.trim();
+    // Image seule sur sa ligne, chemin INTERNE uniquement (sécurité : pas d'URL externe).
+    const img = t.match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/);
+    if (img && img[2].startsWith("/")) { flush(); blocks.push({ type: "image", alt: img[1], src: img[2] }); continue; }
+    // Tableau : ligne d'en-tête | … | suivie d'une ligne séparatrice | --- |.
+    if (isRow(line) && i + 1 < lines.length && isSep(lines[i + 1])) {
+      flush();
+      const header = splitRow(line);
+      const rows = [];
+      i += 2;
+      while (i < lines.length && isRow(lines[i]) && !isSep(lines[i])) { rows.push(splitRow(lines[i])); i++; }
+      i--;
+      blocks.push({ type: "table", header, rows });
+      continue;
+    }
+    para.push(line);
+  }
+  flush();
+  return blocks;
+}
+
 // Extrait les relances suggérées par le LLM : marqueur [[next: q1 | q2 | q3]]
 // (le modèle les ajoute à la fin ; le front en fait des pastilles). Renvoie le
 // texte nettoyé + jusqu'à 3 questions. Tolère le marqueur partiel en streaming.

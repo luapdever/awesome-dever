@@ -5,7 +5,7 @@ import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import styles from "../../../styles/global/botwidget.module.css";
 import { useLandingLang } from "../../context/landingLang";
-import { NAV, extractActions, extractSuggestions, runNavAction, navLabel, navigateRelative, linkTokens } from "../../lib/botActions";
+import { NAV, extractActions, extractSuggestions, runNavAction, navLabel, navigateRelative, linkTokens, looksLikeJobOffer, richBlocks } from "../../lib/botActions";
 import { detectProjects, followUps, pageContext, routeIntent, clientAnswer, tourSteps, smalltalk, smalltalkReply, waitingMessage } from "../../lib/botExtras";
 import { submitContact } from "../../lib/altcha";
 
@@ -63,6 +63,7 @@ const UI = {
       (n) => `Content de t'accueillir${n ? `, ${n}` : ""} ! 🚀 Je suis PaulBot. Parcours, compétences, projets de Paul : dis-moi juste ce qui t'intéresse.`,
     ],
     placeholder: "Écris ton message…",
+    placeholderRecruiter: "Colle une offre d'emploi — je te dis si Paul colle…",
     error: "Je suis momentanément indisponible. Réessaie dans un instant, ou écris directement à Paul : pzannou511@gmail.com.",
     suggestions: ["Il maîtrise quoi ?", "Montre-moi ses projets", "Est-il disponible ?"],
     open: "Discuter avec PaulBot",
@@ -125,6 +126,7 @@ const UI = {
       (n) => `Hi there${n ? `, ${n}` : ""} 👋 PaulBot at your service. Anything about Paul — I'll answer and point you the right way.`,
     ],
     placeholder: "Type your message…",
+    placeholderRecruiter: "Paste a job offer — I'll tell you if Paul fits…",
     error: "I'm momentarily unavailable. Please try again shortly, or reach Paul directly at pzannou511@gmail.com.",
     suggestions: ["What's his stack?", "Show me his projects", "Is he available?"],
     open: "Chat with PaulBot",
@@ -445,11 +447,39 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
         : "Here's his availability and how to reach him directly 👇",
   });
 
+  // Rendu inline (liens, gras) — commun aux messages simples et aux cellules/blocs pitch.
+  const renderInline = (text) =>
+    linkTokens(text).map((tok, k) =>
+      tok.t === "link" ? (
+        <a key={k} href={tok.href} target={tok.external ? "_blank" : undefined} rel="noopener noreferrer" className={styles.msgLink}>{tok.v}</a>
+      ) : tok.t === "bold" ? (
+        <b key={k}>{tok.v}</b>
+      ) : (
+        <React.Fragment key={k}>{tok.v}</React.Fragment>
+      )
+    );
+
+  // Rendu riche (mode pitch) : tableaux, images INTERNES, paragraphes de texte.
+  const renderBlock = (b, k) => {
+    if (b.type === "image") return <img key={k} src={b.src} alt={b.alt} className={styles.pitchImg} loading="lazy" />;
+    if (b.type === "table")
+      return (
+        <div key={k} className={styles.pitchTableWrap}>
+          <table className={styles.pitchTable}>
+            <thead><tr>{b.header.map((h, j) => <th key={j}>{renderInline(h)}</th>)}</tr></thead>
+            <tbody>{b.rows.map((r, ri) => <tr key={ri}>{r.map((c, ci) => <td key={ci}>{renderInline(c)}</td>)}</tr>)}</tbody>
+          </table>
+        </div>
+      );
+    return <div key={k} className={styles.richBlock}>{renderInline(b.value)}</div>;
+  };
+
   // Appelle le LLM avec un contexte donné (streaming). Marque l'erreur pour
   // permettre un « Réessayer ».
-  const callModel = async (contextMessages) => {
+  const callModel = async (contextMessages, opts) => {
+    const pitch = !!(opts && opts.pitch);
     setPending(true);
-    setMessages((m) => [...m, { role: "assistant", content: "", at: Date.now() }]);
+    setMessages((m) => [...m, { role: "assistant", content: "", at: Date.now(), ...(pitch ? { rich: true } : {}) }]);
     let acc = "";
     let started = false;
     // Si le modèle tarde (> 2 s) et que rien n'est encore arrivé, on glisse un
@@ -470,7 +500,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
       const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: contextMessages, lang, conversationId: cidRef.current, contact }),
+        body: JSON.stringify({ messages: contextMessages, lang, conversationId: cidRef.current, contact, ...(pitch ? { mode: "pitch" } : {}) }),
       });
       if (!res.ok || !res.body) throw new Error(`http ${res.status}`);
       const reader = res.body.getReader();
@@ -534,6 +564,14 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
     if (st) {
       const reply = smalltalkReply(st, lang, contact?.name);
       setMessages((m) => [...m, userMsg, { role: "assistant", at: Date.now(), content: reply }]);
+      return;
+    }
+
+    // 1.5) Offre d'emploi collée → mode PITCH (analyse de fit), direct au modèle.
+    if (looksLikeJobOffer(content)) {
+      const next = [...messages, userMsg];
+      setMessages(next);
+      callModel(next, { pitch: true });
       return;
     }
 
@@ -908,21 +946,9 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                             m.content
                           ) : (
                             <>
-                              {linkTokens(m.content).map((tok, k) =>
-                                tok.t === "link" ? (
-                                  <a
-                                    key={k}
-                                    href={tok.href}
-                                    target={tok.external ? "_blank" : undefined}
-                                    rel="noopener noreferrer"
-                                    className={styles.msgLink}
-                                  >{tok.v}</a>
-                                ) : tok.t === "bold" ? (
-                                  <b key={k}>{tok.v}</b>
-                                ) : (
-                                  <React.Fragment key={k}>{tok.v}</React.Fragment>
-                                )
-                              )}
+                              {m.rich
+                                ? richBlocks(m.content).map((b, k) => renderBlock(b, k))
+                                : renderInline(m.content)}
                               {streaming && <span className={styles.caret} />}
                             </>
                           )}
@@ -1087,7 +1113,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                   ref={inputRef}
                   rows={1}
                   className={styles.textarea}
-                  placeholder={ui.placeholder}
+                  placeholder={contact?.persona === "recruiter" ? ui.placeholderRecruiter : ui.placeholder}
                   autoComplete="off"
                   value={draft}
                   onChange={(e) => setDraft(e.target.value)}

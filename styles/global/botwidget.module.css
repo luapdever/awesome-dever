@@ -138,6 +138,16 @@
 .msgTime { font-size: 0.66rem; color: rgba(255, 255, 255, 0.38); padding: 0 5px; }
 .msgLink { color: var(--color-accent-soft); text-decoration: underline; text-underline-offset: 2px; word-break: break-all; }
 .msgLink:hover { color: var(--color-accent); }
+
+/* ---- Rendu riche (mode pitch : tableau, images, blocs) ---- */
+.richBlock { margin: 6px 0; }
+.richBlock:first-child { margin-top: 0; }
+.richBlock:last-child { margin-bottom: 0; }
+.pitchImg { display: block; max-width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--glass-border); margin: 6px 0; }
+.pitchTableWrap { overflow-x: auto; margin: 8px 0; -webkit-overflow-scrolling: touch; }
+.pitchTable { border-collapse: collapse; width: 100%; font-size: 0.8rem; }
+.pitchTable th, .pitchTable td { border: 1px solid var(--glass-border); padding: 6px 8px; text-align: left; vertical-align: top; white-space: normal; }
+.pitchTable th { background: rgba(255, 255, 255, 0.06); font-weight: 600; }
 .assistant, .user { max-width: 100%; padding: 9px 13px; border-radius: 15px; font-size: 0.86rem; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
 
 /* Bouton d'action proposé (navigation) — le visiteur clique, rien d'automatique */
