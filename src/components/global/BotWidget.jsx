@@ -399,6 +399,13 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
     el.scrollTop = el.scrollHeight; // message visiteur / ouverture → bas
   }, [messages]);
 
+  // Autocomplete : pré-remplit le champ de recontact avec l'email de l'onboarding
+  // (le recruteur n'a qu'à valider ; il peut toujours saisir un autre email).
+  useEffect(() => {
+    if (contact?.mode === "email" && contact?.value) setEscEmail((v) => v || contact.value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [contact?.mode, contact?.value]);
+
   // Rafraîchit les dates relatives tant que le chat est visible.
   useEffect(() => {
     if (!shown) return;
@@ -1034,9 +1041,10 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                           )}
                         </div>
 
-                        {/* Après une offre (pitch) : inviter à laisser son email → Paul
-                            reçoit les détails et le recruteur un accusé de réception. */}
-                        {!isUser && m.rich && isLast && escCount < ESC_MAX && (contact?.mode === "incognito" || escCount > 0) && (
+                        {/* Après une offre (pitch) : inviter à laisser son email
+                            (quel que soit le mode d'onboarding) → Paul reçoit les
+                            détails et le recruteur un accusé de réception. */}
+                        {!isUser && m.rich && isLast && escCount < ESC_MAX && (
                           <div className={styles.escalate}>
                             <span className={styles.escText}>{escCount > 0 ? ui.escalateAck : ui.escalateOffer}</span>
                             {escCount === 0 && (
