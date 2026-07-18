@@ -1,0 +1,23 @@
+/* Barre de progression de navigation — fine, en haut, au-dessus de tout. */
+.track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 9999;
+  pointer-events: none;
+  background: transparent;
+}
+.bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--color-accent-soft, #ffc25c), var(--color-accent, #ffa500));
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.6), 0 0 4px rgba(255, 165, 0, 0.5);
+  border-radius: 0 3px 3px 0;
+  transition: width 0.2s ease;
+  will-change: width;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bar { transition: none; }
+}

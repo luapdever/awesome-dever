@@ -15,6 +15,7 @@ import ExperienceButton from "../src/components/global/ExperienceButton";
 import BotWidget from "../src/components/global/BotWidget";
 import CookieConsent from "../src/components/global/CookieConsent";
 import SmartNudge from "../src/components/global/SmartNudge";
+import TopProgress from "../src/components/global/TopProgress";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -54,6 +55,7 @@ function MyApp({ Component, pageProps }) {
         <LandingLangProvider>
           <ExperienceProvider>
             <Cursor />
+            <TopProgress />
             {!hideChrome && <NavBar />}
             <Component {...pageProps} />
             <ToastContainer theme="dark" />

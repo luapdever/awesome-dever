@@ -243,22 +243,46 @@ export function detectProjects(text, lang) {
 }
 
 // Questions de suivi contextuelles (statiques, choisies par le front).
+// L'intention se lit D'ABORD dans la question du visiteur (les pivots front/back
+// en dépendent → jamais les deux à la fois) ; la réponse du bot n'élargit le
+// contexte que pour les rubriques neutres. On ne repropose JAMAIS la question
+// qu'on vient de poser/cliquer.
 export function followUps(lastUser, lastBot, lang) {
   const fr = lang !== "en";
   const S = (f, e) => (fr ? f : e);
-  const t = `${lastUser || ""} ${lastBot || ""}`.toLowerCase();
-  const has = (...ks) => ks.some((k) => t.includes(k));
+  // Normalise (minuscule, sans accents ni ponctuation) pour comparer et filtrer.
+  const norm = (s) => (s || "")
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+  const uq = norm(lastUser);                 // la question du visiteur
+  const both = `${uq} ${norm(lastBot)}`;     // échange complet (contexte élargi)
+  const asked = (...ks) => ks.some((k) => uq.includes(k));    // ce que le visiteur a demandé
+  const seen = (...ks) => ks.some((k) => both.includes(k));   // présent dans l'échange
+
   const pool = [];
-  if (has("backend", "nestjs", "node", "api", "websocket")) pool.push(S("Et côté frontend ?", "And on the frontend?"), S("Montre-moi Emilia Cross", "Show me Emilia Cross"));
-  if (has("frontend", "vue", "react", "nuxt", "flutter", "mobile")) pool.push(S("Et côté backend ?", "And on the backend?"));
-  if (has("emilia")) pool.push(S("C'était quoi son rôle ?", "What was his role?"), S("Quelle stack pour Emilia ?", "What stack for Emilia?"));
-  if (has("dispo", "disponible", "freelance", "mission", "recrut")) pool.push(S("Comment le contacter ?", "How to reach him?"), S("Ouvre son CV", "Open his résumé"));
-  if (has("compétence", "maîtrise", "stack", "skills", "techno", "langage")) pool.push(S("Il a quels projets ?", "What has he built?"), S("Est-il disponible ?", "Is he available?"));
-  if (has("cv", "résumé", "resume", "curriculum")) pool.push(S("Est-il disponible ?", "Is he available?"), S("Ses compétences ?", "His skills?"));
-  if (has("contact", "email", "numéro", "recontact", "@")) pool.push(S("Est-il disponible ?", "Is he available?"));
+  // Histoire / anecdote / parcours : garde le fil narratif (le bot enchaînera
+  // vers le livre via sa règle ANECDOTES). Piloté par la QUESTION du visiteur.
+  if (asked("anecdote", "histoire", "raconte", "story", "parcours", "commenc", "debut", "began", "beginning", "journey")) {
+    pool.push(S("Comment il a commencé ?", "How did he start?"), S("Son parcours en bref ?", "His journey in short?"));
+  }
+  // Pivot frontend/backend : piloté par la QUESTION → on ne propose pas les deux.
+  if (asked("backend", "nestjs", "node", "api", "websocket")) pool.push(S("Et côté frontend ?", "And on the frontend?"));
+  else if (asked("frontend", "vue", "react", "nuxt", "flutter", "mobile")) pool.push(S("Et côté backend ?", "And on the backend?"));
+
+  if (seen("emilia")) pool.push(S("C'était quoi son rôle ?", "What was his role?"), S("Quelle stack pour Emilia ?", "What stack for Emilia?"));
+  else if (seen("projet", "project", "realisation", "portfolio")) pool.push(S("Montre-moi Emilia Cross", "Show me Emilia Cross"));
+  if (seen("dispo", "disponible", "freelance", "mission", "recrut")) pool.push(S("Comment le contacter ?", "How to reach him?"), S("Ouvre son CV", "Open his résumé"));
+  if (seen("competence", "maitrise", "stack", "skills", "techno", "langage")) pool.push(S("Il a quels projets ?", "What has he built?"), S("Est-il disponible ?", "Is he available?"));
+  if (seen("cv", "resume", "curriculum")) pool.push(S("Est-il disponible ?", "Is he available?"), S("Ses compétences ?", "His skills?"));
+  if (seen("contact", "email", "numero", "recontact")) pool.push(S("Est-il disponible ?", "Is he available?"));
+
   const defaults = [S("Il maîtrise quoi ?", "What's his stack?"), S("Montre-moi ses projets", "Show me his projects"), S("Est-il disponible ?", "Is he available?"), S("Comment le contacter ?", "How to reach him?")];
   for (const d of defaults) { if (pool.length >= 3) break; if (!pool.includes(d)) pool.push(d); }
-  return [...new Set(pool)].slice(0, 3);
+
+  // Filtre final : jamais la question que le visiteur vient de poser/cliquer.
+  return [...new Set(pool)].filter((c) => norm(c) !== uq).slice(0, 3);
 }
 
 // Suggestion liée à la page / section actuellement regardée (aucun appel modèle).
