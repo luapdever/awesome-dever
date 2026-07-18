@@ -5,7 +5,7 @@ import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import styles from "../../../styles/global/botwidget.module.css";
 import { useLandingLang } from "../../context/landingLang";
-import { NAV, extractActions, runNavAction, navLabel, navigateRelative, linkTokens } from "../../lib/botActions";
+import { NAV, extractActions, extractSuggestions, runNavAction, navLabel, navigateRelative, linkTokens } from "../../lib/botActions";
 import { detectProjects, followUps, pageContext, routeIntent, clientAnswer, tourSteps, smalltalk, smalltalkReply, waitingMessage } from "../../lib/botExtras";
 import { submitContact } from "../../lib/altcha";
 
@@ -480,14 +480,15 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
         if (done) break;
         acc += dec.decode(value, { stream: true });
         if (!started) { started = true; clearTimeout(waitTimer); }
-        const shown = extractActions(acc).clean;
+        const shown = extractSuggestions(extractActions(acc).clean).clean;
         setMessages((m) => {
           const copy = m.slice();
           copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", content: shown, error: false, waiting: false };
           return copy;
         });
       }
-      const { clean: finalShown, actions } = extractActions(acc);
+      const acted = extractActions(acc);
+      const { clean: finalShown, suggestions: llmSuggest } = extractSuggestions(acted.clean);
       if (UNAVAILABLE_RE.test(finalShown)) {
         // Le modèle a répondu un "cul-de-sac" → on bascule sur /dispo.
         setMessages((m) => {
@@ -495,10 +496,15 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
           copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", error: false, waiting: false, action: undefined, ...dispoFallback() };
           return copy;
         });
-      } else if (actions[0]) {
+      } else {
         setMessages((m) => {
           const copy = m.slice();
-          copy[copy.length - 1] = { ...copy[copy.length - 1], action: actions[0] };
+          copy[copy.length - 1] = {
+            ...copy[copy.length - 1],
+            role: "assistant", content: finalShown, error: false, waiting: false,
+            ...(acted.actions[0] ? { action: acted.actions[0] } : {}),
+            ...(llmSuggest.length ? { suggest: llmSuggest } : {}),
+          };
           return copy;
         });
       }
@@ -1033,7 +1039,11 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                   const last = messages[messages.length - 1];
                   if (!last || last.role !== "assistant" || !last.content) return null;
                   const prevUser = [...messages].reverse().find((mm) => mm.role === "user");
-                  const chips = followUps(prevUser?.content, last.content, lang);
+                  // Relances suggérées par le LLM (piggyback [[next:…]]) si présentes,
+                  // sinon repli déterministe côté client (tours sans appel modèle).
+                  const chips = (last.suggest && last.suggest.length)
+                    ? last.suggest.slice(0, 3)
+                    : followUps(prevUser?.content, last.content, lang);
                   return chips.length ? (
                     <div className={styles.followRow}>
                       {chips.map((c, k) => (

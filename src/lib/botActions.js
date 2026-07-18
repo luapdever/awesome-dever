@@ -110,6 +110,21 @@ export function extractActions(raw) {
   return { clean, actions };
 }
 
+// Extrait les relances suggérées par le LLM : marqueur [[next: q1 | q2 | q3]]
+// (le modèle les ajoute à la fin ; le front en fait des pastilles). Renvoie le
+// texte nettoyé + jusqu'à 3 questions. Tolère le marqueur partiel en streaming.
+export function extractSuggestions(raw) {
+  const suggestions = [];
+  let clean = (raw || "").replace(/\[\[\s*next\s*:\s*([^\]]*?)\s*\]\]/gi, (_, list) => {
+    for (const s of String(list).split("|").map((x) => x.trim()).filter(Boolean)) {
+      if (suggestions.length < 3 && !suggestions.includes(s)) suggestions.push(s);
+    }
+    return "";
+  });
+  clean = clean.replace(/\[\[[^\]]*$/, "").trim(); // marqueur partiel en streaming
+  return { clean, suggestions };
+}
+
 // Scrolle vers une section de la home (en s'y rendant d'abord si besoin).
 // Navigation client-side : aucun rechargement de page.
 function scrollToHomeSection(id, router) {
