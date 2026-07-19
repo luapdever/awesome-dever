@@ -181,9 +181,24 @@ export function extractSuggestions(raw) {
   return { clean, suggestions };
 }
 
+// Le widget peut tourner dans une <iframe> embarquée (loader paulbot-widget.js →
+// page /bot-embed) posée sur une page tierce, ex. le CV statique. Une navigation
+// interne classique (router.push / scroll) resterait alors PRISONNIÈRE du petit
+// cadre du widget. Dans ce cas on ouvre la cible dans un nouvel onglet, en visant
+// l'origine du PORTFOLIO (celle de l'iframe /bot-embed), pas la page hôte.
+function inIframe() {
+  try { return typeof window !== "undefined" && window.self !== window.top; }
+  catch { return true; } // window.top inaccessible (cross-origin) ⇒ on est dans une iframe
+}
+function openTop(path) {
+  const abs = `${window.location.origin}${path}`; // `path` commence par "/"
+  window.open(abs, "_blank", "noopener");
+}
+
 // Scrolle vers une section de la home (en s'y rendant d'abord si besoin).
 // Navigation client-side : aucun rechargement de page.
 function scrollToHomeSection(id, router) {
+  if (inIframe()) { openTop(`/#${id}`); return true; } // hors iframe : ouvre la home + ancre
   const scroll = () => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -204,6 +219,7 @@ export function runNavAction(key, router) {
   if (nav.type === "external") { window.open(nav.url, "_blank", "noopener"); return true; }
   if (nav.type === "route") {
     const url = base === "book" && arg ? `${nav.url}?chap=${encodeURIComponent(arg)}` : nav.url;
+    if (inIframe()) { openTop(url); return true; } // sort de l'iframe (nouvel onglet)
     router.push(url);
     return true;
   }
@@ -218,6 +234,6 @@ export function navigateRelative(target, router) {
   if (!t) return false;
   if (/^[a-z][a-z0-9+.-]*:/i.test(t) || t.startsWith("//")) return false; // externe / protocole
   if (t.startsWith("#")) return scrollToHomeSection(t.slice(1), router);
-  if (t.startsWith("/")) { router.push(t); return true; }
+  if (t.startsWith("/")) { if (inIframe()) openTop(t); else router.push(t); return true; }
   return false;
 }
