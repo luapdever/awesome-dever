@@ -6,7 +6,7 @@ import "react-phone-number-input/style.css";
 import styles from "../../../styles/global/botwidget.module.css";
 import { useLandingLang } from "../../context/landingLang";
 import { NAV, extractActions, extractSuggestions, runNavAction, navLabel, navigateRelative, linkTokens, looksLikeJobOffer, richBlocks } from "../../lib/botActions";
-import { detectProjects, followUps, pageContext, routeIntent, clientAnswer, tourSteps, smalltalk, smalltalkReply, waitingMessage } from "../../lib/botExtras";
+import { detectProjects, followUps, normChip, pageContext, routeIntent, clientAnswer, tourSteps, smalltalk, smalltalkReply, waitingMessage } from "../../lib/botExtras";
 import { submitContact, solveAltcha } from "../../lib/altcha";
 
 const MIC = "/icons/ph/microphone__000000.svg";
@@ -564,6 +564,8 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
       // Anti-bot : sur le 1er message d'une conversation, on résout l'ALTCHA
       // (proof-of-work) et on joint la preuve ; ensuite le backend fait confiance
       // à la conversation (plus de PoW à re-résoudre).
+      // Déjà vérifié dans cette conversation (par le widget OU le terminal) ? on ne re-résout pas.
+      if (!altchaOkRef.current && shared.get("paulbot_altcha_cid") === cidRef.current) altchaOkRef.current = true;
       let altcha;
       if (!altchaOkRef.current) {
         try { altcha = await solveAltcha(); } catch { altcha = undefined; }
@@ -574,7 +576,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
         body: JSON.stringify({ messages: contextMessages, lang, conversationId: cidRef.current, contact, ...(pitch ? { mode: "pitch" } : {}), ...(altcha ? { altcha } : {}) }),
       });
       if (!res.ok || !res.body) throw new Error(`http ${res.status}`);
-      if (altcha) altchaOkRef.current = true; // jeton accepté → conversation vérifiée
+      if (altcha) { altchaOkRef.current = true; shared.set("paulbot_altcha_cid", cidRef.current); } // vérifiée (partagé avec le terminal)
       const reader = res.body.getReader();
       const dec = new TextDecoder();
       while (true) {
@@ -852,6 +854,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
     shared.remove("paulbot_messages");
     shared.remove("paulbot_contact");
     shared.remove("paulbot_esc_count");
+    shared.remove("paulbot_altcha_cid"); // nouvelle conversation → re-vérification anti-bot (widget + terminal)
     const cid = newId(); // nouvelle conversation → nouvel identifiant (nouveau PDF)
     shared.set("paulbot_cid", cid);
     cidRef.current = cid;
@@ -1184,11 +1187,15 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                   const last = messages[messages.length - 1];
                   if (!last || last.role !== "assistant" || !last.content) return null;
                   const prevUser = [...messages].reverse().find((mm) => mm.role === "user");
+                  // Tout ce qui a déjà été demandé dans la conversation → jamais reproposé.
+                  const askedAll = messages.filter((mm) => mm.role === "user").map((mm) => mm.content);
+                  const asked = new Set(askedAll.map(normChip));
                   // Relances suggérées par le LLM (piggyback [[next:…]]) si présentes,
-                  // sinon repli déterministe côté client (tours sans appel modèle).
-                  const chips = (last.suggest && last.suggest.length)
-                    ? last.suggest.slice(0, 3)
-                    : followUps(prevUser?.content, last.content, lang);
+                  // sinon repli déterministe côté client — filtrées du déjà-posé dans les deux cas.
+                  const chips = ((last.suggest && last.suggest.length)
+                    ? last.suggest
+                    : followUps(prevUser?.content, last.content, lang, askedAll)
+                  ).filter((c) => !asked.has(normChip(c))).slice(0, 3);
                   return chips.length ? (
                     <div className={styles.followRow}>
                       {chips.map((c, k) => (

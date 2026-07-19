@@ -6,6 +6,7 @@
    Aucune duplication de logique réseau côté composant.
    ============================================================ */
 import { extractActions } from "./botActions";
+import { solveAltcha } from "./altcha";
 
 const CHAT_URL = process.env.NEXT_PUBLIC_CHAT_URL || "/api/chat";
 
@@ -70,14 +71,23 @@ export async function askBotStream({ question, lang = "fr", onToken, signal }) {
     .slice(-20);
   const context = [...prior, { role: "user", content: q }];
 
+  // Anti-bot : ALTCHA (proof-of-work) exigé une fois par conversation. On partage
+  // l'état avec le widget via le même conversationId (flag paulbot_altcha_cid) →
+  // on ne re-résout pas un défi si la conversation est déjà vérifiée.
+  let altcha;
+  if (shared.get("paulbot_altcha_cid") !== cid) {
+    try { altcha = await solveAltcha(); } catch { altcha = undefined; }
+  }
+
   const url = (typeof window !== "undefined" && window.__CHAT_URL) || CHAT_URL;
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ messages: context, lang, conversationId: cid, contact }),
+    body: JSON.stringify({ messages: context, lang, conversationId: cid, contact, ...(altcha ? { altcha } : {}) }),
     signal,
   });
   if (!res.ok || !res.body) throw new Error(`http ${res.status}`);
+  if (altcha) shared.set("paulbot_altcha_cid", cid); // preuve envoyée → conversation vérifiée
 
   const reader = res.body.getReader();
   const dec = new TextDecoder();

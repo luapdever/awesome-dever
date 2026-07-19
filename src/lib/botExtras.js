@@ -242,47 +242,75 @@ export function detectProjects(text, lang) {
   return found;
 }
 
-// Questions de suivi contextuelles (statiques, choisies par le front).
-// L'intention se lit D'ABORD dans la question du visiteur (les pivots front/back
-// en dépendent → jamais les deux à la fois) ; la réponse du bot n'élargit le
-// contexte que pour les rubriques neutres. On ne repropose JAMAIS la question
-// qu'on vient de poser/cliquer.
-export function followUps(lastUser, lastBot, lang) {
-  const fr = lang !== "en";
-  const S = (f, e) => (fr ? f : e);
-  // Normalise (minuscule, sans accents ni ponctuation) pour comparer et filtrer.
-  const norm = (s) => (s || "")
+// Normalisation partagée (minuscule, sans accents ni ponctuation) — sert à
+// comparer/dédupliquer les suggestions et à filtrer ce qui a déjà été demandé.
+export function normChip(s) {
+  return (s || "")
     .toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
-  const uq = norm(lastUser);                 // la question du visiteur
-  const both = `${uq} ${norm(lastBot)}`;     // échange complet (contexte élargi)
-  const asked = (...ks) => ks.some((k) => uq.includes(k));    // ce que le visiteur a demandé
+}
+
+// Questions de suivi contextuelles (statiques, choisies par le front).
+// - L'intention se lit D'ABORD dans la QUESTION du visiteur (pivots front/back →
+//   jamais les deux à la fois) ; la réponse du bot n'élargit que le contexte neutre.
+// - `asked` = tout ce qui a déjà été demandé/proposé dans la conversation → on ne
+//   le repropose jamais (fini les 3 mêmes chips à chaque tour).
+// - Un pool thématique élargi + rotation fait tourner les propositions par défaut.
+export function followUps(lastUser, lastBot, lang, asked = []) {
+  const fr = lang !== "en";
+  const S = (f, e) => (fr ? f : e);
+  const uq = normChip(lastUser);                 // la question du visiteur
+  const both = `${uq} ${normChip(lastBot)}`;     // échange complet (contexte élargi)
+  const done = new Set(asked.map(normChip).filter(Boolean)); // déjà posé/proposé
+  const askedQ = (...ks) => ks.some((k) => uq.includes(k));   // ce que le visiteur a demandé
   const seen = (...ks) => ks.some((k) => both.includes(k));   // présent dans l'échange
 
   const pool = [];
-  // Histoire / anecdote / parcours : garde le fil narratif (le bot enchaînera
-  // vers le livre via sa règle ANECDOTES). Piloté par la QUESTION du visiteur.
-  if (asked("anecdote", "histoire", "raconte", "story", "parcours", "commenc", "debut", "began", "beginning", "journey")) {
-    pool.push(S("Comment il a commencé ?", "How did he start?"), S("Son parcours en bref ?", "His journey in short?"));
-  }
+  const add = (...items) => { for (const it of items) if (!pool.includes(it)) pool.push(it); };
+
+  // --- branches contextuelles prioritaires ---
+  // Histoire / anecdote / parcours : garde le fil narratif (le bot enchaîne vers
+  // le livre via sa règle ANECDOTES). Piloté par la QUESTION du visiteur.
+  if (askedQ("anecdote", "histoire", "raconte", "story", "parcours", "commenc", "debut", "began", "beginning", "journey"))
+    add(S("Comment il a commencé ?", "How did he start?"), S("Son parcours en bref ?", "His journey in short?"), S("Une anecdote marquante ?", "A memorable anecdote?"));
   // Pivot frontend/backend : piloté par la QUESTION → on ne propose pas les deux.
-  if (asked("backend", "nestjs", "node", "api", "websocket")) pool.push(S("Et côté frontend ?", "And on the frontend?"));
-  else if (asked("frontend", "vue", "react", "nuxt", "flutter", "mobile")) pool.push(S("Et côté backend ?", "And on the backend?"));
+  if (askedQ("backend", "nestjs", "node", "api", "websocket")) add(S("Et côté frontend ?", "And on the frontend?"));
+  else if (askedQ("frontend", "vue", "react", "nuxt", "flutter", "mobile")) add(S("Et côté backend ?", "And on the backend?"));
 
-  if (seen("emilia")) pool.push(S("C'était quoi son rôle ?", "What was his role?"), S("Quelle stack pour Emilia ?", "What stack for Emilia?"));
-  else if (seen("projet", "project", "realisation", "portfolio")) pool.push(S("Montre-moi Emilia Cross", "Show me Emilia Cross"));
-  if (seen("dispo", "disponible", "freelance", "mission", "recrut")) pool.push(S("Comment le contacter ?", "How to reach him?"), S("Ouvre son CV", "Open his résumé"));
-  if (seen("competence", "maitrise", "stack", "skills", "techno", "langage")) pool.push(S("Il a quels projets ?", "What has he built?"), S("Est-il disponible ?", "Is he available?"));
-  if (seen("cv", "resume", "curriculum")) pool.push(S("Est-il disponible ?", "Is he available?"), S("Ses compétences ?", "His skills?"));
-  if (seen("contact", "email", "numero", "recontact")) pool.push(S("Est-il disponible ?", "Is he available?"));
+  // Projet cité → on creuse CE projet plutôt que de renvoyer au générique.
+  if (seen("emilia")) add(S("C'était quoi son rôle ?", "What was his role?"), S("Quelle stack pour Emilia ?", "What stack for Emilia?"), S("D'autres projets comme ça ?", "Other projects like this?"));
+  else if (seen("wapify")) add(S("Son rôle sur WAPIFY ?", "His role on WAPIFY?"), S("Montre-moi Emilia Cross", "Show me Emilia Cross"));
+  else if (seen("mtn")) add(S("Que faisait-il pour MTN ?", "What did he do for MTN?"), S("Via quelle agence ?", "Through which agency?"));
+  else if (seen("projet", "project", "realisation", "portfolio")) add(S("Montre-moi Emilia Cross", "Show me Emilia Cross"), S("Et WAPIFY, c'est quoi ?", "And what is WAPIFY?"));
 
-  const defaults = [S("Il maîtrise quoi ?", "What's his stack?"), S("Montre-moi ses projets", "Show me his projects"), S("Est-il disponible ?", "Is he available?"), S("Comment le contacter ?", "How to reach him?")];
-  for (const d of defaults) { if (pool.length >= 3) break; if (!pool.includes(d)) pool.push(d); }
+  if (seen("dispo", "disponible", "freelance", "mission", "recrut")) add(S("Comment le contacter ?", "How to reach him?"), S("Ouvre son CV", "Open his résumé"), S("Proposer une offre", "Propose an offer"));
+  if (seen("competence", "maitrise", "stack", "skills", "techno", "langage")) add(S("Il a quels projets ?", "What has he built?"), S("Sa stack backend ?", "His backend stack?"), S("Sa stack frontend ?", "His frontend stack?"));
+  if (seen("cv", "resume", "curriculum")) add(S("Est-il disponible ?", "Is he available?"), S("Ses compétences ?", "His skills?"));
+  if (seen("contact", "email", "numero", "recontact")) add(S("Est-il disponible ?", "Is he available?"), S("Proposer un échange", "Propose a chat"));
+  if (seen("ia", "llm", "paulbot", "assistant", "intelligence artificielle")) add(S("Comment marche PaulBot ?", "How does PaulBot work?"), S("Parle-moi de son blog", "Tell me about his blog"));
 
-  // Filtre final : jamais la question que le visiteur vient de poser/cliquer.
-  return [...new Set(pool)].filter((c) => norm(c) !== uq).slice(0, 3);
+  // --- pool thématique élargi, avec rotation pour varier d'un tour à l'autre ---
+  const topics = [
+    S("Il maîtrise quoi ?", "What's his stack?"),
+    S("Montre-moi ses projets", "Show me his projects"),
+    S("Montre-moi Emilia Cross", "Show me Emilia Cross"),
+    S("C'est quoi WAPIFY ?", "What is WAPIFY?"),
+    S("Résume ses expériences", "Sum up his experience"),
+    S("Comment il a commencé ?", "How did he start?"),
+    S("Est-il disponible ?", "Is he available?"),
+    S("Comment le contacter ?", "How to reach him?"),
+    S("Ouvre son CV", "Open his résumé"),
+    S("C'est quoi PaulBrain OS ?", "What is PaulBrain OS?"),
+    S("Ce qu'on dit de lui ?", "What people say about him?"),
+    S("Parle-moi de son blog", "Tell me about his blog"),
+  ];
+  const start = done.size % topics.length; // décalage → les propositions par défaut tournent
+  add(...topics.slice(start), ...topics.slice(0, start));
+
+  // Filtre final : jamais la question courante, ni ce qui a déjà été posé/proposé.
+  return pool.filter((c) => { const n = normChip(c); return n && n !== uq && !done.has(n); }).slice(0, 3);
 }
 
 // Suggestion liée à la page / section actuellement regardée (aucun appel modèle).
