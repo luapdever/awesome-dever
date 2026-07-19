@@ -246,5 +246,12 @@ export function buildCommands() {
     <p>{">>>"} <b className="or">paul</b> is not in the sudoers file. This incident will be reported. 😏</p>
   ));
 
+  // NB : en mode PaulBot (`ask`), `exit` quitte d'abord le chat — il n'atteint ce
+  // handler qu'au prompt de base, où il ferme réellement la fenêtre terminal.
+  def("exit", "Close the terminal window.", "exit", () => {
+    if (typeof window !== "undefined" && window.__osClose) setTimeout(() => window.__osClose("terminal"), 120);
+    return <p>Closing terminal…</p>;
+  }, ["quit"]);
+
   return C;
 }

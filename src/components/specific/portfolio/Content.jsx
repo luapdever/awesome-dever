@@ -307,7 +307,11 @@ function Content() {
       if (p) openWindow(evt, p);
     };
     window.__osSetLang = (l) => setLang(l);
-    return () => { delete window.__osOpen; delete window.__osSetLang; };
+    window.__osClose = (id) => {
+      const i = windowsOpenned.findIndex((w) => w.id === id);
+      if (i >= 0) closeWindow(evt, i);
+    };
+    return () => { delete window.__osOpen; delete window.__osSetLang; delete window.__osClose; };
   });
 
   // Deep-linking: apply the incoming #hash once (open a window / set language),

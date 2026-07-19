@@ -27,7 +27,9 @@ const T = {
     badEmail: ">>> email invalide.",
     badPhone: ">>> numéro invalide (format international, ex. +22990000000).",
     incognito: "Mode anonyme — seul ton pseudo est conservé.",
-    ready: (n) => `Bien, ${n} ! Pose ta question : ask <ta question> (ou juste « ask »).`,
+    chatOn: "Mode PaulBot activé — écris tes questions directement. Tape « exit » pour sortir.",
+    left: "Mode PaulBot fermé. « ask » pour revenir · « exit » (à nouveau) ferme le terminal.",
+    ready: (n) => `Bien, ${n} ! Mode PaulBot activé — pose tes questions directement. « exit » pour sortir.`,
     thinking: "PaulBot réfléchit…",
     label: "PaulBot",
     error: "PaulBot est momentanément indisponible. Réessaie, ou écris à pzannou511@gmail.com.",
@@ -49,7 +51,9 @@ const T = {
     badEmail: ">>> invalid email.",
     badPhone: ">>> invalid number (international format, e.g. +22990000000).",
     incognito: "Anonymous mode — only your nickname is kept.",
-    ready: (n) => `Alright, ${n}! Ask away: ask <your question> (or just “ask”).`,
+    chatOn: "PaulBot mode on — just type your questions. Type “exit” to leave.",
+    left: "PaulBot mode closed. “ask” to return · “exit” again closes the terminal.",
+    ready: (n) => `Alright, ${n}! PaulBot mode on — just type your questions. “exit” to leave.`,
     thinking: "PaulBot is thinking…",
     label: "PaulBot",
     error: "PaulBot is momentarily unavailable. Try again, or email pzannou511@gmail.com.",
@@ -95,6 +99,7 @@ export const useConsole = (lang = "fr") => {
   const queued = useRef(""); // question en attente pendant l'onboarding
   const busyRef = useRef(false);
   const streamId = useRef(0);
+  const inChat = useRef(false); // mode PaulBot persistant : on enchaîne les questions sans retaper `ask`
 
   const setPrompt = (p) => { promptRef.current = p; setPromptLabel(p); };
   const resetPrompt = () => { pending.current = null; setPrompt(PROMPT); };
@@ -104,15 +109,21 @@ export const useConsole = (lang = "fr") => {
   const errOut = (txt) => pushOut(<p style={ERR}>{txt}</p>);
 
   // ---- onboarding terminal-friendly ----
-  const askQuestion = () => { setPrompt(tr().ques); pending.current = onQuestion; };
+  // Mode PaulBot persistant : une fois lancé, on enchaîne les questions sans
+  // retaper `ask`. On quitte le mode avec `exit`/`quit` (intercepté dans `exec`),
+  // ce qui rend la main au prompt de base ; un second `exit` ferme le terminal.
+  const leaveChat = () => { inChat.current = false; resetPrompt(); hint(tr().left); };
+  const askQuestion = () => { inChat.current = true; setPrompt(tr().ques); pending.current = onQuestion; };
   const onQuestion = (line) => {
-    if (!line) { resetPrompt(); return; }
-    resetPrompt();
-    runStream(line);
+    let q = (line || "").trim();
+    if (!q || /^(ask|chat)$/i.test(q)) { askQuestion(); return; } // vide / `ask` seul → on reste en mode
+    q = q.replace(/^(ask|chat)\s+/i, ""); // tolérant : l'user retape `ask` par habitude
+    runStream(q); // réponse finie → `runStream` relance askQuestion (mode persistant)
   };
   const finishOnboarding = (c) => {
     const q = queued.current; queued.current = "";
-    if (q) { resetPrompt(); runStream(q); }
+    inChat.current = true;
+    if (q) runStream(q);
     else { hint(tr().ready(c.name)); askQuestion(); }
   };
   const onEmail = (line) => {
@@ -149,8 +160,10 @@ export const useConsole = (lang = "fr") => {
 
   const startAsk = (inline) => {
     const contact = getContact();
+    inChat.current = true; // on entre en mode PaulBot dès `ask`
     if (!contact || !contact.name) { beginOnboarding(inline); return; }
     const q = (inline || "").trim();
+    hint(tr().chatOn);
     if (q) runStream(q);
     else askQuestion();
   };
@@ -173,15 +186,19 @@ export const useConsole = (lang = "fr") => {
       patch({ text: tr().error, done: true, waiting: false });
     } finally {
       busyRef.current = false; setBusy(false);
+      if (inChat.current) askQuestion(); // mode persistant : on redemande une question
+      else resetPrompt();
     }
   };
 
   const exec = (raw) => {
     const value = raw ?? "";
 
-    // 1) Une étape interactive attend une saisie (onboarding / question).
+    // 1) Une étape interactive attend une saisie (onboarding / question PaulBot).
     if (pending.current) {
       pushCmd(value);
+      const low = value.trim().toLowerCase();
+      if (inChat.current && (low === "exit" || low === "quit")) { leaveChat(); return; } // sortie du mode
       const handler = pending.current;
       pending.current = null;
       handler(value.trim());
