@@ -31,7 +31,7 @@ export const skillSet = [
       { name: "HTML5 / CSS3 / SASS", level: 95, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" },
       { name: "GSAP / Three.js", level: 75, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" },
     ],
-    concepts: ["Fine-grained reactivity", "Streaming SSR & partial hydration", "GSAP timelines & ScrollTrigger", "Award-style scrollytelling (pinned scroll, kinetic type)", "OS-style window manager UI", "Web Audio synthesis", "Web Speech API (STT/TTS)", "Accessibility (WCAG, ARIA, reduced-motion)", "i18n (FR/EN)", "Web Components / Shadow DOM"],
+    concepts: ["Fine-grained reactivity", "Streaming SSR & partial hydration", "GSAP timelines & ScrollTrigger", "Award-style scrollytelling (pinned scroll, kinetic type)", "OS-style window manager UI", "Admin/BI dashboards (KPI cards, paginated tables, skeletons)", "PWA deep links", "Web Audio synthesis", "Web Speech API (STT/TTS)", "Accessibility (WCAG, ARIA, reduced-motion)", "i18n (FR/EN)", "Web Components / Shadow DOM"],
   },
   {
     key: "backend",
@@ -45,7 +45,7 @@ export const skillSet = [
       { name: "REST · WebSocket", level: 88, icon: "/icons/ph/plugs-connected__ffffff.svg" },
       { name: "Swagger/OpenAPI", level: 82, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swagger/swagger-original.svg" },
     ],
-    concepts: ["Streams & backpressure", "Dependency injection (NestJS)", "Idempotency & outbox pattern", "Rate limiting & circuit breakers", "Lightweight CQRS / event-driven", "API documentation (OpenAPI/Swagger)"],
+    concepts: ["Streams & backpressure", "Dependency injection (NestJS)", "Idempotency & outbox pattern", "Rate limiting & circuit breakers", "RBAC & permission-gated endpoints", "Safe DTO projections (no data leakage)", "Lightweight CQRS / event-driven", "API documentation (OpenAPI/Swagger)"],
   },
   {
     key: "ai",
@@ -70,7 +70,7 @@ export const skillSet = [
       { name: "GetX / Bloc", level: 78, icon: "/icons/ph/tree-structure__ffffff.svg" },
       { name: "Electron", level: 80, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg" },
     ],
-    concepts: ["Dart isolates & concurrency", "Reactive state (Bloc/GetX)", "Native platform channels", "Electron desktop apps (offline SQLite, auto-update)", "PWA (installable, offline)"],
+    concepts: ["Dart isolates & concurrency", "Reactive state (Bloc/GetX)", "Native platform channels", "Deep links (App Links / Universal Links)", "Electron desktop apps (offline SQLite, auto-update)", "PWA (installable, offline)"],
   },
   {
     key: "cms",
@@ -93,7 +93,7 @@ export const skillSet = [
       { name: "MySQL / MariaDB", level: 85, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
       { name: "TypeORM · Sequelize", level: 82, icon: "/icons/ph/database__ffffff.svg" },
     ],
-    concepts: ["Recursive CTEs", "LATERAL joins", "Row-Level Security", "Window functions", "Partial & GIN indexes"],
+    concepts: ["Recursive CTEs", "LATERAL joins", "Row-Level Security", "Window functions", "Aggregate FILTER clauses", "Single-query KPI rollups", "Partial & GIN indexes"],
   },
   {
     key: "devops",

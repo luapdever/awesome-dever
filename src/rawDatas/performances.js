@@ -133,18 +133,20 @@ export const performances = [
       team: "France Assist",
       collaboraters: "Clavers (design) · Fresnel Aglossi (front back-office)",
       year: "2024 — 2025",
-      stack: ["Flutter", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker"],
+      stack: ["Flutter", "Vue.js", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker"],
       features: [
         L("Flutter mobile app + PWA clients", "Clients Flutter : app mobile + PWA"),
         L("Per-minute credit-based billing (Stripe)", "Facturation à la minute par crédits (Stripe)"),
         L("Agora live video + dedicated WebSocket signaling", "Vidéo live Agora + signalisation WebSocket dédiée"),
-        L("KYC (Stripe Identity), RBAC and 2FA", "KYC (Stripe Identity), RBAC et 2FA"),
+        L("KYC (Stripe Identity), fine-grained RBAC and 2FA", "KYC (Stripe Identity), RBAC granulaire et 2FA"),
+        L("Referral program with native & PWA deep links", "Système de parrainage avec deep links (natif & PWA)"),
+        L("Admin BI dashboard (Vue.js) — KPIs via single-query SQL aggregates", "Back-office BI (Vue.js) — KPIs via agrégats SQL en un seul query"),
       ],
       createdAt: "January 2024",
       addedAt: "Today",
       more: L(
-        "A dating app (Flutter mobile + PWA) where connections are made over live video billed per minute: Agora video, credit system, KYC verification (Stripe Identity), Stripe payments & payouts, partner discovery and real-time messaging. Multi-service NestJS backend with a dedicated WebSocket server, RBAC, 2FA and monitoring.",
-        "Une application de rencontre (Flutter mobile + PWA) où la relation se noue en visio facturée à la minute : vidéo Agora, système de crédits, vérification d'identité (Stripe Identity/KYC), paiements & reversements (payouts) Stripe, découverte de partenaires et messagerie temps réel. Backend NestJS multi-services avec serveur WebSocket dédié, RBAC, 2FA et supervision."
+        "A dating app (Flutter mobile + PWA) where connections are made over live video billed per minute: Agora video, credit system, KYC verification (Stripe Identity), Stripe payments & payouts, partner discovery and real-time messaging. Multi-service NestJS backend with a dedicated WebSocket server, RBAC, 2FA and monitoring. It also ships a referral program (native & PWA deep links) and a Vue.js BI back-office: each influencer's KPIs — referrals, 30/7-day signups, active accounts, verified KYC, blocked/banned — are computed in a single SQL aggregate query, exposed through permission-gated, privacy-safe endpoints (no sensitive data ever leaves the API).",
+        "Une application de rencontre (Flutter mobile + PWA) où la relation se noue en visio facturée à la minute : vidéo Agora, système de crédits, vérification d'identité (Stripe Identity/KYC), paiements & reversements (payouts) Stripe, découverte de partenaires et messagerie temps réel. Backend NestJS multi-services avec serveur WebSocket dédié, RBAC, 2FA et supervision. Elle embarque aussi un système de parrainage (deep links natif & PWA) et un back-office BI en Vue.js : les KPIs de chaque influenceur — filleuls, inscriptions 30/7 jours, comptes actifs, KYC vérifiés, bloqués/bannis — sont calculés en un seul query d'agrégats SQL, exposés via des endpoints gatés par permission et à projection sûre (aucune donnée sensible ne sort de l'API)."
       ),
     },
   },

@@ -36,12 +36,7 @@
       "href": ""
     },
     {
-      "icon": "briefcase",
-      "text": "KAMGOKO Technologies",
-      "href": ""
-    },
-    {
-      "icon": "briefcase",
+      "icon": "link",
       "text": "luap-dever.netlify.app",
       "href": "https://luap-dever.netlify.app/"
     }
@@ -64,7 +59,8 @@
       "note": "Collaboration — Emilia Cross, a dating app (Flutter + PWA), live video",
       "bullets": [
         "Built Emilia Cross end to end — Flutter clients (mobile app + PWA) and a NestJS backend (multi-service API + dedicated WebSocket server): video streaming, KYC, payments & payouts.",
-        "Per-minute credit-based billing, Stripe payments, KYC verification, access control (RBAC) and 2FA.",
+        "Per-minute credit-based billing, Stripe payments, KYC verification, access control (fine-grained RBAC, permission-gated endpoints) and 2FA.",
+        "Referral program (native & PWA deep links) and a Vue.js BI back-office: per-influencer KPIs (referrals, 30/7-day signups, active accounts, KYC) computed in a single SQL aggregate query (FILTER clauses), with privacy-safe projections.",
         "Agora RTC video integration, Firebase notifications, Google Cloud storage and application monitoring."
       ]
     },
@@ -161,9 +157,10 @@
       "year": "2024 – 2025",
       "role": "Full-stack (Flutter + NestJS) & real-time",
       "client": "France Assist",
-      "desc": "A Flutter mobile app + PWA where connections are made over per-minute billed live video: video streaming, KYC (Stripe Identity), Stripe payments & payouts, partner discovery and real-time messaging. Flutter clients + multi-service NestJS backend (API + dedicated WebSocket server) with RBAC, 2FA and monitoring.",
+      "desc": "A Flutter mobile app + PWA where connections are made over per-minute billed live video: video streaming, KYC (Stripe Identity), Stripe payments & payouts, partner discovery and real-time messaging. Flutter clients + multi-service NestJS backend (API + dedicated WebSocket server) with RBAC, 2FA and monitoring. Referral program (native & PWA deep links) and a Vue.js BI back-office: per-influencer KPIs computed in a single SQL aggregate query (FILTER clauses), through permission-gated, privacy-safe endpoints.",
       "stack": [
         "Flutter",
+        "Vue.js",
         "NestJS",
         "TypeScript",
         "PostgreSQL",
@@ -250,12 +247,12 @@
     {
       "key": "frontend",
       "cat": "Frontend",
-      "items": "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection"
+      "items": "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, BI dashboards (KPIs, paginated tables), Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection"
     },
     {
       "key": "mobile",
       "cat": "Mobile & Desktop",
-      "items": "Flutter, GetX, Bloc, Electron (cross-platform desktop), PWA"
+      "items": "Flutter, GetX, Bloc, deep links (App / Universal Links, PWA), Electron (cross-platform desktop), PWA"
     },
     {
       "key": "cms",
@@ -265,7 +262,7 @@
     {
       "key": "db",
       "cat": "Databases",
-      "items": "PostgreSQL, MySQL / MariaDB"
+      "items": "PostgreSQL (CTEs, window & FILTER aggregates), MySQL / MariaDB"
     },
     {
       "key": "devops",

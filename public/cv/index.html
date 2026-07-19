@@ -1067,7 +1067,8 @@
             note: "Collaboration — Emilia Cross, application (Flutter + PWA) de rencontre en visio",
             bullets: [
               "Conception de bout en bout d'Emilia Cross — clients Flutter (app mobile + PWA) et backend NestJS (API multi-services + serveur WebSocket dédié) : streaming vidéo, KYC, paiements & payouts.",
-              "Facturation à la minute par système de crédits, paiements Stripe, vérification KYC, contrôle d'accès (RBAC) et 2FA.",
+              "Facturation à la minute par système de crédits, paiements Stripe, vérification KYC, contrôle d'accès (RBAC granulaire, endpoints gatés par permission) et 2FA.",
+              "Système de parrainage (deep links natif & PWA) et back-office BI (Vue.js) : KPIs par influenceur (filleuls, inscriptions 30/7 j, comptes actifs, KYC) calculés en un seul query d'agrégats SQL (clauses FILTER), à projection sûre.",
               "Intégration vidéo Agora RTC, notifications Firebase, stockage Google Cloud et supervision applicative."
             ]
           },
@@ -1114,8 +1115,8 @@
           {
             id: "emilia", name: "Emilia Cross — App de rencontre en visio", year: "2024 – 2025", role: "Full-stack (Flutter + NestJS) & temps réel",
             client: "France Assist",
-            desc: "Application mobile (Flutter) + PWA où la relation se noue en visio facturée à la minute : streaming vidéo, KYC (Stripe Identity), paiements & reversements Stripe, découverte de partenaires et messagerie temps réel. Clients Flutter + backend NestJS multi-services (API + serveur WebSocket dédié), RBAC, 2FA et supervision.",
-            stack: ["Flutter", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker", "GitLab CI/CD"],
+            desc: "Application mobile (Flutter) + PWA où la relation se noue en visio facturée à la minute : streaming vidéo, KYC (Stripe Identity), paiements & reversements Stripe, découverte de partenaires et messagerie temps réel. Clients Flutter + backend NestJS multi-services (API + serveur WebSocket dédié), RBAC, 2FA et supervision. Système de parrainage (deep links natif & PWA) et back-office BI en Vue.js : KPIs par influenceur calculés en un seul query d'agrégats SQL (FILTER), endpoints gatés par permission et à projection sûre.",
+            stack: ["Flutter", "Vue.js", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker", "GitLab CI/CD"],
             links: [{ label: "emiliacross.com", href: "https://emiliacross.com/" }]
           },
           {
@@ -1139,10 +1140,10 @@
           { key: "languages", cat: "Langages", items: "JavaScript, TypeScript, PHP, Dart, Java, HTML5, CSS3/SASS, SQL" },
           { key: "backend", cat: "Backend", items: "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize" },
           { key: "ai", cat: "IA / LLM", items: "Intégration LLM (agnostique du modèle), API OpenAI standard, RAG (génération augmentée par récupération), fine-tuning, prompt engineering & garde-fous, function/tool calling, automatisation IA" },
-          { key: "frontend", cat: "Frontend", items: "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection" },
-          { key: "mobile", cat: "Mobile & Desktop", items: "Flutter, GetX, Bloc, Electron (desktop cross-plateforme), PWA" },
+          { key: "frontend", cat: "Frontend", items: "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, dashboards BI (KPIs, tables paginées), Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection" },
+          { key: "mobile", cat: "Mobile & Desktop", items: "Flutter, GetX, Bloc, deep links (App / Universal Links, PWA), Electron (desktop cross-plateforme), PWA" },
           { key: "cms", cat: "CMS & E-commerce", items: "WordPress (thèmes & plugins), WooCommerce, ACF Pro, Elementor, Polylang, LearnPress" },
-          { key: "db", cat: "Bases de données", items: "PostgreSQL, MySQL / MariaDB" },
+          { key: "db", cat: "Bases de données", items: "PostgreSQL (CTE, window & agrégats FILTER), MySQL / MariaDB" },
           { key: "devops", cat: "DevOps", items: "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS" },
           { key: "tests", cat: "Tests", items: "Playwright (tests E2E automatisés)" },
           { key: "cloud", cat: "Cloud & Services", items: "Google Cloud Storage, Firebase, Stripe, Agora RTC, Twilio, Keycloak SSO" },
@@ -1200,7 +1201,8 @@
             note: "Collaboration — Emilia Cross, a dating app (Flutter + PWA), live video",
             bullets: [
               "Built Emilia Cross end to end — Flutter clients (mobile app + PWA) and a NestJS backend (multi-service API + dedicated WebSocket server): video streaming, KYC, payments & payouts.",
-              "Per-minute credit-based billing, Stripe payments, KYC verification, access control (RBAC) and 2FA.",
+              "Per-minute credit-based billing, Stripe payments, KYC verification, access control (fine-grained RBAC, permission-gated endpoints) and 2FA.",
+              "Referral program (native & PWA deep links) and a Vue.js BI back-office: per-influencer KPIs (referrals, 30/7-day signups, active accounts, KYC) computed in a single SQL aggregate query (FILTER clauses), with privacy-safe projections.",
               "Agora RTC video integration, Firebase notifications, Google Cloud storage and application monitoring."
             ]
           },
@@ -1247,8 +1249,8 @@
           {
             id: "emilia", name: "Emilia Cross — Live-video dating app", year: "2024 – 2025", role: "Full-stack (Flutter + NestJS) & real-time",
             client: "France Assist",
-            desc: "A Flutter mobile app + PWA where connections are made over per-minute billed live video: video streaming, KYC (Stripe Identity), Stripe payments & payouts, partner discovery and real-time messaging. Flutter clients + multi-service NestJS backend (API + dedicated WebSocket server) with RBAC, 2FA and monitoring.",
-            stack: ["Flutter", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker", "GitLab CI/CD"],
+            desc: "A Flutter mobile app + PWA where connections are made over per-minute billed live video: video streaming, KYC (Stripe Identity), Stripe payments & payouts, partner discovery and real-time messaging. Flutter clients + multi-service NestJS backend (API + dedicated WebSocket server) with RBAC, 2FA and monitoring. Referral program (native & PWA deep links) and a Vue.js BI back-office: per-influencer KPIs computed in a single SQL aggregate query (FILTER clauses), through permission-gated, privacy-safe endpoints.",
+            stack: ["Flutter", "Vue.js", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker", "GitLab CI/CD"],
             links: [{ label: "emiliacross.com", href: "https://emiliacross.com/" }]
           },
           {
@@ -1272,10 +1274,10 @@
           { key: "languages", cat: "Languages", items: "JavaScript, TypeScript, PHP, Dart, Java, HTML5, CSS3/SASS, SQL" },
           { key: "backend", cat: "Backend", items: "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize" },
           { key: "ai", cat: "AI / LLM", items: "LLM integration (model-agnostic), standard OpenAI API, RAG (retrieval-augmented generation), fine-tuning, prompt engineering & guardrails, function/tool calling, AI workflow automation" },
-          { key: "frontend", cat: "Frontend", items: "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection" },
-          { key: "mobile", cat: "Mobile & Desktop", items: "Flutter, GetX, Bloc, Electron (cross-platform desktop), PWA" },
+          { key: "frontend", cat: "Frontend", items: "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, BI dashboards (KPIs, paginated tables), Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection" },
+          { key: "mobile", cat: "Mobile & Desktop", items: "Flutter, GetX, Bloc, deep links (App / Universal Links, PWA), Electron (cross-platform desktop), PWA" },
           { key: "cms", cat: "CMS & E-commerce", items: "WordPress (themes & plugins), WooCommerce, ACF Pro, Elementor, Polylang, LearnPress" },
-          { key: "db", cat: "Databases", items: "PostgreSQL, MySQL / MariaDB" },
+          { key: "db", cat: "Databases", items: "PostgreSQL (CTEs, window & FILTER aggregates), MySQL / MariaDB" },
           { key: "devops", cat: "DevOps", items: "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS" },
           { key: "tests", cat: "Testing", items: "Playwright (automated E2E tests)" },
           { key: "cloud", cat: "Cloud & Services", items: "Google Cloud Storage, Firebase, Stripe, Agora RTC, Twilio, Keycloak SSO" },
