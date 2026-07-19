@@ -15,7 +15,6 @@ const LINKS = [
   { label: L("Journey", "Parcours"), href: "/#parcours", id: "parcours" },
   { label: L("Experience", "Expériences"), href: "/#experiences", id: "experiences" },
   { label: L("Bio", "Bio"), href: "/about-me", id: "bio" },
-  { label: L("Shop", "Shop"), href: "/shop", id: "shop" },
 ];
 
 function NavBar() {
