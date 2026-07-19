@@ -7,6 +7,7 @@ import { solveChallenge } from "altcha-lib";
 const CHAT = process.env.NEXT_PUBLIC_CHAT_URL || "/api/chat";
 export const ALTCHA_URL = CHAT.replace(/\/chat(\/?)$/, "/altcha$1");
 export const CONTACT_URL = CHAT.replace(/\/chat(\/?)$/, "/contact$1");
+export const ORDER_URL = CHAT.replace(/\/chat(\/?)$/, "/order$1");
 
 const b64 = (obj) => {
   const s = JSON.stringify(obj);
@@ -28,8 +29,8 @@ export async function solveAltcha(url = ALTCHA_URL) {
   });
 }
 
-// Résout le captcha puis poste le contact. Renvoie { ok } ou lève une erreur.
-export async function submitContact(payload, url = CONTACT_URL) {
+// POST commun (résout le captcha ALTCHA puis envoie). Renvoie { ok } ou lève.
+async function postGuarded(url, payload) {
   const altcha = await solveAltcha();
   const res = await fetch(url, {
     method: "POST",
@@ -43,4 +44,14 @@ export async function submitContact(payload, url = CONTACT_URL) {
     throw err;
   }
   return res.json().catch(() => ({ ok: true }));
+}
+
+// Résout le captcha puis poste le contact.
+export function submitContact(payload, url = CONTACT_URL) {
+  return postGuarded(url, payload);
+}
+
+// Résout le captcha puis poste une commande du mini-shop.
+export function submitOrder(payload, url = ORDER_URL) {
+  return postGuarded(url, payload);
 }

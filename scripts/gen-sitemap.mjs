@@ -25,6 +25,7 @@ const lastmod = new Date().toISOString().slice(0, 10);
 // Routes publiques indexables (chemins propres, sans slash fautif).
 const ROUTES = [
   { path: "/", priority: "1.0", changefreq: "monthly" },
+  { path: "/shop", priority: "0.9", changefreq: "monthly" }, // page services / mini-shop
   { path: "/book", priority: "0.9", changefreq: "monthly" }, // la biographie (SEO Book+Person)
   { path: "/blog", priority: "0.8", changefreq: "weekly" },
   { path: "/about-me", priority: "0.7", changefreq: "monthly" },

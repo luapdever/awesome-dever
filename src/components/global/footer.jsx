@@ -41,6 +41,7 @@ function TheFooter() {
 
         <div className={styles.col}>
           <h4>Explorer</h4>
+          <Link href="/shop">{lang === "fr" ? "Commander un service" : "Order a service"}</Link>
           <Link href="/paulfolio">PaulBrain OS</Link>
           <a href="/cv" target="_blank" rel="noopener noreferrer">Mon CV interactif</a>
           <Link href="/#temoignages">Témoignages</Link>
