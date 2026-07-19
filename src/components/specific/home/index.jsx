@@ -44,6 +44,7 @@ function HomePage() {
   const galleryPin = useRef();
   const galleryTrack = useRef();
   const testiRef = useRef();
+  const heroReadyRef = useRef(false); // hero title unmasked (intro done) → cursor play allowed
   const { lang } = useLandingLang();
   const ui = HOME_UI[lang];
   const { openChooser } = useExperience();
@@ -76,6 +77,49 @@ function HomePage() {
       const id = setTimeout(() => ScrollTrigger.refresh(), 120);
       return () => clearTimeout(id);
     }
+  }, [lang]);
+
+  // Playful hero title — words flee the cursor and spring back (skip touch / reduced-motion).
+  // Re-runs on lang change because the <h1 key={lang}> remounts fresh words.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(hover: none), (pointer: coarse), (prefers-reduced-motion: reduce)").matches) return;
+    const words = gsap.utils.toArray(".heroTitleWord");
+    const hero = document.querySelector(".heroSec");
+    if (!words.length || !hero) return;
+
+    // On a language switch there's no intro to preserve, so unmask immediately;
+    // on first load the intro timeline flips heroReadyRef + overflow when the reveal ends.
+    if (heroReadyRef.current) words.forEach((w) => { if (w.parentElement) w.parentElement.style.overflow = "visible"; });
+
+    const RADIUS = 165, PUSH = 0.7;
+    const qx = words.map((w) => gsap.quickTo(w, "x", { duration: 0.55, ease: "power3.out" }));
+    const qy = words.map((w) => gsap.quickTo(w, "y", { duration: 0.55, ease: "power3.out" }));
+    const qr = words.map((w) => gsap.quickTo(w, "rotation", { duration: 0.55, ease: "power3.out" }));
+    const rest = (i) => { qx[i](0); qy[i](0); qr[i](0); };
+
+    const onMove = (e) => {
+      if (!heroReadyRef.current) return; // wait until the intro reveal has finished
+      for (let i = 0; i < words.length; i++) {
+        const b = words[i].getBoundingClientRect();
+        const dx = (b.left + b.width / 2) - e.clientX;
+        const dy = (b.top + b.height / 2) - e.clientY;
+        const dist = Math.hypot(dx, dy);
+        if (dist < RADIUS) {
+          const f = (1 - dist / RADIUS) * PUSH;
+          qx[i](dx * f); qy[i](dy * f); qr[i]((dx / RADIUS) * 6 * f);
+        } else rest(i);
+      }
+    };
+    const reset = () => { for (let i = 0; i < words.length; i++) rest(i); };
+
+    hero.addEventListener("mousemove", onMove);
+    hero.addEventListener("mouseleave", reset);
+    return () => {
+      hero.removeEventListener("mousemove", onMove);
+      hero.removeEventListener("mouseleave", reset);
+      words.forEach((w) => gsap.set(w, { x: 0, y: 0, rotation: 0 }));
+    };
   }, [lang]);
 
   // Testimonials: gentle auto-scroll, still manually draggable (pauses on interaction).
@@ -127,7 +171,9 @@ function HomePage() {
         .to("#preName", { y: -14, opacity: 0, duration: 0.5, ease: "power2.in" }, "-=0.2")
         .to("#preloader", { yPercent: -100, duration: 0.9, ease: "power4.inOut" }, "-=0.1")
         .from(heroWords, { yPercent: 120, duration: 1, ease: "power4.out", stagger: 0.07 }, "-=0.5")
-        .from("[data-hero-fade]", { y: 24, opacity: 0, duration: 0.8, ease: "power3.out", stagger: 0.1 }, "-=0.7");
+        .from("[data-hero-fade]", { y: 24, opacity: 0, duration: 0.8, ease: "power3.out", stagger: 0.1 }, "-=0.7")
+        // Reveal mask done → let each word overflow its clip box so it can drift with the cursor.
+        .add(() => { heroReadyRef.current = true; heroWords.forEach((w) => { if (w.parentElement) w.parentElement.style.overflow = "visible"; }); });
 
       /* Hero bg parallax */
       gsap.to("[data-hero-bg]", { scale: 1.25, yPercent: 12, ease: "none", scrollTrigger: { trigger: ".heroSec", start: "top top", end: "bottom top", scrub: true } });
