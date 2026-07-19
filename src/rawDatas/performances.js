@@ -130,7 +130,7 @@ export const performances = [
       status: "Live",
       role: L("Full-stack & real-time engineer (Flutter + NestJS)", "Ingénieur full-stack & temps réel (Flutter + NestJS)"),
       client: "France Assist",
-      team: "France Assist",
+      team: "France Assist, Clavers & Fresnel AGLOSSI",
       year: "2024 — 2025",
       stack: ["Flutter", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker"],
       features: [
