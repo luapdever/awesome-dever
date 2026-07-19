@@ -7,7 +7,7 @@ import styles from "../../../styles/global/botwidget.module.css";
 import { useLandingLang } from "../../context/landingLang";
 import { NAV, extractActions, extractSuggestions, runNavAction, navLabel, navigateRelative, linkTokens, looksLikeJobOffer, richBlocks } from "../../lib/botActions";
 import { detectProjects, followUps, pageContext, routeIntent, clientAnswer, tourSteps, smalltalk, smalltalkReply, waitingMessage } from "../../lib/botExtras";
-import { submitContact } from "../../lib/altcha";
+import { submitContact, solveAltcha } from "../../lib/altcha";
 
 const MIC = "/icons/ph/microphone__000000.svg";
 const MIC_ON = "/icons/ph/microphone-fill__2a1a00.svg";
@@ -272,6 +272,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
   const scrollRef = useRef();
   const pinnedTopRef = useRef(-1); // index du msg assistant long déjà "épinglé en haut"
   const answeredRef = useRef(new Map()); // idempotence : prompt normalisé → réponse LLM réussie
+  const altchaOkRef = useRef(false); // anti-bot : conversation déjà vérifiée (ALTCHA)
   const inputRef = useRef();
   const onbRef = useRef();
   const cidRef = useRef("");
@@ -560,12 +561,20 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
     }, 2000);
     try {
       const url = (typeof window !== "undefined" && window.__CHAT_URL) || CHAT_URL;
+      // Anti-bot : sur le 1er message d'une conversation, on résout l'ALTCHA
+      // (proof-of-work) et on joint la preuve ; ensuite le backend fait confiance
+      // à la conversation (plus de PoW à re-résoudre).
+      let altcha;
+      if (!altchaOkRef.current) {
+        try { altcha = await solveAltcha(); } catch { altcha = undefined; }
+      }
       const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: contextMessages, lang, conversationId: cidRef.current, contact, ...(pitch ? { mode: "pitch" } : {}) }),
+        body: JSON.stringify({ messages: contextMessages, lang, conversationId: cidRef.current, contact, ...(pitch ? { mode: "pitch" } : {}), ...(altcha ? { altcha } : {}) }),
       });
       if (!res.ok || !res.body) throw new Error(`http ${res.status}`);
+      if (altcha) altchaOkRef.current = true; // jeton accepté → conversation vérifiée
       const reader = res.body.getReader();
       const dec = new TextDecoder();
       while (true) {
@@ -827,6 +836,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
     setDraft("");
     setMenuOpen(false);
     answeredRef.current.clear(); // on repart de zéro → cache d'idempotence vidé
+    altchaOkRef.current = false; // nouvelle conversation → re-vérification anti-bot
     pinnedTopRef.current = -1;
     // On repart de zéro : on oublie aussi l'identité du visiteur et on la redemande.
     setContact(null);

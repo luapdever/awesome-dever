@@ -45,6 +45,7 @@ function AppDetail({ app }) {
         {p.role && <div className={styles.metaItem}><span>{t.lblRole}</span><b>{tx(p.role, lang)}</b></div>}
         {p.client && <div className={styles.metaItem}><span>{t.lblClient}</span><b>{p.client}</b></div>}
         {p.team && <div className={styles.metaItem}><span>{t.lblTeam}</span><b>{p.team}</b></div>}
+        {p.collaboraters && <div className={styles.metaItem}><span>{t.lblCollab || "Collaborateurs"}</span><b>{p.collaboraters}</b></div>}
         {p.year && <div className={styles.metaItem}><span>{t.lblYear}</span><b>{p.year}</b></div>}
       </div>
 
