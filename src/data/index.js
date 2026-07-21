@@ -18,7 +18,7 @@
    ============================================================ */
 
 /* -------- Profil & identité -------- */
-export { me, socialMedias, formations, listSkills } from "../rawDatas/aboutMe";
+export { socialMedias } from "../rawDatas/aboutMe";
 export { XP_START, yearsOfExperience } from "../rawDatas/xp";
 export { OS } from "../rawDatas/os";
 
