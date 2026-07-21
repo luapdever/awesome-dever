@@ -5,6 +5,7 @@ import gsap from "gsap/dist/gsap";
 import dever from "../../assets/img/icons/DEVER.svg";
 import styles from "../../../styles/global/nav.module.css";
 import { socialMedias, L, tx } from "../../data";
+import { track } from "../../lib/analytics";
 import { useLandingLang } from "../../context/landingLang";
 import { useExperience } from "../../context/experience";
 
@@ -87,7 +88,7 @@ function NavBar() {
             <button className={lang === "fr" ? styles.langActive : ""} onClick={() => setLang("fr")}>FR</button>
             <button className={lang === "en" ? styles.langActive : ""} onClick={() => setLang("en")}>EN</button>
           </div>
-          <a href="/cv" target="_blank" rel="noopener noreferrer" className={styles.cvLink}>{tx(L("CV", "CV"), lang)}</a>
+          <a href="/cv" target="_blank" rel="noopener noreferrer" className={styles.cvLink} onClick={() => track("cv_open", { source: "nav" })}>{tx(L("CV", "CV"), lang)}</a>
           <Link href="/paulfolio" className={styles.cta}>PaulBrain&nbsp;OS</Link>
           <button
             className={`${styles.burger} ${open ? styles.burgerOpen : ""}`}

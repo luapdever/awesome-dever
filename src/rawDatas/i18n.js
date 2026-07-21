@@ -97,7 +97,7 @@ export const STR = {
     cSend: "Send message", cSending: "Sending…", cSentBadge: "Message sent — thanks!",
     // App Store
     asSub: "Mobile apps crafted with Flutter & Dart",
-    asGet: "Get", asSoon: "Coming soon", asDownloads: "downloads", asBy: "by",
+    asGet: "Get", asSoon: "Coming soon", asDownloads: "downloads", asBy: "by", asPrivate: "Private · NDA",
   },
   fr: {
     menuFile: "Fichier", menuView: "Affichage", menuHelp: "Aide", langLabel: "Langue",
@@ -152,6 +152,6 @@ export const STR = {
     cNamePh: "Votre nom", cEmailPh: "vous@email.com", cMsgPh: "Parlez-moi de votre projet…",
     cSend: "Envoyer le message", cSending: "Envoi…", cSentBadge: "Message envoyé — merci !",
     asSub: "Applications mobiles conçues avec Flutter & Dart",
-    asGet: "Obtenir", asSoon: "Bientôt", asDownloads: "téléch.", asBy: "par",
+    asGet: "Obtenir", asSoon: "Bientôt", asDownloads: "téléch.", asBy: "par", asPrivate: "Confidentiel · NDA",
   },
 };

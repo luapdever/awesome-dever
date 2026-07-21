@@ -24,9 +24,17 @@ function AppStore() {
       </header>
 
       <section className={styles.list}>
-        {mobilePerformances.map((app, i) => (
+        {mobilePerformances.map((app, i) => {
+          const meta = [app.metric, app.platform, app.year && app.year !== "—" ? app.year : null].filter(Boolean);
+          return (
           <div className={styles.card} key={i}>
-            <img className={styles.preview} src={app.preview} alt={`${app.name} preview`} loading="lazy" />
+            {app.confidential ? (
+              <div className={styles.previewLocked} aria-label="Confidential app">
+                <img src="/icons/ph/lock-key__ffa500.svg" alt="" />
+              </div>
+            ) : (
+              <img className={styles.preview} src={app.preview} alt={`${app.name} preview`} loading="lazy" />
+            )}
             <div className={styles.info}>
               <div className={styles.cardTop}>
                 <div>
@@ -38,24 +46,25 @@ function AppStore() {
               </div>
               <p className={styles.desc}>{app.desc}</p>
               <div className={styles.meta}>
-                <span className={styles.stars}>{stars(app.rating)}</span>
-                <span>{app.rating}</span>
-                {app.downloads && (<><span>·</span><span>{app.downloads} {t.asDownloads}</span></>)}
-                <span>·</span>
-                <span>{app.size}</span>
-                <span>·</span>
-                <span>{app.year}</span>
+                {app.rating != null && (<><span className={styles.stars}>{stars(app.rating)}</span><span>{app.rating}</span></>)}
+                {meta.map((m, j) => (
+                  <React.Fragment key={j}>
+                    {(app.rating != null || j > 0) && <span>·</span>}
+                    <span>{m}</span>
+                  </React.Fragment>
+                ))}
               </div>
               <button
                 className={styles.getBtn}
                 disabled={!app.url}
                 onClick={() => app.url && window.open(app.url, "_blank")}
               >
-                {app.url ? t.asGet : t.asSoon}
+                {app.url ? t.asGet : app.confidential ? t.asPrivate : t.asSoon}
               </button>
             </div>
           </div>
-        ))}
+          );
+        })}
       </section>
     </div>
   );

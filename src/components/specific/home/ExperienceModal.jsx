@@ -5,6 +5,7 @@ import gsap from "gsap/dist/gsap";
 import styles from "../../../../styles/specific/home/home.module.css";
 import Terminal from "../portfolio/wndows/Terminal";
 import { L, tx } from "../../../rawDatas/i18n";
+import { track } from "../../../lib/analytics";
 import { useLandingLang } from "../../../context/landingLang";
 import { useExperience } from "../../../context/experience";
 
@@ -96,6 +97,7 @@ function ExperienceModal() {
   };
 
   const run = (id) => {
+    track("experience_choose", { choice: id }); // quel parcours le visiteur choisit
     if (id === "cv") { remember("cv"); window.open("/cv", "_blank"); dropClose(); }
     else if (id === "os") { remember("os"); dismiss(); router.push("/paulfolio"); }
     else if (id === "bot") {
@@ -115,7 +117,7 @@ function ExperienceModal() {
 
   // "Keep scrolling" is a deliberate choice too (classic site) — it records the
   // choice so the modal won't nag again this session.
-  const keepScrolling = () => { remember("classic"); dropClose(); };
+  const keepScrolling = () => { track("experience_choose", { choice: "classic" }); remember("classic"); dropClose(); };
   const onOverlay = () => { if (canClose) dropClose(); };
 
   return (

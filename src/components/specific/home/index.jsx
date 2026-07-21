@@ -10,6 +10,7 @@ import {
 } from "../../../data";
 import { useLandingLang } from "../../../context/landingLang";
 import { useExperience } from "../../../context/experience";
+import { track } from "../../../lib/analytics";
 import ContactForm from "../../global/ContactForm";
 
 const YEARS = yearsOfExperience();
@@ -312,8 +313,8 @@ function HomePage() {
             <span>{YEARS} {ui.heroSubYears}</span>
           </div>
           <div className={styles.heroActions} data-hero-fade>
-            <Link href="/paulfolio" className={styles.btnPrimary} data-magnetic>{ui.btnOS}</Link>
-            <a href="/cv" target="_blank" rel="noopener noreferrer" className={styles.btnGhost} data-magnetic>{ui.btnCV}</a>
+            <Link href="/paulfolio" className={styles.btnPrimary} data-magnetic onClick={() => track("os_open", { source: "hero" })}>{ui.btnOS}</Link>
+            <a href="/cv" target="_blank" rel="noopener noreferrer" className={styles.btnGhost} data-magnetic onClick={() => track("cv_open", { source: "hero" })}>{ui.btnCV}</a>
           </div>
         </div>
         <div className={styles.heroFoot}>
@@ -405,7 +406,9 @@ function HomePage() {
               <span className={styles.collabIcon}><img src={c.icon} alt="" loading="lazy" /></span>
               <span className={styles.collabName}>{c.name}</span>
               <span className={styles.collabClient}>{tx(c.client, lang)}</span>
+              {c.role && <span className={styles.collabRole}>{tx(c.role, lang)}</span>}
               <span className={styles.collabTag}>{tx(c.tag, lang)}</span>
+              {c.impact && <span className={styles.collabImpact}>{tx(c.impact, lang)}</span>}
               <b className={styles.collabArrow}>↗</b>
             </a>
           ))}

@@ -63,6 +63,19 @@
     background: #fff;
     box-shadow: var(--shadow-1);
 }
+.previewLocked {
+    width: 104px;
+    height: 104px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: repeating-linear-gradient(135deg, rgba(255,165,0,0.14) 0 10px, rgba(255,165,0,0.06) 10px 20px);
+    border: 1px solid rgba(255, 165, 0, 0.3);
+    box-shadow: var(--shadow-1);
+}
+.previewLocked img { width: 40px; height: 40px; opacity: 0.85; }
 .info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .cardTop { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
 .info h2 { margin: 0; font-size: 1.08rem; color: #fff; }
@@ -115,7 +128,7 @@
 
 @media (max-width: 768px) {
     .card { flex-direction: column; align-items: center; text-align: center; }
-    .preview { width: 120px; height: 120px; }
+    .preview, .previewLocked { width: 120px; height: 120px; }
     .cardTop { flex-direction: column; align-items: center; gap: 6px; }
     .meta { justify-content: center; }
     .getBtn { align-self: center; }

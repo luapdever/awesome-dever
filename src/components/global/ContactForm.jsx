@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { submitContact } from "../../lib/altcha";
+import { track } from "../../lib/analytics";
 import styles from "../../../styles/global/contactform.module.css";
 
 const SHIELD = "/icons/ph/shield-check__ffa500.svg";
@@ -44,6 +45,7 @@ export default function ContactForm({ lang = "fr", source = "home-cta" }) {
     try {
       // Résout le captcha ALTCHA (proof-of-work) puis envoie via le backend PaulBot.
       await submitContact({ name: form.name, email: form.email, subject: form.subject, message: form.message, source });
+      track("contact_submit", { source }); // conversion : message envoyé avec succès
       setState("sent");
     } catch (err) {
       setState("error");

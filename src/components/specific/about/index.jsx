@@ -5,6 +5,7 @@ import gsap from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "../../../../styles/specific/about/about.module.css";
 import { socialMedias, L, tx } from "../../../data";
+import { track } from "../../../lib/analytics";
 import { useLandingLang } from "../../../context/landingLang";
 import luap from "../../../assets/img/awesome/luap-thinking.png";
 
@@ -168,7 +169,7 @@ function AboutMe() {
           <Link href="/#collaborer" className={styles.btnPrimary}>{ui.ctaContact}</Link>
           <Link href="/book" className={styles.btnGhost}>{ui.ctaBook}</Link>
           <Link href="/paulfolio" className={styles.btnGhost}>{ui.ctaOS}</Link>
-          <a href="/cv" target="_blank" rel="noopener noreferrer" className={styles.btnGhost}>{ui.ctaCV}</a>
+          <a href="/cv" target="_blank" rel="noopener noreferrer" className={styles.btnGhost} onClick={() => track("cv_open", { source: "about" })}>{ui.ctaCV}</a>
         </div>
       </section>
     </div>

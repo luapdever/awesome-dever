@@ -8,6 +8,7 @@ import { useLandingLang } from "../../context/landingLang";
 import { NAV, extractActions, extractSuggestions, runNavAction, navLabel, navigateRelative, linkTokens, looksLikeJobOffer, richBlocks } from "../../lib/botActions";
 import { detectProjects, followUps, normChip, pageContext, routeIntent, clientAnswer, tourSteps, smalltalk, smalltalkReply, waitingMessage } from "../../lib/botExtras";
 import { submitContact, solveAltcha } from "../../lib/altcha";
+import { track } from "../../lib/analytics";
 
 const MIC = "/icons/ph/microphone__000000.svg";
 const MIC_ON = "/icons/ph/microphone-fill__2a1a00.svg";
@@ -338,8 +339,11 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
   }, []);
 
   // Persistance : état ouvert/fermé (widget flottant uniquement).
+  const wasOpenRef = useRef(false);
   useEffect(() => {
     if (embedded) return;
+    if (open && !wasOpenRef.current) track("bot_open"); // conversion : ouverture du chat (launcher, teaser ou CTA)
+    wasOpenRef.current = open;
     try { sessionStorage.setItem("paulbot_open", open ? "1" : "0"); } catch {}
   }, [open, embedded]);
   useEffect(() => {
@@ -541,6 +545,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
   // permettre un « Réessayer ».
   const callModel = async (contextMessages, opts) => {
     const pitch = !!(opts && opts.pitch);
+    if (pitch) track("offer_submit"); // conversion : une offre d'emploi est analysée
     const cacheKey = normKey([...contextMessages].reverse().find((mm) => mm.role === "user")?.content || "");
     setPending(true);
     setMessages((m) => [...m, { role: "assistant", content: "", at: Date.now(), ...(pitch ? { rich: true } : {}) }]);
