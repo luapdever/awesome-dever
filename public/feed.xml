@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Le blog — Paul Mèdédji Zannou (Luap Dever)</title>
+    <link>https://luap-dever.netlify.app/blog</link>
+    <atom:link href="https://luap-dever.netlify.app/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Billets tech, culture dev, un peu d'IA — et quelques carnets de voyage.</description>
+    <language>fr</language>
+    <lastBuildDate>Tue, 21 Jul 2026 17:43:01 GMT</lastBuildDate>
+    <item>
+      <title>Comment j'ai construit PaulBot : un assistant IA fiable à budget quasi nul</title>
+      <link>https://luap-dever.netlify.app/blog/paulbot-assistant-ia-fiable-budget-quasi-nul</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/paulbot-assistant-ia-fiable-budget-quasi-nul</guid>
+      <pubDate>Sat, 18 Jul 2026 09:00:00 GMT</pubDate>
+      <category>IA</category>
+      <description>Un assistant LLM en streaming qui ne ment pas, ne tombe jamais et résiste aux injections : réponses déterministes côté client, bascule multi-fournisseurs, garde-fous anti-hallucination, défense anti-injection + ALTCHA. Retour technique.</description>
+    </item>
+    <item>
+      <title>Emilia Cross : une visio facturée à la minute, de bout en bout</title>
+      <link>https://luap-dever.netlify.app/blog/emilia-cross-visio-facturee-a-la-minute</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/emilia-cross-visio-facturee-a-la-minute</guid>
+      <pubDate>Sat, 18 Jul 2026 09:00:00 GMT</pubDate>
+      <category>Projet</category>
+      <description>Étude de cas — une app de rencontre (Flutter + PWA) où la relation se noue en visio, facturée à la minute en temps réel. Architecture, décisions, et le problème le plus dur.</description>
+    </item>
+    <item>
+      <title>Ce portfolio, et tout ce qu'il contient</title>
+      <link>https://luap-dever.netlify.app/blog/ce-portfolio-nouvelle-generation</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/ce-portfolio-nouvelle-generation</guid>
+      <pubDate>Fri, 17 Jul 2026 09:00:00 GMT</pubDate>
+      <category>Projet</category>
+      <description>Pas une page : une expérience. Plusieurs façons de me découvrir — une landing animée, un OS dans le navigateur, un assistant IA, un livre, un terminal, un CV interactif. Visite guidée.</description>
+    </item>
+    <item>
+      <title>124 étages gravis, et le sommet encore loin</title>
+      <link>https://luap-dever.netlify.app/blog/124-etages-burj-khalifa</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/124-etages-burj-khalifa</guid>
+      <pubDate>Sun, 20 Jul 2025 09:00:00 GMT</pubDate>
+      <category>Voyage</category>
+      <description>Au 124e étage du Burj Khalifa, t-shirt corporate sur le dos, à scruter les étages interdits d'accès — une jolie métaphore de la vie professionnelle.</description>
+    </item>
+    <item>
+      <title>Artiste ou développeur ? Les deux — il faut bien manger ET rêver</title>
+      <link>https://luap-dever.netlify.app/blog/artiste-ou-developpeur</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/artiste-ou-developpeur</guid>
+      <pubDate>Fri, 28 Mar 2025 09:00:00 GMT</pubDate>
+      <category>Carrière</category>
+      <description>La musique m'a sauvé la vie ; la programmation m'a sauvé de la famine. Petite mise au point sur cette double vie qu'on me prête.</description>
+    </item>
+    <item>
+      <title>Sur internet, ton profil, c'est ton habit</title>
+      <link>https://luap-dever.netlify.app/blog/ton-profil-ton-habit</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/ton-profil-ton-habit</guid>
+      <pubDate>Sun, 11 Aug 2024 09:00:00 GMT</pubDate>
+      <category>Carrière</category>
+      <description>Tu peux être le meilleur codeur du pays : si ton profil ressemble à un SMS écrit en vitesse, on te zappe plus vite qu'une connexion lente.</description>
+    </item>
+    <item>
+      <title>Parler de ses projets innovants à ChatGPT : quels risques ?</title>
+      <link>https://luap-dever.netlify.app/blog/projets-innovants-et-chatgpt</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/projets-innovants-et-chatgpt</guid>
+      <pubDate>Mon, 29 Jul 2024 09:00:00 GMT</pubDate>
+      <category>IA</category>
+      <description>De plus en plus d'entreprises brainstorment leurs idées avec des IA comme ChatGPT. Mais partager ses projets les plus innovants avec ces outils, est-ce vraiment sans risque ?</description>
+    </item>
+    <item>
+      <title>Pourquoi les développeurs béninois aiment tant le café</title>
+      <link>https://luap-dever.netlify.app/blog/developpeurs-beninois-et-cafe</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/developpeurs-beninois-et-cafe</guid>
+      <pubDate>Sun, 28 Jul 2024 09:00:00 GMT</pubDate>
+      <category>Dev</category>
+      <description>Sans leur dose de caféine, leur code devient plus buggé qu'un projet en fin de semestre. Petite ode au carburant secret du dev.</description>
+    </item>
+    <item>
+      <title>Le développeur, meilleur critique d'albums (il connaît les plantages)</title>
+      <link>https://luap-dever.netlify.app/blog/developpeur-critique-d-albums</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/developpeur-critique-d-albums</guid>
+      <pubDate>Sun, 23 Jun 2024 09:00:00 GMT</pubDate>
+      <category>Dev</category>
+      <description>Parce qu'il sait exactement ce que ça fait quand quelque chose plante. Diagnostic musical, avec ou sans « stack trace ».</description>
+    </item>
+    <item>
+      <title>Pourquoi les développeurs ont toujours froid</title>
+      <link>https://luap-dever.netlify.app/blog/pourquoi-les-developpeurs-ont-froid</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/pourquoi-les-developpeurs-ont-froid</guid>
+      <pubDate>Sat, 25 May 2024 09:00:00 GMT</pubDate>
+      <category>Dev</category>
+      <description>Parce qu'ils passent la journée devant les fenêtres. Non, pas celles du bureau — celles du navigateur.</description>
+    </item>
+    <item>
+      <title>Les femmes développeuses sont comme des fonctions JavaScript</title>
+      <link>https://luap-dever.netlify.app/blog/femmes-developpeuses-fonctions-js</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/femmes-developpeuses-fonctions-js</guid>
+      <pubDate>Fri, 08 Mar 2024 09:00:00 GMT</pubDate>
+      <category>Dev</category>
+      <description>Réutilisables, modulables, indispensables — et capables de transformer le chaos en ordre en une seule ligne de code.</description>
+    </item>
+    <item>
+      <title>Portfolio comme un OS #3 — le système de fenêtres</title>
+      <link>https://luap-dever.netlify.app/blog/portfolio-comme-un-os-3-systeme-fenetres</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/portfolio-comme-un-os-3-systeme-fenetres</guid>
+      <pubDate>Sat, 17 Dec 2022 09:00:00 GMT</pubDate>
+      <category>Projet</category>
+      <description>Les petites fenêtres qui s'ouvrent quand on clique sur une icône : état des fenêtres ouvertes, z-index du premier plan, et un hook React maison pour tout orchestrer.</description>
+    </item>
+    <item>
+      <title>Portfolio comme un OS #2 — les icônes du bureau</title>
+      <link>https://luap-dever.netlify.app/blog/portfolio-comme-un-os-2-icones-bureau</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/portfolio-comme-un-os-2-icones-bureau</guid>
+      <pubDate>Sun, 04 Dec 2022 09:00:00 GMT</pubDate>
+      <category>Projet</category>
+      <description>Chaque icône du bureau ouvre une fenêtre : site intégré, terminal, contact, App Store… Tout part d'un simple tableau d'objets JSON.</description>
+    </item>
+    <item>
+      <title>Portfolio comme un OS #1 — la genèse</title>
+      <link>https://luap-dever.netlify.app/blog/portfolio-comme-un-os-1-generalite</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/portfolio-comme-un-os-1-generalite</guid>
+      <pubDate>Sat, 26 Nov 2022 09:00:00 GMT</pubDate>
+      <category>Projet</category>
+      <description>Et si un portfolio ressemblait à un système d'exploitation ? Clic, double-clic, clic droit, molette… Présentation de la toute première version.</description>
+    </item>
+    <item>
+      <title>Python : un petit exercice de traduction en entreprise</title>
+      <link>https://luap-dever.netlify.app/blog/python-exercice-traduction-entreprise</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/python-exercice-traduction-entreprise</guid>
+      <pubDate>Fri, 11 Nov 2022 09:00:00 GMT</pubDate>
+      <category>Dev</category>
+      <description>Deux fichiers de langue, 3000 lignes chacun, des textes non traduits. Un script Python (tuples, sets, dictionnaires) pour trouver ce qui manque.</description>
+    </item>
+    <item>
+      <title>Three.js : la caméra et sa cible</title>
+      <link>https://luap-dever.netlify.app/blog/threejs-camera-et-sa-cible</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/threejs-camera-et-sa-cible</guid>
+      <pubDate>Sun, 06 Nov 2022 09:00:00 GMT</pubDate>
+      <category>Dev</category>
+      <description>Une semaine bloqué sur un concept évident : plutôt que de bouger la caméra, on bouge sa cible. Retour sur un déclic pour tout débutant en 3D.</description>
+    </item>
+    <item>
+      <title>Creative coding : quand le développement web devient un art</title>
+      <link>https://luap-dever.netlify.app/blog/creative-coding-le-web-devient-art</link>
+      <guid isPermaLink="true">https://luap-dever.netlify.app/blog/creative-coding-le-web-devient-art</guid>
+      <pubDate>Sat, 29 Oct 2022 09:00:00 GMT</pubDate>
+      <category>Dev</category>
+      <description>Il n'existe pas de limite à l'imagination. Les créatifs codeurs bousculent le développement web avec des créations toujours plus originales.</description>
+    </item>
+  </channel>
+</rss>

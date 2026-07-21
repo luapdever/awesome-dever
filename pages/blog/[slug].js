@@ -25,18 +25,28 @@ export default function Article({ post, prev, next }) {
 
   const title = tr(post.title, L);
   const excerpt = tr(post.excerpt, L);
+  const bodyText = post.content.map((c) => tr(c, L)).join(" ");
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: title,
+    description: excerpt,
     datePublished: post.date,
+    dateModified: post.date,
     inLanguage: L,
     image: `${ORIGIN}${post.cover}`,
     url: `${ORIGIN}/blog/${post.slug}`,
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${ORIGIN}/blog/${post.slug}` },
+    wordCount: bodyText.split(/\s+/).filter(Boolean).length,
     keywords: post.tags.join(", "),
     articleSection: post.category,
-    author: { "@type": "Person", name: "Paul Mèdédji Zannou", url: ORIGIN },
-    publisher: { "@type": "Person", name: "Paul Mèdédji Zannou" },
+    author: {
+      "@type": "Person",
+      name: "Paul Mèdédji Zannou",
+      url: ORIGIN,
+      sameAs: ["https://github.com/luapdever", "https://www.linkedin.com/in/paul-zannou-b253a2205"],
+    },
+    publisher: { "@type": "Person", name: "Paul Mèdédji Zannou", url: ORIGIN },
   };
   const gallery = (post.images || []).slice(1); // le cover est déjà en tête
 

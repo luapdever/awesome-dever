@@ -127,20 +127,17 @@ export const SHOP_SERVICES = [
   },
 ];
 
-// Vraie capture de projet phare illustrant chaque service (déjà dans /public) +
-// libellé de preuve. On enrichit les services in-place pour garder les données
-// (questions) et les médias (images) au même endroit.
+// Cartes de marque carrées (1080×1080) — les mêmes que le catalogue WhatsApp :
+// mockup navigateur + vraie capture du projet phare + titre/tagline/« Sur devis ».
+// Comme l'image contient déjà le texte, la carte /shop n'affiche que l'image.
 const SHOP_MEDIA = {
-  web: { image: "/projects/mtn-selfcare.png", proof: "MyMTN Selfcare" },
-  mobile: { image: "/projects/emilia.png", proof: "Emilia Cross" },
-  ai: { image: "/blog/paulbot-recruiter.png", proof: "PaulBot" },
-  whatsapp: { image: "/projects/wapify.png", proof: "WAPIFY" },
-  ecommerce: { image: "/projects/mtn-website.png", proof: "MTN Bénin" },
-  portals: { image: "/projects/mtn-fournisseurs.png", proof: "Portail fournisseurs MTN" },
-  bi: { image: "/projects/mdt.png", proof: "Miroiterie du Ternois" },
-  portfolio: { image: "/blog/portfolio-showcase-os.jpg", proof: "PaulBrain OS" },
+  web: "/shop/web.webp",
+  mobile: "/shop/mobile.webp",
+  ai: "/shop/ai.webp",
+  whatsapp: "/shop/whatsapp.webp",
+  ecommerce: "/shop/ecommerce.webp",
+  portals: "/shop/portals.webp",
+  bi: "/shop/bi.webp",
+  portfolio: "/shop/portfolio.webp",
 };
-SHOP_SERVICES.forEach((s) => {
-  const m = SHOP_MEDIA[s.id];
-  if (m) { s.image = m.image; s.proof = m.proof; }
-});
+SHOP_SERVICES.forEach((s) => { if (SHOP_MEDIA[s.id]) s.image = SHOP_MEDIA[s.id]; });

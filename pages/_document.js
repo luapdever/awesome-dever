@@ -59,6 +59,8 @@ gtag('config', 'G-H5387SXY6D');`,
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
         <link rel="manifest" href="/site.webmanifest" />
+        {/* Découverte automatique du flux RSS du blog (généré au build). */}
+        <link rel="alternate" type="application/rss+xml" title="Le blog — Luap Dever" href="/feed.xml" />
         {/* Icônes Phosphor désormais self-hostées (/icons/ph/*.svg) — plus de
             dépendance runtime à api.iconify.design. */}
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />

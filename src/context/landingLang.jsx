@@ -3,15 +3,22 @@ import { createContext, useContext, useEffect, useState } from "react";
 /* Global FR/EN language for the public landing (homepage + Bio).
    Shares the same localStorage key as the OS ("os_lang") so the choice
    stays consistent when navigating between the site and PaulBrain OS.
-   French-first: the site defaults to FR. */
+   Preference wins; otherwise we follow the visitor's browser language
+   (French → FR, anything else → EN) so a recruiter lands in their tongue. */
 export const LandingLangContext = createContext({ lang: "fr", setLang: () => {} });
 
 export function LandingLangProvider({ children }) {
   const [lang, setLang] = useState("fr");
 
   useEffect(() => {
-    const saved = typeof window !== "undefined" && localStorage.getItem("os_lang");
-    if (saved === "fr" || saved === "en") setLang(saved);
+    if (typeof window === "undefined") return;
+    const saved = localStorage.getItem("os_lang");
+    if (saved === "fr" || saved === "en") { setLang(saved); document.documentElement.lang = saved; return; }
+    // Pas de préférence enregistrée → détection navigateur (FR sinon EN).
+    const nav = (navigator.languages && navigator.languages[0]) || navigator.language || "fr";
+    const detected = /^fr\b|^fr-/i.test(nav) ? "fr" : "en";
+    setLang(detected);
+    document.documentElement.lang = detected;
   }, []);
 
   const changeLang = (l) => {

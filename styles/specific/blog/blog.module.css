@@ -31,6 +31,22 @@
   font-size: 1.02rem;
   line-height: 1.55;
 }
+.rssLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 16px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(234, 230, 255, 0.8);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: border-color 0.16s ease, color 0.16s ease, transform 0.16s ease;
+}
+.rssLink:hover { border-color: rgba(255, 165, 0, 0.5); color: #fff; transform: translateY(-1px); }
+.rssLink img { width: 16px; height: 16px; display: block; }
 
 /* ---- Controls ---- */
 .controls {

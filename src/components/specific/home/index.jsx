@@ -55,6 +55,28 @@ function HomePage() {
     return () => clearInterval(id);
   }, []);
 
+  // Preloader failsafe: the veil is normally lifted by the GSAP intro (rAF-driven).
+  // If rAF stalls (backgrounded tab), JS errors, or the user prefers reduced motion,
+  // a wall-clock timer removes it anyway so the page is never held hostage by an
+  // animation. setTimeout keeps firing even when rAF is throttled in a hidden tab.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const pre = document.getElementById("preloader");
+    if (!pre) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const dismiss = () => {
+      if (pre.dataset.done) return;
+      pre.dataset.done = "1";
+      pre.style.transition = "transform 0.5s ease";
+      pre.style.transform = "translateY(-100%)";
+      pre.setAttribute("aria-hidden", "true");
+      heroReadyRef.current = true;
+      document.querySelectorAll(".heroTitleWord").forEach((w) => { if (w.parentElement) w.parentElement.style.overflow = "visible"; });
+    };
+    const id = setTimeout(dismiss, reduce ? 0 : 4500);
+    return () => clearTimeout(id);
+  }, []);
+
   // Magnetic buttons
   useEffect(() => {
     const mags = gsap.utils.toArray("[data-magnetic]");
@@ -161,19 +183,26 @@ function HomePage() {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+    const reduceMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const ctx = gsap.context(() => {
-      /* Preloader */
+      /* Preloader + hero intro. Skipped under reduced-motion (the failsafe
+         effect below reveals everything instantly instead). */
       const heroWords = gsap.utils.toArray(".heroTitleWord");
-      const counter = { v: 0 };
-      gsap.timeline()
-        .to(counter, { v: 100, duration: 1.6, ease: "power2.inOut", onUpdate: () => { const n = document.getElementById("preCount"); if (n) n.textContent = Math.round(counter.v); } })
-        .to("#preName", { y: -14, opacity: 0, duration: 0.5, ease: "power2.in" }, "-=0.2")
-        .to("#preloader", { yPercent: -100, duration: 0.9, ease: "power4.inOut" }, "-=0.1")
-        .from(heroWords, { yPercent: 120, duration: 1, ease: "power4.out", stagger: 0.07 }, "-=0.5")
-        .from("[data-hero-fade]", { y: 24, opacity: 0, duration: 0.8, ease: "power3.out", stagger: 0.1 }, "-=0.7")
-        // Reveal mask done → let each word overflow its clip box so it can drift with the cursor.
-        .add(() => { heroReadyRef.current = true; heroWords.forEach((w) => { if (w.parentElement) w.parentElement.style.overflow = "visible"; }); });
+      if (reduceMotion) {
+        heroReadyRef.current = true;
+        heroWords.forEach((w) => { if (w.parentElement) w.parentElement.style.overflow = "visible"; });
+      } else {
+        const counter = { v: 0 };
+        gsap.timeline()
+          .to(counter, { v: 100, duration: 1.6, ease: "power2.inOut", onUpdate: () => { const n = document.getElementById("preCount"); if (n) n.textContent = Math.round(counter.v); } })
+          .to("#preName", { y: -14, opacity: 0, duration: 0.5, ease: "power2.in" }, "-=0.2")
+          .to("#preloader", { yPercent: -100, duration: 0.9, ease: "power4.inOut" }, "-=0.1")
+          .from(heroWords, { yPercent: 120, duration: 1, ease: "power4.out", stagger: 0.07 }, "-=0.5")
+          .from("[data-hero-fade]", { y: 24, opacity: 0, duration: 0.8, ease: "power3.out", stagger: 0.1 }, "-=0.7")
+          // Reveal mask done → let each word overflow its clip box so it can drift with the cursor.
+          .add(() => { heroReadyRef.current = true; heroWords.forEach((w) => { if (w.parentElement) w.parentElement.style.overflow = "visible"; }); });
+      }
 
       /* Hero bg parallax */
       gsap.to("[data-hero-bg]", { scale: 1.25, yPercent: 12, ease: "none", scrollTrigger: { trigger: ".heroSec", start: "top top", end: "bottom top", scrub: true } });

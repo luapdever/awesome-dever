@@ -15,6 +15,7 @@ const LINKS = [
   { label: L("Journey", "Parcours"), href: "/#parcours", id: "parcours" },
   { label: L("Experience", "Expériences"), href: "/#experiences", id: "experiences" },
   { label: L("Bio", "Bio"), href: "/about-me", id: "bio" },
+  { label: L("Contact", "Contact"), href: "/#collaborer", id: "collaborer" },
 ];
 
 function NavBar() {
@@ -57,7 +58,11 @@ function NavBar() {
     }
   }, [open]);
 
-  const overlayLinks = [...LINKS, { label: "PaulBrain OS", href: "/paulfolio", id: "os" }];
+  const overlayLinks = [
+    ...LINKS,
+    { label: L("View CV", "Voir le CV"), href: "/cv", id: "cv" },
+    { label: "PaulBrain OS", href: "/paulfolio", id: "os" },
+  ];
 
   return (
     <>
@@ -82,6 +87,7 @@ function NavBar() {
             <button className={lang === "fr" ? styles.langActive : ""} onClick={() => setLang("fr")}>FR</button>
             <button className={lang === "en" ? styles.langActive : ""} onClick={() => setLang("en")}>EN</button>
           </div>
+          <a href="/cv" target="_blank" rel="noopener noreferrer" className={styles.cvLink}>{tx(L("CV", "CV"), lang)}</a>
           <Link href="/paulfolio" className={styles.cta}>PaulBrain&nbsp;OS</Link>
           <button
             className={`${styles.burger} ${open ? styles.burgerOpen : ""}`}

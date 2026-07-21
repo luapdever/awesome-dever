@@ -113,19 +113,11 @@ export default function MiniShop({ lang = "fr" }) {
 
       <div className={styles.grid}>
         {SHOP_SERVICES.map((s) => (
-          <button key={s.id} type="button" className={styles.card} onClick={() => open(s.id)}>
+          <button key={s.id} type="button" className={styles.card} onClick={() => open(s.id)} aria-label={`${t.order} — ${tx(s.title, lang)}`}>
             <span className={styles.media}>
               {s.image && <img src={s.image} alt={tx(s.title, lang)} loading="lazy" />}
-              {s.proof && <span className={styles.proof}>{s.proof}</span>}
             </span>
-            <span className={styles.body}>
-              <span className={styles.titleRow}>
-                <span className={styles.cardIcon}><Icon name={s.icon} /></span>
-                <b>{tx(s.title, lang)}</b>
-              </span>
-              <small>{tx(s.tagline, lang)}</small>
-              <span className={styles.cardCta}>{t.order} →</span>
-            </span>
+            <span className={styles.cardCta}>{t.order} <em>→</em></span>
           </button>
         ))}
       </div>

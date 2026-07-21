@@ -17,6 +17,7 @@ const UI = {
     searchPh: "Rechercher un article…",
     noResults: "Aucun article ne correspond à ta recherche.",
     minRead: "min de lecture",
+    rss: "S'abonner (RSS)",
   },
   en: {
     kicker: "The journal",
@@ -25,6 +26,7 @@ const UI = {
     searchPh: "Search an article…",
     noResults: "No article matches your search.",
     minRead: "min read",
+    rss: "Subscribe (RSS)",
   },
 };
 
@@ -172,6 +174,10 @@ export default function BlogIndex() {
           <span className={styles.kicker}>{t.kicker}</span>
           <h1 className={styles.title}>{t.title}</h1>
           <p className={styles.subtitle}>{t.subtitle}</p>
+          <a className={styles.rssLink} href="/feed.xml" target="_blank" rel="noopener noreferrer">
+            <img src="/icons/ph/rss-simple__ffffff.svg" alt="" width={16} height={16} />
+            <span>{t.rss}</span>
+          </a>
         </header>
 
         <div className={styles.controls}>

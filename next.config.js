@@ -6,6 +6,7 @@ const nextConfig = {
     // apiUrl: "https://dever-luapdever511.koyeb.app/api/"
   },
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       { protocol: "https", hostname: "cdn.jsdelivr.net" },
       { protocol: "https", hostname: "www.svgrepo.com" }

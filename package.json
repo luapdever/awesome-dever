@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "gen:sitemap": "node scripts/gen-sitemap.mjs",
-    "prebuild": "node scripts/gen-sitemap.mjs",
+    "gen:feed": "node scripts/gen-feed.mjs",
+    "prebuild": "node scripts/gen-sitemap.mjs && node scripts/gen-feed.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

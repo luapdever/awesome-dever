@@ -23,7 +23,7 @@ export const blogPosts = [
       "Étude de cas — une app de rencontre (Flutter + PWA) où la relation se noue en visio, facturée à la minute en temps réel. Architecture, décisions, et le problème le plus dur.",
       "Case study — a dating app (Flutter + PWA) where connections happen over live video, billed per minute in real time. Architecture, decisions, and the hardest problem."
     ),
-    cover: "/projects/emilia.png",
+    cover: "/projects/emilia.webp",
     content: [
       L(
         "Emilia Cross, pour France Assist, est une application de rencontre où la relation se noue en visio en direct. Je l'ai conçue de bout en bout : les clients Flutter (application mobile publiée + PWA) et le backend NestJS.",
