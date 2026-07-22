@@ -575,11 +575,18 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
       if (!altchaOkRef.current) {
         try { altcha = await solveAltcha(); } catch { altcha = undefined; }
       }
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: contextMessages, lang, conversationId: cidRef.current, contact, ...(pitch ? { mode: "pitch" } : {}), ...(altcha ? { altcha } : {}) }),
-      });
+      const H = { "Content-Type": "application/json" };
+      const reqBody = (proof) => JSON.stringify({ messages: contextMessages, lang, conversationId: cidRef.current, contact, ...(pitch ? { mode: "pitch" } : {}), ...(proof ? { altcha: proof } : {}) });
+      let res = await fetch(url, { method: "POST", headers: H, body: reqBody(altcha) });
+      // 403 = vérification anti-bot perdue côté serveur (ex. backend redémarré, ou
+      // conversation qui n'est plus « de confiance »). On invalide le cache, on
+      // ré-résout un ALTCHA frais et on retente UNE fois — invisible pour le visiteur.
+      if (res.status === 403) {
+        altchaOkRef.current = false;
+        try { shared.set("paulbot_altcha_cid", ""); } catch {}
+        try { altcha = await solveAltcha(); } catch { altcha = undefined; }
+        if (altcha) res = await fetch(url, { method: "POST", headers: H, body: reqBody(altcha) });
+      }
       if (!res.ok || !res.body) throw new Error(`http ${res.status}`);
       if (altcha) { altchaOkRef.current = true; shared.set("paulbot_altcha_cid", cidRef.current); } // vérifiée (partagé avec le terminal)
       const reader = res.body.getReader();

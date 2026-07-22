@@ -80,12 +80,16 @@ export async function askBotStream({ question, lang = "fr", onToken, signal }) {
   }
 
   const url = (typeof window !== "undefined" && window.__CHAT_URL) || CHAT_URL;
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ messages: context, lang, conversationId: cid, contact, ...(altcha ? { altcha } : {}) }),
-    signal,
-  });
+  const H = { "Content-Type": "application/json" };
+  const reqBody = (proof) => JSON.stringify({ messages: context, lang, conversationId: cid, contact, ...(proof ? { altcha: proof } : {}) });
+  let res = await fetch(url, { method: "POST", headers: H, body: reqBody(altcha), signal });
+  // 403 = vérification anti-bot perdue côté serveur (ex. backend redémarré) →
+  // on invalide le cache, ré-résout un ALTCHA frais et retente UNE fois.
+  if (res.status === 403) {
+    try { shared.set("paulbot_altcha_cid", ""); } catch {}
+    try { altcha = await solveAltcha(); } catch { altcha = undefined; }
+    if (altcha) res = await fetch(url, { method: "POST", headers: H, body: reqBody(altcha), signal });
+  }
   if (!res.ok || !res.body) throw new Error(`http ${res.status}`);
   if (altcha) shared.set("paulbot_altcha_cid", cid); // preuve envoyée → conversation vérifiée
 
