@@ -25,6 +25,21 @@ const montserrat = Montserrat({
   variable: "--font-sans",
 });
 
+// Repli affiché si une PAGE crashe au rendu (ErrorBoundary). Le lien est un <a>
+// EN DUR volontairement : après un crash, l'ErrorBoundary reste en état d'erreur ;
+// une navigation client (<Link>) rejouerait le repli sans jamais se réinitialiser.
+// Seul un rechargement complet du navigateur remet tout à zéro — d'où le <a> et la
+// dérogation à la règle no-html-link-for-pages.
+const pageErrorFallback = (
+  <main style={{ padding: "80px 20px", textAlign: "center", color: "#eae6ff" }}>
+    <p>
+      Un souci d&apos;affichage est survenu.{" "}
+      {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+      <a href="/" style={{ color: "#ffa500" }}>Recharger l&apos;accueil</a>.
+    </p>
+  </main>
+);
+
 function MyApp({ Component, pageProps }) {
   // Pages can opt out of the global chrome (nav + footer) — e.g. the OS
   // at /paulfolio runs full-screen without header/footer.
@@ -71,7 +86,7 @@ function MyApp({ Component, pageProps }) {
             {/* Contenu principal isolé : un crash de page affiche un repli, pas un écran blanc. */}
             <ErrorBoundary
               name="page"
-              fallback={<main style={{ padding: "80px 20px", textAlign: "center", color: "#eae6ff" }}><p>Un souci d'affichage est survenu. <a href="/" style={{ color: "#ffa500" }}>Recharger l'accueil</a>.</p></main>}
+              fallback={pageErrorFallback}
             >
               <Component {...pageProps} />
             </ErrorBoundary>
