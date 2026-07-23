@@ -58,6 +58,115 @@ export const vaultProjects = [
     stack: ["WordPress", "PHP", "JavaScript", "SASS"],
     link: { label: "moov-africa.tg", url: "https://moov-africa.tg/" },
   },
+
+  // ===== MTN — livrés chez KAMGOKO Technologies (studio) =====
+  // Projets PUBLICS (URLs live), pas de NDA : crédit explicite à KAMGOKO,
+  // le studio via lequel Paul a réalisé ces applications pour MTN.
+  {
+    id: "mtn-yello-connect",
+    name: "Y'ello Connect",
+    client: "MTN Bénin · via KAMGOKO",
+    role: L("Frontend Developer", "Développeur frontend"),
+    year: "2024",
+    status: "Enterprise",
+    tag: L("Telecom · Auth / SSO", "Télécom · Auth / SSO"),
+    desc: L(
+      "Single sign-on authentication portal for MTN Bénin — one secure login shared across MTN's web services.",
+      "Portail d'authentification unique (SSO) de MTN Bénin — une connexion sécurisée partagée par les services web de MTN."
+    ),
+    stack: ["Vue.js", "Bootstrap", "Node.js"],
+    link: { label: "auth.mtn.bj", url: "https://auth.mtn.bj/" },
+  },
+  {
+    id: "mtn-selfcare",
+    name: "My MTN Web",
+    client: "MTN Bénin · via KAMGOKO",
+    role: L("Frontend Developer", "Développeur frontend"),
+    year: "2024",
+    status: "Enterprise",
+    tag: L("Telecom · Selfcare", "Télécom · Selfcare"),
+    desc: L(
+      "Self-service web app for MTN customers: plans, purchases and account management, integrated with MTN's REST APIs.",
+      "Application web self-service pour les clients MTN : forfaits, achats et gestion de compte, intégrée aux APIs REST de MTN."
+    ),
+    stack: ["Vue.js", "WordPress", "Bootstrap", "Node.js"],
+    link: { label: "my.mtn.bj", url: "https://my.mtn.bj/" },
+  },
+  {
+    id: "mtn-yello-tickets",
+    name: "Y'ello Tickets",
+    client: "MTN Bénin · via KAMGOKO",
+    role: L("Full-stack Developer", "Développeur full-stack"),
+    year: "2024",
+    status: "Enterprise",
+    tag: L("Telecom · Support", "Télécom · Support"),
+    desc: L(
+      "Support-ticket management used by MTN agents — ticket workflow from creation to resolution.",
+      "Gestion des tickets de support utilisée par les agents MTN — workflow du ticket, de la création à la résolution."
+    ),
+    stack: ["Vue.js", "Node.js"],
+    link: { label: "my.mtn.bj/yello-tickets", url: "https://my.mtn.bj/yello-tickets/" },
+  },
+  {
+    id: "mtn-yello-market",
+    name: "Y'ello Market",
+    client: "MTN Bénin · via KAMGOKO",
+    role: L("Full-stack Developer", "Développeur full-stack"),
+    year: "2024",
+    status: "Enterprise",
+    tag: L("Telecom · E-commerce", "Télécom · E-commerce"),
+    desc: L(
+      "Online marketplace for MTN Bénin — buy and sell a wide range of products across the country.",
+      "Marketplace en ligne pour MTN Bénin — achat et vente d'une large gamme de produits à travers le pays."
+    ),
+    stack: ["Vue.js", "Node.js"],
+    link: { label: "shop.mtn.bj", url: "https://shop.mtn.bj/" },
+  },
+  {
+    id: "mtn-monrouteur",
+    name: "Mon Routeur",
+    client: "MTN Bénin · via KAMGOKO",
+    role: L("Frontend Developer", "Développeur frontend"),
+    year: "2024",
+    status: "Enterprise",
+    tag: L("Telecom · Activation", "Télécom · Activation"),
+    desc: L(
+      "Activation landing shown when an MTN router runs out of plan or data — quick plan/data top-up.",
+      "Landing d'activation affichée quand un routeur MTN n'a plus de forfait ou de data — recharge rapide forfait/data."
+    ),
+    stack: ["HTML", "CSS", "JavaScript", "Nginx"],
+    link: { label: "monrouteur.mtn.bj", url: "https://monrouteur.mtn.bj/" },
+  },
+  {
+    id: "mtn-benin-corporate",
+    name: "MTN Bénin — Corporate",
+    client: "MTN Bénin · via KAMGOKO",
+    role: L("WordPress Developer", "Développeur WordPress"),
+    year: "2022 — 2025",
+    status: "Enterprise",
+    tag: L("Telecom · Corporate site", "Télécom · Site corporate"),
+    desc: L(
+      "Corporate website of MTN Bénin — custom WordPress theme and plugins, with performance and SEO optimization.",
+      "Site corporate de MTN Bénin — thème et plugins WordPress sur mesure, avec optimisation performance et SEO."
+    ),
+    stack: ["WordPress", "PHP", "SASS"],
+    link: { label: "mtn.bj", url: "https://www.mtn.bj/" },
+  },
+  {
+    id: "mtn-congo-corporate",
+    name: "MTN Congo — Corporate",
+    client: "MTN Congo · via KAMGOKO",
+    role: L("WordPress Developer", "Développeur WordPress"),
+    year: "2022 — 2025",
+    status: "Enterprise",
+    tag: L("Telecom · Corporate site", "Télécom · Site corporate"),
+    desc: L(
+      "Corporate website of MTN Congo — custom WordPress theme and plugins with multilingual content.",
+      "Site corporate de MTN Congo — thème et plugins WordPress sur mesure avec contenu multilingue."
+    ),
+    stack: ["WordPress", "PHP", "SASS"],
+    link: { label: "mtn.cg", url: "http://mtn.cg/" },
+  },
 ];
 
 export default vaultProjects;

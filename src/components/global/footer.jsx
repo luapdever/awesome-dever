@@ -22,7 +22,7 @@ function TheFooter() {
             {socialMedias.map(
               (s, i) =>
                 i < socialMedias.length - 1 && (
-                  <a key={i} href={s.link} target="_blank" rel="noopener noreferrer" aria-label="social link">
+                  <a key={i} href={s.link} target="_blank" rel="noopener noreferrer" aria-label={s.name || "Réseau social"}>
                     {s.icon}
                   </a>
                 )

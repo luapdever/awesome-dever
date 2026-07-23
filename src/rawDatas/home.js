@@ -87,13 +87,13 @@ export const capabilities = [
 
 // "Mon parcours en images" — dossier public/history
 export const journey = [
-  { img: "/history/01-benevolat.jpeg", year: "2019", title: L("The beginnings", "Les débuts"), caption: L("Volunteering, lots of coffee, zero budget — but a hunger to learn worth selling.", "Bénévole, beaucoup de café, zéro budget — mais l'envie d'apprendre à revendre.") },
-  { img: "/history/02-stage.jpg", year: "2020", title: L("The internship", "Le stage"), caption: L("Where I learned that “works on my machine” is not an admissible line of defence.", "J'y ai appris que « ça marche sur ma machine » n'est pas une ligne de défense recevable.") },
-  { img: "/history/03-premier-contrat.jpg", year: "2021", title: L("First contract", "Premier contrat"), caption: L("Contract signed, impostor syndrome included. We both survived.", "Contrat signé, syndrome de l'imposteur offert avec. On a survécu tous les deux.") },
-  { img: "/history/04-concentration.jpeg", year: "2022", title: L("Focus", "Focus"), caption: L("Maximum focus. Do not disturb — except for coffee or a production on fire.", "Concentration maximale. Ne pas déranger — sauf pour un café ou une prod qui brûle.") },
-  { img: "/history/05-second-contrat.jpeg", year: "2023", title: L("Second contract", "Deuxième contrat"), caption: L("This time I (almost) knew what I was doing. The almost makes all the difference.", "Cette fois, je savais (presque) ce que je faisais. Le presque fait toute la nuance.") },
-  { img: "/history/06.jpeg", year: "2024", title: L("The team", "L'équipe"), caption: L("The best code is sometimes thought up far from the keyboard, with the right people.", "Le meilleur code se pense parfois loin du clavier, entouré des bonnes personnes.") },
-  { img: "/history/07-enjoy-trip.jpeg", year: "2025", title: L("The reward", "La récompense"), caption: L("You don't live on commits alone: a little rest before the next sprint.", "On ne vit pas que de commits : un peu de repos avant le prochain sprint.") },
+  { img: "/history/01-benevolat.webp", year: "2019", title: L("The beginnings", "Les débuts"), caption: L("Volunteering, lots of coffee, zero budget — but a hunger to learn worth selling.", "Bénévole, beaucoup de café, zéro budget — mais l'envie d'apprendre à revendre.") },
+  { img: "/history/02-stage.webp", year: "2020", title: L("The internship", "Le stage"), caption: L("Where I learned that “works on my machine” is not an admissible line of defence.", "J'y ai appris que « ça marche sur ma machine » n'est pas une ligne de défense recevable.") },
+  { img: "/history/03-premier-contrat.webp", year: "2021", title: L("First contract", "Premier contrat"), caption: L("Contract signed, impostor syndrome included. We both survived.", "Contrat signé, syndrome de l'imposteur offert avec. On a survécu tous les deux.") },
+  { img: "/history/04-concentration.webp", year: "2022", title: L("Focus", "Focus"), caption: L("Maximum focus. Do not disturb — except for coffee or a production on fire.", "Concentration maximale. Ne pas déranger — sauf pour un café ou une prod qui brûle.") },
+  { img: "/history/05-second-contrat.webp", year: "2023", title: L("Second contract", "Deuxième contrat"), caption: L("This time I (almost) knew what I was doing. The almost makes all the difference.", "Cette fois, je savais (presque) ce que je faisais. Le presque fait toute la nuance.") },
+  { img: "/history/06.webp", year: "2024", title: L("The team", "L'équipe"), caption: L("The best code is sometimes thought up far from the keyboard, with the right people.", "Le meilleur code se pense parfois loin du clavier, entouré des bonnes personnes.") },
+  { img: "/history/07-enjoy-trip.webp", year: "2025", title: L("The reward", "La récompense"), caption: L("You don't live on commits alone: a little rest before the next sprint.", "On ne vit pas que de commits : un peu de repos avant le prochain sprint.") },
 ];
 
 export const testimonials = [

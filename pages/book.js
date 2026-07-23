@@ -53,7 +53,7 @@ const LEAVES = [
   // ==================== TOME I ====================
   { kind: "part", id: "tome1", roman: T("Tome Premier", "Part One"), title: T("Le Parcours", "The Journey"), epigraph: T("« On n'apprend jamais mieux qu'en construisant pour de vrai. »", "“Nothing teaches better than building for real.”") },
 
-  { kind: "chapter", chap: 1, kicker: T("2019 · Les commencements", "2019 · The Beginnings"), title: T("Apprendre, sans filet", "Learning Without a Net"), img: "/history/01-benevolat.jpeg", caption: T("Les débuts — bénévolat, 2019.", "The beginnings — volunteering, 2019."), paras: [
+  { kind: "chapter", chap: 1, kicker: T("2019 · Les commencements", "2019 · The Beginnings"), title: T("Apprendre, sans filet", "Learning Without a Net"), img: "/history/01-benevolat.webp", caption: T("Les débuts — bénévolat, 2019.", "The beginnings — volunteering, 2019."), paras: [
     T("Tout commence sans budget, sans titre, sans certitude — mais avec une soif d'apprendre qui me tient lieu de capital. Bénévole, je mets la main à tout ce qui se présente, convaincu qu'on n'apprend jamais mieux qu'en bâtissant pour de vrai.", "It all begins with no budget, no title, no certainty — but with a thirst to learn that serves me as capital. As a volunteer, I turn my hand to whatever comes, convinced that nothing teaches better than building for real."),
   ] },
   { kind: "chapter", kicker: T("2019 · Les commencements — suite", "2019 · The Beginnings — cont."), paras: [
@@ -61,12 +61,12 @@ const LEAVES = [
     T("De ces mois modestes, je retiens une leçon qui ne me quittera plus : la compétence ne se décrète pas, elle se gagne — ligne après ligne, café après café.", "From those humble months I draw a lesson that never leaves me: skill is not decreed, it is earned — line by line, coffee by coffee."),
   ] },
 
-  { kind: "chapter", chap: 2, kicker: T("2020 · L'apprentissage", "2020 · The Apprenticeship"), title: T("La rencontre du réel", "Meeting Reality"), img: "/history/02-stage.jpg", caption: T("Le stage, 2020.", "The internship, 2020."), paras: [
+  { kind: "chapter", chap: 2, kicker: T("2020 · L'apprentissage", "2020 · The Apprenticeship"), title: T("La rencontre du réel", "Meeting Reality"), img: "/history/02-stage.webp", caption: T("Le stage, 2020.", "The internship, 2020."), paras: [
     T("Vient le temps du stage, et avec lui la rencontre avec le réel. J'y découvre que « ça marche sur ma machine » n'a jamais convaincu personne, et que le code n'a de valeur que livré, éprouvé, partagé.", "Then comes the internship, and with it a meeting with reality. I discover that “it works on my machine” has never convinced anyone, and that code has worth only once shipped, tested, shared."),
     T("J'apprends la rigueur des environnements, la discipline des versions, l'humilité du débogage. L'artisan, peu à peu, cède la place à l'ingénieur.", "I learn the rigour of environments, the discipline of versions, the humility of debugging. The craftsman in me slowly gives way to the engineer."),
   ] },
 
-  { kind: "chapter", chap: 3, kicker: T("2021 · Le premier engagement", "2021 · The First Commitment"), title: T("La première pierre", "The First Stone"), img: "/history/03-premier-contrat.jpg", caption: T("Premier contrat, 2021.", "First contract, 2021."), paras: [
+  { kind: "chapter", chap: 3, kicker: T("2021 · Le premier engagement", "2021 · The First Commitment"), title: T("La première pierre", "The First Stone"), img: "/history/03-premier-contrat.webp", caption: T("Premier contrat, 2021.", "First contract, 2021."), paras: [
     T("Le premier contrat arrive, syndrome de l'imposteur en prime. Chez Octogone Trading, je consolide mes bases — PHP, Vue.js et Nuxt.js — et je fais mes tout premiers pas en Node.js, sans encore rien y maîtriser. Qu'importe : je comprends déjà qu'un pixel bien placé vaut parfois mille explications.", "The first contract arrives, impostor syndrome included. At Octogone Trading, I consolidate my foundations — PHP, Vue.js and Nuxt.js — and take my very first, unsteady steps in Node.js, mastering nothing yet. No matter: I already learn that a well-placed pixel is sometimes worth a thousand explanations."),
   ] },
   { kind: "chapter", kicker: T("2021 · Le premier engagement — suite", "2021 · The First Commitment — cont."), paras: [
@@ -74,22 +74,22 @@ const LEAVES = [
     T("Je n'en ai pas encore conscience, mais je viens de poser la première pierre d'une carrière qui mêlera, sans relâche, exigence technique et souci de l'utilisateur.", "I don't yet know it, but I have just laid the first stone of a career that will relentlessly blend technical rigour with care for the user."),
   ] },
 
-  { kind: "chapter", chap: 4, kicker: T("2022 · L'exigence", "2022 · The Standard"), title: T("Le changement d'échelle", "A Change of Scale"), img: "/history/04-concentration.jpeg", caption: T("Concentration, 2022.", "Focus, 2022."), paras: [
+  { kind: "chapter", chap: 4, kicker: T("2022 · L'exigence", "2022 · The Standard"), title: T("Le changement d'échelle", "A Change of Scale"), img: "/history/04-concentration.webp", caption: T("Concentration, 2022.", "Focus, 2022."), paras: [
     T("Chez KAMGOKO Technologies, l'échelle change. Au fil des projets menés pour MTN, Moov, Celtiis, Orabank et d'autres, j'acquiers un large éventail de compétences : sites corporate, applications Selfcare consultées par des milliers d'abonnés, intégrations exigeantes.", "At KAMGOKO Technologies, the scale changes. Through projects for MTN, Moov, Celtiis, Orabank and others, I acquire a broad range of skills: corporate sites, Selfcare apps used by thousands of subscribers, demanding integrations."),
     T("Concentration maximale, production sous tension : j'apprends que la fiabilité n'est pas une option, mais une promesse tenue à chaque déploiement.", "Full focus, production under pressure: I learn that reliability is not an option but a promise kept with every deployment."),
   ] },
 
-  { kind: "chapter", chap: 5, kicker: T("2023 · La maturité", "2023 · Coming of Age"), title: T("Qu'on lui confie le critique", "Entrusted With the Critical"), img: "/history/05-second-contrat.jpeg", caption: T("Deuxième contrat, 2023.", "Second contract, 2023."), paras: [
+  { kind: "chapter", chap: 5, kicker: T("2023 · La maturité", "2023 · Coming of Age"), title: T("Qu'on lui confie le critique", "Entrusted With the Critical"), img: "/history/05-second-contrat.webp", caption: T("Deuxième contrat, 2023.", "Second contract, 2023."), paras: [
     T("Je m'affirme comme ingénieur. Pour France Assist, j'architecture Emilia Cross — un site de rencontre où la relation se noue en visio, sécurisé de bout en bout : streaming vidéo, vérification KYC, paiements et reversements (payouts), contrôle d'accès (RBAC). Rien n'est laissé au hasard.", "I come into my own as an engineer. For France Assist I architect Emilia Cross — a dating site where connections are made over live video, secured end to end: video streaming, KYC verification, payments and payouts, access control (RBAC). Nothing is left to chance."),
     T("En parallèle, une institution publique me confie un chantier sensible, couvert par la confidentialité. La preuve, s'il en fallait, qu'on me confie désormais l'essentiel.", "In parallel, a public institution entrusts me with a sensitive, confidential project. Proof, if any were needed, that I am now handed what matters most."),
   ] },
 
-  { kind: "chapter", chap: 6, kicker: T("2024 · Les alliances", "2024 · Alliances"), title: T("Loin du clavier", "Far From the Keyboard"), img: "/history/06.jpeg", caption: T("L'équipe, 2024.", "The team, 2024."), paras: [
+  { kind: "chapter", chap: 6, kicker: T("2024 · Les alliances", "2024 · Alliances"), title: T("Loin du clavier", "Far From the Keyboard"), img: "/history/06.webp", caption: T("L'équipe, 2024.", "The team, 2024."), paras: [
     T("Aucune œuvre solide ne se bâtit seul. Je l'ai compris : le meilleur code se pense souvent loin du clavier, entouré des bonnes personnes. Designers, développeurs, chefs de projet — j'apprends à faire équipe autant qu'à faire système.", "No solid work is built alone. I have understood it: the best code is often thought up far from the keyboard, surrounded by the right people. Designers, developers, project leads — I learn to build teams as much as systems."),
     T("De ces collaborations naît une conviction : la technique n'a de sens que mise au service d'un dessein commun.", "From these collaborations a conviction is born: technology only makes sense in the service of a shared purpose."),
   ] },
 
-  { kind: "chapter", chap: 7, kicker: T("2025 · Le tournant", "2025 · The Turning Point"), title: T("Le temps de la synthèse", "The Time of Synthesis"), img: "/history/07-enjoy-trip.jpeg", caption: T("La récompense, 2025.", "The reward, 2025."), paras: [
+  { kind: "chapter", chap: 7, kicker: T("2025 · Le tournant", "2025 · The Turning Point"), title: T("Le temps de la synthèse", "The Time of Synthesis"), img: "/history/07-enjoy-trip.webp", caption: T("La récompense, 2025.", "The reward, 2025."), paras: [
     T("Vient enfin le temps de la synthèse. J'embrasse l'intelligence artificielle et je conçois PaulBot, un assistant capable de raconter mon parcours — celui-là même qui, peut-être, vous a accueilli. Mon portfolio devient une œuvre à part entière, entre système d'exploitation et récit.", "At last comes the time of synthesis. I embrace artificial intelligence and build PaulBot, an assistant able to tell my story — the very one that, perhaps, welcomed you. My portfolio becomes a work in its own right, between operating system and narrative."),
     T("On ne vit pas que de commits : je m'accorde le repos du bâtisseur, avant de repartir. Car une promesse, chez moi, en appelle toujours une autre.", "One does not live on commits alone: I grant myself the builder's rest, before setting off again. For with me, one promise always calls forth another."),
   ] },

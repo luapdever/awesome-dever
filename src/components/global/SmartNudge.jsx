@@ -16,6 +16,7 @@ import styles from "../../../styles/specific/smartNudge.module.css";
 const KEY = "journey_v1"; // sessionStorage : le parcours (survit au reload)
 const SHOWN = "nudge_shown_v1"; // sessionStorage : déjà proposé cette session
 const OPTOUT = "nudge_optout_v1"; // localStorage : « ne plus proposer »
+const SEED = "nudge_seed_v1"; // sessionStorage : graine de rotation (varie par session)
 const THRESHOLD_MS = 22000; // temps ACTIF avant de pouvoir proposer
 const IDLE_MS = 11000; // inactivité récente = signal « perdu »
 const HARD_CAP_MS = 90000; // au-delà, on ne propose plus (il sait ce qu'il fait)
@@ -44,25 +45,74 @@ const UI = {
   },
 };
 
-// ---- Arbre de décision (déterministe, sans IA) ----
+// Graine STABLE par session (persistée) → fait varier l'ordre d'une session à
+// l'autre sans dépendre du hasard à chaque rendu (déterministe dans la session).
+function sessionSeed() {
+  try {
+    let s = sessionStorage.getItem(SEED);
+    if (!s) { s = String(Math.floor(Math.random() * 1e9) + 1); sessionStorage.setItem(SEED, s); }
+    return parseInt(s, 10) || 1;
+  } catch { return 1; }
+}
+// Hash déterministe (FNV-1a) → jitter reproductible par (session, expérience).
+function hash32(str) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+
+// ---- Décision (déterministe, sans IA) : SCORING piloté par le PARCOURS, avec
+// ROTATION stable par session. Les signaux de parcours dominent ; la rotation
+// départage les quasi-ex æquo et varie le trio d'une session à l'autre. ----
+const ALL_EXP = ["os", "book", "cv", "blog", "about"];
 function decide(state, L) {
   const seen = new Set(state.visited);
-  // Préférence de suggestions selon la page COURANTE.
-  let pref;
   const p = state.path;
-  if (p === "/") pref = ["os", "book", "cv"];
-  else if (p.startsWith("/blog")) pref = ["book", "cv", "os"];
-  else if (p === "/book") pref = ["os", "cv", "blog"];
-  else if (p === "/cv") pref = ["book", "about", "os"];
-  else if (p === "/about-me") pref = ["cv", "os", "book"];
-  else pref = ["os", "book", "cv"];
+  const vis = state.visited;
+  const been = (h) => vis.some((v) => v.startsWith(h));
 
-  const isPingPong = state.visited.length >= 5;
-  // On priorise les expériences PAS ENCORE VUES, puis on complète.
-  const unseen = pref.filter((k) => !seen.has(EXP[k].href));
-  const rest = pref.filter((k) => seen.has(EXP[k].href));
-  const ordered = [...unseen, ...rest].slice(0, 3);
+  // 1) Score de base selon la page COURANTE.
+  const BASE = {
+    home:    { os: 3, book: 2, cv: 2, blog: 1, about: 1 },
+    blog:    { book: 3, cv: 2, os: 2, about: 1, blog: 0 },
+    book:    { os: 3, cv: 2, blog: 2, about: 1, book: 0 },
+    cv:      { book: 2, about: 3, os: 2, blog: 1, cv: 0 },
+    about:   { cv: 3, os: 2, book: 2, blog: 1, about: 0 },
+  };
+  let base;
+  if (p.startsWith("/blog")) base = BASE.blog;
+  else if (p === "/book") base = BASE.book;
+  else if (p === "/cv") base = BASE.cv;
+  else if (p === "/about-me") base = BASE.about;
+  else base = BASE.home;
+  const score = {};
+  ALL_EXP.forEach((k) => { score[k] = base[k] ?? 1; });
 
+  // 2) Pilotage par le PARCOURS (signaux déjà collectés dans journey_v1).
+  if (been("/blog") || state.scrollPct > 0.6) score.book += 2;      // lecteur assidu → le Livre
+  if (been("/cv")) { score.about += 2; score.blog -= 1; }           // profil recruteur → À propos
+  if (vis.length >= 5) score.os += 2;                               // hésitant → l'OS (guidé, ludique)
+  if (state.activeMs > 45000) { score.book += 1; score.blog += 1; } // creuse depuis longtemps → contenu long
+  if (!seen.has("/about-me") && vis.length >= 3) score.about += 1;  // a pas mal navigué sans voir « qui je suis »
+
+  // 3) Rotation par SESSION : jitter reproductible (< 1.5 → les boosts de
+  //    parcours de +2/+3 dominent, mais l'ordre varie d'une session à l'autre).
+  const seed = sessionSeed();
+  ALL_EXP.forEach((k) => { score[k] += ((hash32(seed + ":" + k) % 1000) / 1000) * 1.5; });
+
+  // 4) Jamais la page courante ; le déjà-visité recule (on privilégie l'inédit).
+  ALL_EXP.forEach((k) => {
+    const onThisPage = EXP[k].href === p || (k === "blog" && p.startsWith("/blog"));
+    if (onThisPage) score[k] = -999;
+    else if (seen.has(EXP[k].href)) score[k] -= 4;
+  });
+
+  const ordered = ALL_EXP
+    .filter((k) => score[k] > -900)
+    .sort((a, b) => score[b] - score[a])
+    .slice(0, 3);
+
+  const isPingPong = vis.length >= 5;
   return {
     message: isPingPong ? UI[L].lost : UI[L].default,
     suggestions: ordered.map((k) => ({ key: k, label: EXP[k][L], href: EXP[k].href })),
