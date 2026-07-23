@@ -135,6 +135,10 @@
 .overlaySocials a { color: rgba(255, 255, 255, 0.7); }
 .overlaySocials a:hover { color: var(--color-accent); }
 
+@media (min-width: 768px) and (max-width: 1180px) {
+  .logoText { display: none; }
+}
+
 @media (max-width: 980px) {
   .pill, .cta, .cvLink { display: none; }
   .burger { display: inline-flex; }

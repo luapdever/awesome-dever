@@ -12,7 +12,6 @@ import { useExperience } from "../../context/experience";
 const LINKS = [
   { label: L("Home", "Accueil"), href: "/", id: "top" },
   { label: L("About", "Qui suis-je"), href: "/#qui-suis-je", id: "qui-suis-je" },
-  { label: L("Skills", "Compétences"), href: "/#que-sais-je-faire", id: "que-sais-je-faire" },
   { label: L("Journey", "Parcours"), href: "/#parcours", id: "parcours" },
   { label: L("Experience", "Expériences"), href: "/#experiences", id: "experiences" },
   { label: L("Bio", "Bio"), href: "/about-me", id: "bio" },
