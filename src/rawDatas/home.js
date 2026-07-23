@@ -20,12 +20,14 @@ export const collaborations = [
   { name: "Y'ello Market", client: "MTN — via KAMGOKO", url: "https://shop.mtn.bj/", icon: favicon("shop.mtn.bj"), tag: L("MTN e-commerce marketplace (WooCommerce)", "Marketplace e-commerce MTN (WooCommerce)"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: L("MTN audience: 1M+ subscribers", "Audience MTN : 1M+ abonnés") },
   { name: "MTN Yello Connect", client: "MTN — via KAMGOKO", url: "https://auth.mtn.bj/", icon: favicon("auth.mtn.bj"), tag: L("Centralized SSO portal", "Portail SSO centralisé"), role: L("Frontend developer", "Développeur frontend"), impact: L("MTN SSO: 1–2M subscribers", "SSO MTN : 1–2M abonnés") },
   { name: "Mon Routeur", client: "MTN — via KAMGOKO", url: "https://monrouteur.mtn.bj/?ref=noref", icon: favicon("monrouteur.mtn.bj"), tag: L("Activation journey", "Parcours d'activation"), role: L("Frontend & DevOps developer", "Développeur frontend & DevOps"), impact: L("1M+ MTN subscribers · plan tracking", "1M+ abonnés MTN · suivi de forfait") },
-  { name: "WAPIFY", client: L("Studio · SaaS", "Studio · SaaS"), url: "https://wapify.co/", icon: favicon("wapify.co"), tag: L("WhatsApp AI marketing", "Marketing IA WhatsApp") },
-  { name: "GoCoachings", client: L("Studio · SaaS", "Studio · SaaS"), url: "https://www.gocoachings.com", icon: favicon("gocoachings.com"), tag: L("Coaching platform", "Plateforme de coaching") },
-  { name: "NinjaLinking", client: L("Studio · France", "Studio · France"), url: "https://app.ninjalinking.fr", icon: favicon("ninjalinking.fr"), tag: L("SEO backlinks SaaS", "SaaS backlinks SEO") },
-  { name: "Sevexchange", client: L("Fintech", "Fintech"), url: "https://sevexchange.com", icon: favicon("sevexchange.com"), tag: L("Crypto & mobile-money exchange", "Échange crypto & mobile money") },
-  { name: "Kloo", client: L("Web", "Web"), url: "https://kloo.me", icon: favicon("kloo.me"), tag: L("Link-in-bio platform", "Plateforme link-in-bio") },
-  { name: "Miroiterie du Ternois", client: "France", url: "https://www.mdtfermetures.com", icon: favicon("mdtfermetures.com"), tag: L("Field & site management", "Gestion chantiers & terrain") },
+  // `role` inféré prudemment (Paul est dev full-stack) — WAPIFY = fait réel (Laravel).
+  // Pas de `impact`/métrique inventée : à compléter par Paul avec de vrais chiffres.
+  { name: "WAPIFY", client: L("Studio · SaaS", "Studio · SaaS"), url: "https://wapify.co/", icon: favicon("wapify.co"), tag: L("WhatsApp AI marketing", "Marketing IA WhatsApp"), role: L("Full-stack developer (Laravel)", "Développeur full-stack (Laravel)") },
+  { name: "GoCoachings", client: L("Studio · SaaS", "Studio · SaaS"), url: "https://www.gocoachings.com", icon: favicon("gocoachings.com"), tag: L("Coaching platform", "Plateforme de coaching"), role: L("Full-stack developer", "Développeur full-stack") },
+  { name: "NinjaLinking", client: L("Studio · France", "Studio · France"), url: "https://app.ninjalinking.fr", icon: favicon("ninjalinking.fr"), tag: L("SEO backlinks SaaS", "SaaS backlinks SEO"), role: L("Full-stack developer", "Développeur full-stack") },
+  { name: "Sevexchange", client: L("Fintech", "Fintech"), url: "https://sevexchange.com", icon: favicon("sevexchange.com"), tag: L("Crypto & mobile-money exchange", "Échange crypto & mobile money"), role: L("Full-stack developer", "Développeur full-stack") },
+  { name: "Kloo", client: L("Web", "Web"), url: "https://kloo.me", icon: favicon("kloo.me"), tag: L("Link-in-bio platform", "Plateforme link-in-bio"), role: L("Frontend developer", "Développeur frontend") },
+  { name: "Miroiterie du Ternois", client: "France", url: "https://www.mdtfermetures.com", icon: favicon("mdtfermetures.com"), tag: L("Field & site management", "Gestion chantiers & terrain"), role: L("Full-stack developer", "Développeur full-stack") },
 ];
 
 export const stats = [

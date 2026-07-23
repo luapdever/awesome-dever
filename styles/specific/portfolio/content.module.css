@@ -939,3 +939,82 @@
         display: none;
     }
 }
+
+/* =========================================================================
+   Écran d'extinction (Suspend) — overlay affiché pendant la latence avant le
+   retour au portfolio. Effet "power-off" facon CRT : le contenu se replie en
+   une ligne puis un point, avec un flash de luminosité.
+   ========================================================================= */
+.shutdownOverlay {
+    position: fixed;
+    inset: 0;
+    /* Au-dessus de TOUT (bot z=100000, bannière cookies z=9999999, curseur) :
+       l'extinction doit couvrir l'écran entier. */
+    z-index: 10000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 45%, #16112e 0%, #0a0817 55%, #030208 100%);
+    animation: shutdownFadeIn 0.28s ease both;
+}
+@keyframes shutdownFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Le bloc qui "s'éteint" en fin d'animation (collapse CRT). */
+.shutdownCrt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    transform-origin: center center;
+    animation: shutdownCrtOff 0.5s cubic-bezier(0.5, 0, 0.3, 1) 0.95s forwards;
+}
+@keyframes shutdownCrtOff {
+    0%   { transform: scale(1, 1);       filter: brightness(1);   opacity: 1; }
+    55%  { transform: scale(1, 0.008);   filter: brightness(2.6); opacity: 1; }
+    72%  { transform: scale(1.35, 0.005);filter: brightness(4.2); opacity: 1; }
+    100% { transform: scale(0, 0.002);   filter: brightness(6);   opacity: 0; }
+}
+
+.shutdownLogo {
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(0 0 20px rgba(124, 92, 255, 0.6));
+    animation: shutdownPulse 1s ease-in-out infinite;
+}
+@keyframes shutdownPulse {
+    0%, 100% { opacity: 0.5; transform: scale(0.96); }
+    50%      { opacity: 1;   transform: scale(1); }
+}
+
+.shutdownLabel {
+    margin: 0;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: #d3ccff;
+}
+.shutdownLabel b { color: #ffb43a; font-weight: 700; }
+
+.shutdownBar {
+    width: 190px;
+    height: 3px;
+    border-radius: 3px;
+    background: rgba(124, 92, 255, 0.16);
+    overflow: hidden;
+}
+.shutdownBar > span {
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #7c5cff, #ffb43a);
+    transform-origin: right center;
+    animation: shutdownDrain 1.15s ease-in forwards;
+}
+@keyframes shutdownDrain { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+/* Accessibilité : pas d'effet CRT agressif si l'utilisateur préfère peu d'animation. */
+@media (prefers-reduced-motion: reduce) {
+    .shutdownCrt { animation: shutdownFadeIn 0.3s ease both; }
+    .shutdownLogo { animation: none; opacity: 0.9; }
+    .shutdownBar > span { animation-duration: 1.4s; }
+}

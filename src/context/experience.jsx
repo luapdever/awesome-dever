@@ -21,8 +21,8 @@ export function ExperienceProvider({ children }) {
     if (typeof window === "undefined") return;
     // Don't hijack the OS at /paulfolio.
     if (window.location.pathname.startsWith("/paulfolio")) return;
-    // Ne pas déranger la lecture d'un article de blog (/blog/<slug>).
-    if (window.location.pathname.startsWith("/blog/")) return;
+    // Ne pas déranger sur TOUT le blog : l'index (/blog) ET les articles (/blog/<slug>).
+    if (window.location.pathname.startsWith("/blog")) return;
     if (sessionStorage.getItem("dever_experience")) return;
     const id = setTimeout(() => {
       setMandatory(true);

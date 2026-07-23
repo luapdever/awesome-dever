@@ -54,6 +54,7 @@ function Content() {
   const [volume, setVolume] = useState(70);
   const [muted, setMuted] = useState(false);
   const [calDate, setCalDate] = useState(null); // {y, m} viewed month
+  const [shuttingDown, setShuttingDown] = useState(false); // overlay d'extinction (suspend)
   const audioCtx = useRef(null);
 
   // Pick a random desktop wallpaper on the client (avoids SSR hydration mismatch).
@@ -177,6 +178,22 @@ function Content() {
     else document.exitFullscreen?.();
   };
   const menuAction = (fn) => { setOpenMenu(null); fn(); };
+  // Suspension : on affiche l'écran d'extinction (overlay CRT) PENDANT la latence
+  // avant la navigation. Le son de démarrage inversé joue en parallèle ; la
+  // navigation part sur un délai fixe (1500 ms) pour laisser l'animation se jouer
+  // en entier, quelle que soit la durée réelle du son.
+  const suspendOs = () => {
+    if (shuttingDown) return;
+    setShuttingDown(true);
+    setOpenMenu(null);
+    // Les widgets globaux (bot, bannière cookies) sont montés au niveau _app via
+    // des portails à z-index très élevé → une classe sur <body> les masque
+    // pendant l'extinction (déterministe, indépendant du stacking context).
+    try { document.body.classList.add("os-suspending"); } catch (e) { /* noop */ }
+    try { playStartupReversed(); } catch (e) { /* audio indispo */ }
+    setTimeout(() => { window.location.href = "/"; }, 1500);
+  };
+
   const MENUS = {
     file: [
       { label: t.miApps, fn: openLauncher },
@@ -215,7 +232,7 @@ function Content() {
     { label: t.miFullscreen, fn: toggleFullscreen },
     { label: lang === "fr" ? "Redémarrer le système" : "Restart system", fn: () => window.location.reload() },
     { divider: true },
-    { label: lang === "fr" ? "Suspendre — retour au portfolio" : "Suspend — back to portfolio", fn: () => { playStartupReversed().finally(() => { window.location.href = "/"; }); }, accent: true },
+    { label: lang === "fr" ? "Suspendre — retour au portfolio" : "Suspend — back to portfolio", fn: suspendOs, accent: true },
   ];
 
   // Play a short beep at the current volume so the control is genuinely audible.
@@ -348,7 +365,20 @@ function Content() {
       className={styles.contentBlk}
       onClick={(e) => hideContextMenuIfVisible(e, contextMenus.current)}
     >
-      
+
+      {/* Écran d'extinction — affiché pendant la latence avant le retour au portfolio */}
+      {shuttingDown && (
+        <div className={styles.shutdownOverlay} role="alertdialog" aria-live="assertive" aria-label={lang === "fr" ? "Extinction du système" : "System shutting down"}>
+          <div className={styles.shutdownCrt}>
+            <img src={dever.src} alt="" className={styles.shutdownLogo} />
+            <p className={styles.shutdownLabel}>
+              {lang === "fr" ? "Suspension de " : "Suspending "}<b>{OS.name}</b>&nbsp;…
+            </p>
+            <div className={styles.shutdownBar}><span /></div>
+          </div>
+        </div>
+      )}
+
       {/* The splash / boot screen — terminal boot-log style */}
       <section ref={welcomeScreen} className={styles.welcomeScreen}>
         <div className={styles.bootTerm}>

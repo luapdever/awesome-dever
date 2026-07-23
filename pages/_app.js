@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +16,7 @@ import BotWidget from "../src/components/global/BotWidget";
 import CookieConsent from "../src/components/global/CookieConsent";
 import SmartNudge from "../src/components/global/SmartNudge";
 import TopProgress from "../src/components/global/TopProgress";
+import ErrorBoundary from "../src/components/global/ErrorBoundary";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -28,6 +29,16 @@ function MyApp({ Component, pageProps }) {
   // Pages can opt out of the global chrome (nav + footer) — e.g. the OS
   // at /paulfolio runs full-screen without header/footer.
   const hideChrome = Component.hideChrome === true;
+
+  // Mode « embed » : la page est chargée DANS une iframe (l'OS /paulfolio embarque
+  // le blog). On n'affiche alors QUE le contenu — pas de nav, footer, bannière
+  // cookies ni widget bot. Détecté via window.self !== window.top ; comme
+  // X-Frame-Options=SAMEORIGIN, seule NOTRE app peut framer → sûr.
+  const [isEmbed, setIsEmbed] = useState(false);
+  useEffect(() => {
+    try { setIsEmbed(window.self !== window.top); } catch { setIsEmbed(true); }
+  }, []);
+  const bare = hideChrome || isEmbed;
 
   // SPA page views : Next navigue côté client (pas de rechargement), donc
   // gtag n'envoie qu'UN page_view au 1er chargement. On en émet un à chaque
@@ -54,20 +65,27 @@ function MyApp({ Component, pageProps }) {
       <Suspense fallback={<p>Loading</p>}>
         <LandingLangProvider>
           <ExperienceProvider>
-            <Cursor />
-            <TopProgress />
-            {!hideChrome && <NavBar />}
-            <Component {...pageProps} />
-            <ToastContainer theme="dark" />
-            {!hideChrome && <TheFooter />}
-            {!hideChrome && <ExperienceButton />}
+            {!isEmbed && <Cursor />}
+            {!isEmbed && <TopProgress />}
+            {!bare && <NavBar />}
+            {/* Contenu principal isolé : un crash de page affiche un repli, pas un écran blanc. */}
+            <ErrorBoundary
+              name="page"
+              fallback={<main style={{ padding: "80px 20px", textAlign: "center", color: "#eae6ff" }}><p>Un souci d'affichage est survenu. <a href="/" style={{ color: "#ffa500" }}>Recharger l'accueil</a>.</p></main>}
+            >
+              <Component {...pageProps} />
+            </ErrorBoundary>
+            {!isEmbed && <ToastContainer theme="dark" />}
+            {!bare && <TheFooter />}
+            {!bare && <ExperienceButton />}
             {/* Widget monté en permanence (même sur l'OS /paulfolio) : il ne se
                 démonte jamais lors d'une navigation client, donc il reste ouvert
-                si le visiteur l'avait ouvert. */}
-            <BotWidget />
-            <CookieConsent />
-            <SmartNudge />
-            {!hideChrome && <ExperienceModal />}
+                si le visiteur l'avait ouvert. Chaque widget est isolé → son crash
+                éventuel ne tue pas la page (fallback silencieux). */}
+            {!isEmbed && <ErrorBoundary name="bot"><BotWidget /></ErrorBoundary>}
+            {!isEmbed && <ErrorBoundary name="consent"><CookieConsent /></ErrorBoundary>}
+            {!isEmbed && <ErrorBoundary name="nudge"><SmartNudge /></ErrorBoundary>}
+            {!bare && <ErrorBoundary name="expmodal"><ExperienceModal /></ErrorBoundary>}
           </ExperienceProvider>
         </LandingLangProvider>
       </Suspense>

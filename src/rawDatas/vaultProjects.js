@@ -12,18 +12,35 @@
 import { L } from "./i18n";
 
 export const vaultProjects = [
+  // Projets sous NDA : résumés VOLONTAIREMENT génériques et sans chiffres —
+  // ils donnent le rôle, le domaine et une stack plausible SANS révéler le projet.
+  // (À ajuster par Paul si besoin ; aucun détail confidentiel ici.)
   {
     id: "gov-einvoicing",
     company: "CCIB — Chambre de Commerce et d'Industrie du Bénin",
+    role: L("Full-stack Developer", "Développeur full-stack"),
     year: "2022 – 2023",
     status: "Government",
+    tag: L("Public-sector digital platform", "Plateforme numérique du secteur public"),
+    desc: L(
+      "Digital platform for a public institution (business services, data & workflow management). End-to-end application development. Details under NDA.",
+      "Plateforme numérique pour une institution publique (services aux entreprises, gestion de données et de démarches). Développement applicatif de bout en bout. Détails sous NDA."
+    ),
+    stack: ["JavaScript", "Node.js", "PostgreSQL"],
     hidden: true,
   },
   {
     id: "celtiis-corporate",
     company: "Celtiis (via KAMGOKO)",
+    role: L("Full-stack Developer", "Développeur full-stack"),
     year: "2026",
     status: "Confidential",
+    tag: L("Telecom web ecosystem", "Écosystème web télécom"),
+    desc: L(
+      "Web platforms for a telecom operator (multilingual corporate portal, content management, integrations), delivered at KAMGOKO. Details under NDA.",
+      "Plateformes web pour un opérateur télécom (portail corporate multilingue, gestion de contenu, intégrations), réalisées chez KAMGOKO. Détails sous NDA."
+    ),
+    stack: ["WordPress", "PHP", "JavaScript", "SASS"],
     hidden: true,
   },
   {

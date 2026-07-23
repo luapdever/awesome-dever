@@ -238,6 +238,14 @@
 .hiddenOverlay img { width: 26px; height: 26px; opacity: 0.9; }
 .hiddenOverlay .htitle { font-size: 0.82rem; font-weight: 700; color: #fff; }
 .hiddenOverlay .hsub { font-size: 0.68rem; color: rgba(255,255,255,0.6); max-width: 210px; }
+.ndaNote {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 10px; padding: 5px 10px; border-radius: 999px;
+  font-size: 0.68rem; color: #ffc25c;
+  background: rgba(255, 194, 92, 0.1);
+  border: 1px solid rgba(255, 194, 92, 0.28);
+}
+.ndaNote img { opacity: 0.9; }
 
 /* ===================== APP DETAIL (CSP fallback / live app) ===================== */
 .detail { padding: 0; color: #fff; }

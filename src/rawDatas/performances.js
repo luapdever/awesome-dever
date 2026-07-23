@@ -157,7 +157,7 @@ export const performances = [
     icon: dever.src,
     label: "My Blog",
     isLink: true,
-    embed: false, // page interne (même origine) → carte AppDetail + ouverture dans un onglet, pas d'iframe
+    embed: true, // iframe direct du blog dans l'OS (même origine → autorisé par frame-src 'self')
     url: "/blog",
     get content() { return appWindow(this); },
     properties: {

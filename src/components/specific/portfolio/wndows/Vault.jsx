@@ -31,23 +31,20 @@ function Vault() {
             <div className={`${styles.vaultCard} ${styles.hidden}`} key={p.id}>
               <img className={styles.lock} src="/icons/ph/eye-slash__ffffff.svg" alt="Hidden" />
               <h2>{p.company || p.name}</h2>
-              <span className={styles.tag}>{statusLabel(p.status)} · {p.year}</span>
-              <div className={styles.hiddenBody}>
-                <div className={styles.redacted} aria-hidden="true">
-                  <div className={`${styles.rline} ${styles.s1}`} />
-                  <div className={`${styles.rline} ${styles.s2}`} />
-                  <div className={`${styles.rline} ${styles.s3}`} />
-                  <div className={styles.rchips}>
-                    <span className={styles.rchip} />
-                    <span className={styles.rchip} />
-                    <span className={styles.rchip} />
-                  </div>
+              {p.tag && <span className={styles.tag}>{tx(p.tag, lang)}</span>}
+              {p.role && <div className={styles.vRow}>{t.lblRole}&nbsp;: <b>{tx(p.role, lang)}</b> · {p.year}</div>}
+              <span className={`${styles.status} ${styles[p.status]}`}>{statusLabel(p.status)}</span>
+              {p.desc && <p className={styles.desc}>{tx(p.desc, lang)}</p>}
+              {p.stack?.length > 0 && (
+                <div className={styles.chips}>
+                  {p.stack.map((s, i) => (
+                    <span className={styles.chip} key={p.id + i}>{s}</span>
+                  ))}
                 </div>
-                <div className={styles.hiddenOverlay}>
-                  <img src="/icons/ph/lock-simple__ffc25c.svg" alt="" />
-                  <span className={styles.htitle}>{t.enConfidential}</span>
-                  <span className={styles.hsub}>{t.enHiddenSub}</span>
-                </div>
+              )}
+              <div className={styles.ndaNote}>
+                <img src="/icons/ph/lock-simple__ffc25c.svg" alt="" width={13} height={13} />
+                {t.enConfidential} — {t.enHiddenSub}
               </div>
             </div>
           ) : (

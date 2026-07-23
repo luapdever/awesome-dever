@@ -1488,7 +1488,7 @@
         ["fr", "en"].map(l =>
           `<button data-lang="${l}" class="${l === state.lang ? "active" : ""}">${l.toUpperCase()}</button>`).join("");
       ls.querySelectorAll("button").forEach(b =>
-        b.onclick = () => { state.lang = b.dataset.lang; localStorage.setItem("cv_lang", state.lang); render(); });
+        b.onclick = () => { state.lang = b.dataset.lang; localStorage.setItem("cv_lang", state.lang); document.documentElement.lang = state.lang; render(); });
 
       // Bouton export
       document.getElementById("pdfBtn").innerHTML = ICONS.download + " " + ui.exportPdf;

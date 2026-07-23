@@ -1,3 +1,13 @@
+/* Extinction de PaulBrain OS (Suspend) : on masque les widgets globaux montés
+   au niveau _app (bot, bannière cookies, nudge) le temps de l'animation, pour
+   une extinction plein écran non parasitée. Sélecteurs par préfixe de classe
+   hashée (CSS Modules). */
+body.os-suspending [class*="botwidget_"],
+body.os-suspending [class*="cookieConsent_"],
+body.os-suspending [class*="smartNudge_"] {
+  display: none !important;
+}
+
 :root {
   /* ===== Palette "Indigo & Amber" raffinée (cohérente avec le CV) ===== */
   --color-primary: #110068;        /* indigo signature */
