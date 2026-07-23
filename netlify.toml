@@ -1,0 +1,6 @@
+# Force Node 20 sur Netlify : sharp 0.35 (utilisé par next/image pour les blur
+# placeholders des images importées statiquement) exige Node >= 20.9. Le défaut
+# Netlify était Node 18 (EOL) → « Could not load sharp using linux-x64 runtime ».
+# La commande de build et le dossier de publication restent définis dans l'UI Netlify.
+[build.environment]
+  NODE_VERSION = "20"

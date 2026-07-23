@@ -2,6 +2,9 @@
   "name": "dever",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "gen:sitemap": "node scripts/gen-sitemap.mjs",
     "gen:feed": "node scripts/gen-feed.mjs",
