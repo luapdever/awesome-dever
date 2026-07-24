@@ -75,6 +75,15 @@ export const capabilities = [
     tags: ["Docker", "GitLab CI", "Jenkins", "Nginx", "Grafana"],
   },
   {
+    icon: ph("shield-check"),
+    title: L("Security & Reliability", "Sécurité & fiabilité"),
+    desc: L(
+      "Permission-gated APIs and hardened auth: RBAC, 2FA, SSO (Keycloak/OIDC), anti-bot (ALTCHA), rate limiting, input validation and safe DTO projections — plus provider failover and graceful degradation.",
+      "APIs gatées par permission et authentification durcie : RBAC, 2FA, SSO (Keycloak/OIDC), anti-bot (ALTCHA), rate limiting, validation des entrées et projections DTO sûres — plus failover fournisseurs et dégradation gracieuse."
+    ),
+    tags: ["RBAC", "2FA / SSO", "ALTCHA", "Rate limiting", "Idempotency"],
+  },
+  {
     icon: ph("sparkle"),
     title: L("Creative & Motion", "Créatif & Motion"),
     desc: L(

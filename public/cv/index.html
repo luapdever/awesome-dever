@@ -562,6 +562,13 @@
       color: var(--ink);
     }
 
+    .proj-impact {
+      margin: 3px 0 1px;
+      font-size: 11.4px;
+      font-weight: 700;
+      color: #b26a00;
+    }
+
     .proj-stack {
       margin-top: 8px;
       display: flex;
@@ -1099,14 +1106,14 @@
             id: "celtiis", hidden: true, company: "Celtiis (via KAMGOKO)", year: "2026", type: "Développement web — opérateur télécom"
           },
           {
-            id: "mtn-sites", name: "Sites corporate MTN Bénin & MTN Congo", year: "2022 – 2025", role: "Développeur WordPress",
+            id: "mtn-sites", name: "Sites corporate MTN Bénin & MTN Congo", year: "2022 – 2025", role: "Développeur WordPress", impact: "Audience MTN : 1M+ abonnés",
             client: "MTN Group (via KAMGOKO)",
             desc: "Sites vitrines corporate pour deux opérateurs télécoms majeurs : construction de thèmes personnalisés, plugins sur mesure, gestion de contenus multilingue et optimisation des performances et du référencement.",
             stack: ["WordPress", "PHP", "JavaScript", "SASS"],
             links: [{ label: "mtn.bj", href: "https://www.mtn.bj/" }, { label: "mtn.cg", href: "http://mtn.cg/" }]
           },
           {
-            id: "mymtn", name: "MyMTN Selfcare & MonRouteur", year: "2022 – 2025", role: "Développeur Frontend",
+            id: "mymtn", name: "MyMTN Selfcare & MonRouteur", year: "2022 – 2025", role: "Développeur Frontend", impact: "1M+ abonnés MTN",
             client: "MTN Bénin (via KAMGOKO)",
             desc: "Application Selfcare abonnés (SPA) — consultation de forfaits, achats et gestion de compte — et page MonRouteur d'activation de forfaits/data en cas de solde ou de forfait épuisé. Intégration d'APIs RESTful, gestion d'état avancée et optimisation de l'expérience utilisateur.",
             stack: ["Vue.js", "Nuxt.js", "REST API", "SASS", "Webpack"],
@@ -1119,7 +1126,7 @@
             stack: ["Electron", "electron-builder", "Node.js", "Vue.js", "SQLite (sqlite3)", "Socket.io", "IPC · contextBridge", "Axios / REST", "Froala", "Plyr"]
           },
           {
-            id: "emilia", name: "Emilia Cross — App de rencontre en visio", year: "2024 – 2025", role: "Full-stack (Flutter + NestJS) & temps réel",
+            id: "emilia", name: "Emilia Cross — App de rencontre en visio", year: "2024 – 2025", role: "Full-stack (Flutter + NestJS) & temps réel", impact: "2 000+ utilisateurs en temps réel",
             client: "France Assist",
             desc: "Application mobile (Flutter) + PWA où la relation se noue en visio facturée à la minute : streaming vidéo, KYC (Stripe Identity), paiements & reversements Stripe, découverte de partenaires et messagerie temps réel. Clients Flutter + backend NestJS multi-services (API + serveur WebSocket dédié), RBAC, 2FA et supervision. Système de parrainage (deep links natif & PWA) et back-office BI en Vue.js : KPIs par influenceur calculés en un seul query d'agrégats SQL (FILTER), endpoints gatés par permission et à projection sûre.",
             stack: ["Flutter", "Vue.js", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker", "GitLab CI/CD"],
@@ -1239,14 +1246,14 @@
             id: "celtiis", hidden: true, company: "Celtiis (via KAMGOKO)", year: "2026", type: "Web development — telecom operator"
           },
           {
-            id: "mtn-sites", name: "MTN Benin & MTN Congo corporate websites", year: "2022 – 2025", role: "WordPress Developer",
+            id: "mtn-sites", name: "MTN Benin & MTN Congo corporate websites", year: "2022 – 2025", role: "WordPress Developer", impact: "MTN audience: 1M+ subscribers",
             client: "MTN Group (via KAMGOKO)",
             desc: "Corporate showcase websites for two major telecom operators: custom themes, tailored plugins, multilingual content management and performance/SEO optimization.",
             stack: ["WordPress", "PHP", "JavaScript", "SASS"],
             links: [{ label: "mtn.bj", href: "https://www.mtn.bj/" }, { label: "mtn.cg", href: "http://mtn.cg/" }]
           },
           {
-            id: "mymtn", name: "MyMTN Selfcare & MonRouteur", year: "2022 – 2025", role: "Frontend Developer",
+            id: "mymtn", name: "MyMTN Selfcare & MonRouteur", year: "2022 – 2025", role: "Frontend Developer", impact: "1M+ MTN subscribers",
             client: "MTN Benin (via KAMGOKO)",
             desc: "Subscriber Selfcare app (SPA) — plans, purchases and account management — and the MonRouteur page for activating plans/data when the balance or bundle is depleted. RESTful API integration, advanced state management and UX optimization.",
             stack: ["Vue.js", "Nuxt.js", "REST API", "SASS", "Webpack"],
@@ -1259,7 +1266,7 @@
             stack: ["Electron", "electron-builder", "Node.js", "Vue.js", "SQLite (sqlite3)", "Socket.io", "IPC · contextBridge", "Axios / REST", "Froala", "Plyr"]
           },
           {
-            id: "emilia", name: "Emilia Cross — Live-video dating app", year: "2024 – 2025", role: "Full-stack (Flutter + NestJS) & real-time",
+            id: "emilia", name: "Emilia Cross — Live-video dating app", year: "2024 – 2025", role: "Full-stack (Flutter + NestJS) & real-time", impact: "2,000+ real-time users",
             client: "France Assist",
             desc: "A Flutter mobile app + PWA where connections are made over per-minute billed live video: video streaming, KYC (Stripe Identity), Stripe payments & payouts, partner discovery and real-time messaging. Flutter clients + multi-service NestJS backend (API + dedicated WebSocket server) with RBAC, 2FA and monitoring. Referral program (native & PWA deep links) and a Vue.js BI back-office: per-influencer KPIs computed in a single SQL aggregate query (FILTER clauses), through permission-gated, privacy-safe endpoints.",
             stack: ["Flutter", "Vue.js", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker", "GitLab CI/CD"],
@@ -1442,6 +1449,7 @@
         return `<div class="proj">
        <div class="proj-head"><span class="proj-name">${p.name}</span><span class="proj-year">${p.year}</span></div>
        <div class="proj-meta"><span class="proj-role">${p.role}</span> &nbsp;·&nbsp; <span class="proj-client">${ui.client}&nbsp;: <b>${p.client}</b></span></div>
+       ${p.impact ? `<div class="proj-impact">↗ ${p.impact}</div>` : ""}
        <div class="proj-desc">${p.desc}</div>
        <div class="proj-stack">${p.stack.map(s => `<span class="chip">${s}</span>`).join("")}</div>
        ${(links || priv) ? `<div class="proj-links">${links}${priv}</div>` : ""}</div>`;

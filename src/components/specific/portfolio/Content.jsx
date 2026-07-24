@@ -6,7 +6,7 @@ import consl from '../../../assets/img/icons/console.png'
 
 import gsap from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { performances, groupsMeta, pickWallpaper, OS, yearsOfExperience } from "../../../data";
+import { performances, groupsMeta, pickWallpaper, OS, yearsOfExperience, tx } from "../../../data";
 import {
   FaRegSquare,
   FaRegWindowMinimize,
@@ -147,14 +147,47 @@ function Content() {
 
   // App launcher (Windows-like)
   const perfById = Object.fromEntries(performances.map((p) => [p.id, p]));
-  const launcherList = performances.filter((p) =>
-    p.label.toLowerCase().includes(q.trim().toLowerCase())
-  );
+  // Recherche PROFONDE : on ne se limite pas au nom. On construit un « haystack »
+  // par app (nom, catégorie, rôle, client, tag, stack, features, description,
+  // groupe, statut) et on exige que TOUS les termes tapés y figurent (recherche
+  // multi-mots). Les champs bilingues sont résolus dans la langue courante.
+  const appHaystack = (p) => {
+    const pr = p.properties || {};
+    const parts = [p.label, p.id];
+    const add = (v) => { if (v) parts.push(typeof v === "string" ? v : tx(v, lang)); };
+    add(pr.category); add(pr.role); add(pr.client); add(pr.team); add(pr.tag); add(pr.status); add(pr.more); add(pr.impact);
+    if (Array.isArray(pr.stack)) parts.push(pr.stack.join(" "));
+    if (Array.isArray(pr.features)) parts.push(pr.features.map((f) => (typeof f === "string" ? f : tx(f, lang))).join(" "));
+    if (p.group) parts.push(p.group);
+    return parts.join(" ").toLowerCase();
+  };
+  const searchTerms = q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const launcherList = performances.filter((p) => {
+    if (!searchTerms.length) return true;
+    const hay = appHaystack(p);
+    return searchTerms.every((t) => hay.includes(t));
+  });
   const openApp = (e, app) => {
     openWindow(e || { preventDefault() {} }, app);
     setLauncherOpen(false);
   };
   const openLauncher = () => { setQ(""); setSel(0); setLauncherOpen(true); playOsSound("pop"); };
+
+  // Raccourci global : Ctrl+B (⌘B sur Mac) ouvre/ferme l'invite de recherche.
+  // Choisi car simple et NON capté par l'OS (contrairement à Win/Cmd+Espace) ;
+  // `preventDefault` neutralise l'éventuel défaut navigateur (ex. sidebar Firefox).
+  useEffect(() => {
+    const onKey = (e) => {
+      if ((e.ctrlKey || e.metaKey) && !e.altKey && (e.key === "b" || e.key === "B" || e.code === "KeyB")) {
+        e.preventDefault();
+        if (launcherOpen) setLauncherOpen(false);
+        else openLauncher();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [launcherOpen]);
 
   // Clic sur une icône de la barre des tâches : ouvre si besoin, met au premier
   // plan, et surtout RESTAURE la fenêtre si elle était réduite (sinon on ne

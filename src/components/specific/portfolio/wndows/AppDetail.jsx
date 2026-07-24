@@ -26,6 +26,8 @@ function AppDetail({ app }) {
         </div>
       </div>
 
+      {p.impact && <p className={styles.impactBadge}>{tx(p.impact, lang)}</p>}
+
       {app.url && (
         <>
           <a className={styles.openBtn} href={app.url} target="_blank" rel="noopener noreferrer">
@@ -37,6 +39,12 @@ function AppDetail({ app }) {
             {t.adCsp}
           </p>
         </>
+      )}
+
+      {p.article && (
+        <a className={styles.deepDiveBtn} href={p.article} target="_blank" rel="noopener noreferrer">
+          {lang === "fr" ? "Lire l'étude de cas technique" : "Read the technical deep-dive"} →
+        </a>
       )}
 
       {p.more && <p className={styles.detailDesc}>{tx(p.more, lang)}</p>}

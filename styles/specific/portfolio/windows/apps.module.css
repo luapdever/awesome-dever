@@ -276,6 +276,24 @@
 .pill_Training { background: rgba(56,189,248,0.16); border-color: rgba(56,189,248,0.4); color: #8fd6ff; }
 .pill_Enterprise { background: rgba(255,194,92,0.16); border-color: rgba(255,194,92,0.4); color: #ffd591; }
 
+.impactBadge {
+  display: inline-flex; align-items: center; gap: 6px;
+  max-width: calc(100% - 48px); box-sizing: border-box;
+  margin: 14px 24px 0; padding: 6px 13px;
+  background: rgba(255,194,92,0.14); border: 1px solid rgba(255,194,92,0.4);
+  border-radius: 14px; color: #ffd591; font-weight: 700; font-size: 13px;
+  white-space: normal; overflow-wrap: anywhere;
+}
+.impactBadge::before { content: "↗"; font-weight: 800; flex: 0 0 auto; }
+.deepDiveBtn {
+  display: inline-flex; align-items: center; gap: 6px;
+  max-width: calc(100% - 48px); box-sizing: border-box;
+  margin: 8px 24px 2px; color: var(--color-accent-soft, #ffc25c);
+  font-weight: 600; text-decoration: none; font-size: 13px;
+  white-space: normal; overflow-wrap: anywhere;
+}
+.deepDiveBtn:hover { text-decoration: underline; }
+
 .openBtn {
   display: inline-flex; align-items: center; gap: 9px; margin: 18px 24px 0;
   padding: 12px 20px; border-radius: 12px; font-weight: 700; font-size: 0.92rem;

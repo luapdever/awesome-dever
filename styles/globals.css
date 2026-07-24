@@ -8,6 +8,20 @@ body.os-suspending [class*="smartNudge_"] {
   display: none !important;
 }
 
+/* Anti-zoom au focus sur iOS/Safari mobile : Safari zoome automatiquement si un
+   champ a une taille de police < 16px. On force ≥ 16px sur tous les champs de
+   saisie en dessous de 768px — SANS désactiver le pinch-zoom (accessibilité). */
+@media (max-width: 768px) {
+  input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+  /* Horloge de l'OS : on masque la date sur mobile (on garde l'heure) pour ne
+     pas surcharger la barre du haut. */
+  .os-clock-date { display: none; }
+}
+
 :root {
   /* ===== Palette "Indigo & Amber" raffinée (cohérente avec le CV) ===== */
   --color-primary: #110068;        /* indigo signature */

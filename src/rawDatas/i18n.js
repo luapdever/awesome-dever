@@ -31,6 +31,7 @@ export const SKILL_CAT = {
   "CMS & Web": L("CMS & Web", "CMS & Web"),
   Databases: L("Databases", "Bases de données"),
   "DevOps & Cloud": L("DevOps & Cloud", "DevOps & Cloud"),
+  "Security & Reliability": L("Security & Reliability", "Sécurité & fiabilité"),
   "Tooling & Design": L("Tooling & Design", "Outils & Design"),
 };
 

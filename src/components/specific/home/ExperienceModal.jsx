@@ -14,7 +14,7 @@ const ph = (name, color = "ffa500") => `/icons/ph/${name}__${color}.svg`;
 // Trois registres principaux : converser (PaulBot, recommandé), explorer
 // (PaulBrain OS) ou aller à l'essentiel (CV).
 const PRIMARY = [
-  { id: "cv", label: L("Read my résumé", "Lire mon CV"), sub: L("Straight to the facts", "Droit aux faits"), icon: ph("file-text") },
+  { id: "cv", label: L("Read my resume", "Lire mon CV"), sub: L("Straight to the facts", "Droit aux faits"), icon: ph("file-text") },
   { id: "bot", label: L("PaulBot", "PaulBot"), sub: L("Chat about me, then book a meeting", "Discuter à propos de moi, puis RDV"), icon: ph("robot"), recommended: true },
   { id: "os", label: L("PaulBrain OS", "PaulBrain OS"), sub: L("Explore my world, desktop-style", "Explorer mon univers façon bureau"), icon: ph("desktop") },
 ];

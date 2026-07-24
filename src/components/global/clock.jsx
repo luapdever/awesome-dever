@@ -22,7 +22,7 @@ function Clock() {
 
   return (
     <span suppressHydrationWarning>
-      {date}&nbsp;&nbsp;{time}
+      <span className="os-clock-date">{date}&nbsp;&nbsp;</span>{time}
     </span>
   );
 }

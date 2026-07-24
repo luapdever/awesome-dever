@@ -109,6 +109,19 @@ export const skillSet = [
     concepts: ["Self-hosted production on a VPS (Docker Compose, Nginx)", "Multi-provider LLM failover + per-IP rate-limiting", "Multi-stage & distroless builds", "Layer caching", "Blue/green & rollbacks", "SSO OIDC (Keycloak)", "Observability (RED/USE)"],
   },
   {
+    key: "security",
+    category: "Security & Reliability",
+    icon: "/icons/ph/shield-check__ffa500.svg",
+    skills: [
+      { name: "RBAC · 2FA", level: 85, icon: "/icons/ph/shield-check__ffffff.svg" },
+      { name: "SSO — Keycloak / OIDC", level: 80, icon: "/icons/ph/lock-key__ffffff.svg" },
+      { name: "ALTCHA (anti-bot PoW)", level: 82, icon: "/icons/ph/robot__ffffff.svg" },
+      { name: "Input validation (DTO)", level: 85, icon: "/icons/ph/check__ffffff.svg" },
+      { name: "Rate limiting", level: 84, icon: "/icons/ph/plugs-connected__ffffff.svg" },
+    ],
+    concepts: ["Permission-gated endpoints & safe DTO projections (no data leakage)", "Idempotency & outbox", "Per-IP rate limiting", "Anti-bot proof-of-work (ALTCHA)", "Secrets in env, HTTPS/HSTS & CSP", "Graceful degradation & provider failover"],
+  },
+  {
     key: "tools",
     category: "Tooling & Design",
     icon: "/icons/ph/wrench__ffa500.svg",

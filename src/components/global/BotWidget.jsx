@@ -86,6 +86,7 @@ const UI = {
     invalidPhone: "Numéro invalide.",
     start: "Commencer",
     slashTip: "Astuce : tape « / » pour des commandes rapides.",
+    botDeepDive: "Comment PaulBot est construit — étude de cas",
     goHint: "Choisis une section, ou tape un lien relatif (#section ou /page) puis Entrée.",
     options: "Options",
     enlarge: "Agrandir le widget",
@@ -152,6 +153,7 @@ const UI = {
     invalidPhone: "Invalid number.",
     start: "Start",
     slashTip: "Tip: type “/” for quick commands.",
+    botDeepDive: "How PaulBot is built — case study",
     goHint: "Pick a section, or type a relative link (#section or /page) then Enter.",
     options: "Options",
     enlarge: "Enlarge widget",
@@ -924,7 +926,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
               const canEnlarge = !embedded && !narrow;
               const canExport = messages.some((mm) => mm.content && mm.content.trim());
               const canClear = !!contact || messages.length > 0;
-              if (!canEnlarge && !canExport && !canClear) return null; // rien à afficher
+              // Le menu porte toujours au moins le lien « deep-dive » → toujours affiché.
               return (
                 <div className={styles.headMenuWrap}>
                   <button
@@ -937,6 +939,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                     <>
                       <div className={styles.menuScrim} onClick={() => setMenuOpen(false)} />
                       <div className={styles.menuPop} role="menu">
+                        <button type="button" role="menuitem" onClick={() => { setMenuOpen(false); window.open("/blog/paulbot-assistant-ia-fiable-budget-quasi-nul", "_blank", "noopener"); }}>{ui.botDeepDive}</button>
                         {canEnlarge && (
                           <button type="button" onClick={toggleBig} role="menuitem">{big ? ui.reduce : ui.enlarge}</button>
                         )}

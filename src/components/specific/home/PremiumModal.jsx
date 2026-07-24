@@ -9,7 +9,7 @@ import { useLandingLang } from "../../../context/landingLang";
 const ph = (name, color = "ffa500") => `/icons/ph/${name}__${color}.svg`;
 
 const ACTIONS = [
-  { id: "cv", label: L("Read my résumé", "Lire mon CV"), sub: L("Short version, hold the coffee", "Version courte, sans le café"), icon: ph("file-text") },
+  { id: "cv", label: L("Read my resume", "Lire mon CV"), sub: L("Short version, hold the coffee", "Version courte, sans le café"), icon: ph("file-text") },
   { id: "os", label: L("PaulBrain OS", "PaulBrain OS"), sub: L("My brain in desktop mode", "Mon cerveau en mode bureau"), icon: ph("desktop") },
   { id: "terminal", label: L("Terminal mode", "Mode terminal"), sub: L("For the brave — type help", "Pour les vrais, tapez help"), icon: ph("terminal-window") },
   { id: "bot", label: L("My bot", "Mon bot"), sub: L("Soon — it's still learning", "Bientôt — il apprend encore"), icon: ph("robot", "8a8aa0"), disabled: true },
