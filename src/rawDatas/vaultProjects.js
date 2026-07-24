@@ -52,10 +52,10 @@ export const vaultProjects = [
     status: "Enterprise",
     tag: L("Cross-platform desktop app", "Application desktop multiplateforme"),
     desc: L(
-      "Cross-platform Electron desktop app that broadcasts scheduled internal messages onto employee workstations: compose & schedule publications (text, video, audio, flash, scrolling ticker), always-on-top frameless overlay windows (kiosk mode, multi-monitor aware), real-time delivery over WebSocket, and defer/snooze persisted in a local SQLite database. Secure IPC bridge (contextBridge + contextIsolation), multi-file media upload to a REST API, and packaging/distribution via electron-builder.",
-      "Application desktop multiplateforme (Electron) de diffusion programmée de messages internes sur les postes des employés : composition et planification de publications (texte, vidéo, audio, flash, bandeau défilant), fenêtres superposées always-on-top sans cadre (mode kiosque, multi-écrans), livraison en temps réel via WebSocket, et report/rappel des publications persistés en base locale SQLite. Bridge IPC sécurisé (contextBridge + contextIsolation), upload média multi-fichiers vers une API REST, et packaging/distribution via electron-builder."
+      "Cross-platform Electron desktop app that broadcasts scheduled internal messages onto employee workstations: publications (text, video, audio, flash, scrolling ticker) authored in a rich WYSIWYG editor (Froala) with an in-app media player (Plyr), scheduled and delivered as always-on-top frameless overlay windows (kiosk mode, multi-monitor aware), pushed in real time over WebSocket, with defer/snooze persisted in a local SQLite database. Secure IPC bridge (contextBridge + contextIsolation), multi-file media upload to a REST API, and packaging/distribution via electron-builder.",
+      "Application desktop multiplateforme (Electron) de diffusion programmée de messages internes sur les postes des employés : publications (texte, vidéo, audio, flash, bandeau défilant) rédigées dans un éditeur WYSIWYG riche (Froala) avec lecteur média intégré (Plyr), planifiées et diffusées en fenêtres superposées always-on-top sans cadre (mode kiosque, multi-écrans), poussées en temps réel via WebSocket, avec report/rappel des publications persistés en base locale SQLite. Bridge IPC sécurisé (contextBridge + contextIsolation), upload média multi-fichiers vers une API REST, et packaging/distribution via electron-builder."
     ),
-    stack: ["Electron", "electron-builder", "Node.js", "Vue.js", "SQLite", "Socket.io", "IPC · contextBridge"],
+    stack: ["Electron", "electron-builder", "Vue.js", "SQLite", "Socket.io", "IPC · contextBridge", "Froala (WYSIWYG)", "Plyr"],
   },
   {
     id: "moov-togo",

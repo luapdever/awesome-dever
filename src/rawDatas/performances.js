@@ -70,11 +70,16 @@ export const performances = [
     properties: {
       category: L("System · AI assistant", "Système · Assistant IA"),
       status: "Live",
-      role: L("Portfolio assistant", "Assistant du portfolio"),
+      role: L("Full-stack & AI integration — self-hosted", "Full-stack & intégration IA — auto-hébergé"),
       year: "Today",
-      stack: ["Next.js", "Groq / Ollama", "Llama 3.3"],
-      features: [L("Answers about Paul", "Répond à propos de Paul"), L("Streaming replies", "Réponses en streaming"), L("Context-stuffed, RAG-ready", "Context-stuffing, prêt pour le RAG")],
-      more: L("A chat assistant grounded in Paul's real data (CV, projects, skills). Swappable engine — Groq now, self-hosted Ollama later.", "Un assistant de chat nourri des vraies données de Paul (CV, projets, compétences). Moteur interchangeable — Groq maintenant, Ollama auto-hébergé plus tard."),
+      stack: ["NestJS", "SSE streaming", "Docker Compose", "Nginx", "Multi-LLM failover", "ALTCHA"],
+      features: [
+        L("Answers about Paul, streaming replies (SSE)", "Répond à propos de Paul, réponses en streaming (SSE)"),
+        L("Self-hosted on a VPS — Docker Compose + Nginx", "Auto-hébergé sur un VPS — Docker Compose + Nginx"),
+        L("Multi-provider LLM failover + per-IP rate-limit", "Failover multi-fournisseurs LLM + rate-limit par IP"),
+        L("ALTCHA anti-bot; context-stuffed, RAG-ready", "Anti-bot ALTCHA ; context-stuffing, prêt pour le RAG"),
+      ],
+      more: L("A chat assistant grounded in Paul's real data (CV, projects, skills) — built and operated end to end: a NestJS backend self-hosted on a VPS (Docker Compose, Nginx), streaming (SSE) from an OpenAI-compatible LLM with automatic failover across providers, per-IP rate-limiting and an open-source anti-bot captcha (ALTCHA). Swappable engine, RAG-ready.", "Un assistant de chat nourri des vraies données de Paul (CV, projets, compétences) — conçu et opéré de bout en bout : un backend NestJS auto-hébergé sur un VPS (Docker Compose, Nginx), streaming (SSE) depuis un LLM compatible OpenAI avec failover automatique entre fournisseurs, rate-limit par IP et un captcha anti-bot open-source (ALTCHA). Moteur interchangeable, prêt pour le RAG."),
     },
   },
   {
@@ -147,6 +152,37 @@ export const performances = [
       more: L(
         "A dating app (Flutter mobile + PWA) where connections are made over live video billed per minute: Agora video, credit system, KYC verification (Stripe Identity), Stripe payments & payouts, partner discovery and real-time messaging. Multi-service NestJS backend with a dedicated WebSocket server, RBAC, 2FA and monitoring. It also ships a referral program (native & PWA deep links) and a Vue.js BI back-office: each influencer's KPIs — referrals, 30/7-day signups, active accounts, verified KYC, blocked/banned — are computed in a single SQL aggregate query, exposed through permission-gated, privacy-safe endpoints (no sensitive data ever leaves the API).",
         "Une application de rencontre (Flutter mobile + PWA) où la relation se noue en visio facturée à la minute : vidéo Agora, système de crédits, vérification d'identité (Stripe Identity/KYC), paiements & reversements (payouts) Stripe, découverte de partenaires et messagerie temps réel. Backend NestJS multi-services avec serveur WebSocket dédié, RBAC, 2FA et supervision. Elle embarque aussi un système de parrainage (deep links natif & PWA) et un back-office BI en Vue.js : les KPIs de chaque influenceur — filleuls, inscriptions 30/7 jours, comptes actifs, KYC vérifiés, bloqués/bannis — sont calculés en un seul query d'agrégats SQL, exposés via des endpoints gatés par permission et à projection sûre (aucune donnée sensible ne sort de l'API)."
+      ),
+    },
+  },
+
+  /* ============ Featured desktop app (Electron) ============ */
+  {
+    id: "beacon",
+    icon: "/icons/ph/broadcast__ffffff.svg", // ondes radiantes = diffusion d'information
+    bg: "#d97a1e",
+    label: "Beacon",
+    isLink: false,
+    embed: false, // outil interne : pas d'URL publique → carte AppDetail (pas d'iframe)
+    get content() { return appWindow(this); },
+    properties: {
+      category: L("Desktop · Electron — internal broadcast", "Desktop · Electron — diffusion interne"),
+      status: "Enterprise",
+      role: L("Desktop Developer (Electron)", "Développeur desktop (Electron)"),
+      client: "France Assist",
+      year: "2023",
+      stack: ["Electron", "electron-builder", "Vue.js", "SQLite", "Socket.io", "IPC · contextBridge", "Froala (WYSIWYG)", "Plyr"],
+      features: [
+        L("Scheduled publishing (text, video, audio, flash, scrolling ticker)", "Publication programmée (texte, vidéo, audio, flash, bandeau défilant)"),
+        L("Rich message authoring (Froala WYSIWYG) + media player (Plyr)", "Composition de messages riches (WYSIWYG Froala) + lecteur média (Plyr)"),
+        L("Always-on-top frameless overlays (kiosk mode, multi-monitor)", "Overlays sans cadre always-on-top (mode kiosque, multi-écrans)"),
+        L("Real-time delivery over WebSocket (Socket.io)", "Livraison en temps réel via WebSocket (Socket.io)"),
+        L("Secure IPC bridge (contextBridge + contextIsolation)", "Bridge IPC sécurisé (contextBridge + contextIsolation)"),
+        L("Defer/snooze persisted in local SQLite; packaged via electron-builder", "Report/rappel persistés en SQLite local ; packagé via electron-builder"),
+      ],
+      more: L(
+        "A cross-platform Electron desktop app that broadcasts scheduled internal messages onto employee workstations. Internal tool — no public URL.",
+        "Une application desktop multiplateforme (Electron) qui diffuse des messages internes programmés sur les postes des employés. Outil interne — pas d'URL publique."
       ),
     },
   },

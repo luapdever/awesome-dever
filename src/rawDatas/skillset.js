@@ -106,7 +106,7 @@ export const skillSet = [
       { name: "Firebase · GCP · Stripe", level: 82, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
       { name: "Keycloak (SSO) · Agora", level: 78, icon: "/icons/ph/shield-check__ffffff.svg" },
     ],
-    concepts: ["Multi-stage & distroless builds", "Layer caching", "Blue/green & rollbacks", "SSO OIDC (Keycloak)", "Observability (RED/USE)"],
+    concepts: ["Self-hosted production on a VPS (Docker Compose, Nginx)", "Multi-provider LLM failover + per-IP rate-limiting", "Multi-stage & distroless builds", "Layer caching", "Blue/green & rollbacks", "SSO OIDC (Keycloak)", "Observability (RED/USE)"],
   },
   {
     key: "tools",

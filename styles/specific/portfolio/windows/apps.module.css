@@ -274,6 +274,7 @@
 .pill_Live { background: rgba(46, 204, 113, 0.18); border-color: rgba(46,204,113,0.4); color: #8ff0b5; }
 .pill_Demo { background: rgba(255,165,0,0.16); border-color: rgba(255,165,0,0.4); color: var(--color-accent-soft); }
 .pill_Training { background: rgba(56,189,248,0.16); border-color: rgba(56,189,248,0.4); color: #8fd6ff; }
+.pill_Enterprise { background: rgba(255,194,92,0.16); border-color: rgba(255,194,92,0.4); color: #ffd591; }
 
 .openBtn {
   display: inline-flex; align-items: center; gap: 9px; margin: 18px 24px 0;
