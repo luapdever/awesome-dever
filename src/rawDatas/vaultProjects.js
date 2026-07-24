@@ -44,6 +44,20 @@ export const vaultProjects = [
     hidden: true,
   },
   {
+    id: "vantia-beacon",
+    name: "Beacon — Diffusion interne programmée",
+    client: "France Assist",
+    role: L("Desktop Developer (Electron)", "Développeur desktop (Electron)"),
+    year: "2023",
+    status: "Enterprise",
+    tag: L("Cross-platform desktop app", "Application desktop multiplateforme"),
+    desc: L(
+      "Cross-platform Electron desktop app that broadcasts scheduled internal messages onto employee workstations: compose & schedule publications (text, video, audio, flash, scrolling ticker), always-on-top frameless overlay windows (kiosk mode, multi-monitor aware), real-time delivery over WebSocket, and defer/snooze persisted in a local SQLite database. Secure IPC bridge (contextBridge + contextIsolation), multi-file media upload to a REST API, and packaging/distribution via electron-builder.",
+      "Application desktop multiplateforme (Electron) de diffusion programmée de messages internes sur les postes des employés : composition et planification de publications (texte, vidéo, audio, flash, bandeau défilant), fenêtres superposées always-on-top sans cadre (mode kiosque, multi-écrans), livraison en temps réel via WebSocket, et report/rappel des publications persistés en base locale SQLite. Bridge IPC sécurisé (contextBridge + contextIsolation), upload média multi-fichiers vers une API REST, et packaging/distribution via electron-builder."
+    ),
+    stack: ["Electron", "electron-builder", "Node.js", "Vue.js", "SQLite", "Socket.io", "IPC · contextBridge"],
+  },
+  {
     id: "moov-togo",
     name: "Moov Africa Togo",
     client: "Moov Africa (via KAMGOKO)",

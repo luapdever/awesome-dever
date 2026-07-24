@@ -70,7 +70,7 @@ export const skillSet = [
       { name: "GetX / Bloc", level: 78, icon: "/icons/ph/tree-structure__ffffff.svg" },
       { name: "Electron", level: 80, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg" },
     ],
-    concepts: ["Dart isolates & concurrency", "Reactive state (Bloc/GetX)", "Native platform channels", "Deep links (App Links / Universal Links)", "Electron desktop apps (offline SQLite, auto-update)", "PWA (installable, offline)"],
+    concepts: ["Dart isolates & concurrency", "Reactive state (Bloc/GetX)", "Native platform channels", "Deep links (App Links / Universal Links)", "Electron: secure IPC (contextBridge/contextIsolation)", "Electron: always-on-top multi-window overlays (kiosk)", "Electron: offline SQLite + real-time Socket.io", "Electron packaging (electron-builder)", "PWA (installable, offline)"],
   },
   {
     key: "cms",

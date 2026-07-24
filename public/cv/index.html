@@ -1113,6 +1113,12 @@
             links: [{ label: "my.mtn.bj", href: "https://my.mtn.bj/" }, { label: "monrouteur.mtn.bj", href: "https://monrouteur.mtn.bj/forfaits/" }]
           },
           {
+            id: "vantia-beacon", name: "Beacon — Diffusion interne programmée (app desktop)", year: "2023", role: "Développeur Desktop (Electron)",
+            client: "France Assist",
+            desc: "Application desktop multiplateforme (Electron) diffusant des messages internes programmés sur les postes des employés : composition et planification de publications (texte, vidéo, audio, message flash, bandeau défilant), affichage en fenêtres superposées always-on-top sans cadre (transparentes, mode kiosque bloquant Alt+F4, gestion multi-écrans), réception en temps réel via WebSocket (Socket.io) et report/rappel des publications persistés en base locale SQLite. Bridge IPC sécurisé (contextBridge + contextIsolation) entre le processus principal et le renderer, upload média multi-fichiers vers une API REST (multipart, auth Bearer), notifications sonores natives, et packaging/distribution via electron-builder.",
+            stack: ["Electron", "electron-builder", "Node.js", "Vue.js", "SQLite (sqlite3)", "Socket.io", "IPC · contextBridge", "Axios / REST", "Froala", "Plyr"]
+          },
+          {
             id: "emilia", name: "Emilia Cross — App de rencontre en visio", year: "2024 – 2025", role: "Full-stack (Flutter + NestJS) & temps réel",
             client: "France Assist",
             desc: "Application mobile (Flutter) + PWA où la relation se noue en visio facturée à la minute : streaming vidéo, KYC (Stripe Identity), paiements & reversements Stripe, découverte de partenaires et messagerie temps réel. Clients Flutter + backend NestJS multi-services (API + serveur WebSocket dédié), RBAC, 2FA et supervision. Système de parrainage (deep links natif & PWA) et back-office BI en Vue.js : KPIs par influenceur calculés en un seul query d'agrégats SQL (FILTER), endpoints gatés par permission et à projection sûre.",
@@ -1141,7 +1147,7 @@
           { key: "backend", cat: "Backend", items: "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize" },
           { key: "ai", cat: "IA / LLM", items: "Intégration LLM (agnostique du modèle), API OpenAI standard, RAG (génération augmentée par récupération), fine-tuning, prompt engineering & garde-fous, function/tool calling, automatisation IA" },
           { key: "frontend", cat: "Frontend", items: "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, dashboards BI (KPIs, tables paginées), Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection" },
-          { key: "mobile", cat: "Mobile & Desktop", items: "Flutter, GetX, Bloc, deep links (App / Universal Links, PWA), Electron (desktop cross-plateforme), PWA" },
+          { key: "mobile", cat: "Mobile & Desktop", items: "Flutter, GetX, Bloc, deep links (App / Universal Links, PWA), Electron (desktop cross-plateforme : IPC/contextBridge & contextIsolation, multi-fenêtres always-on-top / mode kiosque, SQLite hors-ligne, Socket.io temps réel, electron-builder), PWA" },
           { key: "cms", cat: "CMS & E-commerce", items: "WordPress (thèmes & plugins), WooCommerce, ACF Pro, Elementor, Polylang, LearnPress" },
           { key: "db", cat: "Bases de données", items: "PostgreSQL (CTE, window & agrégats FILTER), MySQL / MariaDB" },
           { key: "devops", cat: "DevOps", items: "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS" },
@@ -1247,6 +1253,12 @@
             links: [{ label: "my.mtn.bj", href: "https://my.mtn.bj/" }, { label: "monrouteur.mtn.bj", href: "https://monrouteur.mtn.bj/forfaits/" }]
           },
           {
+            id: "vantia-beacon", name: "Beacon — Scheduled internal broadcast (desktop app)", year: "2023", role: "Desktop Developer (Electron)",
+            client: "France Assist",
+            desc: "Cross-platform Electron desktop app broadcasting scheduled internal messages onto employee workstations: composing and scheduling publications (text, video, audio, flash message, scrolling ticker), rendered as always-on-top frameless overlay windows (transparent, kiosk mode blocking Alt+F4, multi-monitor aware), real-time delivery over WebSocket (Socket.io), and defer/snooze of publications persisted in a local SQLite database. Secure IPC bridge (contextBridge + contextIsolation) between the main and renderer processes, multi-file media upload to a REST API (multipart, Bearer auth), native sound notifications, and packaging/distribution via electron-builder.",
+            stack: ["Electron", "electron-builder", "Node.js", "Vue.js", "SQLite (sqlite3)", "Socket.io", "IPC · contextBridge", "Axios / REST", "Froala", "Plyr"]
+          },
+          {
             id: "emilia", name: "Emilia Cross — Live-video dating app", year: "2024 – 2025", role: "Full-stack (Flutter + NestJS) & real-time",
             client: "France Assist",
             desc: "A Flutter mobile app + PWA where connections are made over per-minute billed live video: video streaming, KYC (Stripe Identity), Stripe payments & payouts, partner discovery and real-time messaging. Flutter clients + multi-service NestJS backend (API + dedicated WebSocket server) with RBAC, 2FA and monitoring. Referral program (native & PWA deep links) and a Vue.js BI back-office: per-influencer KPIs computed in a single SQL aggregate query (FILTER clauses), through permission-gated, privacy-safe endpoints.",
@@ -1275,7 +1287,7 @@
           { key: "backend", cat: "Backend", items: "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize" },
           { key: "ai", cat: "AI / LLM", items: "LLM integration (model-agnostic), standard OpenAI API, RAG (retrieval-augmented generation), fine-tuning, prompt engineering & guardrails, function/tool calling, AI workflow automation" },
           { key: "frontend", cat: "Frontend", items: "React, Next.js, Vue.js, Nuxt.js, GSAP / ScrollTrigger, CSS Modules / SASS, BI dashboards (KPIs, paginated tables), Web Audio API, Web Speech API, Webpack, ARIA / a11y, i18n, proactive UX & client-side intent detection" },
-          { key: "mobile", cat: "Mobile & Desktop", items: "Flutter, GetX, Bloc, deep links (App / Universal Links, PWA), Electron (cross-platform desktop), PWA" },
+          { key: "mobile", cat: "Mobile & Desktop", items: "Flutter, GetX, Bloc, deep links (App / Universal Links, PWA), Electron (cross-platform desktop: IPC/contextBridge & contextIsolation, always-on-top multi-window / kiosk mode, offline SQLite, real-time Socket.io, electron-builder), PWA" },
           { key: "cms", cat: "CMS & E-commerce", items: "WordPress (themes & plugins), WooCommerce, ACF Pro, Elementor, Polylang, LearnPress" },
           { key: "db", cat: "Databases", items: "PostgreSQL (CTEs, window & FILTER aggregates), MySQL / MariaDB" },
           { key: "devops", cat: "DevOps", items: "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS" },
@@ -1315,7 +1327,7 @@
 
     const VARIANTS = {
       fullstack: {
-        projectOrder: ["celtiis", "mtn-sites", "mymtn", "emilia", "paulbot", "portfolio", "invoicepay"],
+        projectOrder: ["celtiis", "mtn-sites", "mymtn", "vantia-beacon", "emilia", "paulbot", "portfolio", "invoicepay"],
         skillOrder: ["languages", "backend", "ai", "frontend", "mobile", "cms", "db", "devops", "cloud", "obs", "vcs"],
         focus: [],
         fr: {
@@ -1328,7 +1340,7 @@
         }
       },
       frontend: {
-        projectOrder: ["portfolio", "mymtn", "mtn-sites", "celtiis", "emilia", "paulbot", "invoicepay"],
+        projectOrder: ["portfolio", "mymtn", "vantia-beacon", "mtn-sites", "celtiis", "emilia", "paulbot", "invoicepay"],
         skillOrder: ["frontend", "languages", "mobile", "cms", "backend", "ai", "cloud", "devops", "db", "obs", "vcs"],
         focus: ["frontend", "mobile", "languages", "cms"],
         fr: {
@@ -1341,7 +1353,7 @@
         }
       },
       backend: {
-        projectOrder: ["emilia", "paulbot", "portfolio", "invoicepay", "celtiis", "mtn-sites", "mymtn"],
+        projectOrder: ["emilia", "paulbot", "portfolio", "vantia-beacon", "invoicepay", "celtiis", "mtn-sites", "mymtn"],
         skillOrder: ["backend", "ai", "languages", "db", "cloud", "devops", "obs", "frontend", "cms", "mobile", "vcs"],
         focus: ["backend", "ai", "db", "cloud"],
         fr: {
@@ -1354,7 +1366,7 @@
         }
       },
       devops: {
-        projectOrder: ["emilia", "celtiis", "invoicepay", "paulbot", "portfolio", "mtn-sites", "mymtn"],
+        projectOrder: ["emilia", "celtiis", "invoicepay", "paulbot", "portfolio", "vantia-beacon", "mtn-sites", "mymtn"],
         skillOrder: ["devops", "cloud", "obs", "backend", "ai", "db", "vcs", "languages", "cms", "frontend", "mobile"],
         focus: ["devops", "cloud", "obs", "backend"],
         fr: {
