@@ -13,6 +13,7 @@ import Vault from "../components/specific/portfolio/wndows/Vault";
 import Bot from "../components/specific/portfolio/wndows/Bot";
 import { appWindow } from "../components/specific/portfolio/wndows/AppWindow";
 import { L } from "./i18n";
+import { IMPACT } from "./impact";
 
 const MTN_LOGO = "https://my.mtn.bj/wp-content/themes/kamgoko/mtn-logo-nav-new.svg";
 const KAMGOKO = "KAMGOKO Technologies";
@@ -110,13 +111,13 @@ export const performances = [
     url: "/cv",
     get content() { return appWindow(this); },
     properties: {
-      category: L("System · Résumé", "Système · CV"),
+      category: L("System ·resume", "Système · CV"),
       status: "Live",
       role: L("Full-Stack Software Engineer", "Ingénieur logiciel full-stack"),
       year: "2020 — Present",
       stack: ["HTML", "CSS", "JavaScript"],
       features: [L("FR / EN + 4 profiles", "FR / EN + 4 profils"), L("One-click PDF export", "Export PDF en un clic"), L("Always fullscreen", "Toujours en plein écran")],
-      more: L("My interactive résumé — bilingual, with Full-Stack / Frontend / Backend / DevOps variants and PDF export.", "Mon CV interactif — bilingue, avec les variantes Full-Stack / Frontend / Backend / DevOps et export PDF."),
+      more: L("My interactive resume — bilingual, with Full-Stack / Frontend / Backend / DevOps variants and PDF export.", "Mon CV interactif — bilingue, avec les variantes Full-Stack / Frontend / Backend / DevOps et export PDF."),
     },
   },
 
@@ -138,7 +139,7 @@ export const performances = [
       team: "France Assist",
       collaboraters: "Clavers (design) · Fresnel Aglossi (front back-office)",
       year: "2024 — 2025",
-      impact: L("2,000+ real-time users", "2 000+ utilisateurs en temps réel"),
+      impact: IMPACT.emilia,
       article: "/blog/emilia-cross-visio-facturee-a-la-minute",
       stack: ["Flutter", "Vue.js", "NestJS", "TypeScript", "PostgreSQL", "Socket.io", "Agora RTC", "Stripe", "Firebase", "Docker"],
       features: [
@@ -171,7 +172,7 @@ export const performances = [
       category: L("Desktop · Electron — internal broadcast", "Desktop · Electron — diffusion interne"),
       status: "Enterprise",
       role: L("Desktop Developer (Electron)", "Développeur desktop (Electron)"),
-      client: "France Assist",
+      client: "Confidential (NDA)",
       year: "2023",
       stack: ["Electron", "electron-builder", "Vue.js", "SQLite", "Socket.io", "IPC · contextBridge", "Froala (WYSIWYG)", "Plyr"],
       features: [
@@ -280,7 +281,7 @@ export const performances = [
       year: "2024",
       stack: ["Vue.js", "Bootstrap", "Node.js"],
       features: [L("Single sign-on portal", "Portail d'authentification unique"), L("Secure authentication", "Authentification sécurisée")],
-      impact: L("MTN SSO: 1–2M subscribers", "SSO MTN : 1–2M abonnés"),
+      impact: IMPACT.mtnSSO,
       more: L("Y'ello Connect — MTN Bénin's authentication portal.", "Y'ello Connect — le portail d'authentification de MTN Bénin."),
     },
   },
@@ -303,7 +304,7 @@ export const performances = [
       year: "2024",
       stack: ["Vue.js", "WordPress", "Bootstrap", "Node.js"],
       features: [L("Plans, purchases & account", "Forfaits, achats & compte"), L("RESTful API integration", "Intégration d'APIs RESTful"), L("Advanced state management", "Gestion d'état avancée")],
-      impact: L("MTN audience: 1M+ subscribers", "Audience MTN : 1M+ abonnés"),
+      impact: IMPACT.mtnAudience,
       more: L("MyMTN Web — all of MTN in a single self-service application.", "MyMTN Web — tout MTN dans une seule application self-service."),
     },
   },
@@ -326,7 +327,7 @@ export const performances = [
       year: "2024",
       stack: ["HTML", "CSS", "JS", "Nginx"],
       features: [L("Zero-balance landing", "Landing solde épuisé"), L("Plan/data activation", "Activation forfait/data")],
-      impact: L("1M+ MTN subscribers · plan tracking", "1M+ abonnés MTN · suivi de forfait"),
+      impact: IMPACT.mtnRouter,
       more: L("MonRouteur — activation landing shown when an MTN router runs out of plan or data.", "MonRouteur — page d'activation affichée quand un routeur MTN n'a plus de forfait ou de data."),
     },
   },
@@ -371,7 +372,7 @@ export const performances = [
       year: "2024",
       stack: ["Vue.js", "Node.js"],
       features: [L("Online marketplace", "Marketplace en ligne"), L("Buy & sell in Benin", "Achat & vente au Bénin")],
-      impact: L("MTN audience: 1M+ subscribers", "Audience MTN : 1M+ abonnés"),
+      impact: IMPACT.mtnAudience,
       more: L("Online marketplace for all kinds of products in Benin.", "Marketplace en ligne pour tous types de produits au Bénin."),
     },
   },
@@ -394,7 +395,7 @@ export const performances = [
       year: "2022 — 2025",
       stack: ["WordPress", "PHP", "SASS"],
       features: [L("Custom theme & plugins", "Thème & plugins sur mesure"), L("Performance & SEO", "Performance & SEO")],
-      impact: L("MTN audience: 1M+ subscribers", "Audience MTN : 1M+ abonnés"),
+      impact: IMPACT.mtnAudience,
       more: L("Corporate website of MTN Bénin — custom WordPress theme and plugins.", "Site corporate de MTN Bénin — thème et plugins WordPress sur mesure."),
     },
   },

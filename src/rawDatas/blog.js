@@ -85,7 +85,7 @@ export const blogPosts = [
       ),
       L(
         "Contrainte n°1 : les tokens. Les offres gratuites sont vite limitées. Ma parade : répondre côté client, sans appeler le modèle, à toutes les questions déterministes — « est-il dispo ? », « son email ? », « son CV ? », « son parcours ? ». Un routeur d'intention les intercepte et renvoie une réponse toute prête. Résultat : les questions les plus fréquentes coûtent zéro token.",
-        "Constraint #1: tokens. Free tiers get limited fast. My workaround: answer client-side, without calling the model, every deterministic question — “is he available?”, “his email?”, “his résumé?”, “his background?”. An intent router intercepts them and returns a ready-made answer. As a result, the most common questions cost zero tokens."
+        "Constraint #1: tokens. Free tiers get limited fast. My workaround: answer client-side, without calling the model, every deterministic question — “is he available?”, “his email?”, “his resume?”, “his background?”. An intent router intercepts them and returns a ready-made answer. As a result, the most common questions cost zero tokens."
       ),
       L(
         "Contrainte n°2 : la fiabilité. Un fournisseur gratuit peut renvoyer un 429 (quota) à tout moment. J'ai donc mis en place une bascule multi-fournisseurs : Groq en primaire, puis Cerebras, puis Gemini — tous en API compatible OpenAI. Si l'un échoue avant le premier octet, on passe au suivant, de façon transparente. C'est de la résilience légitime (un compte par fournisseur), pas du multi-comptes.",
@@ -164,7 +164,7 @@ Conditions : 100% remote, TJM selon profil.`,
     title: L("Ce portfolio, et tout ce qu'il contient", "This portfolio, and everything inside it"),
     excerpt: L(
       "Pas une page : une expérience. Plusieurs façons de me découvrir — une landing animée, un OS dans le navigateur, un assistant IA, un livre, un terminal, un CV interactif. Visite guidée.",
-      "Not a page: an experience. Several ways to get to know me — an animated landing, an in-browser OS, an AI assistant, a book, a terminal, an interactive résumé. Guided tour."
+      "Not a page: an experience. Several ways to get to know me — an animated landing, an in-browser OS, an AI assistant, a book, a terminal, an interactive resume. Guided tour."
     ),
     cover: "/blog/portfolio-showcase-os.jpg",
     images: [
@@ -196,7 +196,7 @@ Conditions : 100% remote, TJM selon profil.`,
       ),
       L(
         "Le CV : interactif, bilingue, avec quatre profils (Full-Stack, Frontend, Backend, DevOps) et un export PDF en un clic. Et enfin ce blog, où je partage des billets tech, de la culture dev et quelques carnets de voyage.",
-        "The résumé: interactive, bilingual, with four profiles (Full-Stack, Frontend, Backend, DevOps) and one-click PDF export. And finally this blog, where I share tech notes, dev culture and a few travel journals."
+        "The resume: interactive, bilingual, with four profiles (Full-Stack, Frontend, Backend, DevOps) and one-click PDF export. And finally this blog, where I share tech notes, dev culture and a few travel journals."
       ),
       L(
         "Sous le capot : Next.js, React et GSAP côté front, un backend NestJS pour l'assistant IA, Docker et CI/CD pour livrer. Le tout bilingue (FR/EN), accessible et optimisé pour le référencement.",
@@ -211,7 +211,7 @@ Conditions : 100% remote, TJM selon profil.`,
     ctas: [
       { label: L("Explorer PaulBrain OS", "Explore PaulBrain OS"), href: "/paulfolio", desc: L("Le portfolio en mode système d'exploitation", "The portfolio as an operating system") },
       { label: L("Lire le livre", "Read the book"), href: "/book", desc: L("Ma biographie, page à page", "My biography, page by page") },
-      { label: L("Voir le CV interactif", "See the interactive résumé"), href: "/cv", desc: L("Bilingue, 4 profils, export PDF", "Bilingual, 4 profiles, PDF export") },
+      { label: L("Voir le CV interactif", "See the interactive resume"), href: "/cv", desc: L("Bilingue, 4 profils, export PDF", "Bilingual, 4 profiles, PDF export") },
       { label: L("En savoir plus sur moi", "Learn more about me"), href: "/about-me", desc: L("Le parcours en détail", "The journey in detail") },
       { label: L("Le code sur GitHub", "The code on GitHub"), href: "https://github.com/luapdever", desc: L("Mes dépôts", "My repositories"), external: true },
       { label: L("Me contacter sur LinkedIn", "Reach me on LinkedIn"), href: "https://www.linkedin.com/in/paul-zannou-b253a2205", desc: L("Discutons d'un projet", "Let's talk about a project"), external: true },
@@ -299,7 +299,7 @@ Conditions : 100% remote, TJM selon profil.`,
       ),
       L(
         "Sur le web, ton profil, c'est ton habit. Tu peux avoir les meilleures compétences du monde, mais si ta photo de profil date de l'époque où Nokia était à la mode, ou si ton résumé ressemble à un SMS écrit en vitesse, on risque de te zapper plus vite qu'une connexion lente.",
-        "On the web, your profile is your outfit. You can have the best skills in the world, but if your profile picture dates back to when Nokia was cool, or your résumé looks like a rushed text, people will skip you faster than a slow connection."
+        "On the web, your profile is your outfit. You can have the best skills in the world, but if your profile picture dates back to when Nokia was cool, or your resume looks like a rushed text, people will skip you faster than a slow connection."
       ),
       L(
         "Imagine un développeur qui va en entretien avec un pantalon déchiré et un t-shirt délavé : même s'il est le meilleur codeur du pays, le recruteur regardera d'abord son « habit ». En ligne, c'est pareil. Prends soin de ton profil, mets tout à jour, montre tes meilleurs attributs.",

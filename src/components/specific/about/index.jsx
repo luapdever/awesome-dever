@@ -53,7 +53,7 @@ const ABOUT_UI = {
     ctaTitle: "Shall we build something?",
     ctaContact: "Contact me",
     ctaOS: "Explore PaulBrain OS",
-    ctaCV: "My résumé",
+    ctaCV: "My resume",
     ctaBook: "Read my biography (the book)",
   },
   fr: {

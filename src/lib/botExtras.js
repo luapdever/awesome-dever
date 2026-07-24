@@ -54,7 +54,7 @@ export function clientAnswer(intent, lang) {
     case "location":
       return { content: S("Il est basé ici :", "He's based here:"), widget: { type: "info", rows: [{ label: S("Localisation", "Location"), value: F.location }] } };
     case "cv":
-      return { content: S("Son CV interactif est juste là :", "His interactive résumé is right here:"), widget: { type: "info", actions: [{ label: S("Ouvrir le CV", "Open the résumé"), nav: "cv" }] } };
+      return { content: S("Son CV interactif est juste là :", "His interactive resume is right here:"), widget: { type: "info", actions: [{ label: S("Ouvrir le CV", "Open the resume"), nav: "cv" }] } };
     case "meeting":
       return { content: S("Je te mets en relation avec lui :", "Let me connect you with him:"), widget: { type: "info", actions: [{ label: S("Proposer un échange", "Propose a chat"), href: F.booking }, { label: S("Écrire un email", "Send an email"), href: `mailto:${F.email}` }], askEmail: true } };
     case "dispo":
@@ -285,7 +285,7 @@ export function followUps(lastUser, lastBot, lang, asked = []) {
   else if (seen("mtn")) add(S("Que faisait-il pour MTN ?", "What did he do for MTN?"), S("Via quelle agence ?", "Through which agency?"));
   else if (seen("projet", "project", "realisation", "portfolio")) add(S("Montre-moi Emilia Cross", "Show me Emilia Cross"), S("Et WAPIFY, c'est quoi ?", "And what is WAPIFY?"));
 
-  if (seen("dispo", "disponible", "freelance", "mission", "recrut")) add(S("Comment le contacter ?", "How to reach him?"), S("Ouvre son CV", "Open his résumé"), S("Proposer une offre", "Propose an offer"));
+  if (seen("dispo", "disponible", "freelance", "mission", "recrut")) add(S("Comment le contacter ?", "How to reach him?"), S("Ouvre son CV", "Open his resume"), S("Proposer une offre", "Propose an offer"));
   if (seen("competence", "maitrise", "stack", "skills", "techno", "langage")) add(S("Il a quels projets ?", "What has he built?"), S("Sa stack backend ?", "His backend stack?"), S("Sa stack frontend ?", "His frontend stack?"));
   if (seen("cv", "resume", "curriculum")) add(S("Est-il disponible ?", "Is he available?"), S("Ses compétences ?", "His skills?"));
   if (seen("contact", "email", "numero", "recontact")) add(S("Est-il disponible ?", "Is he available?"), S("Proposer un échange", "Propose a chat"));
@@ -301,7 +301,7 @@ export function followUps(lastUser, lastBot, lang, asked = []) {
     S("Comment il a commencé ?", "How did he start?"),
     S("Est-il disponible ?", "Is he available?"),
     S("Comment le contacter ?", "How to reach him?"),
-    S("Ouvre son CV", "Open his résumé"),
+    S("Ouvre son CV", "Open his resume"),
     S("C'est quoi PaulBrain OS ?", "What is PaulBrain OS?"),
     S("Ce qu'on dit de lui ?", "What people say about him?"),
     S("Parle-moi de son blog", "Tell me about his blog"),

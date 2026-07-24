@@ -30,7 +30,7 @@ export const NAV_LABEL = {
   testimonials: { fr: "Voir les témoignages", en: "See testimonials" },
   stack: { fr: "Voir sa stack", en: "See his stack" },
   contact: { fr: "Aller au contact", en: "Go to contact" },
-  cv: { fr: "Ouvrir le CV", en: "Open the résumé" },
+  cv: { fr: "Ouvrir le CV", en: "Open the resume" },
   os: { fr: "Ouvrir PaulBrain OS", en: "Open PaulBrain OS" },
   book: { fr: "Lire le livre", en: "Read the book" },
 };

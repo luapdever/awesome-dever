@@ -25,7 +25,7 @@ const HARD_CAP_MS = 90000; // au-delà, on ne propose plus (il sait ce qu'il fai
 const EXP = {
   os: { fr: "Explorer PaulBrain OS", en: "Explore PaulBrain OS", href: "/paulfolio" },
   book: { fr: "Lire le livre", en: "Read the book", href: "/book" },
-  cv: { fr: "Voir mon CV", en: "See my résumé", href: "/cv" },
+  cv: { fr: "Voir mon CV", en: "See my resume", href: "/cv" },
   blog: { fr: "Lire le blog", en: "Read the blog", href: "/blog" },
   about: { fr: "Qui je suis", en: "About me", href: "/about-me" },
 };

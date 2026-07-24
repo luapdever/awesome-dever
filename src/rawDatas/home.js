@@ -5,6 +5,7 @@
    ============================================================ */
 import { yearsOfExperience } from "./xp";
 import { L } from "./i18n";
+import { IMPACT } from "./impact";
 
 const ph = (name, color = "ffa500") => `/icons/ph/${name}__${color}.svg`;
 const favicon = (domain) => `https://www.google.com/s2/favicons?sz=64&domain=${domain}`;
@@ -14,12 +15,12 @@ const YEARS = yearsOfExperience();
 /* Mes collaborations — 10 projets clés, tirés du portfolio (PaulBrain OS).
    Chaque carte pointe vers le projet en ligne ; « Voir plus » ouvre l'OS. */
 export const collaborations = [
-  { name: "Emilia Cross", client: "France Assist", url: "https://emiliacross.com/", icon: favicon("emiliacross.com"), tag: L("Dating app (Flutter) · per-minute video", "App de rencontre (Flutter) · visio facturée"), role: L("Full-stack developer", "Développeur full-stack"), impact: L("2,000+ real-time users", "2 000+ utilisateurs en temps réel") },
-  { name: "My MTN · Selfcare", client: "MTN — via KAMGOKO", url: "https://my.mtn.bj/", icon: favicon("my.mtn.bj"), tag: L("Vue.js self-care portal", "Portail selfcare Vue.js"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: L("MTN audience: 1M+ subscribers", "Audience MTN : 1M+ abonnés") },
-  { name: "MTN Bénin", client: "MTN — via KAMGOKO", url: "https://www.mtn.bj/", icon: favicon("mtn.bj"), tag: L("Corporate WordPress", "Site corporate WordPress"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: L("MTN audience: 1M+ subscribers", "Audience MTN : 1M+ abonnés") },
-  { name: "Y'ello Market", client: "MTN — via KAMGOKO", url: "https://shop.mtn.bj/", icon: favicon("shop.mtn.bj"), tag: L("MTN e-commerce marketplace (WooCommerce)", "Marketplace e-commerce MTN (WooCommerce)"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: L("MTN audience: 1M+ subscribers", "Audience MTN : 1M+ abonnés") },
-  { name: "MTN Yello Connect", client: "MTN — via KAMGOKO", url: "https://auth.mtn.bj/", icon: favicon("auth.mtn.bj"), tag: L("Centralized SSO portal", "Portail SSO centralisé"), role: L("Frontend developer", "Développeur frontend"), impact: L("MTN SSO: 1–2M subscribers", "SSO MTN : 1–2M abonnés") },
-  { name: "Mon Routeur", client: "MTN — via KAMGOKO", url: "https://monrouteur.mtn.bj/?ref=noref", icon: favicon("monrouteur.mtn.bj"), tag: L("Activation journey", "Parcours d'activation"), role: L("Frontend & DevOps developer", "Développeur frontend & DevOps"), impact: L("1M+ MTN subscribers · plan tracking", "1M+ abonnés MTN · suivi de forfait") },
+  { name: "Emilia Cross", client: "France Assist", url: "https://emiliacross.com/", icon: favicon("emiliacross.com"), tag: L("Dating app (Flutter) · per-minute video", "App de rencontre (Flutter) · visio facturée"), role: L("Full-stack developer", "Développeur full-stack"), impact: IMPACT.emilia },
+  { name: "My MTN · Selfcare", client: "MTN — via KAMGOKO", url: "https://my.mtn.bj/", icon: favicon("my.mtn.bj"), tag: L("Vue.js self-care portal", "Portail selfcare Vue.js"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: IMPACT.mtnAudience },
+  { name: "MTN Bénin", client: "MTN — via KAMGOKO", url: "https://www.mtn.bj/", icon: favicon("mtn.bj"), tag: L("Corporate WordPress", "Site corporate WordPress"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: IMPACT.mtnAudience },
+  { name: "Y'ello Market", client: "MTN — via KAMGOKO", url: "https://shop.mtn.bj/", icon: favicon("shop.mtn.bj"), tag: L("MTN e-commerce marketplace (WooCommerce)", "Marketplace e-commerce MTN (WooCommerce)"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: IMPACT.mtnAudience },
+  { name: "MTN Yello Connect", client: "MTN — via KAMGOKO", url: "https://auth.mtn.bj/", icon: favicon("auth.mtn.bj"), tag: L("Centralized SSO portal", "Portail SSO centralisé"), role: L("Frontend developer", "Développeur frontend"), impact: IMPACT.mtnSSO },
+  { name: "Mon Routeur", client: "MTN — via KAMGOKO", url: "https://monrouteur.mtn.bj/?ref=noref", icon: favicon("monrouteur.mtn.bj"), tag: L("Activation journey", "Parcours d'activation"), role: L("Frontend & DevOps developer", "Développeur frontend & DevOps"), impact: IMPACT.mtnRouter },
   // `role` inféré prudemment (Paul est dev full-stack) — WAPIFY = fait réel (Laravel).
   // Pas de `impact`/métrique inventée : à compléter par Paul avec de vrais chiffres.
   { name: "WAPIFY", client: L("Studio · SaaS", "Studio · SaaS"), url: "https://wapify.co/", icon: favicon("wapify.co"), tag: L("WhatsApp AI marketing", "Marketing IA WhatsApp"), role: L("Full-stack developer (Laravel)", "Développeur full-stack (Laravel)") },
@@ -117,7 +118,7 @@ export const testimonials = [
 ];
 
 export const usefulLinks = [
-  { label: L("My interactive résumé", "Mon CV interactif"), href: "/cv", target: "_blank", icon: ph("file-text") },
+  { label: L("My interactive resume", "Mon CV interactif"), href: "/cv", target: "_blank", icon: ph("file-text") },
   { label: L("PaulBrain OS", "PaulBrain OS"), href: "/paulfolio", icon: ph("desktop") },
   { label: L("About me", "À propos de moi"), href: "/about-me", icon: ph("user-focus") },
   { label: L("GitHub", "GitHub"), href: "https://github.com/luapdever", target: "_blank", icon: ph("github-logo") },
@@ -136,14 +137,14 @@ export const HOME_UI = {
   en: {
     heroSubYears: "years shipping, breaking and fixing (better).",
     btnOS: "Explore PaulBrain OS",
-    btnCV: "My résumé",
+    btnCV: "My resume",
     scroll: "SCROLL",
     casquettes: ["Frontend", "Backend", "DevOps", "Mobile", "CMS / WordPress", "Real-Time", "AI / LLM", "Creative / 3D"],
     stackHead: "What I'm made of.",
     headCollab: "Some collaborations.",
     collabSub: "A few live projects shipped with teams and clients.",
     collabMore: "See everything in PaulBrain OS",
-    aboutText: "A self-taught developer turned engineer, I turn problems others call complicated — per-minute billing, real-time video streaming, government e-invoicing — into stable, elegant and documented products.",
+    aboutText: "Full-stack engineer focused on real-time, product-grade apps: I take problems others call complicated — per-minute video billing, live streaming, government e-invoicing — from prototype to stable, documented production. Broad in range, deep where it counts.",
     bioLink: "My full bio",
     headCaps: "A Swiss army knife — that compiles.",
     headJourney: "My journey in frames.",
@@ -166,7 +167,7 @@ export const HOME_UI = {
     headCollab: "Mes collaborations.",
     collabSub: "Quelques projets en ligne livrés avec des équipes et des clients.",
     collabMore: "Tout voir dans PaulBrain OS",
-    aboutText: "Développeur autodidacte devenu ingénieur, je transforme des problèmes que d'autres jugent compliqués — facturation à la minute, streaming vidéo temps réel, e-facturation gouvernementale — en produits stables, élégants et documentés.",
+    aboutText: "Ingénieur full-stack spécialisé dans les produits temps réel : je prends des problèmes réputés compliqués — facturation vidéo à la minute, streaming live, e-facturation gouvernementale — du prototype à une prod stable et documentée. Large par l'étendue, profond là où ça compte.",
     bioLink: "Ma bio complète",
     headCaps: "Un couteau suisse, mais qui compile.",
     headJourney: "Mon parcours en images.",

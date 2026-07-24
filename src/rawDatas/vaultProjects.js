@@ -12,7 +12,7 @@
 import { L } from "./i18n";
 
 export const vaultProjects = [
-  // Projets sous NDA : résumés VOLONTAIREMENT génériques et sans chiffres —
+  // Projets sous NDA :resumes VOLONTAIREMENT génériques et sans chiffres —
   // ils donnent le rôle, le domaine et une stack plausible SANS révéler le projet.
   // (À ajuster par Paul si besoin ; aucun détail confidentiel ici.)
   {
@@ -46,7 +46,7 @@ export const vaultProjects = [
   {
     id: "vantia-beacon",
     name: "Beacon — Diffusion interne programmée",
-    client: "France Assist",
+    client: "Confidential (NDA)",
     role: L("Desktop Developer (Electron)", "Développeur desktop (Electron)"),
     year: "2023",
     status: "Enterprise",
