@@ -97,7 +97,7 @@
 .aboutWord { transition: opacity 0.15s linear; }
 
 /* Capabilities */
-.capGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+.capGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
 .capCard { position: relative; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 28px; overflow: hidden; transition: transform 0.4s var(--ease-spring), border-color 0.3s ease, background 0.3s ease; }
 .capCard:hover { transform: translateY(-8px); border-color: rgba(255, 165, 0, 0.5); background: rgba(255, 255, 255, 0.06); }
 .capNum { position: absolute; top: 18px; right: 22px; font-size: 1rem; font-weight: 800; color: rgba(255, 255, 255, 0.14); }
