@@ -66,7 +66,7 @@ export function clientAnswer(intent, lang) {
             { label: S("Disponibilité", "Availability"), value: S("Ouvert aux missions freelance & collaborations", "Open to freelance & collaborations") },
             { label: S("Télétravail", "Remote"), value: S("Oui", "Yes") },
             { label: S("Basé à", "Based in"), value: F.location },
-            { label: "Focus", value: "Web · Mobile · Backend · DevOps" },
+            { label: "Focus", value: S("Solutions logicielles", "Software solutions") },
           ],
           actions: [{ label: S("Proposer un échange", "Propose a chat"), href: F.booking }],
           askEmail: true,
