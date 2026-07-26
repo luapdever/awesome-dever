@@ -6,7 +6,7 @@ import "react-phone-number-input/style.css";
 import styles from "../../../styles/global/botwidget.module.css";
 import { useLandingLang } from "../../context/landingLang";
 import { NAV, extractActions, extractSuggestions, runNavAction, navLabel, navigateRelative, linkTokens, looksLikeJobOffer, richBlocks } from "../../lib/botActions";
-import { detectProjects, followUps, normChip, pageContext, routeIntent, clientAnswer, tourSteps, smalltalk, smalltalkReply, waitingMessage } from "../../lib/botExtras";
+import { detectProjects, followUps, normChip, pageContext, routeIntent, clientAnswer, tourSteps, smalltalk, smalltalkReply, waitingMessage, PAUL_FACTS } from "../../lib/botExtras";
 import { submitContact, solveAltcha } from "../../lib/altcha";
 import { track } from "../../lib/analytics";
 
@@ -496,6 +496,24 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
         : "Here's his availability and how to reach him directly 👇",
   });
 
+  // Repli PANNE (modèle indisponible, réseau KO, réponse vide) : on NE montre PAS
+  // la carte « disponibilité » — répondre « voici sa dispo » à une question
+  // technique est un non-sequitur qui donne l'impression d'un bot qui esquive.
+  // On assume la panne, on invite à reposer la question, et on garde le contact
+  // en SECOURS seulement.
+  const errorFallback = () => ({
+    content:
+      lang === "fr"
+        ? "Je n'ai pas réussi à répondre à l'instant — un souci côté modèle, pas côté question. Repose-la (ou reformule-la), ça repart généralement du premier coup."
+        : "I couldn't answer just now — a hiccup on the model side, not with your question. Ask it again (or rephrase); it usually works right away.",
+    widget: {
+      type: "info",
+      actions: [
+        { label: lang === "fr" ? "Écrire à Paul" : "Email Paul", href: `mailto:${PAUL_FACTS.email}` },
+      ],
+    },
+  });
+
   // Rendu inline (liens, gras) — commun aux messages simples et aux cellules/blocs pitch.
   const renderInline = (text) =>
     linkTokens(text).map((tok, k) =>
@@ -612,10 +630,11 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
       // elle renvoie vers le contact, on AJOUTE le repli dispo APRÈS (message séparé).
       const isDeadEnd = !finalShown.trim() || /momentan[eé]ment indisponible|momentarily unavailable/i.test(finalShown);
       if (!pitch && isDeadEnd && UNAVAILABLE_RE.test(finalShown)) {
-        // Cul-de-sac réel (hors-ligne / vide) → on bascule sur /dispo.
+        // Cul-de-sac réel (hors-ligne / vide) = PANNE technique → repli « réessaie »
+        // et non la carte disponibilité (qui serait hors-sujet).
         setMessages((m) => {
           const copy = m.slice();
-          copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", error: false, waiting: false, action: undefined, ...dispoFallback() };
+          copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", error: false, waiting: false, action: undefined, ...errorFallback() };
           return copy;
         });
       } else {
@@ -646,11 +665,11 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
         }
       }
     } catch {
-      // Indisponibilité réseau/serveur → on bascule sur /dispo plutôt qu'un
-      // message d'erreur sans issue.
+      // Indisponibilité réseau/serveur → repli « réessaie » (assumé et actionnable)
+      // plutôt que la carte disponibilité, hors-sujet sur une question technique.
       setMessages((m) => {
         const copy = m.slice();
-        copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", error: false, waiting: false, action: undefined, ...dispoFallback() };
+        copy[copy.length - 1] = { ...copy[copy.length - 1], role: "assistant", error: false, waiting: false, action: undefined, ...errorFallback() };
         return copy;
       });
     } finally {

@@ -33,7 +33,7 @@ export const experiences = [
   },
   {
     id: "france-assist",
-    role: L("Backend & Real-Time Engineer", "Ingénieur backend & temps réel"),
+    role: L("Full-Stack & Real-Time Engineer", "Ingénieur full-stack & temps réel"),
     org: "France Assist",
     client: "France Assist",
     type: L("Collaboration", "Collaboration"),
@@ -62,8 +62,12 @@ export const experiences = [
   },
   {
     id: "ccib",
-    role: L("Desktop & Mobile Developer", "Développeur desktop & mobile"),
-    org: "CCIB — Chamber of Commerce and Industry of Benin",
+    role: L("Backend Developer", "Développeur backend"),
+    // `org` est une CHAÎNE (5 consommateurs l'affichent brut, sans tx()) → on
+    // garde le nom OFFICIEL français de l'institution béninoise, valable dans les
+    // deux langues comme tout nom propre. Avant, la timeline FR affichait le
+    // libellé anglais « Chamber of Commerce and Industry of Benin ».
+    org: "CCIB — Chambre de Commerce et d'Industrie du Bénin",
     client: "CCIB (Government)",
     type: L("Contract", "Prestation"),
     period: L("2022 – 2023", "2022 – 2023"),
