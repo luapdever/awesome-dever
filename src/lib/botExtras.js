@@ -224,7 +224,6 @@ export const BOT_PROJECTS = [
   { name: "MTN Bénin", aliases: ["mtn bénin", "mtn benin", "mtn.bj"], url: "https://www.mtn.bj/", icon: fav("mtn.bj"), tag: L("Corporate WordPress · via KAMGOKO", "Site corporate WordPress · via KAMGOKO") },
   { name: "Mon Routeur", aliases: ["mon routeur", "monrouteur"], url: "https://monrouteur.mtn.bj/?ref=noref", icon: fav("monrouteur.mtn.bj"), tag: L("Activation · via KAMGOKO", "Activation · via KAMGOKO") },
   { name: "WAPIFY", aliases: ["wapify"], url: "https://wapify.co/", icon: fav("wapify.co"), tag: L("WhatsApp AI marketing", "Marketing IA WhatsApp") },
-  { name: "GoCoachings", aliases: ["gocoachings", "go coachings"], url: "https://www.gocoachings.com", icon: fav("gocoachings.com"), tag: L("Coaching platform", "Plateforme de coaching") },
   { name: "NinjaLinking", aliases: ["ninjalinking", "ninja linking"], url: "https://app.ninjalinking.fr", icon: fav("ninjalinking.fr"), tag: L("SEO backlinks SaaS", "SaaS backlinks SEO") },
   { name: "Sevexchange", aliases: ["sevexchange"], url: "https://sevexchange.com", icon: fav("sevexchange.com"), tag: L("Crypto & mobile-money exchange", "Échange crypto & mobile money") },
   { name: "Kloo", aliases: ["kloo"], url: "https://kloo.me", icon: fav("kloo.me"), tag: L("Link-in-bio platform", "Plateforme link-in-bio") },

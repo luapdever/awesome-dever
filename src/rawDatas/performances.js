@@ -503,26 +503,8 @@ export const performances = [
       more: L("A Facebook-style connect / authentication UI experiment.", "Une expérimentation d'UI de connexion/authentification façon Facebook."),
     },
   },
-  {
-    id: "gocoachings",
-    icon: "https://www.google.com/s2/favicons?sz=64&domain=gocoachings.com",
-    bg: "#fff",
-    label: "GoCoachings",
-    isLink: true,
-    embed: false,
-    url: "https://www.gocoachings.com",
-    get content() { return appWindow(this); },
-    properties: {
-      category: L("SaaS · Coaching", "SaaS · Coaching"),
-      status: "Live",
-      role: L("Full-Stack Developer", "Développeur full-stack"),
-      team: STUDIO,
-      year: "2023 — 2024",
-      stack: ["Nuxt.js", "Strapi", "Node.js", "SCSS"],
-      features: [L("Manage & measure coaching sessions", "Gérer & mesurer les séances de coaching"), L("All-in-one platform", "Plateforme tout-en-un")],
-      more: L("The all-in-one platform to manage, monitor and measure your coaching sessions.", "La plateforme tout-en-un pour gérer, suivre et mesurer vos séances de coaching."),
-    },
-  },
+  // GoCoachings retiré : le site n'est plus en ligne. On ne garde pas une app
+  // dont le lien est mort (un lien cassé décrédibilise plus qu'il ne prouve).
   {
     id: "wapify",
     icon: "https://wapify.co/assets/img/logo.svg",

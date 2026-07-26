@@ -24,7 +24,6 @@ export const collaborations = [
   // `role` inféré prudemment (Paul est dev full-stack) — WAPIFY = fait réel (Laravel).
   // Pas de `impact`/métrique inventée : à compléter par Paul avec de vrais chiffres.
   { name: "WAPIFY", client: L("Studio · SaaS", "Studio · SaaS"), url: "https://wapify.co/", icon: favicon("wapify.co"), tag: L("WhatsApp AI marketing", "Marketing IA WhatsApp"), role: L("Full-stack developer (Laravel)", "Développeur full-stack (Laravel)") },
-  { name: "GoCoachings", client: L("Studio · SaaS", "Studio · SaaS"), url: "https://www.gocoachings.com", icon: favicon("gocoachings.com"), tag: L("Coaching platform", "Plateforme de coaching"), role: L("Full-stack developer", "Développeur full-stack") },
   { name: "NinjaLinking", client: L("Studio · France", "Studio · France"), url: "https://app.ninjalinking.fr", icon: favicon("ninjalinking.fr"), tag: L("SEO backlinks SaaS", "SaaS backlinks SEO"), role: L("Full-stack developer", "Développeur full-stack") },
   { name: "Sevexchange", client: L("Fintech", "Fintech"), url: "https://sevexchange.com", icon: favicon("sevexchange.com"), tag: L("Crypto & mobile-money exchange", "Échange crypto & mobile money"), role: L("Full-stack developer", "Développeur full-stack") },
   { name: "Kloo", client: L("Web", "Web"), url: "https://kloo.me", icon: favicon("kloo.me"), tag: L("Link-in-bio platform", "Plateforme link-in-bio"), role: L("Frontend developer", "Développeur frontend") },

@@ -26,7 +26,6 @@ const PUBLIC_PROJECTS = [
   { name: "MTN Bénin", cat: "Telecom · Corporate", year: "2022–2025", url: "https://www.mtn.bj/" },
   { name: "WAPIFY", cat: "WhatsApp AI marketing", year: "2023–2024", url: "https://wapify.co/" },
   { name: "NinjaLinking", cat: "SEO backlinks", year: "2024", url: "https://app.ninjalinking.fr" },
-  { name: "GoCoachings", cat: "Coaching SaaS", year: "2023–2024", url: "https://www.gocoachings.com" },
   { name: "Miroiterie du Ternois", cat: "Field management", year: "2025", url: "https://app-mdt.fr" },
   { name: "Sevexchange", cat: "Crypto & MoMo exchange", year: "2019", url: "https://sevexchange.com" },
 ];

@@ -87,6 +87,7 @@ const UI = {
     start: "Commencer",
     slashTip: "Astuce : tape « / » pour des commandes rapides.",
     botDeepDive: "Comment PaulBot est construit — étude de cas",
+    onePager: "⤓ Télécharger le one-pager d'adéquation (PDF)",
     goHint: "Choisis une section, ou tape un lien relatif (#section ou /page) puis Entrée.",
     options: "Options",
     enlarge: "Agrandir le widget",
@@ -154,6 +155,7 @@ const UI = {
     start: "Start",
     slashTip: "Tip: type “/” for quick commands.",
     botDeepDive: "How PaulBot is built — case study",
+    onePager: "⤓ Download the fit one-pager (PDF)",
     goHint: "Pick a section, or type a relative link (#section or /page) then Enter.",
     options: "Options",
     enlarge: "Enlarge widget",
@@ -864,6 +866,42 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
     }
   };
 
+  // One-pager d'adéquation : rend l'analyse d'offre déjà affichée en PDF
+  // transmissible (le recruteur le fait circuler en interne). Aucun appel LLM :
+  // on envoie le texte déjà produit + l'intitulé du poste deviné dans l'offre.
+  const downloadOnePager = async (analysisText) => {
+    const analysis = (analysisText || "").trim();
+    if (!analysis) return;
+    // Intitulé du poste : 1re ligne « utile » de l'offre collée par le visiteur.
+    const offer = [...messages].reverse().find((m) => m.role === "user" && m.content && m.content.length > 80);
+    const role = (offer?.content || "")
+      .split("\n")
+      .map((l) => l.trim())
+      .find((l) => l.length > 3 && l.length < 120) || "";
+    try {
+      const base = (typeof window !== "undefined" && window.__CHAT_URL) || CHAT_URL;
+      const url = base.replace(/\/chat(\/?)$/, "/onepager$1");
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ role, analysis, lang }),
+      });
+      if (!res.ok) throw new Error("pdf");
+      const blob = await res.blob();
+      const href = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = href;
+      a.download = "paul-zannou-adequation.pdf";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(href), 2000);
+      track("onepager_download");
+    } catch {
+      /* silencieux : nécessite le backend, comme le chat lui-même */
+    }
+  };
+
   // Efface l'historique CÔTÉ CLIENT uniquement. Le conversationId est conservé,
   // donc le transcript serveur (→ PDF/email) n'est pas affecté.
   const clearConversation = () => {
@@ -1094,6 +1132,14 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                             </>
                           )}
                         </div>
+
+                        {/* Après une analyse d'offre : le one-pager PDF, que le
+                            recruteur transmet en interne (manager, client, ATS). */}
+                        {!isUser && m.rich && m.content && m.content.trim() && (
+                          <button type="button" className={styles.escBtn} style={{ marginTop: 8 }} onClick={() => downloadOnePager(m.content)}>
+                            {ui.onePager}
+                          </button>
+                        )}
 
                         {/* Après une offre (pitch) : inviter à laisser son email
                             (quel que soit le mode d'onboarding) → Paul reçoit les
