@@ -9,6 +9,9 @@ import { extractActions } from "./botActions";
 import { solveAltcha } from "./altcha";
 
 const CHAT_URL = process.env.NEXT_PUBLIC_CHAT_URL || "/api/chat";
+// Voir BotWidget : le backend n'exploite que les derniers tours et rejette les
+// charges de plus de 50 messages — on plafonne donc dès l'envoi.
+const MAX_SENT_MESSAGES = 24;
 
 // Même helper de stockage partagé que BotWidget (localStorage, avec repli
 // migratoire depuis sessionStorage) — partagé entre onglets/iframes.
@@ -81,7 +84,7 @@ export async function askBotStream({ question, lang = "fr", onToken, signal }) {
 
   const url = (typeof window !== "undefined" && window.__CHAT_URL) || CHAT_URL;
   const H = { "Content-Type": "application/json" };
-  const reqBody = (proof) => JSON.stringify({ messages: context, lang, conversationId: cid, contact, ...(proof ? { altcha: proof } : {}) });
+  const reqBody = (proof) => JSON.stringify({ messages: context.slice(-MAX_SENT_MESSAGES), lang, conversationId: cid, contact, ...(proof ? { altcha: proof } : {}) });
   let res = await fetch(url, { method: "POST", headers: H, body: reqBody(altcha), signal });
   // 403 = vérification anti-bot perdue côté serveur (ex. backend redémarré) →
   // on invalide le cache, ré-résout un ALTCHA frais et retente UNE fois.

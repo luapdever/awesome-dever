@@ -21,6 +21,10 @@ const CHAT = "/icons/ph/chat-circle-dots-fill__1a0a00.svg";
 const CLOSE = "/icons/ph/x-bold__ffffff.svg";
 
 const CHAT_URL = process.env.NEXT_PUBLIC_CHAT_URL || "/api/chat";
+// Nombre max de messages envoyés au backend. Il n'exploite que les derniers
+// tours et refuse les charges > 50 : au-delà, une conversation longue se
+// bloquait en 400 définitif. 24 laisse largement le contexte utile.
+const MAX_SENT_MESSAGES = 24;
 
 // Repère les réponses "cul-de-sac" (bot indisponible / renvoi vers Paul).
 // Dans ces cas on remplace la réponse par la carte /dispo (contact + dispo),
@@ -598,7 +602,13 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
         try { altcha = await solveAltcha(); } catch { altcha = undefined; }
       }
       const H = { "Content-Type": "application/json" };
-      const reqBody = (proof) => JSON.stringify({ messages: contextMessages, lang, conversationId: cidRef.current, contact, ...(pitch ? { mode: "pitch" } : {}), ...(proof ? { altcha: proof } : {}) });
+      // On n'envoie QUE la fin de la conversation : le backend ne garde de toute
+      // façon que les derniers messages, et sa validation refuse au-delà de 50
+      // (une conversation longue tombait alors en 400 sur CHAQUE message — plus
+      // aucune réponse possible). Plafonner ici règle le problème à la source
+      // et allège la requête.
+      const sentMessages = contextMessages.slice(-MAX_SENT_MESSAGES);
+      const reqBody = (proof) => JSON.stringify({ messages: sentMessages, lang, conversationId: cidRef.current, contact, ...(pitch ? { mode: "pitch" } : {}), ...(proof ? { altcha: proof } : {}) });
       let res = await fetch(url, { method: "POST", headers: H, body: reqBody(altcha) });
       // 403 = vérification anti-bot perdue côté serveur (ex. backend redémarré, ou
       // conversation qui n'est plus « de confiance »). On invalide le cache, on
