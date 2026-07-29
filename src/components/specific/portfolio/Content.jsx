@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styles from "../../../../styles/specific/portfolio/content.module.css";
 import dever from "../../../assets/img/icons/DEVER.svg";
 import consl from '../../../assets/img/icons/console.png'
@@ -26,6 +26,7 @@ import useWindowScreen from "../../../hooks/useWindowScreen";
 import Clock from "../../global/clock";
 import { useLang } from "./lang";
 import { playOsSound, playStartupSound, playStartupReversed, setOsAudioConfig, unlockOsAudio } from "../../../lib/osSounds";
+import { buildIndex as buildBm25Index, rank as rankByBm25 } from "../../../lib/bm25";
 
 // Parse a shareable hash like "app=skills&lang=fr" (or bare "skills").
 function parseHash(h) {
@@ -161,12 +162,18 @@ function Content() {
     if (p.group) parts.push(p.group);
     return parts.join(" ").toLowerCase();
   };
-  const searchTerms = q.trim().toLowerCase().split(/\s+/).filter(Boolean);
-  const launcherList = performances.filter((p) => {
-    if (!searchTerms.length) return true;
-    const hay = appHaystack(p);
-    return searchTerms.every((t) => hay.includes(t));
-  });
+  // Classement BM25 : filtrage inchangé (tous les termes doivent figurer),
+  // seul l'ordre change — les résultats sortaient dans l'ordre du tableau source.
+  // `performances` est un import de module : seule la langue change le haystack.
+  const bm25Index = useMemo(
+    () => buildBm25Index(performances.map(appHaystack)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [lang],
+  );
+  const launcherList = useMemo(
+    () => (q.trim() ? rankByBm25(performances, bm25Index, q) : performances),
+    [q, bm25Index],
+  );
   const openApp = (e, app) => {
     openWindow(e || { preventDefault() {} }, app);
     setLauncherOpen(false);
