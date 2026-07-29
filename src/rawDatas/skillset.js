@@ -62,6 +62,29 @@ export const skillSet = [
     concepts: ["LLM integration (model-agnostic)", "Fine-tuning & LoRA", "RAG — embeddings & vector search", "Standard OpenAI-compatible API", "Function / tool calling", "AI agents & orchestration", "Prompt engineering & guardrails", "Token streaming (SSE)", "Context window & token budgeting", "Workflow automation"],
   },
   {
+    key: "search",
+    category: "Search & relevance",
+    icon: "/icons/ph/magnifying-glass__ffa500.svg",
+    skills: [
+      { name: "BM25 / lexical search", level: 84, icon: "/icons/ph/text-aa__ffffff.svg" },
+      { name: "SQLite FTS5", level: 80, icon: "/icons/ph/database__ffffff.svg" },
+      { name: "Semantic & vector search", level: 82, icon: "/icons/ph/vector-three__ffffff.svg" },
+      { name: "ChromaDB", level: 76, icon: "/icons/ph/stack__ffffff.svg" },
+      { name: "Hybrid retrieval & RRF", level: 80, icon: "/icons/ph/shuffle__ffffff.svg" },
+      { name: "Relevance evaluation (hit@K)", level: 78, icon: "/icons/ph/target__ffffff.svg" },
+    ],
+    concepts: [
+      "Inverted index & tokenization (stemming, diacritics)",
+      "BM25 — IDF, term saturation (k1), length normalization (b)",
+      "Cosine similarity over embeddings",
+      "Reciprocal Rank Fusion (RRF) — merging incomparable rankings",
+      "Source weighting, relevance thresholds & diversity caps",
+      "Retrieval evaluation: hit@K, MRR",
+      "Engine vs algorithm trade-off by corpus size (brute force ≈ 10k vectors, index beyond)",
+      "Works with or without an LLM — site search, dedup, recommendations",
+    ],
+  },
+  {
     key: "mobile",
     category: "Mobile & Desktop",
     icon: "/icons/ph/device-mobile__ffa500.svg",
@@ -89,6 +112,8 @@ export const skillSet = [
     category: "Databases",
     icon: "/icons/ph/database__ffa500.svg",
     skills: [
+      { name: "SQLite FTS5", level: 80, icon: "/icons/ph/magnifying-glass__ffffff.svg" },
+      { name: "ChromaDB (vector store)", level: 76, icon: "/icons/ph/vector-three__ffffff.svg" },
       { name: "PostgreSQL", level: 85, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
       { name: "MySQL / MariaDB", level: 85, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
       { name: "TypeORM · Sequelize", level: 82, icon: "/icons/ph/database__ffffff.svg" },

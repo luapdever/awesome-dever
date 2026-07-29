@@ -100,8 +100,8 @@ export const vaultProjects = [
     status: "Enterprise",
     tag: L("Telecom · Selfcare", "Télécom · Selfcare"),
     desc: L(
-      "Self-service web app for MTN customers: plans, purchases and account management, integrated with MTN's REST APIs.",
-      "Application web self-service pour les clients MTN : forfaits, achats et gestion de compte, intégrée aux APIs REST de MTN."
+      "Self-service web app for MTN customers: plans, purchases and account management, integrated with MTN's REST APIs. Semantic search on the FAQ module: customers find the right answer even when their wording differs from the article's.",
+      "Application web self-service pour les clients MTN : forfaits, achats et gestion de compte, intégrée aux APIs REST de MTN. Recherche sémantique sur le module FAQ : le client trouve la bonne réponse même quand ses mots diffèrent de ceux de l'article."
     ),
     stack: ["Vue.js", "WordPress", "Bootstrap", "Node.js"],
     link: { label: "my.mtn.bj", url: "https://my.mtn.bj/" },
