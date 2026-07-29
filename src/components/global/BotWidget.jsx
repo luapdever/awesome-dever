@@ -31,11 +31,9 @@ const MAX_SENT_MESSAGES = 24;
 // pour ne pas laisser le visiteur sans piste.
 const UNAVAILABLE_RE = /(momentan[eé]ment indisponible|indisponible pour le moment|momentarily unavailable|r[eé]essaie dans un instant|try again shortly|[eé]cri(?:s|re)[- ]?(?:lui|moi)?\s+(?:directement\s+)?[àa]\s+paul|write\s+(?:directly\s+)?to\s+paul|reach\s+paul\s+directly|contacte[rz]?\s+paul\s+directement)/i;
 
-// Données de conversation PARTAGÉES entre tous les onglets/iframes de même
-// origine, via localStorage (contrairement à sessionStorage, isolé par onglet).
-// Ainsi une conversation entamée sur le site se retrouve dans le widget embarqué
-// (ex. le CV, ouvert dans un autre onglet). Lecture avec repli sur sessionStorage
-// pour migrer sans perte les sessions déjà en cours.
+// localStorage et non sessionStorage : la conversation suit le visiteur entre
+// onglets et iframes de même origine. Repli en lecture sur sessionStorage pour
+// migrer les sessions déjà ouvertes.
 const shared = {
   get(key) {
     try {
@@ -502,11 +500,8 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
         : "Here's his availability and how to reach him directly 👇",
   });
 
-  // Repli PANNE (modèle indisponible, réseau KO, réponse vide) : on NE montre PAS
-  // la carte « disponibilité » — répondre « voici sa dispo » à une question
-  // technique est un non-sequitur qui donne l'impression d'un bot qui esquive.
-  // On assume la panne, on invite à reposer la question, et on garde le contact
-  // en SECOURS seulement.
+  // En panne, surtout PAS la carte « disponibilité » : répondre une dispo à une
+  // question technique donne l'impression d'un bot qui esquive. On assume.
   const errorFallback = () => ({
     content:
       lang === "fr"

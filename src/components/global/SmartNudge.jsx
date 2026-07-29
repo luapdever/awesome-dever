@@ -4,14 +4,10 @@ import { useRouter } from "next/router";
 import { useLandingLang } from "../../context/landingLang";
 import styles from "../../../styles/specific/smartNudge.module.css";
 
-/* ============================================================
-   SmartNudge — guidage proactif 100 % CÔTÉ CLIENT (0 requête,
-   0 token). On observe le parcours (temps ACTIF, scroll, clics,
-   inactivité, pages vues), persisté en sessionStorage pour
-   SURVIVRE AUX RECHARGEMENTS. Si l'utilisateur semble perdu après
-   ~22 s de temps actif, on propose une page/parcours pertinent
-   via un arbre de décision déterministe. Une seule fois/session.
-   ============================================================ */
+/* Guidage proactif 100 % côté client (aucune requête). Observe le parcours
+   — temps actif, scroll, clics, pages vues — persisté en sessionStorage pour
+   survivre aux rechargements. Arbre de décision déterministe, une fois par
+   session, après ~22 s de temps actif. */
 
 const KEY = "journey_v1"; // sessionStorage : le parcours (survit au reload)
 const SHOWN = "nudge_shown_v1"; // sessionStorage : déjà proposé cette session

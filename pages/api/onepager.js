@@ -1,9 +1,5 @@
-/* ============================================================
-   PROXY SSR — one-pager d'adéquation en PDF.
-   Le front poste {role, analysis, lang} ; Next relaie vers le backend
-   Nest qui met en page l'analyse déjà produite par le mode pitch
-   (aucun appel LLM côté serveur).
-   ============================================================ */
+/* Proxy SSR du one-pager PDF : relaie {role, analysis, lang} vers Nest, qui
+   met en page l'analyse déjà produite par le mode pitch (aucun appel LLM). */
 const TARGET = (process.env.CHAT_API_URL || "http://api:4000/paulbot/chat").replace(/\/chat(\/?)$/, "/onepager$1");
 
 export default async function handler(req, res) {

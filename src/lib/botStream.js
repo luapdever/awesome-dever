@@ -1,10 +1,6 @@
-/* ============================================================
-   PaulBot — appel streaming réutilisable (commande terminal `ask`, …).
-   Réutilise l'IDENTITÉ et la CONVERSATION *partagées* du widget
-   (mêmes clés localStorage) : une question posée au terminal
-   poursuit la même conversation et l'identité déjà saisie ailleurs.
-   Aucune duplication de logique réseau côté composant.
-   ============================================================ */
+/* Appel streaming réutilisable (terminal `ask`, …). Partage l'identité et la
+   conversation du widget via localStorage : une question posée au terminal
+   poursuit la même conversation. */
 import { extractActions } from "./botActions";
 import { solveAltcha } from "./altcha";
 
@@ -59,11 +55,9 @@ function cleanForTerminal(raw) {
   return extractActions(raw || "").clean.replace(/\*\*(.+?)\*\*/g, "$1");
 }
 
-/* Pose une question au bot, en streaming.
-   - onToken(partialCleanText) est appelé à chaque paquet reçu.
-   - Renvoie le texte final nettoyé.
-   Réutilise le contact + le conversationId + l'historique partagés, et
-   ré-enregistre la conversation (le widget se met à jour entre onglets). */
+/* Question en streaming : `onToken` reçoit le texte partiel nettoyé, la
+   promesse rend le texte final. La conversation est ré-enregistrée (le widget
+   se met à jour entre onglets). */
 export async function askBotStream({ question, lang = "fr", onToken, signal }) {
   const q = (question || "").trim();
   const contact = getContact();

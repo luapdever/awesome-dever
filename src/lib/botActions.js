@@ -1,10 +1,6 @@
-/* ============================================================
-   PaulBot — actions de navigation.
-   Le bot peut terminer sa réponse par un marqueur [[go:CIBLE]]
-   (CIBLE parmi la whitelist ci-dessous) quand le visiteur demande
-   à voir une page/section. Le front retire le marqueur du texte
-   affiché et exécute la navigation. Aucune URL arbitraire.
-   ============================================================ */
+/* Navigation par marqueur [[go:CIBLE]] en fin de réponse. CIBLE doit figurer
+   dans la whitelist ci-dessous : le bot ne peut pas produire d'URL arbitraire.
+   Le front retire le marqueur du texte affiché avant de naviguer. */
 export const NAV = {
   bio: { type: "route", url: "/about-me" },
   collaborations: { type: "section", id: "collaborations" },
