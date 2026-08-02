@@ -40,8 +40,8 @@ export default async function handler(req, res) {
     res.writeHead(502, { "Content-Type": "text/plain; charset=utf-8" });
     res.end(
       lang === "fr"
-        ? "Je suis momentanément indisponible. Réessaie dans un instant, ou écris directement à Paul : pzannou511@gmail.com."
-        : "I'm momentarily unavailable. Please try again shortly, or reach Paul directly at pzannou511@gmail.com."
+        ? "Je suis momentanément indisponible. Réessaie dans un instant, ou écris directement à Paul : hi@paulzannou.com."
+        : "I'm momentarily unavailable. Please try again shortly, or reach Paul directly at hi@paulzannou.com."
     );
   }
 }

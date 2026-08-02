@@ -32,7 +32,7 @@ const T = {
     ready: (n) => `Bien, ${n} ! Mode PaulBot activé — pose tes questions directement. « exit » pour sortir.`,
     thinking: "PaulBot réfléchit…",
     label: "PaulBot",
-    error: "PaulBot est momentanément indisponible. Réessaie, ou écris à pzannou511@gmail.com.",
+    error: "PaulBot est momentanément indisponible. Réessaie, ou écris à hi@paulzannou.com.",
     reset: "Identité oubliée. Relance « ask » pour te présenter à nouveau.",
     who: (c) =>
       `Tu es connu·e comme « ${c.name} » (${c.mode}${c.value ? " · " + c.value : ""}). « ask reset » pour changer.`,
@@ -56,7 +56,7 @@ const T = {
     ready: (n) => `Alright, ${n}! PaulBot mode on — just type your questions. “exit” to leave.`,
     thinking: "PaulBot is thinking…",
     label: "PaulBot",
-    error: "PaulBot is momentarily unavailable. Try again, or email pzannou511@gmail.com.",
+    error: "PaulBot is momentarily unavailable. Try again, or email hi@paulzannou.com.",
     reset: "Identity cleared. Run “ask” to introduce yourself again.",
     who: (c) =>
       `You're known as “${c.name}” (${c.mode}${c.value ? " · " + c.value : ""}). Use “ask reset” to change.`,

@@ -12,7 +12,7 @@ import { experiences } from "../rawDatas/experiences";
    BOOKING : mailto par défaut (fonctionne partout) — remplace par un lien
    Cal.com/Calendly le jour où tu en as un. */
 export const PAUL_FACTS = {
-  email: "pzannou511@gmail.com",
+  email: "hi@paulzannou.com",
   phone: "+2290190667333",
   phoneDisplay: "+229 01 90 66 73 33",
   location: "Cotonou / Abomey-Calavi, Bénin",

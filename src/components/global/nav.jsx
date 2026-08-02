@@ -118,7 +118,7 @@ function NavBar() {
           {lang === "fr" ? "Changer d'expérience" : "Change experience"}
         </button>
         <div className={styles.overlayFoot} data-oitem>
-          <a href="mailto:pzannou511@gmail.com" className={styles.overlayMail}>pzannou511@gmail.com</a>
+          <a href="mailto:hi@paulzannou.com" className={styles.overlayMail}>hi@paulzannou.com</a>
           <div className={styles.overlaySocials}>
             {socialMedias.map((s, i) =>
               i < socialMedias.length - 1 ? (

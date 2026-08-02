@@ -34,7 +34,7 @@ const SOCIALS = [
   { label: "GitHub", url: "https://github.com/luapdever" },
   { label: "LinkedIn", url: "https://linkedin.com/in/paul-zannou-b253a2205" },
   { label: "Blog", url: "https://paulzannou.com" },
-  { label: "Email", url: "mailto:pzannou511@gmail.com" },
+  { label: "Email", url: "mailto:hi@paulzannou.com" },
 ];
 
 export const OPENABLE = ["career", "skills", "vault", "cv", "emilia", "contact", "appStore", "terminal", "dever"];

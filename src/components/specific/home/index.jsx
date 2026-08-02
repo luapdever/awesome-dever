@@ -487,7 +487,7 @@ function HomePage() {
           <ContactForm lang={lang} source="home-cta" />
         </div>
         <div className={styles.ctaActions} data-reveal>
-          <a className={styles.btnGhost} href="mailto:pzannou511@gmail.com" data-magnetic>{ui.ctaMail}</a>
+          <a className={styles.btnGhost} href="mailto:hi@paulzannou.com" data-magnetic>{ui.ctaMail}</a>
           <button
             className={styles.btnGhost}
             onClick={openChooser}

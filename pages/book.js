@@ -145,7 +145,7 @@ const LEAVES = [
       T("Une idée à concrétiser ? Une histoire à écrire ensemble ? Ce livre n'attend qu'une suite. Écrivez-moi.", "An idea to bring to life? A story to write together? This book only awaits a sequel. Write to me."),
     ],
     links: [
-      { label: "pzannou511@gmail.com", href: "mailto:pzannou511@gmail.com" },
+      { label: "hi@paulzannou.com", href: "mailto:hi@paulzannou.com" },
       { label: "GitHub", href: "https://github.com/luapdever" },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/paul-zannou-b253a2205" },
       { label: T("Le blog", "The blog"), href: "https://paulzannou.com/blog" },

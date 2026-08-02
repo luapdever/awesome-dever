@@ -6,7 +6,7 @@ import { socialMedias } from "../../../../data";
 import { useLang } from "../lang";
 import ContactForm from "../../../global/ContactForm";
 
-const EMAIL = "pzannou511@gmail.com";
+const EMAIL = "hi@paulzannou.com";
 const PHONE = "+229 01 90 66 73 33";
 const LOCATION = "Abomey-Calavi / Cotonou, Benin";
 

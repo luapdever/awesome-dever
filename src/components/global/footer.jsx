@@ -58,7 +58,7 @@ function TheFooter() {
 
         <div className={styles.col}>
           <h4>Contact</h4>
-          <a href="mailto:pzannou511@gmail.com">pzannou511@gmail.com</a>
+          <a href="mailto:hi@paulzannou.com">hi@paulzannou.com</a>
           <a href="tel:+2290190667333">+229 01 90 66 73 33</a>
           <span>Abomey-Calavi / Cotonou, Bénin</span>
         </div>
