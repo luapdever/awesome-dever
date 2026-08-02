@@ -7,7 +7,7 @@ import { blogPosts, readingMinutes, tr } from "../../src/rawDatas/blog";
 import { useLandingLang } from "../../src/context/landingLang";
 import styles from "../../styles/specific/blog/article.module.css";
 
-const ORIGIN = "https://luap-dever.netlify.app";
+const ORIGIN = "https://paulzannou.com";
 const CAT_EN = { Dev: "Dev", IA: "AI", "Carrière": "Career", Voyage: "Travel" };
 const catLabel = (c, lang) => (lang === "en" ? CAT_EN[c] || c : c);
 

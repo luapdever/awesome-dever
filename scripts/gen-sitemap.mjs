@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(__dirname, "..", "public", "sitemap.xml");
-const ORIGIN = "https://luap-dever.netlify.app";
+const ORIGIN = "https://paulzannou.com";
 
 // Articles du blog : on PARSE blog.js (slug + date) au lieu de l'importer.
 // (Un import ESM nommé casse sur Node 18 en prod Netlify, où blog.js est

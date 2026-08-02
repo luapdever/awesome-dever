@@ -7,8 +7,8 @@ const personJsonLd = {
   name: "Paul Mèdédji ZANNOU",
   alternateName: "Luap Dever",
   jobTitle: "Ingénieur logiciel full-stack",
-  url: "https://luap-dever.netlify.app",
-  image: "https://luap-dever.netlify.app/luap.png",
+  url: "https://paulzannou.com",
+  image: "https://paulzannou.com/luap.png",
   address: { "@type": "PostalAddress", addressLocality: "Cotonou", addressCountry: "BJ" },
   description:
     "Ingénieur logiciel full-stack : web, mobile, temps réel et DevOps. Backend distribué, interfaces réactives, paiements, streaming vidéo et écosystèmes WordPress d'entreprise.",
@@ -18,7 +18,7 @@ const personJsonLd = {
     "https://linkedin.com/in/paul-zannou-b253a2205",
     "https://facebook.com/paulsmith.zannou",
     "https://twitter.com/SmithZannou",
-    "https://luap-dever.netlify.app",
+    "https://paulzannou.com",
   ],
 };
 

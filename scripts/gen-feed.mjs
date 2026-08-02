@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(__dirname, "..", "public", "feed.xml");
-const ORIGIN = "https://luap-dever.netlify.app";
+const ORIGIN = "https://paulzannou.com";
 const TITLE = "Le blog — Paul Mèdédji Zannou (Luap Dever)";
 const DESC = "Billets tech, culture dev, un peu d'IA — et quelques carnets de voyage.";
 

@@ -10,5 +10,5 @@ export const socialMedias = [
   { name: "LinkedIn", icon: <FaLinkedinIn />, link: "https://linkedin.com/in/paul-zannou-b253a2205" },
   { name: "Facebook", icon: <FaFacebook />, link: "https://facebook.com/paulsmith.zannou" },
   { name: "Twitter / X", icon: <FaTwitter />, link: "https://twitter.com/SmithZannou" },
-  { name: "Blog", icon: <>Blog</>, link: "https://luap-dever.netlify.app/blog" },
+  { name: "Blog", icon: <>Blog</>, link: "https://paulzannou.com/blog" },
 ];

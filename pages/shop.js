@@ -10,10 +10,10 @@ const jsonLd = {
     "@type": "Person",
     name: "Paul Mèdédji ZANNOU",
     alternateName: "Luap Dever",
-    url: "https://luap-dever.netlify.app",
+    url: "https://paulzannou.com",
   },
   areaServed: "Worldwide",
-  url: "https://luap-dever.netlify.app/shop",
+  url: "https://paulzannou.com/shop",
 };
 
 export default function ShopPage() {

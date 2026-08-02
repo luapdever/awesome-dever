@@ -33,7 +33,7 @@ const PUBLIC_PROJECTS = [
 const SOCIALS = [
   { label: "GitHub", url: "https://github.com/luapdever" },
   { label: "LinkedIn", url: "https://linkedin.com/in/paul-zannou-b253a2205" },
-  { label: "Blog", url: "https://luap-dever.netlify.app" },
+  { label: "Blog", url: "https://paulzannou.com" },
   { label: "Email", url: "mailto:pzannou511@gmail.com" },
 ];
 

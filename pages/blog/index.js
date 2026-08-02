@@ -6,7 +6,7 @@ import { blogPosts, CATEGORIES, readingMinutes, tr } from "../../src/rawDatas/bl
 import { useLandingLang } from "../../src/context/landingLang";
 import styles from "../../styles/specific/blog/blog.module.css";
 
-const ORIGIN = "https://luap-dever.netlify.app";
+const ORIGIN = "https://paulzannou.com";
 const PER_PAGE = 9;
 
 const UI = {

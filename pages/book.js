@@ -110,7 +110,7 @@ const LEAVES = [
 
   { kind: "projects", kicker: T("Réalisations — suite", "Selected Works — cont."), title: T("… et quelques autres", "… and a few more"), projects: [
     { name: T("Sites corporate MTN", "MTN corporate sites"), client: "MTN · via KAMGOKO", href: "https://www.mtn.bj/", problem: T("Offrir une présence corporate multilingue, rapide et bien référencée pour deux opérateurs.", "Deliver a fast, well-ranked, multilingual corporate presence for two operators."), solution: T("Thèmes & plugins WordPress sur mesure, contenu multilingue, optimisation performances et SEO.", "Custom WordPress themes & plugins, multilingual content, performance and SEO optimization.") },
-    { name: T("PaulBot & le portfolio", "PaulBot & the portfolio"), client: T("Projet personnel", "Personal project"), href: "https://luap-dever.netlify.app", problem: T("Prouver des compétences autrement qu'avec une liste — et laisser le visiteur interroger le profil.", "Prove skills otherwise than with a list — and let the visitor question the profile."), solution: T("Portfolio « OS dans le navigateur » (GSAP) + assistant IA en streaming (NestJS, LLM/SSE), captcha open-source, export PDF.", "In-browser “OS” portfolio (GSAP) + streaming AI assistant (NestJS, LLM/SSE), open-source captcha, PDF export.") },
+    { name: T("PaulBot & le portfolio", "PaulBot & the portfolio"), client: T("Projet personnel", "Personal project"), href: "https://paulzannou.com", problem: T("Prouver des compétences autrement qu'avec une liste — et laisser le visiteur interroger le profil.", "Prove skills otherwise than with a list — and let the visitor question the profile."), solution: T("Portfolio « OS dans le navigateur » (GSAP) + assistant IA en streaming (NestJS, LLM/SSE), captcha open-source, export PDF.", "In-browser “OS” portfolio (GSAP) + streaming AI assistant (NestJS, LLM/SSE), open-source captcha, PDF export.") },
   ], ndaNote: T("D'autres missions — pour Celtiis, Orabank et une institution publique (CCIB) — restent couvertes par la confidentialité.", "Other engagements — for Celtiis, Orabank and a public institution (CCIB) — remain under confidentiality.") },
 
   { kind: "lessons", kicker: T("Leçons", "Lessons"), title: T("Ce que j'aurais aimé qu'on me dise", "What I Wish I'd Been Told"), intro: T("À qui débute, huit convictions gagnées sur le terrain — bien plus utiles qu'une liste de technologies.", "For anyone starting out, eight convictions earned in the field — far more useful than a list of technologies."), items: [
@@ -148,7 +148,7 @@ const LEAVES = [
       { label: "pzannou511@gmail.com", href: "mailto:pzannou511@gmail.com" },
       { label: "GitHub", href: "https://github.com/luapdever" },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/paul-zannou-b253a2205" },
-      { label: T("Le blog", "The blog"), href: "https://luap-dever.netlify.app/blog" },
+      { label: T("Le blog", "The blog"), href: "https://paulzannou.com/blog" },
     ],
   },
 ];
@@ -324,7 +324,7 @@ function Leaf({ c, lang, tr, jumpTo, toc }) {
   );
 }
 
-const ORIGIN = "https://luap-dever.netlify.app";
+const ORIGIN = "https://paulzannou.com";
 const labelOf = (l) => {
   if (l.kind === "cover") return T("Couverture", "Cover");
   if (l.kind === "edition") return T("L'auteur", "The Author");
