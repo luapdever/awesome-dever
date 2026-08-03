@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  /* Routage i18n : / = français, /en/... = anglais. Indispensable au SEO —
+     une URL unique ne peut pas être indexée dans deux langues.
+     `localeDetection` s'appuie sur le cookie NEXT_LOCALE (posé par le
+     sélecteur de langue) puis sur Accept-Language. */
+  i18n: { locales: ["fr", "en"], defaultLocale: "fr", localeDetection: true },
   env: {
     appUrl: "https://paulzannou.com/",
     // apiUrl: "https://dever-luapdever511.koyeb.app/api/"

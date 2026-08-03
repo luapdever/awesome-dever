@@ -244,3 +244,10 @@ export default function BlogIndex() {
     </>
   );
 }
+
+/* Sans getStaticProps, Next applique l'optimisation statique automatique et
+   produit UN SEUL HTML pour toutes les locales — la version anglaise ne serait
+   donc toujours pas indexable. Ce bloc force une génération par locale. */
+export async function getStaticProps() {
+  return { props: {} };
+}

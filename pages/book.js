@@ -422,7 +422,7 @@ function Book() {
     "@type": "Book",
     name: lang === "fr" ? "Ce que les idées promettent" : "What Ideas Promise",
     inLanguage: lang,
-    url: `${ORIGIN}/book`,
+    url: `${ORIGIN}${lang === "fr" ? "" : "/en"}/book`,
     datePublished: "2026-06-30",
     bookEdition: lang === "fr" ? "Première édition" : "First edition",
     author: { "@type": "Person", name: "Paul Mèdédji Zannou" },
@@ -441,11 +441,16 @@ function Book() {
       <Head>
         <title>{title}</title>
         <meta name="description" content={desc} />
-        <link rel="canonical" href={`${ORIGIN}/book`} />
+        {/* Canonique par locale + hreflang réciproques : sans ça, /en/book se
+            déclarerait doublon de /book et ne serait jamais indexé. */}
+        <link rel="canonical" href={`${ORIGIN}${lang === "fr" ? "" : "/en"}/book`} />
+        <link rel="alternate" hreflang="fr" href={`${ORIGIN}/book`} />
+        <link rel="alternate" hreflang="en" href={`${ORIGIN}/en/book`} />
+        <link rel="alternate" hreflang="x-default" href={`${ORIGIN}/book`} />
         <meta property="og:type" content="book" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={desc} />
-        <meta property="og:url" content={`${ORIGIN}/book`} />
+        <meta property="og:url" content={`${ORIGIN}${lang === "fr" ? "" : "/en"}/book`} />
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLd, breadcrumbLd([{ name: "Accueil", path: "/" }, { name: "Le livre", path: "/book" }])]) }} />
       </Head>
@@ -520,3 +525,10 @@ function Book() {
 
 Book.hideChrome = true;
 export default Book;
+
+/* Sans getStaticProps, Next applique l'optimisation statique automatique et
+   produit UN SEUL HTML pour toutes les locales — la version anglaise ne serait
+   donc toujours pas indexable. Ce bloc force une génération par locale. */
+export async function getStaticProps() {
+  return { props: {} };
+}

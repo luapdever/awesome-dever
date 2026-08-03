@@ -94,6 +94,69 @@ function HomePage() {
     return () => handlers.forEach((h) => { h.el.removeEventListener("mousemove", h.move); h.el.removeEventListener("mouseleave", h.leave); });
   }, []);
 
+  /* Animations des trois sections denses. Rattaché à `[lang]` : après un
+     changement de langue les nœuds sont neufs, un tween créé au montage
+     pointerait dans le vide. */
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+        // Expériences — la carte monte et se pose ; léger scale pour la profondeur.
+        gsap.utils.toArray(`.${styles.stackCard}`).forEach((card, i) =>
+          gsap.from(card, {
+            y: 80, opacity: 0, scale: 0.95,
+            duration: 1.15, ease: "power3.out", delay: i * 0.06,
+            scrollTrigger: { trigger: card, start: "top 88%", toggleActions: "play none none reverse" },
+          })
+        );
+
+        // Collaborations — bascule 3D discrète, pivot au bas de la carte.
+        gsap.from(`.${styles.collabCard}`, {
+          y: 64, opacity: 0, rotateX: -18, transformPerspective: 900, transformOrigin: "50% 100%",
+          duration: 1.05, ease: "power3.out", stagger: { each: 0.09, from: "start" },
+          scrollTrigger: { trigger: `.${styles.collabGrid}`, start: "top 78%", toggleActions: "play none none reverse" },
+        });
+
+        // Compétences — la catégorie monte, puis ses puces éclosent.
+        gsap.utils.toArray(`.${styles.techCat}`).forEach((cat) => {
+          gsap.from(cat, {
+            y: 56, opacity: 0, duration: 0.95, ease: "power3.out",
+            scrollTrigger: { trigger: cat, start: "top 85%", toggleActions: "play none none reverse" },
+          });
+          gsap.from(cat.querySelectorAll(`.${styles.techChip}`), {
+            opacity: 0, scale: 0.86, y: 10, duration: 0.55, ease: "back.out(1.7)", stagger: 0.035,
+            scrollTrigger: { trigger: cat, start: "top 80%", toggleActions: "play none none reverse" },
+          });
+        });
+    });
+
+    // La section « Journey » est épinglée : elle allonge le document une fois
+    // initialisée, faussant les déclencheurs situés après elle.
+    const t = setTimeout(() => ScrollTrigger.refresh(), 600);
+    const onLoad = () => ScrollTrigger.refresh();
+    window.addEventListener("load", onLoad);
+    return () => { clearTimeout(t); window.removeEventListener("load", onLoad); ctx.revert(); };
+  }, [lang]);
+
+  /* Le paragraphe « à propos » porte `key={lang}` : il REMONTE à chaque
+     changement de langue, donc ses `.aboutWord` sont de nouveaux nœuds. Le tween
+     créé au montage pointait sur les anciens — les mots restaient figés. On le
+     recrée donc à chaque langue, en tuant proprement le précédent. */
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    gsap.registerPlugin(ScrollTrigger);
+    const words = gsap.utils.toArray(".aboutWord");
+    if (!words.length) return;
+    const tween = gsap.fromTo(
+      words,
+      { opacity: 0.16 },
+      { opacity: 1, ease: "none", stagger: 0.5, scrollTrigger: { trigger: ".aboutText", start: "top 72%", end: "bottom 60%", scrub: true } }
+    );
+    return () => { tween.scrollTrigger?.kill(); tween.kill(); };
+  }, [lang]);
+
   // Recalculate pinned-scroll distances when the language (and thus text width) changes.
   useEffect(() => {
     if (typeof window !== "undefined" && ScrollTrigger) {
@@ -218,9 +281,7 @@ function HomePage() {
       gsap.utils.toArray("[data-stagger]").forEach((g) =>
         gsap.from(g.children, { y: 46, opacity: 0, duration: 0.7, ease: "power3.out", stagger: 0.09, scrollTrigger: { trigger: g, start: "top 86%" } }));
 
-      /* About scrub */
-      const aboutWords = gsap.utils.toArray(".aboutWord");
-      if (aboutWords.length) gsap.fromTo(aboutWords, { opacity: 0.16 }, { opacity: 1, ease: "none", stagger: 0.5, scrollTrigger: { trigger: ".aboutText", start: "top 72%", end: "bottom 60%", scrub: true } });
+      /* About scrub : recréé à chaque langue, voir l'effet dédié plus bas. */
 
       /* Journey — pinned horizontal scroll (desktop + mobile) */
       const mm = gsap.matchMedia();
@@ -238,6 +299,11 @@ function HomePage() {
             pin: true,
             scrub: 1,
             invalidateOnRefresh: true,
+            /* Ce pin allonge le document de plusieurs milliers de pixels, mais
+               UNIQUEMENT sur desktop. Sans priorité, les déclencheurs situés
+               après lui étaient calculés sur l'ancienne hauteur et se jouaient
+               hors écran — d'où des animations visibles sur mobile seulement. */
+            refreshPriority: 1,
           },
         });
       };
@@ -400,7 +466,7 @@ function HomePage() {
           <h2 className={styles.bigHead} data-mask><MaskWords text={ui.headCollab} /></h2>
           <p className={styles.stackSub} data-reveal>{ui.collabSub}</p>
         </div>
-        <div className={styles.collabGrid} data-stagger>
+        <div className={styles.collabGrid}>
           {collaborations.map((c, i) => (
             <a key={i} href={c.url} target="_blank" rel="noopener noreferrer" className={styles.collabCard}>
               <span className={styles.collabIcon}><img src={c.icon} alt="" loading="lazy" /></span>
@@ -423,7 +489,7 @@ function HomePage() {
         <div className={styles.stackHeadRow}>
           <h2 className={styles.bigHead} data-mask><MaskWords text={ui.stackHead} /></h2>
         </div>
-        <div className={styles.techGrid} data-stagger>
+        <div className={styles.techGrid}>
           {skillSet.map((cat) => (
             <div className={styles.techCat} key={cat.key}>
               <div className={styles.techCatHead}>

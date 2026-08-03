@@ -132,8 +132,15 @@ export default function Article({ post, prev, next }) {
   );
 }
 
-export async function getStaticPaths() {
-  return { paths: blogPosts.map((p) => ({ params: { slug: p.slug } })), fallback: false };
+/* Avec l'i18n, un chemin sans `locale` n'est généré que pour la locale par
+   défaut : les 17 articles anglais renvoyaient 404. On produit donc le produit
+   cartésien articles × locales. */
+export async function getStaticPaths({ locales }) {
+  const paths = [];
+  for (const locale of locales) {
+    for (const p of blogPosts) paths.push({ params: { slug: p.slug }, locale });
+  }
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {

@@ -1,8 +1,8 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
-export default function Document() {
+export default function Document(props) {
   return (
-    <Html lang="fr">
+    <Html lang={props.__NEXT_DATA__?.locale || "fr"}>
       <Head>
         {/* Hygiène analytics — DOIT s'exécuter AVANT GTM/gtag. Désactive la
             mesure GA4 pour le trafic INTERNE (toi) et dev/preview, afin de ne

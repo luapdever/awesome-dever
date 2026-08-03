@@ -1392,7 +1392,9 @@
        Ainsi chaque version est partageable et imprimable directement. */
     const _qs = new URLSearchParams(location.search);
     const state = {
-      lang: _qs.get("lang") || localStorage.getItem("cv_lang") || "fr",
+      /* Repli sur os_lang : le CV est ouvert depuis le site ou depuis l'OS, il
+         doit hériter de la langue déjà choisie au lieu de repartir en français. */
+      lang: _qs.get("lang") || localStorage.getItem("cv_lang") || localStorage.getItem("os_lang") || "fr",
       variant: _qs.get("profile") || localStorage.getItem("cv_variant") || "fullstack"
     };
     if (!T[state.lang]) state.lang = "fr";

@@ -27,6 +27,7 @@ import Clock from "../../global/clock";
 import { useLang } from "./lang";
 import { playOsSound, playStartupSound, playStartupReversed, setOsAudioConfig, unlockOsAudio } from "../../../lib/osSounds";
 import { buildIndex as buildBm25Index, rank as rankByBm25 } from "../../../lib/bm25";
+import { rememberLang } from "../../../context/landingLang";
 
 // Parse a shareable hash like "app=skills&lang=fr" (or bare "skills").
 function parseHash(h) {
@@ -375,7 +376,16 @@ function Content() {
   // then keep the URL in sync so any state is shareable via link.
   useEffect(() => {
     const p = parseHash(bootHash);
-    if (p.lang === "fr" || p.lang === "en") setLang(p.lang);
+    /* Un `lang=` reçu par lien de partage l'emporte, mais on le RETIRE du hash
+       juste après l'avoir appliqué : conservé, il contredirait indéfiniment la
+       locale de l'URL (on voyait /en/paulfolio#lang=fr). La préférence est
+       mémorisée dans os_lang + cookie, le hash n'a plus à la porter. */
+    if (p.lang === "fr" || p.lang === "en") {
+      setLang(p.lang);
+      rememberLang(p.lang);
+      const rest = window.location.hash.slice(1).split("&").filter((kv) => !/^lang=/.test(kv)).join("&");
+      window.history.replaceState(null, "", window.location.pathname + window.location.search + (rest ? `#${rest}` : ""));
+    }
     if (p.app) {
       const perf =
         performances.find((x) => x.id === p.app) ||
@@ -385,7 +395,7 @@ function Content() {
     hashReady.current = true;
     const onHash = () => {
       const q = parseHash(window.location.hash.slice(1));
-      if ((q.lang === "fr" || q.lang === "en") && window.__osSetLang) window.__osSetLang(q.lang);
+      if ((q.lang === "fr" || q.lang === "en") && window.__osSetLang) { window.__osSetLang(q.lang); rememberLang(q.lang); }
       if (q.app && window.__osOpen) window.__osOpen(q.app);
     };
     window.addEventListener("hashchange", onHash);
@@ -395,10 +405,13 @@ function Content() {
 
   useEffect(() => {
     if (!hashReady.current || !currentWindow) return;
+    /* Plus de `lang=` dans le hash : c'est la locale du CHEMIN qui porte la
+       langue (/paulfolio vs /en/paulfolio). Un hash la dupliquant produisait des
+       URL qui se contredisaient — /en/paulfolio#lang=fr. Les anciens liens de
+       partage restent compris : on les applique au démarrage, puis on nettoie. */
     const parts = [`app=${currentWindow}`];
-    if (lang !== "en") parts.push(`lang=${lang}`);
     try { window.history.replaceState(null, "", "#" + parts.join("&")); } catch (e) { /* noop */ }
-  }, [currentWindow, lang]);
+  }, [currentWindow]);
 
   return (
     <div

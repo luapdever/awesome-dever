@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const SITE_NAME = "Paul Mèdédji ZANNOU — Luap Dever";
 const DEFAULT_DESCRIPTION =
@@ -18,11 +19,23 @@ function Seo({
   path = "/",
   image = "awesome-dever.png",
   type = "website",
-  locale = "fr_FR",
+  locale: localeOverride,
   noindex = false,
   jsonLd,
 }) {
-  const url = `${ORIGIN}${path}`;
+  /* Le canonique doit désigner la locale COURANTE, jamais toujours le français :
+     sinon la version anglaise se déclarerait doublon de la française et ne
+     serait pas indexée. Les `hreflang` réciproques relient les deux, et
+     `x-default` désigne la version servie à un visiteur sans préférence. */
+  const { locale = "fr" } = useRouter() || {};
+  const prefix = locale === "fr" ? "" : `/${locale}`;
+  // Open Graph attend la forme longue (fr_FR), pas le code court du routeur.
+  const OG = { fr: "fr_FR", en: "en_US" };
+  const ogLocale = localeOverride || OG[locale] || "fr_FR";
+  const ogAlternate = ogLocale === "fr_FR" ? "en_US" : "fr_FR";
+  const url = `${ORIGIN}${prefix}${path}`;
+  const altFr = `${ORIGIN}${path}`;
+  const altEn = `${ORIGIN}/en${path}`;
   const imageUrl = image?.startsWith("http") ? image : `${ORIGIN}/${image.replace(/^\/+/, "")}`;
   const imgType = /\.jpe?g($|\?)/i.test(imageUrl) ? "image/jpeg" : "image/png";
   const isDefaultImage = image === "awesome-dever.png"; // seule image dont on connaît les dims
@@ -38,6 +51,9 @@ function Seo({
         content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1"}
       />
       <link rel="canonical" href={url} />
+      <link rel="alternate" hreflang="fr" href={altFr} />
+      <link rel="alternate" hreflang="en" href={altEn} />
+      <link rel="alternate" hreflang="x-default" href={altFr} />
       <link rel="image_src" href={imageUrl} />
 
       {/* Open Graph */}
@@ -46,8 +62,8 @@ function Seo({
       <meta property="og:description" content={description} key="ogdesc" />
       <meta property="og:type" content={type} key="ogtype" />
       <meta property="og:url" content={url} key="ogurl" />
-      <meta property="og:locale" content={locale} key="oglocale" />
-      <meta property="og:locale:alternate" content={locale === "fr_FR" ? "en_US" : "fr_FR"} key="oglocalealt" />
+      <meta property="og:locale" content={ogLocale} key="oglocale" />
+      <meta property="og:locale:alternate" content={ogAlternate} key="oglocalealt" />
       <meta property="og:image" content={imageUrl} key="ogimage" />
       <meta property="og:image:secure_url" content={imageUrl} key="ogimagesecure" />
       <meta property="og:image:type" content={imgType} key="ogimagetype" />

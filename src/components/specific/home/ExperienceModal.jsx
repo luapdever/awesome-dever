@@ -123,9 +123,7 @@ function ExperienceModal() {
   return (
     <div className={styles.modalOverlay} ref={overlayRef} onClick={onOverlay}>
       <div ref={modalRef} className={`${styles.modal} ${mode === "terminal" ? styles.modalWide : ""}`} onClick={(e) => e.stopPropagation()}>
-        {canClose && (
           <button className={styles.modalClose} onClick={() => dropClose()} aria-label="Fermer">×</button>
-        )}
 
         {mode === "menu" ? (
           <>
