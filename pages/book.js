@@ -97,6 +97,7 @@ const LEAVES = [
   { kind: "chapter", chap: 8, kicker: T("Aujourd'hui", "Today"), title: T("Fidèle à la promesse", "Faithful to the Promise"), paras: [
     T("Aujourd'hui, je suis ingénieur logiciel full-stack : web, mobile, temps réel, intelligence artificielle et DevOps. Cinq années d'expérience, une vingtaine de projets, trois pays. Mais les chiffres disent peu de l'essentiel : la constance.", "Today, I am a full-stack software engineer: web, mobile, real-time, artificial intelligence and DevOps. Five years of experience, some twenty projects, three countries. Yet numbers say little of what matters most: constancy."),
     T("J'ai aussi appris à renoncer. La musique, cette passion qui me faisait vibrer, ne payait ni mes factures ni mes courses ; je l'ai mise de côté pour survivre. Ce n'est pas un adieu, seulement une parenthèse : j'y reviendrai, sous une forme ou une autre.", "I have also learned to let go. Music, that passion which made me vibrate, paid neither my bills nor my groceries; I set it aside to survive. It is not a farewell, only a pause: I will return to it, in one form or another."),
+    T("Mon terrain s'est déplacé, ces derniers temps, vers ce qui rend une intelligence artificielle digne de confiance. D'un côté la recherche d'information — lexicale, sémantique, vectorielle — car un modèle ne vaut que ce qu'on lui donne à lire. De l'autre les garde-fous : ce qu'il ne doit jamais dire, et le code qui l'en empêche quand les mots ne suffisent plus.", "My ground has shifted lately toward what makes an artificial intelligence trustworthy. On one side, information retrieval — lexical, semantic, vector-based — for a model is only worth what you give it to read. On the other, the guardrails: what it must never say, and the code that prevents it when words are no longer enough."),
     T("Je demeure fidèle à ma promesse première — bâtir ce que les idées promettent — et ouvert à celles et ceux qui ont, eux aussi, quelque chose à construire.", "I remain faithful to my first promise — to build what ideas promise — and open to those who, too, have something to build."),
   ] },
 
@@ -110,17 +111,18 @@ const LEAVES = [
 
   { kind: "projects", kicker: T("Réalisations — suite", "Selected Works — cont."), title: T("… et quelques autres", "… and a few more"), projects: [
     { name: T("Sites corporate MTN", "MTN corporate sites"), client: "MTN · via KAMGOKO", href: "https://www.mtn.bj/", problem: T("Offrir une présence corporate multilingue, rapide et bien référencée pour deux opérateurs.", "Deliver a fast, well-ranked, multilingual corporate presence for two operators."), solution: T("Thèmes & plugins WordPress sur mesure, contenu multilingue, optimisation performances et SEO.", "Custom WordPress themes & plugins, multilingual content, performance and SEO optimization.") },
-    { name: T("PaulBot & le portfolio", "PaulBot & the portfolio"), client: T("Projet personnel", "Personal project"), href: "https://paulzannou.com", problem: T("Prouver des compétences autrement qu'avec une liste — et laisser le visiteur interroger le profil.", "Prove skills otherwise than with a list — and let the visitor question the profile."), solution: T("Portfolio « OS dans le navigateur » (GSAP) + assistant IA en streaming (NestJS, LLM/SSE), captcha open-source, export PDF.", "In-browser “OS” portfolio (GSAP) + streaming AI assistant (NestJS, LLM/SSE), open-source captcha, PDF export.") },
+    { name: T("PaulBot & le portfolio", "PaulBot & the portfolio"), client: T("Projet personnel", "Personal project"), href: "https://paulzannou.com", problem: T("Prouver des compétences autrement qu'avec une liste — et laisser le visiteur interroger le profil.", "Prove skills otherwise than with a list — and let the visitor question the profile."), solution: T("Portfolio « OS dans le navigateur » (GSAP) + assistant IA en streaming (NestJS, LLM/SSE). Recherche hybride BM25 + vecteurs sur un corpus généré depuis une source unique, garde-fous anti-injection éprouvés par une suite d'attaques, captcha open-source, export PDF.", "In-browser “OS” portfolio (GSAP) + streaming AI assistant (NestJS, LLM/SSE). Hybrid BM25 + vector retrieval over a corpus generated from a single source of truth, prompt-injection guardrails proven by an attack suite, open-source captcha, PDF export.") },
   ], ndaNote: T("D'autres missions — pour Celtiis, Orabank et une institution publique (CCIB) — restent couvertes par la confidentialité.", "Other engagements — for Celtiis, Orabank and a public institution (CCIB) — remain under confidentiality.") },
 
-  { kind: "lessons", kicker: T("Leçons", "Lessons"), title: T("Ce que j'aurais aimé qu'on me dise", "What I Wish I'd Been Told"), intro: T("À qui débute, huit convictions gagnées sur le terrain — bien plus utiles qu'une liste de technologies.", "For anyone starting out, eight convictions earned in the field — far more useful than a list of technologies."), items: [
+  { kind: "lessons", kicker: T("Leçons", "Lessons"), title: T("Ce que j'aurais aimé qu'on me dise", "What I Wish I'd Been Told"), intro: T("À qui débute, neuf convictions gagnées sur le terrain — bien plus utiles qu'une liste de technologies.", "For anyone starting out, nine convictions earned in the field — far more useful than a list of technologies."), items: [
     { h: T("Livrer vaut mieux que peaufiner sans fin", "Shipping beats endless polishing"), t: T("Un code parfait jamais livré ne vaut rien. Fais fonctionner, puis améliore.", "Perfect code never shipped is worth nothing. Make it work, then improve it.") },
     { h: T("Lis la documentation d'abord", "Read the docs first"), t: T("La plupart des réponses y sont déjà. Chercher soi-même forge l'autonomie.", "Most answers are already there. Searching yourself forges autonomy.") },
     { h: T("La fiabilité est une promesse", "Reliability is a promise"), t: T("Chaque déploiement est un engagement envers l'utilisateur. Teste, surveille, préviens.", "Every deploy is a commitment to the user. Test, monitor, anticipate.") },
     { h: T("Apprends à déboguer avec méthode", "Learn to debug methodically"), t: T("Reproduis, isole, formule une hypothèse, vérifie. Le hasard n'est pas une stratégie.", "Reproduce, isolate, hypothesize, verify. Chance is not a strategy.") },
   ] },
 
-  { kind: "lessons", kicker: T("Leçons — suite", "Lessons — cont."), title: T("… et encore quatre", "… and four more"), items: [
+  { kind: "lessons", kicker: T("Leçons — suite", "Lessons — cont."), title: T("… et encore cinq", "… and five more"), items: [
+    { h: T("Une métrique au plafond ne prouve rien", "A metric at its ceiling proves nothing"), t: T("Tant qu'elle affiche 100 %, elle cache autant qu'elle rassure. Mesure plus sévèrement avant de régler quoi que ce soit.", "As long as it shows 100%, it hides as much as it reassures. Measure more strictly before tuning anything.") },
     { h: T("Le code se lit plus qu'il ne s'écrit", "Code is read more than written"), t: T("Nomme clairement, garde simple. Ton futur toi te remerciera.", "Name clearly, keep it simple. Your future self will thank you.") },
     { h: T("La sécurité dès la première ligne", "Security from the first line"), t: T("RBAC, validation, secrets hors du code : ça ne se rajoute pas à la fin.", "RBAC, validation, secrets out of the code: it is not bolted on at the end.") },
     { h: T("Sache expliquer sans jargon", "Explain without jargon"), t: T("Si tu ne peux l'expliquer simplement, tu ne l'as pas encore compris.", "If you can't explain it simply, you don't understand it yet.") },
@@ -167,7 +169,7 @@ function Leaf({ c, lang, tr, jumpTo, toc }) {
         <div className={styles.monogram}>P<span>Z</span></div>
         <p className={styles.coverAuthor}>Paul Mèdédji Zannou</p>
         <div className={styles.coverRule} />
-        <span className={styles.coverEd}>{lang === "fr" ? "Première édition · 2026" : "First edition · 2026"}</span>
+        <span className={styles.coverEd}>{lang === "fr" ? "Première édition · 30 juin 2026" : "First edition · 30 June 2026"}</span>
       </div>
     );
   }
@@ -185,7 +187,7 @@ function Leaf({ c, lang, tr, jumpTo, toc }) {
           <p>« {lang === "fr" ? "Ce que les idées promettent" : "What Ideas Promise"} » — {lang === "fr" ? "première édition" : "first edition"}.</p>
           <p>{lang === "fr" ? "Composé en Cormorant Garamond." : "Set in Cormorant Garamond."}</p>
           <p>© 2026 Paul Mèdédji Zannou. {lang === "fr" ? "Tous droits réservés." : "All rights reserved."}</p>
-          <p>{lang === "fr" ? "Publié depuis Cotonou, Bénin." : "Published from Cotonou, Benin."}</p>
+          <p>{lang === "fr" ? "Achevé le 30 juin 2026, à Cotonou, Bénin." : "Completed on 30 June 2026, in Cotonou, Benin."}</p>
         </div>
       </div>
     );
@@ -420,6 +422,8 @@ function Book() {
     name: lang === "fr" ? "Ce que les idées promettent" : "What Ideas Promise",
     inLanguage: lang,
     url: `${ORIGIN}/book`,
+    datePublished: "2026-06-30",
+    bookEdition: lang === "fr" ? "Première édition" : "First edition",
     author: { "@type": "Person", name: "Paul Mèdédji Zannou" },
     about: {
       "@type": "Person",
