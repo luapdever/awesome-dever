@@ -979,7 +979,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
       {shown && (
         <div className={embedded ? styles.embed : `${styles.panel} ${big ? styles.panelBig : ""}`} role="dialog" aria-label={ui.title}>
           <header className={styles.head}>
-            <img src={ROBOT + "?color=%23110068"} alt="" className={styles.headIcon} />
+            <img src={ROBOT + "?color=%23110068"} alt="" className={styles.headIcon}  loading="lazy" decoding="async"/>
             <div className={styles.headText}>
               <b>{ui.title}</b>
               <span className={styles.headStatus}><i className={styles.statusDot} />{ui.available}</span>
@@ -1019,14 +1019,14 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
             })()}
             {!embedded && (
               <button className={styles.headClose} onClick={() => setOpen(false)} aria-label="Fermer">
-                <img src={CLOSE} alt="" />
+                <img src={CLOSE} alt=""  loading="lazy" decoding="async"/>
               </button>
             )}
           </header>
 
           {!contact ? (
             <div className={styles.onboard}>
-              <img src={ROBOT + "?color=%23ffffff"} alt="" className={styles.onbIcon} />
+              <img src={ROBOT + "?color=%23ffffff"} alt="" className={styles.onbIcon}  loading="lazy" decoding="async"/>
               <b className={styles.onbTitle}>{ui.onbTitle}</b>
               <p className={styles.onbText}>{ui.onbText}</p>
 
@@ -1121,7 +1121,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                   const streaming = !isUser && pending && isLast && !empty;
                   return (
                     <div key={i} className={`${styles.row} ${isUser ? styles.rowUser : ""}`}>
-                      {!isUser && <img src={ROBOT} alt="" className={`${styles.avatar} ${thinking ? styles.avatarLive : ""}`} />}
+                      {!isUser && <img src={ROBOT} alt="" className={`${styles.avatar} ${thinking ? styles.avatarLive : ""}`}  loading="lazy" decoding="async"/>}
                       <div className={styles.bubbleCol}>
                         <div className={isUser ? styles.user : styles.assistant}>
                           {thinking ? (
@@ -1236,7 +1236,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                           <div className={styles.projCards}>
                             {detectProjects(m.content, lang).map((p, k) => (
                               <a key={k} href={p.url} target="_blank" rel="noopener noreferrer" className={styles.projCard}>
-                                <img src={p.icon} alt="" className={styles.projIcon} />
+                                <img src={p.icon} alt="" className={styles.projIcon}  loading="lazy" decoding="async"/>
                                 <span className={styles.projInfo}>
                                   <b>{p.name}</b>
                                   <span>{p.tag}</span>
@@ -1257,7 +1257,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                                 aria-label={speakingIdx === i ? ui.stopReading : ui.readAloud}
                                 title={speakingIdx === i ? ui.stopReading : ui.readAloud}
                               >
-                                <img src={speakingIdx === i ? SPEAK_ON : SPEAK} alt="" />
+                                <img src={speakingIdx === i ? SPEAK_ON : SPEAK} alt=""  loading="lazy" decoding="async"/>
                               </button>
                             )}
                           </span>
@@ -1338,10 +1338,10 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                     aria-label={listening ? ui.micStop : ui.mic}
                     title={listening ? ui.micStop : ui.mic}
                   >
-                    <img src={listening ? MIC_ON : MIC} alt="" />
+                    <img src={listening ? MIC_ON : MIC} alt=""  loading="lazy" decoding="async"/>
                   </button>
                 )}
-                <button type="submit" disabled={pending} aria-label="Envoyer"><img src={SEND} alt="" /></button>
+                <button type="submit" disabled={pending} aria-label="Envoyer"><img src={SEND} alt=""  loading="lazy" decoding="async"/></button>
               </form>
             </>
           )}
@@ -1363,7 +1363,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
             aria-label={ui.open}
             title={ui.open}
           >
-            <img src={open ? CLOSE : CHAT} alt="" />
+            <img src={open ? CLOSE : CHAT} alt=""  loading="lazy" decoding="async"/>
           </button>
         </>
       )}

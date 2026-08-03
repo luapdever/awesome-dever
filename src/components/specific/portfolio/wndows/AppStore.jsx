@@ -15,7 +15,7 @@ function AppStore() {
     <div className={styles.appStore}>
       <header className={styles.header}>
         <span className={styles.headIcon}>
-          <img src="/icons/ph/device-mobile__ffa500.svg" alt="" />
+          <img src="/icons/ph/device-mobile__ffa500.svg" alt=""  loading="lazy" decoding="async"/>
         </span>
         <div>
           <h1>App Store</h1>
@@ -30,7 +30,7 @@ function AppStore() {
           <div className={styles.card} key={i}>
             {app.confidential ? (
               <div className={styles.previewLocked} aria-label="Confidential app">
-                <img src="/icons/ph/lock-key__ffa500.svg" alt="" />
+                <img src="/icons/ph/lock-key__ffa500.svg" alt=""  loading="lazy" decoding="async"/>
               </div>
             ) : (
               <img className={styles.preview} src={app.preview} alt={`${app.name} preview`} loading="lazy" />

@@ -56,7 +56,7 @@ export default function ContactForm({ lang = "fr", source = "home-cta" }) {
   if (state === "sent") {
     return (
       <div className={styles.sent}>
-        <img src="/icons/ph/check-circle-fill__35d07f.svg" alt="" />
+        <img src="/icons/ph/check-circle-fill__35d07f.svg" alt=""  loading="lazy" decoding="async"/>
         <span>{t.ok}</span>
       </div>
     );
@@ -74,7 +74,7 @@ export default function ContactForm({ lang = "fr", source = "home-cta" }) {
       {errMsg && <span className={styles.err}>{errMsg}</span>}
 
       <div className={styles.foot}>
-        <span className={styles.altcha}><img src={SHIELD} alt="" />{t.altcha}</span>
+        <span className={styles.altcha}><img src={SHIELD} alt=""  loading="lazy" decoding="async"/>{t.altcha}</span>
         <button type="submit" className={styles.submit} disabled={!valid || state === "sending"}>
           {state === "sending" ? t.sending : t.send}
         </button>

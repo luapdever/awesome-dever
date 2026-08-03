@@ -27,7 +27,7 @@ function WelcomeContent() {
     <div className={styles.welcomeContent}>
       <header className={styles.hero}>
         <div className={styles.avatar}>
-          <img src={luap.src} alt="Paul M. ZANNOU" />
+          <img src={luap.src} alt="Paul M. ZANNOU"  loading="lazy" decoding="async"/>
         </div>
         <div className={styles.heroText}>
           <span className={styles.kicker}>{t.wKicker} {OS.name}</span>
@@ -63,7 +63,7 @@ function WelcomeContent() {
       <div className={styles.quickGrid}>
         {QUICK.map((q) => (
           <button key={q.id} className={styles.quickBtn} onClick={(e) => open(e, q.id)}>
-            <img src={q.icon} alt="" />
+            <img src={q.icon} alt=""  loading="lazy" decoding="async"/>
             <span>{q.label}</span>
           </button>
         ))}

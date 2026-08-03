@@ -12,7 +12,7 @@ function Vault() {
     <div className={styles.app}>
       <div className={styles.head}>
         <span className={styles.headIcon}>
-          <img src="/icons/ph/lock-key__ffc25c.svg" alt="Enterprise" />
+          <img src="/icons/ph/lock-key__ffc25c.svg" alt="Enterprise"  loading="lazy" decoding="async"/>
         </span>
         <div>
           <h1>{t.enTitle}</h1>
@@ -21,7 +21,7 @@ function Vault() {
       </div>
 
       <div className={styles.vaultNote}>
-        <img src="/icons/ph/shield-check__ffc25c.svg" alt="" width={16} height={16} />
+        <img src="/icons/ph/shield-check__ffc25c.svg" alt="" width={16} height={16}  loading="lazy" decoding="async"/>
         {t.enNote}
       </div>
 
@@ -29,7 +29,7 @@ function Vault() {
         {vaultProjects.map((p) =>
           p.hidden ? (
             <div className={`${styles.vaultCard} ${styles.hidden}`} key={p.id}>
-              <img className={styles.lock} src="/icons/ph/eye-slash__ffffff.svg" alt="Hidden" />
+              <img className={styles.lock} src="/icons/ph/eye-slash__ffffff.svg" alt="Hidden"  loading="lazy" decoding="async"/>
               <h2>{p.company || p.name}</h2>
               {p.tag && <span className={styles.tag}>{tx(p.tag, lang)}</span>}
               {p.role && <div className={styles.vRow}>{t.lblRole}&nbsp;: <b>{tx(p.role, lang)}</b> · {p.year}</div>}
@@ -43,13 +43,13 @@ function Vault() {
                 </div>
               )}
               <div className={styles.ndaNote}>
-                <img src="/icons/ph/lock-simple__ffc25c.svg" alt="" width={13} height={13} />
+                <img src="/icons/ph/lock-simple__ffc25c.svg" alt="" width={13} height={13}  loading="lazy" decoding="async"/>
                 {t.enConfidential} — {t.enHiddenSub}
               </div>
             </div>
           ) : (
             <div className={styles.vaultCard} key={p.id}>
-              <img className={styles.lock} src="/icons/ph/lock-simple__ffffff.svg" alt="Locked" />
+              <img className={styles.lock} src="/icons/ph/lock-simple__ffffff.svg" alt="Locked"  loading="lazy" decoding="async"/>
               <h2>{p.name}</h2>
               <span className={styles.tag}>{tx(p.tag, lang)}</span>
               <div className={styles.vRow}>{t.lblClient}&nbsp;: <b>{p.client}</b></div>
@@ -65,7 +65,7 @@ function Vault() {
               )}
               {p.link && (
                 <a className={styles.vaultLink} href={p.link.url} target="_blank" rel="noopener noreferrer">
-                  <img src="/icons/ph/arrow-square-out__ffc25c.svg" alt="" width={13} height={13} />
+                  <img src="/icons/ph/arrow-square-out__ffc25c.svg" alt="" width={13} height={13}  loading="lazy" decoding="async"/>
                   {p.link.label}
                 </a>
               )}

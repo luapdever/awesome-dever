@@ -186,7 +186,7 @@ export default function ArticleReader({ paragraphs, lang }) {
       {supported && status === "idle" && (
         <div className={styles.trigger}>
           <button type="button" className={styles.listenBtn} onClick={start}>
-            <img src="/icons/ph/headphones__ffffff.svg" alt="" width={18} height={18} />
+            <img src="/icons/ph/headphones__ffffff.svg" alt="" width={18} height={18}  loading="lazy" decoding="async"/>
             <span>{t.listen}</span>
           </button>
         </div>
@@ -209,13 +209,13 @@ export default function ArticleReader({ paragraphs, lang }) {
       {supported && status !== "idle" && (
         <div className={styles.bar} role="group" aria-label={t.listen}>
           <button type="button" className={styles.ctrl} onClick={prev} title={t.prev} aria-label={t.prev}>
-            <img src="/icons/ph/skip-back__ffffff.svg" alt="" width={17} height={17} />
+            <img src="/icons/ph/skip-back__ffffff.svg" alt="" width={17} height={17}  loading="lazy" decoding="async"/>
           </button>
           <button type="button" className={`${styles.ctrl} ${styles.playBtn}`} onClick={toggle} title={status === "playing" ? t.pause : t.play} aria-label={status === "playing" ? t.pause : t.play}>
-            <img src={status === "playing" ? "/icons/ph/pause__ffffff.svg" : "/icons/ph/play__ffffff.svg"} alt="" width={17} height={17} />
+            <img src={status === "playing" ? "/icons/ph/pause__ffffff.svg" : "/icons/ph/play__ffffff.svg"} alt="" width={17} height={17}  loading="lazy" decoding="async"/>
           </button>
           <button type="button" className={styles.ctrl} onClick={next} title={t.next} aria-label={t.next}>
-            <img src="/icons/ph/skip-forward__ffffff.svg" alt="" width={17} height={17} />
+            <img src="/icons/ph/skip-forward__ffffff.svg" alt="" width={17} height={17}  loading="lazy" decoding="async"/>
           </button>
 
           <div className={styles.timeline} onClick={seek} role="slider" aria-label={t.listen} aria-valuenow={Math.round(pct)} aria-valuemin={0} aria-valuemax={100}>
@@ -225,7 +225,7 @@ export default function ArticleReader({ paragraphs, lang }) {
 
           <button type="button" className={styles.rate} onClick={cycleRate} title={t.speed}>{rate}×</button>
           <button type="button" className={styles.ctrl} onClick={finish} title={t.stop} aria-label={t.stop}>
-            <img src="/icons/ph/x__ffffff.svg" alt="" width={15} height={15} />
+            <img src="/icons/ph/x__ffffff.svg" alt="" width={15} height={15}  loading="lazy" decoding="async"/>
           </button>
         </div>
       )}

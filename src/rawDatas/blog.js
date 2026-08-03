@@ -77,7 +77,7 @@ export const blogPosts = [
       "Un assistant LLM en streaming qui ne ment pas, ne tombe jamais et résiste aux injections : réponses déterministes côté client, bascule multi-fournisseurs, garde-fous anti-hallucination, défense anti-injection + ALTCHA. Retour technique.",
       "A streaming LLM assistant that doesn't lie, never goes down and resists injections: client-side deterministic answers, multi-provider failover, anti-hallucination guardrails, anti-injection defense + ALTCHA. A technical deep-dive."
     ),
-    cover: "/blog/paulbot-recruiter.png",
+    cover: "/blog/paulbot-recruiter.webp",
     content: [
       L(
         "PaulBot, c'est l'assistant IA de mon portfolio : il répond en streaming aux questions sur mon parcours, mes compétences et mes projets. Le vrai défi n'était pas de brancher un LLM, mais de le rendre fiable et honnête… sans budget.",
@@ -166,12 +166,12 @@ Conditions : 100% remote, TJM selon profil.`,
       "Pas une page : une expérience. Plusieurs façons de me découvrir — une landing animée, un OS dans le navigateur, un assistant IA, un livre, un terminal, un CV interactif. Visite guidée.",
       "Not a page: an experience. Several ways to get to know me — an animated landing, an in-browser OS, an AI assistant, a book, a terminal, an interactive resume. Guided tour."
     ),
-    cover: "/blog/portfolio-showcase-os.jpg",
+    cover: "/blog/portfolio-showcase-os.webp",
     images: [
-      "/blog/portfolio-showcase-os.jpg",
-      "/blog/portfolio-showcase-home.jpg",
-      "/blog/portfolio-showcase-book.jpg",
-      "/blog/portfolio-showcase-cv.jpg",
+      "/blog/portfolio-showcase-os.webp",
+      "/blog/portfolio-showcase-home.webp",
+      "/blog/portfolio-showcase-book.webp",
+      "/blog/portfolio-showcase-cv.webp",
     ],
     content: [
       L(
@@ -290,8 +290,8 @@ Conditions : 100% remote, TJM selon profil.`,
       "Tu peux être le meilleur codeur du pays : si ton profil ressemble à un SMS écrit en vitesse, on te zappe plus vite qu'une connexion lente.",
       "You can be the best coder in the country: if your profile looks like a rushed text message, people skip you faster than a slow connection."
     ),
-    cover: "/blog/ton-profil-ton-habit-1.jpg",
-    images: ["/blog/ton-profil-ton-habit-1.jpg", "/blog/ton-profil-ton-habit-2.jpg", "/blog/ton-profil-ton-habit-3.jpg"],
+    cover: "/blog/ton-profil-ton-habit-1.webp",
+    images: ["/blog/ton-profil-ton-habit-1.webp", "/blog/ton-profil-ton-habit-2.webp", "/blog/ton-profil-ton-habit-3.webp"],
     content: [
       L(
         "Sur internet, c'est un peu comme au village : même si tu mets une soutane, on te jugera si tu portes des sandales trouées ! 😂",
@@ -321,8 +321,8 @@ Conditions : 100% remote, TJM selon profil.`,
       "De plus en plus d'entreprises brainstorment leurs idées avec des IA comme ChatGPT. Mais partager ses projets les plus innovants avec ces outils, est-ce vraiment sans risque ?",
       "More and more companies brainstorm their ideas with AIs like ChatGPT. But is sharing your most innovative projects with these tools really risk-free?"
     ),
-    cover: "/blog/projets-innovants-et-chatgpt-1.jpg",
-    images: ["/blog/projets-innovants-et-chatgpt-1.jpg"],
+    cover: "/blog/projets-innovants-et-chatgpt-1.webp",
+    images: ["/blog/projets-innovants-et-chatgpt-1.webp"],
     content: [
       L(
         "Aujourd'hui, de nombreuses entreprises et innovateurs utilisent des IA comme ChatGPT pour obtenir des idées, des conseils et de l'inspiration. Mais une question importante se pose : partager nos projets innovants avec ces IA comporte-t-il des risques ?",
@@ -356,8 +356,8 @@ Conditions : 100% remote, TJM selon profil.`,
       "Sans leur dose de caféine, leur code devient plus buggé qu'un projet en fin de semestre. Petite ode au carburant secret du dev.",
       "Without their caffeine fix, their code gets buggier than an end-of-semester project. A little ode to the dev's secret fuel."
     ),
-    cover: "/blog/developpeurs-beninois-et-cafe-1.jpg",
-    images: ["/blog/developpeurs-beninois-et-cafe-1.jpg"],
+    cover: "/blog/developpeurs-beninois-et-cafe-1.webp",
+    images: ["/blog/developpeurs-beninois-et-cafe-1.webp"],
     content: [
       L(
         "Pourquoi les développeurs béninois aiment-ils tellement le café ? Parce que sans leur dose de caféine, leur code devient plus buggé qu'un projet en fin de semestre ! 😂",
@@ -387,8 +387,8 @@ Conditions : 100% remote, TJM selon profil.`,
       "Parce qu'il sait exactement ce que ça fait quand quelque chose plante. Diagnostic musical, avec ou sans « stack trace ».",
       "Because he knows exactly what it feels like when something crashes. A musical diagnosis, with or without a stack trace."
     ),
-    cover: "/blog/developpeur-critique-d-albums-1.jpg",
-    images: ["/blog/developpeur-critique-d-albums-1.jpg"],
+    cover: "/blog/developpeur-critique-d-albums-1.webp",
+    images: ["/blog/developpeur-critique-d-albums-1.webp"],
     content: [
       L(
         "Pourquoi les développeurs sont-ils les meilleurs critiques d'albums ? Parce qu'ils comprennent vraiment ce que signifie un « plantage » ! 🎶💾",
@@ -418,8 +418,8 @@ Conditions : 100% remote, TJM selon profil.`,
       "Parce qu'ils passent la journée devant les fenêtres. Non, pas celles du bureau — celles du navigateur.",
       "Because they spend all day in front of windows. No, not the office ones — the browser windows."
     ),
-    cover: "/blog/pourquoi-les-developpeurs-ont-froid-1.jpg",
-    images: ["/blog/pourquoi-les-developpeurs-ont-froid-1.jpg"],
+    cover: "/blog/pourquoi-les-developpeurs-ont-froid-1.webp",
+    images: ["/blog/pourquoi-les-developpeurs-ont-froid-1.webp"],
     content: [
       L(
         "« Pourquoi les développeurs ont-ils toujours froid ? Parce qu'ils passent toute la journée devant les fenêtres ! » ❄️😂",
@@ -449,8 +449,8 @@ Conditions : 100% remote, TJM selon profil.`,
       "Réutilisables, modulables, indispensables — et capables de transformer le chaos en ordre en une seule ligne de code.",
       "Reusable, modular, indispensable — and able to turn chaos into order in a single line of code."
     ),
-    cover: "/blog/femmes-developpeuses-fonctions-js-1.jpg",
-    images: ["/blog/femmes-developpeuses-fonctions-js-1.jpg"],
+    cover: "/blog/femmes-developpeuses-fonctions-js-1.webp",
+    images: ["/blog/femmes-developpeuses-fonctions-js-1.webp"],
     content: [
       L("Pourquoi les femmes développeuses sont-elles comme des fonctions JavaScript ?", "Why are women developers like JavaScript functions?"),
       L(
@@ -474,7 +474,7 @@ Conditions : 100% remote, TJM selon profil.`,
       "The little windows that open when you click an icon: state of open windows, foreground z-index, and a home-made React hook to orchestrate it all."
     ),
     cover: "/blog/portfolio-comme-un-os-3-systeme-fenetres-1.jpg",
-    images: ["/blog/portfolio-comme-un-os-3-systeme-fenetres-1.jpg", "/blog/portfolio-comme-un-os-3-systeme-fenetres-2.jpg", "/blog/portfolio-comme-un-os-3-systeme-fenetres-3.jpg"],
+    images: ["/blog/portfolio-comme-un-os-3-systeme-fenetres-1.jpg", "/blog/portfolio-comme-un-os-3-systeme-fenetres-2.webp", "/blog/portfolio-comme-un-os-3-systeme-fenetres-3.webp"],
     content: [
       L(
         "Aujourd'hui, on parle du système de fenêtres — ces petites fenêtres qui s'ouvrent quand tu cliques sur une icône du bureau.",
@@ -504,8 +504,8 @@ Conditions : 100% remote, TJM selon profil.`,
       "Chaque icône du bureau ouvre une fenêtre : site intégré, terminal, contact, App Store… Tout part d'un simple tableau d'objets JSON.",
       "Each desktop icon opens a window: embedded site, terminal, contact, App Store… It all starts from a simple array of JSON objects."
     ),
-    cover: "/blog/portfolio-comme-un-os-2-icones-bureau-1.jpg",
-    images: ["/blog/portfolio-comme-un-os-2-icones-bureau-1.jpg", "/blog/portfolio-comme-un-os-2-icones-bureau-2.jpg", "/blog/portfolio-comme-un-os-2-icones-bureau-3.jpg"],
+    cover: "/blog/portfolio-comme-un-os-2-icones-bureau-1.webp",
+    images: ["/blog/portfolio-comme-un-os-2-icones-bureau-1.webp", "/blog/portfolio-comme-un-os-2-icones-bureau-2.webp", "/blog/portfolio-comme-un-os-2-icones-bureau-3.webp"],
     content: [
       L(
         "Mon site personnel se présente comme un embryon de système d'exploitation avec lequel on interagit. Chaque icône du bureau ouvre une fenêtre : un site web intégré (iframe), le terminal, le programme de contact, mon App Store…",
@@ -535,8 +535,8 @@ Conditions : 100% remote, TJM selon profil.`,
       "Et si un portfolio ressemblait à un système d'exploitation ? Clic, double-clic, clic droit, molette… Présentation de la toute première version.",
       "What if a portfolio looked like an operating system? Click, double-click, right-click, scroll… A look at the very first version."
     ),
-    cover: "/blog/portfolio-comme-un-os-1-generalite-1.jpg",
-    images: ["/blog/portfolio-comme-un-os-1-generalite-1.jpg", "/blog/portfolio-comme-un-os-1-generalite-2.jpg", "/blog/portfolio-comme-un-os-1-generalite-3.jpg"],
+    cover: "/blog/portfolio-comme-un-os-1-generalite-1.webp",
+    images: ["/blog/portfolio-comme-un-os-1-generalite-1.webp", "/blog/portfolio-comme-un-os-1-generalite-2.webp", "/blog/portfolio-comme-un-os-1-generalite-3.webp"],
     content: [
       L(
         "Aujourd'hui, je me demandais quoi partager, et je me suis dit : pourquoi ne pas présenter mon portfolio dans son entièreté ? Déployé il y a quelques semaines, « Dever » me présente en quelques mots et montre mes compétences et réalisations sous la forme d'un écran de tablette avec lequel on interagit (IHM — interface homme-machine).",
@@ -566,8 +566,8 @@ Conditions : 100% remote, TJM selon profil.`,
       "Deux fichiers de langue, 3000 lignes chacun, des textes non traduits. Un script Python (tuples, sets, dictionnaires) pour trouver ce qui manque.",
       "Two language files, 3000 lines each, untranslated strings. A Python script (tuples, sets, dictionaries) to find what's missing."
     ),
-    cover: "/blog/python-exercice-traduction-entreprise-1.jpg",
-    images: ["/blog/python-exercice-traduction-entreprise-1.jpg", "/blog/python-exercice-traduction-entreprise-2.jpg"],
+    cover: "/blog/python-exercice-traduction-entreprise-1.webp",
+    images: ["/blog/python-exercice-traduction-entreprise-1.webp", "/blog/python-exercice-traduction-entreprise-2.webp"],
     content: [
       L(
         "Il n'y a pas longtemps, j'ai débuté la programmation en Python. Je me demandais bien d'où venait ce fantasme des développeurs pour ce langage 🐍 — sûrement un venin de naissance 😁. En réalité, ce que Python offre, c'est une expérience développeur (DX) unique, dont j'ai eu un avant-goût.",
@@ -597,8 +597,8 @@ Conditions : 100% remote, TJM selon profil.`,
       "Une semaine bloqué sur un concept évident : plutôt que de bouger la caméra, on bouge sa cible. Retour sur un déclic pour tout débutant en 3D.",
       "A week stuck on an obvious concept: rather than moving the camera, you move its target. A lightbulb moment for any 3D beginner."
     ),
-    cover: "/blog/threejs-camera-et-sa-cible-1.jpg",
-    images: ["/blog/threejs-camera-et-sa-cible-1.jpg", "/blog/threejs-camera-et-sa-cible-2.jpg", "/blog/threejs-camera-et-sa-cible-3.jpg"],
+    cover: "/blog/threejs-camera-et-sa-cible-1.webp",
+    images: ["/blog/threejs-camera-et-sa-cible-1.webp", "/blog/threejs-camera-et-sa-cible-2.webp", "/blog/threejs-camera-et-sa-cible-3.webp"],
     content: [
       L(
         "J'ai passé une semaine bloqué sur un concept tellement évident que j'ai mis du temps à le comprendre : la caméra et sa cible.",

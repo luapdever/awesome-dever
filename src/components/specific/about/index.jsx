@@ -99,7 +99,7 @@ function AboutMe() {
     <div className={styles.about} ref={root}>
       <header className={styles.hero}>
         <div className={styles.avatar} data-r>
-          <img src={luap.src} alt="Paul Mèdédji ZANNOU" />
+          <img src={luap.src} alt="Paul Mèdédji ZANNOU"  loading="lazy" decoding="async"/>
         </div>
         <div className={styles.heroText}>
           <h1 data-r>{ui.heroTitle.pre}<br /><span className={styles.accent}>{ui.heroTitle.accent}</span> {ui.heroTitle.post}</h1>
@@ -154,7 +154,7 @@ function AboutMe() {
         <div className={styles.interests} data-rs>
           {INTERESTS.map((it, i) => (
             <div className={styles.interest} key={i}>
-              <img src={it.icon} alt="" />
+              <img src={it.icon} alt=""  loading="lazy" decoding="async"/>
               <b>{tx(it.t, lang)}</b>
               <span>{tx(it.d, lang)}</span>
             </div>

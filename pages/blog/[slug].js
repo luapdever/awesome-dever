@@ -6,6 +6,7 @@ import BlogUseCases from "../../src/components/global/BlogUseCases";
 import { blogPosts, readingMinutes, tr } from "../../src/rawDatas/blog";
 import { useLandingLang } from "../../src/context/landingLang";
 import styles from "../../styles/specific/blog/article.module.css";
+import { breadcrumbLd } from "../../src/lib/seoSchema";
 
 const ORIGIN = "https://paulzannou.com";
 const CAT_EN = { Dev: "Dev", IA: "AI", "Carrière": "Career", Voyage: "Travel" };
@@ -52,7 +53,7 @@ export default function Article({ post, prev, next }) {
 
   return (
     <>
-      <Seo path={`/blog/${post.slug}`} title={`${title} — ${L === "en" ? "The blog" : "Le blog"}`} description={excerpt} image={post.cover} type="article" jsonLd={jsonLd} />
+      <Seo path={`/blog/${post.slug}`} title={`${title} — ${L === "en" ? "The blog" : "Le blog"}`} description={excerpt} image={post.cover} type="article" jsonLd={[jsonLd, breadcrumbLd([{ name: "Accueil", path: "/" }, { name: "Le blog", path: "/blog" }, { name: title, path: `/blog/${post.slug}` }])]} />
       <main className={styles.wrap}>
         <Link href="/blog" className={styles.back}>← {t.back}</Link>
 

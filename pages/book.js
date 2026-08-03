@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Cormorant_Garamond } from "next/font/google";
 import { useLandingLang } from "../src/context/landingLang";
 import styles from "../styles/specific/book/book.module.css";
+import { breadcrumbLd } from "../src/lib/seoSchema";
 
 const serif = Cormorant_Garamond({ subsets: ["latin"], weight: ["500", "600", "700"], style: ["normal", "italic"], variable: "--font-book" });
 
@@ -177,7 +178,7 @@ function Leaf({ c, lang, tr, jumpTo, toc }) {
   if (c.kind === "edition") {
     return (
       <div className={`${styles.chap} ${styles.edition}`}>
-        <img className={styles.authorPhoto} src="/cv/photo.jpg" alt={lang === "fr" ? "Portrait de l'auteur" : "Author portrait"} />
+        <img className={styles.authorPhoto} src="/cv/photo.jpg" alt={lang === "fr" ? "Portrait de l'auteur" : "Author portrait"}  loading="lazy" decoding="async"/>
         <span className={styles.kicker}>{lang === "fr" ? "L'auteur" : "The Author"}</span>
         <h2 className={styles.chapTitle}>Paul Mèdédji Zannou</h2>
         <p className={styles.authorBlurb}>{lang === "fr"
@@ -317,7 +318,7 @@ function Leaf({ c, lang, tr, jumpTo, toc }) {
       {c.title && <h2 className={styles.chapTitle}>{tr(c.title)}</h2>}
       {c.img && (
         <figure className={styles.figure}>
-          <img className={styles.chapImg} src={c.img} alt="" />
+          <img className={styles.chapImg} src={c.img} alt=""  loading="lazy" decoding="async"/>
           {c.caption && <figcaption className={styles.caption}>{tr(c.caption)}</figcaption>}
         </figure>
       )}
@@ -446,7 +447,7 @@ function Book() {
         <meta property="og:description" content={desc} />
         <meta property="og:url" content={`${ORIGIN}/book`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLd, breadcrumbLd([{ name: "Accueil", path: "/" }, { name: "Le livre", path: "/book" }])]) }} />
       </Head>
 
       {/* Menu hamburger (mobile) */}
@@ -470,7 +471,7 @@ function Book() {
 
       <div className={styles.topbar}>
         <Link href="/" className={styles.iconBtn} title={ui.home} aria-label={ui.home}>
-          <img src="/icons/ph/house-fill__f2e9da.svg" alt="" width={18} height={18} />
+          <img src="/icons/ph/house-fill__f2e9da.svg" alt="" width={18} height={18}  loading="lazy" decoding="async"/>
         </Link>
         <button className={styles.iconBtn} onClick={() => setMuted((m) => !m)} title={ui.sound} aria-label={ui.sound}>{muted ? "🔇" : "🔊"}</button>
         <button className={styles.exportBtn} onClick={() => window.print()}>{ui.exportPdf}</button>

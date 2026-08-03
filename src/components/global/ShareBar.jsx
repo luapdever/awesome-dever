@@ -57,7 +57,7 @@ export default function ShareBar({ url, title }) {
       <div className={styles.btns}>
         {canNative && (
           <button type="button" className={styles.btn} onClick={nativeShare} title={t.native} aria-label={t.native}>
-            <img src="/icons/ph/share-network__ffffff.svg" alt="" width={18} height={18} />
+            <img src="/icons/ph/share-network__ffffff.svg" alt="" width={18} height={18}  loading="lazy" decoding="async"/>
           </button>
         )}
         {NETS.map((n) => (
@@ -71,7 +71,7 @@ export default function ShareBar({ url, title }) {
             aria-label={n.label}
             onClick={() => ga(n.key)}
           >
-            <img src={n.icon} alt="" width={18} height={18} />
+            <img src={n.icon} alt="" width={18} height={18}  loading="lazy" decoding="async"/>
           </a>
         ))}
         <button
@@ -81,7 +81,7 @@ export default function ShareBar({ url, title }) {
           title={t.copy}
           aria-label={t.copy}
         >
-          <img src={copied ? "/icons/ph/check__ffffff.svg" : "/icons/ph/link__ffffff.svg"} alt="" width={18} height={18} />
+          <img src={copied ? "/icons/ph/check__ffffff.svg" : "/icons/ph/link__ffffff.svg"} alt="" width={18} height={18}  loading="lazy" decoding="async"/>
           <span className={styles.copyLabel}>{copied ? t.copied : t.copy}</span>
         </button>
       </div>

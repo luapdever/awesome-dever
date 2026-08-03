@@ -66,7 +66,7 @@ function PremiumModal({ onClose }) {
                   onClick={() => !a.disabled && run(a.id)}
                   disabled={a.disabled}
                 >
-                  <img src={a.icon} alt="" />
+                  <img src={a.icon} alt=""  loading="lazy" decoding="async"/>
                   <span className={styles.maLabel}>{tx(a.label, lang)}</span>
                   <span className={styles.maSub}>{tx(a.sub, lang)}</span>
                 </button>

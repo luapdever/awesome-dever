@@ -19,7 +19,7 @@ function Contact() {
     <div className={styles.contact}>
       <header className={styles.head}>
         <span className={styles.headIcon}>
-          <img src="/icons/ph/envelope-simple__ffa500.svg" alt="" />
+          <img src="/icons/ph/envelope-simple__ffa500.svg" alt=""  loading="lazy" decoding="async"/>
         </span>
         <div>
           <h1>{t.cTitle}</h1>

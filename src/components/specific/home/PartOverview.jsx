@@ -27,7 +27,7 @@ function PartOverview() {
 							onClick={downImg}
               src={real1.src}
               alt={"THREE DEVER IMG 1"}
-            />
+             loading="lazy" decoding="async"/>
           </div>
           <div className={styles.partLink}>
             <Link href={"/paulfolio"}>
@@ -68,7 +68,7 @@ function PartOverview() {
 							onClick={downImg}	
               src={real2.src}
               alt={"THREE DEVER IMG 2"}
-            />
+             loading="lazy" decoding="async"/>
           </div>
         </section>
       </div>

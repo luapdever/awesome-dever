@@ -17,7 +17,7 @@ function AppDetail({ app }) {
     <div className={styles.detail}>
       <div className={styles.detailHero}>
         <span className={styles.detailIcon} style={{ background: app.bg || "#fff" }}>
-          <img src={app.icon} alt={app.label} />
+          <img src={app.icon} alt={app.label}  loading="lazy" decoding="async"/>
         </span>
         <div className={styles.detailHeadText}>
           <h1>{app.label}</h1>
@@ -31,11 +31,11 @@ function AppDetail({ app }) {
       {app.url && (
         <>
           <a className={styles.openBtn} href={app.url} target="_blank" rel="noopener noreferrer">
-            <img src="/icons/ph/arrow-square-out__3a2500.svg" alt="" width={17} height={17} />
+            <img src="/icons/ph/arrow-square-out__3a2500.svg" alt="" width={17} height={17}  loading="lazy" decoding="async"/>
             {t.adOpen}
           </a>
           <p className={styles.cspNote}>
-            <img src="/icons/ph/shield-check__ffc25c.svg" alt="" width={14} height={14} />
+            <img src="/icons/ph/shield-check__ffc25c.svg" alt="" width={14} height={14}  loading="lazy" decoding="async"/>
             {t.adCsp}
           </p>
         </>

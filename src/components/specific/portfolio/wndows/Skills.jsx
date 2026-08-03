@@ -10,7 +10,7 @@ function Skills() {
     <div className={styles.app}>
       <div className={styles.head}>
         <span className={styles.headIcon}>
-          <img src="/icons/ph/brain__ffa500.svg" alt="Skills" />
+          <img src="/icons/ph/brain__ffa500.svg" alt="Skills"  loading="lazy" decoding="async"/>
         </span>
         <div>
           <h1>{t.skTitle}</h1>
@@ -22,7 +22,7 @@ function Skills() {
         {skillSet.map((cat) => (
           <div className={styles.skillCard} key={cat.key}>
             <div className={styles.cat}>
-              {cat.icon && <img src={cat.icon} alt="" />}
+              {cat.icon && <img src={cat.icon} alt=""  loading="lazy" decoding="async"/>}
               {SKILL_CAT[cat.category] ? tx(SKILL_CAT[cat.category], lang) : cat.category}
             </div>
 

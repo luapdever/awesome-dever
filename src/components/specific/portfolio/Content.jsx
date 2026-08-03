@@ -410,7 +410,7 @@ function Content() {
       {shuttingDown && (
         <div className={styles.shutdownOverlay} role="alertdialog" aria-live="assertive" aria-label={lang === "fr" ? "Extinction du système" : "System shutting down"}>
           <div className={styles.shutdownCrt}>
-            <img src={dever.src} alt="" className={styles.shutdownLogo} />
+            <img src={dever.src} alt="" className={styles.shutdownLogo}  loading="lazy" decoding="async"/>
             <p className={styles.shutdownLabel}>
               {lang === "fr" ? "Suspension de " : "Suspending "}<b>{OS.name}</b>&nbsp;…
             </p>
@@ -423,7 +423,7 @@ function Content() {
       <section ref={welcomeScreen} className={styles.welcomeScreen}>
         <div className={styles.bootTerm}>
           <div className={styles.bootBrand}>
-            <img src={dever.src} alt={OS.name} width={40} className={styles.bootLogo} />
+            <img src={dever.src} alt={OS.name} width={40} className={styles.bootLogo}  loading="lazy" decoding="async"/>
             <span>{OS.name} <em>v{OS.version}</em></span>
           </div>
           <div className={styles.bootLog}>
@@ -448,7 +448,7 @@ function Content() {
             className={styles.osBrand + (openMenu === "system" ? " " + styles.menuItemActive : "")}
             onClick={(e) => { e.stopPropagation(); setOpenMenu(openMenu === "system" ? null : "system"); }}
           >
-            <img src={dever.src} alt={OS.name} width={18} />
+            <img src={dever.src} alt={OS.name} width={18}  loading="lazy" decoding="async"/>
             <b>{OS.name}</b>
             {openMenu === "system" && (
               <div className={`${styles.dropdown} ${styles.systemDrop}`} onClick={(e) => e.stopPropagation()}>
@@ -565,7 +565,7 @@ function Content() {
                   style={{ backgroundColor: item.app.bg ?? "white" }}
                   alt="Icon"
                   width={50}
-                />
+                 loading="lazy" decoding="async"/>
                 <span>{item.app.label}</span>
               </div>
             ) : (
@@ -578,7 +578,7 @@ function Content() {
               >
                 <div className={styles.folderTile}>
                   {appsInGroup(item.group).slice(0, 4).map((a, i) => (
-                    <img key={"fi" + i} src={a.icon} alt="" style={{ backgroundColor: a.bg ?? "white" }} />
+                    <img key={"fi" + i} src={a.icon} alt="" style={{ backgroundColor: a.bg ?? "white" }}  loading="lazy" decoding="async"/>
                   ))}
                 </div>
                 <span>{(groupsMeta[item.group] || {}).name || item.group}</span>
@@ -593,7 +593,7 @@ function Content() {
         <div className={styles.folderOverlay} onClick={() => setOpenFolder(null)}>
           <div className={styles.folderPanel} onClick={(e) => e.stopPropagation()}>
             <div className={styles.folderPanelHead}>
-              <img src={(groupsMeta[openFolder] || {}).icon} alt="" style={{ backgroundColor: (groupsMeta[openFolder] || {}).bg ?? "white" }} />
+              <img src={(groupsMeta[openFolder] || {}).icon} alt="" style={{ backgroundColor: (groupsMeta[openFolder] || {}).bg ?? "white" }}  loading="lazy" decoding="async"/>
               <b>{(groupsMeta[openFolder] || {}).name || openFolder}</b>
               <FaTimes className={styles.folderClose} onClick={() => setOpenFolder(null)} />
             </div>
@@ -605,7 +605,7 @@ function Content() {
                   onClick={(e) => launch(e, a)}
                   onContextMenu={(e) => switchContext(e, a, contextMenus.current)}
                 >
-                  <img src={a.icon} alt={a.label} style={{ backgroundColor: a.bg ?? "white" }} width={50} />
+                  <img src={a.icon} alt={a.label} style={{ backgroundColor: a.bg ?? "white" }} width={50}  loading="lazy" decoding="async"/>
                   <span>{a.label}</span>
                 </div>
               ))}
@@ -635,7 +635,7 @@ function Content() {
               onDoubleClick={(e) => !wind.window.fullscreenOnly && resizeWindow(e, "wind" + ind)}
             >
               <div className={styles.windLabel}>
-                <img src={wind.window.icon} alt="Label" width={25} />
+                <img src={wind.window.icon} alt="Label" width={25}  loading="lazy" decoding="async"/>
                 {wind.window.label}
               </div>
               <div className={styles.windActions}>
@@ -682,7 +682,7 @@ function Content() {
                 alt={app.label}
                 width={25}
                 style={{ backgroundColor: app.bg ?? "white" }}
-              />
+               loading="lazy" decoding="async"/>
             </div>
           );
         })}
@@ -705,7 +705,7 @@ function Content() {
                 alt="Task icon"
                 width={25}
                 style={{ backgroundColor: task.window.bg ?? "white" }}
-              />
+               loading="lazy" decoding="async"/>
             </div>
           )
         )}
@@ -734,7 +734,7 @@ function Content() {
                   onMouseEnter={() => setSel(i)}
                   onClick={(e) => openApp(e, app)}
                 >
-                  <img src={app.icon} alt="" style={{ backgroundColor: app.bg ?? "white" }} />
+                  <img src={app.icon} alt="" style={{ backgroundColor: app.bg ?? "white" }}  loading="lazy" decoding="async"/>
                   <span>{app.label}</span>
                 </div>
               ))}

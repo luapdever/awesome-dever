@@ -345,7 +345,7 @@ function HomePage() {
           {capabilities.map((c, i) => (
             <article className={styles.capCard} key={i}>
               <span className={styles.capNum}>0{i + 1}</span>
-              <img src={c.icon} alt="" className={styles.capIcon} />
+              <img src={c.icon} alt="" className={styles.capIcon}  loading="lazy" decoding="async"/>
               <h3>{tx(c.title, lang)}</h3>
               <p>{tx(c.desc, lang)}</p>
               <div className={styles.tags}>{c.tags.map((t, j) => <span key={j}>{t}</span>)}</div>
@@ -427,7 +427,7 @@ function HomePage() {
           {skillSet.map((cat) => (
             <div className={styles.techCat} key={cat.key}>
               <div className={styles.techCatHead}>
-                <img src={CAT_PH[cat.key] || cat.icon} alt="" />
+                <img src={CAT_PH[cat.key] || cat.icon} alt=""  loading="lazy" decoding="async"/>
                 <span>{SKILL_CAT[cat.category] ? tx(SKILL_CAT[cat.category], lang) : cat.category}</span>
               </div>
               <div className={styles.techChips}>
@@ -503,7 +503,7 @@ function HomePage() {
         <div className={styles.linksGrid} data-stagger>
           {usefulLinks.map((l, i) => (
             <a className={styles.linkCard} key={i} href={l.href} target={l.target} rel={l.target ? "noopener noreferrer" : undefined}>
-              <img src={l.icon} alt="" />
+              <img src={l.icon} alt=""  loading="lazy" decoding="async"/>
               <span>{tx(l.label, lang)}</span>
               <b className={styles.linkArrow}>→</b>
             </a>

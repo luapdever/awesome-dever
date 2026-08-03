@@ -188,7 +188,7 @@ export default function MiniShop({ lang = "fr" }) {
                 {errMsg && <span className={styles.err}>{errMsg}</span>}
 
                 <div className={styles.foot}>
-                  <span className={styles.altcha}><img src={SHIELD} alt="" />{t.altcha}</span>
+                  <span className={styles.altcha}><img src={SHIELD} alt=""  loading="lazy" decoding="async"/>{t.altcha}</span>
                   <div className={styles.footBtns}>
                     <button type="button" className={styles.ghost} onClick={close}>{t.back}</button>
                     <button type="submit" className={styles.submit} disabled={!valid || state === "sending"}>

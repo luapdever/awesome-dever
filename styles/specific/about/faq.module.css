@@ -1,0 +1,80 @@
+.faq {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 72px 20px 96px;
+}
+
+.title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.intro {
+  margin: 0 0 32px;
+  opacity: 0.72;
+  line-height: 1.6;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  border: 1px solid rgba(127, 127, 127, 0.22);
+  border-radius: 12px;
+  background: rgba(127, 127, 127, 0.05);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.item[open] {
+  border-color: rgba(255, 165, 0, 0.45);
+  background: rgba(255, 165, 0, 0.06);
+}
+
+.q {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 22px;
+  font-weight: 600;
+  line-height: 1.45;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Chevron maison : le marqueur natif diffère trop d'un navigateur à l'autre. */
+.q::-webkit-details-marker { display: none; }
+.q::before {
+  content: "＋";
+  flex: 0 0 auto;
+  font-size: 1.05rem;
+  color: #ffa500;
+  transition: transform 0.2s ease;
+}
+.item[open] .q::before { content: "－"; }
+
+.q:focus-visible {
+  outline: 2px solid #ffa500;
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+.a {
+  margin: 0;
+  padding: 0 22px 20px 56px;
+  line-height: 1.68;
+  opacity: 0.85;
+}
+
+@media (max-width: 600px) {
+  .faq { padding: 48px 16px 72px; }
+  .q { padding: 16px 16px; }
+  .a { padding: 0 16px 18px 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item, .q::before { transition: none; }
+}

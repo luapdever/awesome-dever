@@ -141,10 +141,10 @@ function ExperienceModal() {
                 >
                   {a.recommended && (
                     <span className={styles.maBadge} title={m.recommended} aria-label={m.recommended}>
-                      <img src={ph("star-fill", "2a1a00")} alt="" />
+                      <img src={ph("star-fill", "2a1a00")} alt=""  loading="lazy" decoding="async"/>
                     </span>
                   )}
-                  <img src={a.icon} alt="" />
+                  <img src={a.icon} alt=""  loading="lazy" decoding="async"/>
                   <span className={styles.maLabel}>{tx(a.label, lang)}</span>
                   <span className={styles.maSub}>{tx(a.sub, lang)}</span>
                 </button>
@@ -156,7 +156,7 @@ function ExperienceModal() {
               <div className={styles.modalMoreRow}>
                 {SECONDARY.map((a) => (
                   <button key={a.id} type="button" className={styles.modalMoreBtn} onClick={() => run(a.id)}>
-                    <img src={a.icon} alt="" />
+                    <img src={a.icon} alt=""  loading="lazy" decoding="async"/>
                     {tx(a.label, lang)}
                   </button>
                 ))}

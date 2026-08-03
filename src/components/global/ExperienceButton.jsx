@@ -16,7 +16,7 @@ function ExperienceButton() {
     : "Change experience — classic version or PaulBrain OS";
   return (
     <button id="expSticky" className="expSticky" onClick={openChooser} aria-label={hint} title={hint}>
-      <img src={ICON} alt="" width={26} height={26} />
+      <img src={ICON} alt="" width={26} height={26}  loading="lazy" decoding="async"/>
     </button>
   );
 }

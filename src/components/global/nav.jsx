@@ -69,7 +69,7 @@ function NavBar() {
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
         <Link href="/" className={styles.logo} onClick={() => setOpen(false)}>
           <span className={styles.logoMark}>
-            <Image src={dever} alt="Dever" width={24} height={24} />
+            <Image src={dever} alt="Dever" width={24} height={24} priority />
           </span>
           <span className={styles.logoText}>DEVER</span>
         </Link>
