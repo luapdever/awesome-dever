@@ -61,3 +61,14 @@
   animation: termBlink 1s step-end infinite;
 }
 @keyframes termBlink { 50% { opacity: 0; } }
+
+/* Liens dans les réponses de PaulBot — soulignés et colorés pour se distinguer
+   du texte du terminal, sans casser la police à chasse fixe. */
+.link { color: #ffb552; text-decoration: underline; text-underline-offset: 2px; }
+.link:hover { color: #ffd08a; }
+.link:focus-visible { outline: 1px solid #ffb552; outline-offset: 2px; }
+
+/* Relances et navigation proposées par le bot, rendues façon shell. */
+.hints { margin: 6px 0 2px; padding-left: 2px; opacity: 0.9; line-height: 1.7; }
+.hintNum { color: #ffb552; margin-right: 6px; }
+.hintTip { opacity: 0.55; font-style: italic; margin-top: 2px; }

@@ -32,7 +32,7 @@ const PUBLIC_PROJECTS = [
 
 const SOCIALS = [
   { label: "GitHub", url: "https://github.com/luapdever" },
-  { label: "LinkedIn", url: "https://linkedin.com/in/paul-zannou-b253a2205" },
+  { label: "LinkedIn", url: "https://linkedin.com/in/paul-zannou" },
   { label: "Blog", url: "https://paulzannou.com" },
   { label: "Email", url: "mailto:hi@paulzannou.com" },
 ];

@@ -1,7 +1,7 @@
 /* Appel streaming réutilisable (terminal `ask`, …). Partage l'identité et la
    conversation du widget via localStorage : une question posée au terminal
    poursuit la même conversation. */
-import { extractActions } from "./botActions";
+import { extractActions, extractSuggestions } from "./botActions";
 import { solveAltcha } from "./altcha";
 
 const CHAT_URL = process.env.NEXT_PUBLIC_CHAT_URL || "/api/chat";
@@ -51,9 +51,18 @@ function saveMessages(msgs) {
 
 // Nettoie le flux pour un affichage terminal : retire les marqueurs [[go:]]
 // (navigation, non pertinents en shell) et les **gras** Markdown.
-function cleanForTerminal(raw) {
-  return extractActions(raw || "").clean.replace(/\*\*(.+?)\*\*/g, "$1");
+/* Sépare le texte des marqueurs. On ne les JETTE pas : le terminal les
+   réexploite sous forme native (choix numérotés, commandes). */
+function splitForTerminal(raw) {
+  const nav = extractActions(raw || "");
+  const sug = extractSuggestions(nav.clean);
+  return {
+    text: sug.clean.replace(/\*\*(.+?)\*\*/g, "$1"),
+    actions: nav.actions || [],
+    suggestions: sug.suggestions || [],
+  };
 }
+const cleanForTerminal = (raw) => splitForTerminal(raw).text;
 
 /* Question en streaming : `onToken` reçoit le texte partiel nettoyé, la
    promesse rend le texte final. La conversation est ré-enregistrée (le widget
@@ -99,12 +108,15 @@ export async function askBotStream({ question, lang = "fr", onToken, signal }) {
     acc += dec.decode(value, { stream: true });
     if (onToken) onToken(cleanForTerminal(acc));
   }
-  const finalText = cleanForTerminal(acc);
+  const parsed = splitForTerminal(acc);
+  const finalText = parsed.text;
 
   const all = getMessages();
   all.push({ role: "user", content: q, at: Date.now() });
   all.push({ role: "assistant", content: finalText, at: Date.now() });
   saveMessages(all);
 
-  return finalText;
+  // On renvoie un objet : le texte reste accessible via `.text`, et l'appelant
+  // récupère navigations et relances pour les rendre à sa façon.
+  return { text: finalText, actions: parsed.actions, suggestions: parsed.suggestions };
 }

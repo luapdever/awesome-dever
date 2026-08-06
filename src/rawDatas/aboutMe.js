@@ -7,7 +7,7 @@ import { FaFacebook, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 // `name` sert de nom accessible (aria-label) pour les liens icône-only (nav + footer).
 export const socialMedias = [
   { name: "GitHub", icon: <FaGithub />, link: "https://github.com/luapdever" },
-  { name: "LinkedIn", icon: <FaLinkedinIn />, link: "https://linkedin.com/in/paul-zannou-b253a2205" },
+  { name: "LinkedIn", icon: <FaLinkedinIn />, link: "https://linkedin.com/in/paul-zannou" },
   { name: "Facebook", icon: <FaFacebook />, link: "https://facebook.com/paulsmith.zannou" },
   { name: "Twitter / X", icon: <FaTwitter />, link: "https://twitter.com/SmithZannou" },
   { name: "Blog", icon: <>Blog</>, link: "https://paulzannou.com/blog" },

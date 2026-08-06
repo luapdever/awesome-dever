@@ -17,7 +17,7 @@ const jsonLd = {
     birthPlace: "Cotonou, Bénin",
     sameAs: [
       "https://github.com/luapdever",
-      "https://linkedin.com/in/paul-zannou-b253a2205",
+      "https://linkedin.com/in/paul-zannou",
       "https://paulzannou.com",
     ],
   },

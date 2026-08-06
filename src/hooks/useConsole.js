@@ -83,6 +83,7 @@ export const useConsole = (lang = "fr") => {
   if (!commands.current) commands.current = buildCommands();
 
   const [lines, setLines] = useState([intro]);
+  const choices = useRef(null); // relances numérotées du dernier tour
   const [promptLabel, setPromptLabel] = useState(PROMPT);
   const [busy, setBusy] = useState(false);
   const history = useRef([]);
@@ -176,12 +177,21 @@ export const useConsole = (lang = "fr") => {
     setLines((prev) => [...prev, { type: "stream", id, label: tr().label, text: tr().thinking, waiting: true, done: false }]);
     const patch = (fields) => setLines((prev) => prev.map((l) => (l.id === id ? { ...l, ...fields } : l)));
     try {
-      await askBotStream({
+      const res = await askBotStream({
         question: q,
         lang: langRef.current,
         onToken: (partial) => patch({ text: partial, waiting: false }),
       });
-      patch({ done: true, waiting: false });
+      /* Les marqueurs ne sont pas jetés : on les rend à la manière d'un shell.
+         Les relances deviennent des choix numérotés (on tape 1, 2 ou 3), la
+         navigation devient une commande à taper — c'est la forme native ici,
+         là où le widget affiche des boutons. */
+      patch({
+        done: true, waiting: false,
+        suggestions: res?.suggestions || [],
+        actions: res?.actions || [],
+      });
+      choices.current = { suggestions: res?.suggestions || [], actions: res?.actions || [] };
     } catch {
       patch({ text: tr().error, done: true, waiting: false });
     } finally {
@@ -193,6 +203,18 @@ export const useConsole = (lang = "fr") => {
 
   const exec = (raw) => {
     const value = raw ?? "";
+    /* Réponse à un choix numéroté proposé au tour précédent : « 2 » relance la
+       deuxième question suggérée, sans que l'utilisateur ait à la retaper. */
+    const pick = value.trim();
+    if (inChat.current && /^[1-9]$/.test(pick) && choices.current?.suggestions?.length) {
+      const q = choices.current.suggestions[Number(pick) - 1];
+      if (q) {
+        choices.current = null;
+        setLines((prev) => [...prev, { type: "cmd", text: q, prompt: promptLabel }]);
+        runStream(q);
+        return;
+      }
+    }
 
     // 1) Une étape interactive attend une saisie (onboarding / question PaulBot).
     if (pending.current) {

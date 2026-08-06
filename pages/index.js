@@ -15,7 +15,7 @@ const personJsonLd = {
   knowsAbout: ["JavaScript", "TypeScript", "Vue.js", "NestJS", "Node.js", "Flutter", "PHP", "Docker", "WordPress"],
   sameAs: [
     "https://github.com/luapdever",
-    "https://linkedin.com/in/paul-zannou-b253a2205",
+    "https://linkedin.com/in/paul-zannou",
     "https://facebook.com/paulsmith.zannou",
     "https://twitter.com/SmithZannou",
     "https://paulzannou.com",

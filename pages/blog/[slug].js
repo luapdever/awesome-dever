@@ -45,7 +45,7 @@ export default function Article({ post, prev, next }) {
       "@type": "Person",
       name: "Paul Mèdédji Zannou",
       url: ORIGIN,
-      sameAs: ["https://github.com/luapdever", "https://www.linkedin.com/in/paul-zannou-b253a2205"],
+      sameAs: ["https://github.com/luapdever", "https://www.linkedin.com/in/paul-zannou"],
     },
     publisher: { "@type": "Person", name: "Paul Mèdédji Zannou", url: ORIGIN },
   };

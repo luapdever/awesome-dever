@@ -121,7 +121,7 @@ export const usefulLinks = [
   { label: L("PaulBrain OS", "PaulBrain OS"), href: "/paulfolio", icon: ph("desktop") },
   { label: L("About me", "À propos de moi"), href: "/about-me", icon: ph("user-focus") },
   { label: L("GitHub", "GitHub"), href: "https://github.com/luapdever", target: "_blank", icon: ph("github-logo") },
-  { label: L("LinkedIn", "LinkedIn"), href: "https://linkedin.com/in/paul-zannou-b253a2205", target: "_blank", icon: ph("linkedin-logo") },
+  { label: L("LinkedIn", "LinkedIn"), href: "https://linkedin.com/in/paul-zannou", target: "_blank", icon: ph("linkedin-logo") },
   { label: L("My blog", "Mon blog"), href: "https://paulzannou.com/blog", target: "_blank", icon: ph("pen-nib") },
 ];
 

@@ -150,7 +150,7 @@ const LEAVES = [
     links: [
       { label: "hi@paulzannou.com", href: "mailto:hi@paulzannou.com" },
       { label: "GitHub", href: "https://github.com/luapdever" },
-      { label: "LinkedIn", href: "https://www.linkedin.com/in/paul-zannou-b253a2205" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/paul-zannou" },
       { label: T("Le blog", "The blog"), href: "https://paulzannou.com/blog" },
     ],
   },
@@ -432,7 +432,7 @@ function Book() {
       alternateName: "Luap Dever",
       jobTitle: lang === "fr" ? "Ingénieur logiciel full-stack" : "Full-stack software engineer",
       url: ORIGIN,
-      sameAs: ["https://github.com/luapdever", "https://www.linkedin.com/in/paul-zannou-b253a2205"],
+      sameAs: ["https://github.com/luapdever", "https://www.linkedin.com/in/paul-zannou"],
     },
   };
 

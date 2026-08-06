@@ -64,7 +64,7 @@ export const blogPosts = [
     ],
     ctas: [
       { label: L("Voir Emilia Cross", "See Emilia Cross"), href: "https://emiliacross.com/", desc: L("Le projet en ligne", "The live project"), external: true },
-      { label: L("Discuter d'un projet", "Discuss a project"), href: "https://www.linkedin.com/in/paul-zannou-b253a2205", desc: L("Sur LinkedIn", "On LinkedIn"), external: true },
+      { label: L("Discuter d'un projet", "Discuss a project"), href: "https://www.linkedin.com/in/paul-zannou", desc: L("Sur LinkedIn", "On LinkedIn"), external: true },
     ],
   },
   {
@@ -214,7 +214,7 @@ Conditions : 100% remote, TJM selon profil.`,
       { label: L("Voir le CV interactif", "See the interactive resume"), href: "/cv", desc: L("Bilingue, 4 profils, export PDF", "Bilingual, 4 profiles, PDF export") },
       { label: L("En savoir plus sur moi", "Learn more about me"), href: "/about-me", desc: L("Le parcours en détail", "The journey in detail") },
       { label: L("Le code sur GitHub", "The code on GitHub"), href: "https://github.com/luapdever", desc: L("Mes dépôts", "My repositories"), external: true },
-      { label: L("Me contacter sur LinkedIn", "Reach me on LinkedIn"), href: "https://www.linkedin.com/in/paul-zannou-b253a2205", desc: L("Discutons d'un projet", "Let's talk about a project"), external: true },
+      { label: L("Me contacter sur LinkedIn", "Reach me on LinkedIn"), href: "https://www.linkedin.com/in/paul-zannou", desc: L("Discutons d'un projet", "Let's talk about a project"), external: true },
     ],
   },
   {
