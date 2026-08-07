@@ -7,7 +7,11 @@ import { useRouter } from "next/router";
 
 function Portfolio() {
   const router = useRouter()
-  const [lang, setLang] = useState('en')
+  /* Initialisée depuis la locale de l'URL, jamais en dur : Next rend une page
+     par locale au build, mais l'effet ci-dessous ne s'exécute pas côté serveur.
+     Un défaut figé à 'en' produisait donc deux HTML identiques en anglais, que
+     Google traitait — à raison — comme des doublons. */
+  const [lang, setLang] = useState(router.locale === 'fr' ? 'fr' : 'en')
 
   /* Hiérarchie de langue, du plus fort au plus faible :
        #lang= (lien de partage explicite) > locale de l'URL > os_lang
