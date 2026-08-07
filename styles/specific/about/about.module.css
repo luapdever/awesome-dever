@@ -64,7 +64,7 @@
 .socials a:hover { transform: translateY(-3px); background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent)); border-color: transparent; }
 
 /* ---------- Story (editorial two-column) ---------- */
-.story { display: grid; grid-template-columns: 220px 1fr; gap: 34px; padding: 52px 0; border-top: 1px solid var(--glass-border); }
+.story { display: grid; grid-template-columns: 220px 1fr; gap: 34px; padding: 52px 0; }
 .story h2 { position: sticky; top: 96px; align-self: start; margin: 0; font-size: clamp(1.5rem, 3.6vw, 2.1rem); font-weight: 800; line-height: 1.1; }
 .storyText { max-width: 680px; }
 .storyText p { font-size: 1.04rem; line-height: 1.8; color: rgba(255, 255, 255, 0.84); margin: 0 0 18px; }
