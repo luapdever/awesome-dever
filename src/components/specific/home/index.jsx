@@ -11,6 +11,7 @@ import {
 import { useLandingLang } from "../../../context/landingLang";
 import { useExperience } from "../../../context/experience";
 import { track } from "../../../lib/analytics";
+import { localeHref } from "../../../lib/localeHref";
 import ContactForm from "../../global/ContactForm";
 
 const YEARS = yearsOfExperience();
@@ -568,7 +569,7 @@ function HomePage() {
         <h2 className={styles.bigHead} data-mask><MaskWords text={ui.headLinks} /></h2>
         <div className={styles.linksGrid} data-stagger>
           {usefulLinks.map((l, i) => (
-            <a className={styles.linkCard} key={i} href={l.href} target={l.target} rel={l.target ? "noopener noreferrer" : undefined}>
+            <a className={styles.linkCard} key={i} href={localeHref(l.href, lang)} target={l.target} rel={l.target ? "noopener noreferrer" : undefined}>
               <img src={l.icon} alt=""  loading="lazy" decoding="async"/>
               <span>{tx(l.label, lang)}</span>
               <b className={styles.linkArrow}>→</b>
