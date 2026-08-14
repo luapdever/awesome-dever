@@ -27,6 +27,10 @@ export default function Article({ post, prev, next }) {
   const title = tr(post.title, L);
   const excerpt = tr(post.excerpt, L);
   const bodyText = post.content.map((c) => tr(c, L)).join(" ");
+  /* Le chemin doit porter la locale : sans préfixe, la page anglaise déclarait
+     l'URL française en JSON-LD pendant que son canonical pointait l'anglaise.
+     Deux signaux contradictoires sur la même page. */
+  const path = `${L === "en" ? "/en" : ""}/blog/${post.slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -36,8 +40,8 @@ export default function Article({ post, prev, next }) {
     dateModified: post.date,
     inLanguage: L,
     image: `${ORIGIN}${post.cover}`,
-    url: `${ORIGIN}/blog/${post.slug}`,
-    mainEntityOfPage: { "@type": "WebPage", "@id": `${ORIGIN}/blog/${post.slug}` },
+    url: `${ORIGIN}${path}`,
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${ORIGIN}${path}` },
     wordCount: bodyText.split(/\s+/).filter(Boolean).length,
     keywords: post.tags.join(", "),
     articleSection: post.category,
@@ -49,11 +53,40 @@ export default function Article({ post, prev, next }) {
     },
     publisher: { "@type": "Person", name: "Paul Mèdédji Zannou", url: ORIGIN },
   };
+  /* Sans VideoObject, Google voit une page qui contient une vidéo mais ne sait
+     pas laquelle : ni vignette vidéo dans les résultats, ni éligibilité à
+     l'onglet Vidéos. `uploadDate` et `thumbnailUrl` sont exigés. */
+  const videoLd = post.video && {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: title,
+    description: excerpt,
+    thumbnailUrl: `${ORIGIN}${post.cover}`,
+    contentUrl: `${ORIGIN}${post.video}`,
+    uploadDate: post.date,
+    inLanguage: L,
+    ...(post.videoDuration ? { duration: post.videoDuration } : {}),
+  };
   const gallery = (post.images || []).slice(1); // le cover est déjà en tête
 
   return (
     <>
-      <Seo path={`/blog/${post.slug}`} title={`${title} — ${L === "en" ? "The blog" : "Le blog"}`} description={excerpt} image={post.cover} type="article" jsonLd={[jsonLd, breadcrumbLd([{ name: "Accueil", path: "/" }, { name: "Le blog", path: "/blog" }, { name: title, path: `/blog/${post.slug}` }])]} />
+      <Seo
+        path={`/blog/${post.slug}`}
+        title={`${title} — ${L === "en" ? "The blog" : "Le blog"}`}
+        description={excerpt}
+        image={post.cover}
+        type="article"
+        jsonLd={[
+          jsonLd,
+          breadcrumbLd([
+            { name: L === "en" ? "Home" : "Accueil", path: L === "en" ? "/en" : "/" },
+            { name: L === "en" ? "The blog" : "Le blog", path: `${L === "en" ? "/en" : ""}/blog` },
+            { name: title, path },
+          ]),
+          ...(videoLd ? [videoLd] : []),
+        ]}
+      />
       <main className={styles.wrap}>
         <Link href="/blog" className={styles.back}>← {t.back}</Link>
 
@@ -70,7 +103,14 @@ export default function Article({ post, prev, next }) {
 
           {post.cover && (
             <figure className={styles.cover}>
-              <img src={post.cover} alt={title} loading="eager" />
+              {post.video ? (
+                /* La cover sert de vignette au lecteur. `preload="none"` : le
+                   fichier ne part qu'au clic — sinon chaque visiteur paierait
+                   plusieurs Mo pour un clip qu'il ne lancera peut-être jamais. */
+                <video src={post.video} poster={post.cover} controls playsInline preload="none" />
+              ) : (
+                <img src={post.cover} alt={title} loading="eager" />
+              )}
             </figure>
           )}
 
