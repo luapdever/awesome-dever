@@ -56,17 +56,8 @@
   box-shadow: 0 18px 44px rgba(4, 2, 20, 0.5);
 }
 .cover img { width: 100%; display: block; }
-
-/* Vidéo de couverture. `max-height` borné : ces clips sont filmés au téléphone,
-   donc verticaux — sans plafond, un 1080x1920 pousse tout l'article sous la
-   ligne de flottaison. Le fond sombre évite le flash blanc avant le poster. */
-.cover video {
-  width: 100%;
-  max-height: 78vh;
-  display: block;
-  background: #0d0a1a;
-  object-fit: contain;
-}
+/* La vignette vidéo apporte son rayon et son ombre : on neutralise ceux de la figure. */
+.cover:has(button) { border-radius: 0; overflow: visible; box-shadow: none; }
 
 /* ---- Body ---- */
 .body { font-size: 1.06rem; line-height: 1.72; }

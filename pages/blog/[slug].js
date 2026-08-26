@@ -2,6 +2,7 @@ import Link from "next/link";
 import Seo from "../../src/components/global/seo";
 import ShareBar from "../../src/components/global/ShareBar";
 import ArticleReader from "../../src/components/global/ArticleReader";
+import VideoModal from "../../src/components/global/VideoModal";
 import BlogUseCases from "../../src/components/global/BlogUseCases";
 import { blogPosts, readingMinutes, tr } from "../../src/rawDatas/blog";
 import { useLandingLang } from "../../src/context/landingLang";
@@ -104,10 +105,13 @@ export default function Article({ post, prev, next }) {
           {post.cover && (
             <figure className={styles.cover}>
               {post.video ? (
-                /* La cover sert de vignette au lecteur. `preload="none"` : le
-                   fichier ne part qu'au clic — sinon chaque visiteur paierait
-                   plusieurs Mo pour un clip qu'il ne lancera peut-être jamais. */
-                <video src={post.video} poster={post.cover} controls playsInline preload="none" />
+                <VideoModal
+                  src={post.video}
+                  poster={post.cover}
+                  alt={title}
+                  duration={post.videoDuration}
+                  caption={L === "en" ? "Tap to play — 7 seconds of pure failure" : "Clique pour lancer — 7 secondes d'échec intégral"}
+                />
               ) : (
                 <img src={post.cover} alt={title} loading="eager" />
               )}
@@ -150,7 +154,7 @@ export default function Article({ post, prev, next }) {
             ))}
           </div>
 
-          <ShareBar url={`${ORIGIN}/blog/${post.slug}`} title={title} />
+          <ShareBar url={`${ORIGIN}${path}`} title={title} />
         </article>
 
         <nav className={styles.pager}>
