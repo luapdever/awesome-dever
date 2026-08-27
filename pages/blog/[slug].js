@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Seo from "../../src/components/global/seo";
 import ShareBar from "../../src/components/global/ShareBar";
-import ArticleReader from "../../src/components/global/ArticleReader";
+import ArticleReader, { HEADING, slugify } from "../../src/components/global/ArticleReader";
+import ArticleToc from "../../src/components/global/ArticleToc";
 import VideoModal from "../../src/components/global/VideoModal";
 import BlogUseCases from "../../src/components/global/BlogUseCases";
 import { blogPosts, readingMinutes, tr } from "../../src/rawDatas/blog";
@@ -27,7 +28,8 @@ export default function Article({ post, prev, next }) {
 
   const title = tr(post.title, L);
   const excerpt = tr(post.excerpt, L);
-  const bodyText = post.content.map((c) => tr(c, L)).join(" ");
+  const isText = (c) => typeof c === "string" || (c && c.fr !== undefined);
+  const bodyText = post.content.filter(isText).map((c) => tr(c, L)).join(" ");
   /* Le chemin doit porter la locale : sans préfixe, la page anglaise déclarait
      l'URL française en JSON-LD pendant que son canonical pointait l'anglaise.
      Deux signaux contradictoires sur la même page. */
@@ -40,7 +42,12 @@ export default function Article({ post, prev, next }) {
     datePublished: post.date,
     dateModified: post.date,
     inLanguage: L,
-    image: `${ORIGIN}${post.cover}`,
+    /* Plusieurs images plutôt qu'une : Google choisit la mieux adaptée au
+       format de résultat. La couverture reste en tête. */
+    image: [post.cover, ...post.content.filter((c) => c && c.fig).map((c) => c.fig)]
+      .filter(Boolean)
+      .map((src) => `${ORIGIN}${src}`),
+    timeRequired: `PT${readingMinutes(post)}M`,
     url: `${ORIGIN}${path}`,
     mainEntityOfPage: { "@type": "WebPage", "@id": `${ORIGIN}${path}` },
     wordCount: bodyText.split(/\s+/).filter(Boolean).length,
@@ -53,6 +60,14 @@ export default function Article({ post, prev, next }) {
       sameAs: ["https://github.com/luapdever", "https://www.linkedin.com/in/paul-zannou"],
     },
     publisher: { "@type": "Person", name: "Paul Mèdédji Zannou", url: ORIGIN },
+    /* Les sources citées dans le corps, déclarées comme telles : un article
+       qui s'appuie sur des références vérifiables le dit à la machine aussi. */
+    ...(() => {
+      const cites = post.content.filter((c) => c && c.quote && c.href);
+      return cites.length
+        ? { citation: cites.map((c) => ({ "@type": "CreativeWork", name: c.source, url: c.href })) }
+        : {};
+    })(),
   };
   /* Sans VideoObject, Google voit une page qui contient une vidéo mais ne sait
      pas laquelle : ni vignette vidéo dans les résultats, ni éligibilité à
@@ -68,6 +83,17 @@ export default function Article({ post, prev, next }) {
     inLanguage: L,
     ...(post.videoDuration ? { duration: post.videoDuration } : {}),
   };
+  /* Un bloc est soit du texte (chaîne bilingue), soit une figure, soit une
+     citation. Tout est résolu ICI : le lecteur reçoit des valeurs prêtes. */
+  const paragraphs = post.content.map((c) => {
+    if (isText(c)) return tr(c, L);
+    if (c.fig) return { fig: c.fig, alt: tr(c.alt, L), caption: tr(c.caption, L) };
+    return { quote: tr(c.quote, L), source: c.source, href: c.href };
+  });
+  // Le sommaire se déduit du contenu, pas du DOM : il existe donc au rendu serveur.
+  const toc = paragraphs
+    .filter((p) => typeof p === "string" && HEADING.test(p))
+    .map((p) => ({ id: slugify(p), text: p.replace(HEADING, "") }));
   const gallery = (post.images || []).slice(1); // le cover est déjà en tête
 
   return (
@@ -118,7 +144,8 @@ export default function Article({ post, prev, next }) {
             </figure>
           )}
 
-          <ArticleReader paragraphs={post.content.map((c) => tr(c, L))} lang={L} />
+          {toc.length > 1 && <ArticleToc items={toc} label={L === "en" ? "On this page" : "Sur cette page"} />}
+          <ArticleReader paragraphs={paragraphs} lang={L} />
 
           {post.useCases && post.useCases.length > 0 && <BlogUseCases useCases={post.useCases} lang={L} />}
 

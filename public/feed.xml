@@ -6,7 +6,15 @@
     <atom:link href="https://paulzannou.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>Billets tech, culture dev, un peu d'IA — et quelques carnets de voyage.</description>
     <language>fr</language>
-    <lastBuildDate>Wed, 26 Aug 2026 12:54:46 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 27 Aug 2026 09:04:14 GMT</lastBuildDate>
+    <item>
+      <title>Construire un assistant qui n'a pas le droit de se tromper</title>
+      <link>https://paulzannou.com/blog/architecture-assistant-qui-na-pas-le-droit-de-se-tromper</link>
+      <guid isPermaLink="true">https://paulzannou.com/blog/architecture-assistant-qui-na-pas-le-droit-de-se-tromper</guid>
+      <pubDate>Wed, 26 Aug 2026 09:00:00 GMT</pubDate>
+      <category>Projet</category>
+      <description>Dantokpa, un cadenas, deux amis qui ne comptent pas pareil et un groupe électrogène : l'architecture d'un assistant fiable, expliquée sans jargon.</description>
+    </item>
     <item>
       <title>J'ai fait une erreur de débutant</title>
       <link>https://paulzannou.com/blog/erreur-de-debutant-degonfler-les-pneus</link>

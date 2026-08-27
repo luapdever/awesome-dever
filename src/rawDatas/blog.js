@@ -14,6 +14,325 @@ export const CATEGORIES = ["Tous", "Projet", "Dev", "IA", "Carrière", "Voyage"]
 
 export const blogPosts = [
   {
+    slug: "architecture-assistant-qui-na-pas-le-droit-de-se-tromper",
+    date: "2026-08-26",
+    category: "Projet",
+    tags: ["Architecture", "Recherche hybride", "Docker Swarm", "PostgreSQL", "Fiabilité", "Expliqué simplement"],
+    title: L(
+      "Construire un assistant qui n'a pas le droit de se tromper",
+      "Building an assistant that isn't allowed to be wrong"
+    ),
+    excerpt: L(
+      "Dantokpa, un cadenas, deux amis qui ne comptent pas pareil et un groupe électrogène : l'architecture d'un assistant fiable, expliquée sans jargon.",
+      "A market, a padlock, two friends who count differently and a backup generator: the architecture of a reliable assistant, explained without jargon."
+    ),
+    cover: "/blog/architecture-assistant-qui-na-pas-le-droit-de-se-tromper-1.jpg",
+    content: [
+      L(
+        "## Au marché, personne n'aime celui qui invente",
+        "## At the market, nobody likes the one who makes things up"
+      ),
+      L(
+        "Tu arrives à Dantokpa, tu cherches un vendeur précis. Tu demandes ton chemin. Deux réponses possibles.",
+        "You arrive at the big market looking for a particular trader. You ask for directions. Two possible answers."
+      ),
+      L(
+        "La première : « va tout droit, tourne à gauche après les bassines ». Tu marches vingt minutes. Ce n'était pas là. La personne ne savait pas, mais elle a préféré dire quelque chose plutôt que rien.",
+        "The first: “go straight, turn left after the basins”. You walk for twenty minutes. It wasn't there. The person didn't know, but preferred saying something to saying nothing."
+      ),
+      L(
+        "La deuxième : « je ne sais pas, demande à la dame là-bas ». Tu perds dix secondes. Tu trouves.",
+        "The second: “I don't know, ask that lady over there”. You lose ten seconds. You find it."
+      ),
+      L(
+        "**La deuxième réponse vaut mieux que la première.** C'est toute la différence entre un assistant utile et un assistant dangereux — et c'est la phrase qui a décidé de toute l'architecture qui suit.",
+        "**The second answer is worth more than the first.** That is the whole difference between a useful assistant and a dangerous one — and it's the sentence that decided the architecture that follows."
+      ),
+      L(
+        "Maintenant remplace le marché par une mutuelle de santé, et la direction par un taux de remboursement. Se tromper ne fait plus marcher quelqu'un vingt minutes pour rien : ça devient un litige. C'est ce genre d'assistant que je construis, et cette phrase a décidé de toute son architecture.",
+        "Now replace the market with a health mutual, and the directions with a reimbursement rate. Being wrong no longer costs someone a twenty-minute walk: it becomes a dispute. That is the kind of assistant I build, and that sentence decided its entire architecture."
+      ),
+      L(
+        "Je ne peux pas nommer le projet réel : le décor est déplacé, les décisions techniques sont exactement celles que j'ai prises.",
+        "I can't name the real project: the setting is moved, the technical decisions are exactly the ones I made."
+      ),
+      L(
+        "## La consigne qu'on oublie, le cadenas qu'on ne contourne pas",
+        "## The instruction you forget, the padlock you can't get around"
+      ),
+      L(
+        "Tu peux dire à tes enfants : « ne sortez pas sans prévenir ». C'est une consigne. Elle tient tant que tout le monde s'en souvient.",
+        "You can tell your children: “don't go out without telling me”. That's an instruction. It holds as long as everyone remembers it."
+      ),
+      L(
+        "Ou tu peux mettre un cadenas au portail. Là, la question ne se pose plus.",
+        "Or you can put a padlock on the gate. Then the question doesn't arise."
+      ),
+      L(
+        "Le programme qui répond aux adhérents, c'est la consigne. La base de données, c'est le cadenas. Et j'ai mis la règle dans le cadenas.",
+        "The program answering members is the instruction. The database is the padlock. And I put the rule in the padlock."
+      ),
+      L(
+        "Concrètement, la base **refuse physiquement** d'enregistrer une réponse publiée sans trois choses : le document d'où elle vient, la date où on l'a vérifiée, et le niveau de confiance. Ce n'est pas un test qu'un développeur pourrait oublier de lancer. C'est un mur.",
+        "Concretely, the database **physically refuses** to store a published answer without three things: the document it comes from, the date it was checked, and the confidence level. It isn't a test a developer might forget to run. It's a wall."
+      ),
+      L(
+        "Deuxième cadenas : une réponse publiée ne se modifie plus. Jamais. Si l'information change, on en publie une nouvelle et on retire l'ancienne — mais l'ancienne reste, datée.",
+        "Second padlock: a published answer can never be edited. Ever. If the information changes, a new one is published and the old withdrawn — but the old one stays, dated."
+      ),
+      L(
+        "Pourquoi tant de rigidité ? Parce que si un adhérent conteste en octobre une réponse reçue en mars, il faut pouvoir montrer **exactement** ce que le système disait en mars. Une ligne qu'on peut retoucher rend cette preuve impossible.",
+        "Why so rigid? Because if a member disputes in October an answer received in March, you must be able to show **exactly** what the system said in March. A row that can be quietly edited makes that proof impossible."
+      ),
+      L(
+        "Un développeur dirait : « les invariants sont dans le schéma, pas dans l'application ». C'est la même chose, dit en jargon.",
+        "A developer would say: “the invariants are in the schema, not in the application”. Same thing, said in jargon."
+      ),
+      L(
+        "## Chercher une adresse à Cotonou",
+        "## Finding an address in Cotonou"
+      ),
+      L(
+        "À Cotonou, personne ne cherche par le nom de la rue. On dit : « c'est après le carrefour, à côté de la pharmacie, en face du maquis bleu ».",
+        "In Cotonou nobody searches by street name. People say: “it's past the junction, next to the pharmacy, opposite the blue bar”."
+      ),
+      L(
+        "Ce sont deux façons de chercher, et elles ne trouvent pas les mêmes choses.",
+        "These are two ways of searching, and they don't find the same things."
+      ),
+      L(
+        "**Par le nom exact.** Si tu connais le nom, tu tombes dessus directement. Si tu te trompes d'une lettre, tu ne trouves rien.",
+        "**By exact name.** If you know the name, you land on it directly. One letter wrong and you find nothing."
+      ),
+      L(
+        "**Par les repères.** Tu décris ce qu'il y a autour. Ça marche même si tu ignores le nom — mais tu peux tomber sur la pharmacie d'à côté, qui ressemble beaucoup.",
+        "**By landmarks.** You describe what's around it. It works even if you don't know the name — but you may land on the pharmacy next door, which looks very similar."
+      ),
+      L(
+        "Un adhérent écrit « lunettes ». Le contrat, lui, dit « équipements d'optique médicale ». La recherche par le nom exact ne trouve rien. Il écrit « je viens d'accoucher » ; le contrat dit « prestation maternité ». Là encore, aucun mot commun.",
+        "A member writes “glasses”. The contract says “medical optical equipment”. Exact-name search finds nothing. They write “I just gave birth”; the contract says “maternity benefit”. Again, not a single word in common."
+      ),
+      L(
+        "Alors on garde **les deux méthodes en parallèle**. L'une cherche les mots exacts, l'autre cherche le sens. Chacune rattrape ce que l'autre rate.",
+        "So we keep **both methods running in parallel**. One looks for exact words, the other looks for meaning. Each catches what the other misses."
+      ),
+      L(
+        "Le nom technique de la seconde, c'est la recherche « vectorielle » : on transforme chaque phrase en une suite de nombres qui représentent son sens, et on compare les nombres. Deux phrases qui veulent dire la même chose se retrouvent proches, même sans un seul mot commun.",
+        "The technical name for the second is “vector” search: each sentence is turned into a series of numbers representing its meaning, and the numbers are compared. Two sentences meaning the same thing end up close together, even without a single shared word."
+      ),
+      L(
+        "## Kossi compte les fois, Fifamè note sur dix",
+        "## Kossi counts the visits, Fifamè marks out of ten"
+      ),
+      L(
+        "On a donc deux moteurs qui répondent chacun de leur côté. Reste à les mettre d'accord. Et c'est là que ça se complique.",
+        "So we have two engines, each answering on its own side. Now they must agree. And that's where it gets tricky."
+      ),
+      L(
+        "Prends une situation ordinaire : tu cherches un bon maquis, tu demandes à deux amis.",
+        "Take an ordinary situation: you're looking for a good local restaurant, so you ask two friends."
+      ),
+      L(
+        "Kossi te dit combien de fois il y a mangé. Ça peut monter à quarante-sept. Fifamè, elle, note sur dix.",
+        "Kossi tells you how many times he has eaten there. It can climb to forty-seven. Fifamè marks out of ten."
+      ),
+      L(
+        "Si tu additionnes leurs chiffres, tu ne fais plus confiance qu'à Kossi. Ses quarante-sept écrasent une note qui ne dépassera jamais dix — même quand Fifamè a mis deux sur dix à l'adresse qu'il adore.",
+        "If you add their numbers, you're only trusting Kossi. His forty-seven crush a mark that will never exceed ten — even when Fifamè gave two out of ten to the place he loves."
+      ),
+      L(
+        "La solution tient en une phrase : **on n'additionne pas leurs chiffres, on additionne leurs classements.** Premier, deuxième, troisième. Là, la façon de compter de chacun n'a plus d'importance, et c'est l'adresse que les deux placent bien qui gagne.",
+        "The fix is one sentence: **don't add their numbers, add their rankings.** First, second, third. Now each person's way of counting no longer matters, and the place both rate highly wins."
+      ),
+      { fig: "/blog/architecture-fig1.webp",
+        alt: L("Kossi et Fifamè notent le même maquis de deux façons", "Kossi and Fifamè rate the same place two different ways"),
+        caption: L("En additionnant leurs classements plutôt que leurs chiffres, c'est Le Baobab qui gagne — jamais le plus fréquenté, jamais mal noté.",
+                   "Adding their rankings instead of their numbers makes Le Baobab win — never the most visited, never badly rated.") },
+      { quote: L("La fusion par rang réciproque, une méthode simple pour combiner les classements de plusieurs systèmes, donne systématiquement de meilleurs résultats que n'importe quel système pris isolément.",
+                  "Reciprocal rank fusion, a simple method for combining the rankings from multiple systems, consistently yields better results than any individual system."),
+        source: "Cormack, Clarke & Büttcher — SIGIR 2009", href: "https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf" },
+      L(
+        "Les deux moteurs de recherche ont exactement ce problème. L'un rend des scores sans limite haute, l'autre des scores entre zéro et un. On compare donc les places, pas les notes. Ça porte un nom savant — la fusion par rang réciproque — pour une idée que tout le monde applique déjà sans le savoir.",
+        "The two search engines have exactly this problem. One returns scores with no upper limit, the other scores between zero and one. So we compare positions, not marks. It has a fancy name — reciprocal rank fusion — for an idea everyone already applies without knowing it."
+      ),
+      L(
+        "## Savoir dire « je ne sais pas »",
+        "## Knowing how to say “I don't know”"
+      ),
+      L(
+        "On fixe un niveau minimum. En dessous, l'assistant ne répond pas : il passe la main à un conseiller.",
+        "We set a minimum level. Below it, the assistant doesn't answer: it hands over to a human advisor."
+      ),
+      L(
+        "C'est le zémidjan qui te dit « je ne connais pas ce quartier, prends celui-là il y va tous les jours » plutôt que de tourner une heure avec toi sur le compteur.",
+        "It's the motorbike taxi who tells you “I don't know that neighbourhood, take that guy, he goes there every day” instead of circling for an hour with the meter running."
+      ),
+      L(
+        "Une erreur que j'ai failli commettre : appliquer ce seuil **après** avoir mélangé les deux moteurs. Ça n'a aucun sens — une fois mélangé, le chiffre obtenu ne mesure plus rien de réel. Le seuil s'applique à chaque moteur séparément, avant le mélange, tant que ses chiffres veulent encore dire quelque chose.",
+        "A mistake I nearly made: applying that threshold **after** blending the two engines. It makes no sense — once blended, the resulting number no longer measures anything real. The threshold applies to each engine separately, before the blend, while its numbers still mean something."
+      ),
+      L(
+        "Et on compte les fois où l'assistant se tait. Si ce nombre grimpe, ce n'est pas qu'il fonctionne mal : c'est qu'on lui pose des questions dont la réponse n'a pas encore été écrite. **Ce compteur dit quoi rédiger ensuite.**",
+        "And we count how often the assistant stays quiet. If that number climbs, it isn't malfunctioning: people are asking questions whose answer hasn't been written yet. **That counter tells you what to write next.**"
+      ),
+      { fig: "/blog/architecture-demo.svg",
+        alt: L("Deux questions : il répond, ou il se tait", "Two questions: it answers, or it stays quiet"),
+        caption: L("Le même système, deux questions. Ce qui change, c'est ce qu'il a trouvé — pas sa technologie.",
+                   "The same system, two questions. What changes is what it found — not its technology.") },
+      L(
+        "## Le virement passé, le message perdu",
+        "## The transfer went through, the message didn't"
+      ),
+      L(
+        "Tu envoies de l'argent à quelqu'un par Mobile Money. Puis tu l'appelles pour le prévenir. Deux gestes.",
+        "You send someone money by mobile money. Then you call to tell them. Two actions."
+      ),
+      L(
+        "Si l'argent part mais que l'appel ne passe pas, la personne ne sait pas qu'elle a reçu. Si tu appelles mais que le transfert échoue, elle attend pour rien. **Deux gestes, c'est deux occasions de rater.**",
+        "If the money leaves but the call doesn't connect, they don't know it arrived. If you call but the transfer fails, they wait for nothing. **Two actions means two chances to fail.**"
+      ),
+      L(
+        "Le système a le même souci. Quand une réponse est publiée, il faut l'enregistrer *et* prévenir les autres parties du système. Deux opérations. Deux façons d'échouer à moitié.",
+        "The system has the same problem. When an answer is published, it must be stored *and* the rest of the system must be told. Two operations. Two ways to half-fail."
+      ),
+      L(
+        "La parade est simple une fois qu'on la voit : on écrit le message à envoyer **dans la base, en même temps que la donnée**, d'un seul geste. Un petit programme passe ensuite ramasser les messages et les distribuer.",
+        "The fix is simple once you see it: the message to send is written **into the database, at the same moment as the data**, in a single action. A small program then comes along, picks the messages up and delivers them."
+      ),
+      L(
+        "Soit les deux réussissent, soit aucun. Le demi-échec disparaît. Les développeurs appellent ça la « boîte d'envoi » — l'*outbox*.",
+        "Either both succeed or neither does. The half-failure disappears. Developers call it the outbox."
+      ),
+      { fig: "/blog/architecture-fig2.webp",
+        alt: L("L'argent part, le message se perd", "The money leaves, the message is lost"),
+        caption: L("Deux gestes séparés peuvent réussir à moitié. Un seul geste, non.",
+                   "Two separate actions can half-succeed. A single action cannot.") },
+      { quote: L("Le service qui envoie le message commence par le stocker en base dans la transaction qui met à jour les données ; un processus séparé publie ensuite les messages.",
+                  "The service that sends the message first stores it in the database as part of the transaction that updates the data; a separate process then publishes the messages."),
+        source: "Chris Richardson — Pattern: Transactional outbox", href: "https://microservices.io/patterns/data/transactional-outbox.html" },
+      L(
+        "## Trois tricycles ou un camion-remorque ?",
+        "## Three tricycles or one articulated lorry?"
+      ),
+      L(
+        "Tu dois livrer vingt sacs de riz par jour dans Cotonou.",
+        "You have to deliver twenty bags of rice a day across the city."
+      ),
+      L(
+        "Le camion-remorque transporte tout d'un coup. Mais il te faut un chauffeur poids lourd, un garage qui sait le réparer, une place pour le garer, et il ne passe pas dans les petites rues.",
+        "The lorry carries it all in one go. But you need a heavy-goods driver, a garage that can fix it, somewhere to park it, and it doesn't fit down small streets."
+      ),
+      L(
+        "Trois tricycles font le même travail. Tu les répares toi-même, ils passent partout, et si l'un tombe en panne les deux autres continuent.",
+        "Three tricycles do the same job. You fix them yourself, they go everywhere, and if one breaks down the other two keep going."
+      ),
+      L(
+        "C'est exactement le choix entre les deux outils qui font tourner ce genre de système. Le premier — Kubernetes — est le camion : très puissant, utilisé par les géants du web, et qui demande une équipe pour s'en occuper. Le second — Docker Swarm — c'est les tricycles.",
+        "That's exactly the choice between the two tools that run this kind of system. The first — Kubernetes — is the lorry: very powerful, used by the web giants, and it needs a team to look after it. The second — Docker Swarm — is the tricycles."
+      ),
+      L(
+        "Pour trois ou quatre machines et une douzaine de programmes, le camion devient un projet à lui tout seul. J'ai pris les tricycles.",
+        "For three or four machines and a dozen programs, the lorry becomes a project of its own. I took the tricycles."
+      ),
+      L(
+        "Ce que ça donne concrètement : les programmes sont répartis sur les machines selon leur rôle, les mots de passe ne traînent jamais dans des fichiers de configuration, et les échanges entre machines sont chiffrés. Tout ça sans qu'une personne seule y perde son week-end.",
+        "In practice: programs are spread across machines according to their role, passwords never sit in configuration files, and traffic between machines is encrypted. All without one person losing their weekend to it."
+      ),
+      L(
+        "Le jour où le volume dépassera ce cadre, la question se reposera. Pas avant. **On choisit l'outil à la taille du problème, pas à la taille de son CV.**",
+        "The day the volume outgrows this, the question comes back. Not before. **You pick the tool sized for the problem, not for your CV.**"
+      ),
+      L(
+        "## Le groupe électrogène qu'on démarre avant la coupure",
+        "## The generator you start before the cut"
+      ),
+      L(
+        "La SBEE coupe. Tu vas démarrer le groupe.",
+        "The power is about to go. You're going to start the generator."
+      ),
+      L(
+        "Si tu attends la coupure pour le lancer, tu as deux minutes de noir. Le frigo s'arrête, l'ordinateur redémarre, la connexion tombe.",
+        "If you wait for the cut to start it, you get two minutes of darkness. The fridge stops, the computer reboots, the connection drops."
+      ),
+      L(
+        "Si le groupe tourne déjà quand tu bascules, personne ne remarque rien.",
+        "If the generator is already running when you switch over, nobody notices a thing."
+      ),
+      L(
+        "Mettre à jour un programme en service, c'est la même chose. La mauvaise méthode arrête l'ancienne version puis lance la nouvelle — et entre les deux, plus personne ne répond. La bonne méthode démarre la nouvelle d'abord, vérifie qu'elle fonctionne, et seulement ensuite éteint l'ancienne.",
+        "Updating a running program is the same. The bad method stops the old version then starts the new one — and in between, nothing answers. The good method starts the new one first, checks it works, and only then shuts the old one down."
+      ),
+      L(
+        "Et si la nouvelle version ne va pas ? Le système revient tout seul à la précédente. Pas une procédure écrite dans un document que personne ne relit à trois heures du matin : un retour en arrière automatique.",
+        "And if the new version misbehaves? The system goes back to the previous one by itself. Not a procedure written in a document nobody re-reads at 3am: an automatic rollback."
+      ),
+      { fig: "/blog/architecture-fig3.webp",
+        alt: L("Démarrer le groupe avant la coupure", "Starting the generator before the cut"),
+        caption: L("La zone rouge, c'est le noir complet. Elle disparaît si on démarre avant de basculer.",
+                   "The red zone is total darkness. It disappears if you start before switching over.") },
+      L(
+        "## Le gardien qui note « rien à signaler »",
+        "## The night guard who writes “nothing to report”"
+      ),
+      L(
+        "Un gardien peut écrire « tout va bien » toute la nuit. Ça ne dit pas si le portail était fermé.",
+        "A guard can write “all fine” all night long. It doesn't tell you whether the gate was locked."
+      ),
+      L(
+        "C'est le piège de la surveillance informatique. On mesure la mémoire, le processeur, la vitesse. Tous ces chiffres peuvent être au vert pendant que le système raconte n'importe quoi aux adhérents.",
+        "That's the trap of computer monitoring. We measure memory, processor, speed. All those numbers can be green while the system tells members complete nonsense."
+      ),
+      L(
+        "Alors **l'alerte la plus importante de tout ce système ne surveille aucune machine.** Elle compte les réponses envoyées sans document source. Sa valeur normale est zéro. Au premier écart, alerte immédiate — parce qu'une promesse vient d'être rompue.",
+        "So **the most important alert in this whole system watches no machine at all.** It counts answers sent without a source document. Its normal value is zero. At the first deviation, immediate alert — because a promise has just been broken."
+      ),
+      L(
+        "À côté, on suit le nombre de fois où l'assistant s'est tu, le temps de réponse, et les demandes transmises à un conseiller qui traînent depuis deux jours. Chaque alerte correspond à une promesse faite à quelqu'un.",
+        "Alongside it: how often the assistant stayed quiet, response time, and requests passed to an advisor still sitting there after two days. Every alert maps to a promise made to someone."
+      ),
+      L(
+        "Dernier point, et il compte : les traces d'activité sont nettoyées des données personnelles **avant** d'être enregistrées, pas après. Nettoyer après, c'est n'avoir rien nettoyé.",
+        "One last point, and it matters: activity logs are stripped of personal data **before** being stored, not after. Cleaning afterwards means you cleaned nothing."
+      ),
+      L(
+        "## Ce que je referais autrement",
+        "## What I'd do differently"
+      ),
+      L(
+        "Trois choses, en toute honnêteté.",
+        "Three things, honestly."
+      ),
+      L(
+        "J'ai passé trop de temps à régler des détails avant d'avoir de quoi mesurer si mes réglages amélioraient quelque chose. Sans mesure, on optimise à l'aveugle et on appelle ça de l'intuition.",
+        "I spent too long tuning details before having any way to measure whether my tuning improved anything. Without measurement you optimise blind and call it intuition."
+      ),
+      L(
+        "Le seuil du « je ne sais pas » aurait dû être réglable question par question dès le départ. Se tromper sur un horaire d'accueil et se tromper sur un taux de remboursement, ce n'est pas la même faute.",
+        "The “I don't know” threshold should have been adjustable question by question from the start. Being wrong about opening hours and being wrong about a reimbursement rate are not the same mistake."
+      ),
+      L(
+        "Et j'aurais installé la surveillance dès le premier jour, pas le trentième. Les trois premières semaines d'un système en service sont celles où il t'apprend le plus — je les ai regardées à travers une vitre sale.",
+        "And I'd have installed the monitoring on day one, not day thirty. The first three weeks of a live system are the ones that teach you the most — I watched them through a dirty window."
+      ),
+      L(
+        "## Ce qu'il faut retenir",
+        "## What to take away"
+      ),
+      L(
+        "Aucune de ces décisions n'est spectaculaire. Aucune n'utilise la technologie la plus récente. Elles ont un point commun : elles répondent toutes à la même phrase, posée avant d'écrire la première ligne de code.",
+        "None of these decisions is spectacular. None uses the newest technology. They share one thing: they all answer the same sentence, set down before the first line of code."
+      ),
+      L(
+        "Une architecture, ce n'est pas un empilement de bons choix techniques. C'est **une contrainte tenue jusqu'au bout**, y compris là où c'est pénible — dans la base de données, dans les alertes, dans la façon de mettre à jour.",
+        "An architecture isn't a stack of good technical choices. It's **one constraint held all the way through**, including where it hurts — in the database, in the alerts, in how you deploy."
+      ),
+      L(
+        "Si tu construis quelque chose qui n'a pas le droit de se tromper, la vraie question n'est pas « quelle technologie ? ». C'est : **qu'est-ce que ce système n'a jamais le droit de faire — et qui l'en empêche quand tout le monde a oublié la règle ?**",
+        "If you're building something that isn't allowed to be wrong, the real question isn't “which technology?”. It's: **what must this system never do — and what stops it when everyone has forgotten the rule?**"
+      ),
+    ],
+  },
+  {
     slug: "erreur-de-debutant-degonfler-les-pneus",
     date: "2026-08-14",
     category: "Voyage",
@@ -697,7 +1016,10 @@ Conditions : 100% remote, TJM selon profil.`,
 
 // Durée de lecture estimée (≈ 200 mots/min), calculée sur le FR.
 export function readingMinutes(post) {
-  const words = post.content.map((c) => (c && c.fr !== undefined ? c.fr : c)).join(" ").split(/\s+/).length;
+  // Les blocs non textuels (figures, citations) ne comptent pas comme de la lecture.
+  const words = post.content
+    .map((c) => (c && c.fr !== undefined ? c.fr : typeof c === "string" ? c : ""))
+    .join(" ").split(/\s+/).length;
   return Math.max(1, Math.round(words / 200));
 }
 

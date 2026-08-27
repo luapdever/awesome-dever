@@ -1,0 +1,147 @@
+/* Rail de sommaire. Calé sur le bord droit de la colonne de lecture (760 px)
+   via `calc(50% + …)` : la colonne reste centrée et intacte. */
+
+.toc {
+  position: fixed;
+  top: 190px;
+  left: calc(50% + 400px);
+  width: 232px;
+  max-height: calc(100vh - 260px);
+  overflow-y: auto;
+  z-index: 5;
+}
+
+.title {
+  margin: 0 0 14px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: rgba(234, 230, 255, 0.42);
+}
+
+.toc ol {
+  margin: 0;
+  padding: 0 0 0 1px;
+  list-style: none;
+  /* Filet vertical : donne au sommaire la lisibilité d'une frise. */
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toc a {
+  display: flex;
+  gap: 9px;
+  padding: 8px 0 8px 14px;
+  margin-left: -1px;
+  border-left: 2px solid transparent;
+  color: rgba(234, 230, 255, 0.5);
+  font-size: 0.83rem;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.toc a:hover { color: rgba(234, 230, 255, 0.85); }
+
+.num {
+  flex: none;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding-top: 2px;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.active {
+  color: #fff !important;
+  border-left-color: var(--color-accent);
+  font-weight: 600;
+}
+.active .num { color: var(--color-accent); }
+
+/* Sous 1280 px il n'y a plus la place : le rail disparaît plutôt que de
+   chevaucher le texte. Les titres restent dans le flux, la lecture est intacte. */
+@media (max-width: 1279px) {
+  .toc { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toc a { transition: none; }
+}
+
+/* ---- Variante mobile : barre collante repliable ---- */
+.mobile { display: none; }
+
+@media (max-width: 1279px) {
+  .mobile {
+    display: block;
+    position: sticky;
+    top: 70px;
+    z-index: 20;
+    margin: 0 0 26px;
+  }
+  .mobileBtn {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 13px;
+    background: rgba(20, 12, 45, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+  }
+  .mobileNum {
+    flex: none;
+    font-size: 0.76rem;
+    font-weight: 800;
+    color: var(--color-accent);
+  }
+  .mobileNum i { font-style: normal; color: rgba(255, 255, 255, 0.3); }
+  .mobileLabel {
+    flex: 1;
+    font-size: 0.87rem;
+    font-weight: 600;
+    /* Une seule ligne : la barre ne doit pas grandir au fil des sections. */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .chevron { flex: none; font-size: 1.1rem; color: rgba(255, 255, 255, 0.45); transition: transform 0.2s ease; }
+  .chevronUp { transform: rotate(180deg); }
+
+  .mobileList {
+    margin: 7px 0 0;
+    padding: 7px 0;
+    max-height: 58vh;
+    overflow-y: auto;
+    list-style: none;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 13px;
+    background: rgba(16, 9, 38, 0.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .mobileList a { padding: 10px 15px; border-left: 2px solid transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron { transition: none; }
+}
+
+/* Fin d'article atteinte : le rail s'efface plutôt que de flotter au-dessus du
+   pied de page. `visibility` en plus de l'opacité pour le retirer du focus. */
+.gone {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
+}
+.toc {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .toc, .gone { transition: none; }
+}

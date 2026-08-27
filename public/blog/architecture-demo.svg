@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" font-family="Helvetica, Arial, sans-serif">
+  <rect width="1200" height="420" fill="#0d0a1a"/>
+  <text x="48" y="52" fill="#ffffff" font-size="23" font-weight="bold">Deux questions, deux comportements</text>
+  <rect x="48" y="66" width="46" height="3" rx="2" fill="#ffa500"/>
+  <text x="1152" y="52" fill="#5f5a8c" font-size="14" text-anchor="end">boucle · 12 s</text>
+
+  <!-- ================= CAS 1 : la réponse existe ================= -->
+  <g>
+    <animate attributeName="opacity" values="0;1;1;1;0;0;0;0" dur="12s" repeatCount="indefinite"/>
+
+    <rect x="48" y="104" width="420" height="58" rx="12" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.16"/>
+    <text x="72" y="140" fill="#ffffff" font-size="17">« mes lunettes sont remboursées ? »</text>
+
+    <rect x="48" y="196" width="250" height="96" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#7ee0a8" stroke-opacity="0.45"/>
+    <text x="70" y="226" fill="#ffc25c" font-size="13" font-weight="bold">PAR LES MOTS</text>
+    <text x="70" y="256" fill="#ffffff" font-size="15">3 documents trouvés</text>
+    <text x="70" y="278" fill="#7ee0a8" font-size="14">assez sûr pour répondre</text>
+
+    <rect x="322" y="196" width="250" height="96" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#7ee0a8" stroke-opacity="0.45"/>
+    <text x="344" y="226" fill="#ffc25c" font-size="13" font-weight="bold">PAR LE SENS</text>
+    <text x="344" y="256" fill="#ffffff" font-size="15">4 documents trouvés</text>
+    <text x="344" y="278" fill="#7ee0a8" font-size="14">assez sûr pour répondre</text>
+
+    <path d="M596 244 L664 244" stroke="#ffa500" stroke-opacity="0.55" stroke-width="2"/>
+    <rect x="680" y="180" width="472" height="128" rx="12" fill="#7ee0a8" fill-opacity="0.07" stroke="#7ee0a8" stroke-opacity="0.42"/>
+    <text x="704" y="212" fill="#7ee0a8" font-size="13" font-weight="bold">IL RÉPOND</text>
+    <text x="704" y="244" fill="#ffffff" font-size="16">Forfait optique : 200 € par an et par bénéficiaire.</text>
+    <text x="704" y="276" fill="#9c95c4" font-size="14">Source : notice, art. 4.2 — vérifiée le 12 février</text>
+    <text x="704" y="296" fill="#6f68a0" font-size="13">le document ne peut plus être modifié</text>
+  </g>
+
+  <!-- ================= CAS 2 : le système s'abstient ================= -->
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0;0;0;0;1;1;0" dur="12s" repeatCount="indefinite"/>
+
+    <rect x="48" y="104" width="420" height="58" rx="12" fill="#ffffff" fill-opacity="0.06" stroke="#ffffff" stroke-opacity="0.16"/>
+    <text x="72" y="140" fill="#ffffff" font-size="17">« et si je pars vivre à l'étranger ? »</text>
+
+    <rect x="48" y="196" width="250" height="96" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ff8f8f" stroke-opacity="0.42"/>
+    <text x="70" y="226" fill="#ffc25c" font-size="13" font-weight="bold">PAR LES MOTS</text>
+    <text x="70" y="256" fill="#ffffff" font-size="15">1 document, très vague</text>
+    <text x="70" y="278" fill="#ff8f8f" font-size="14">pas assez sûr</text>
+
+    <rect x="322" y="196" width="250" height="96" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ff8f8f" stroke-opacity="0.42"/>
+    <text x="344" y="226" fill="#ffc25c" font-size="13" font-weight="bold">PAR LE SENS</text>
+    <text x="344" y="256" fill="#ffffff" font-size="15">2 documents à côté</text>
+    <text x="344" y="278" fill="#ff8f8f" font-size="14">pas assez sûr</text>
+
+    <path d="M596 244 L664 244" stroke="#ffa500" stroke-opacity="0.55" stroke-width="2"/>
+    <rect x="680" y="180" width="472" height="128" rx="12" fill="#ffa500" fill-opacity="0.08" stroke="#ffa500" stroke-opacity="0.42"/>
+    <text x="704" y="212" fill="#ffc25c" font-size="13" font-weight="bold">IL SE TAIT</text>
+    <text x="704" y="244" fill="#ffffff" font-size="16">« Je préfère ne pas répondre de mémoire.</text>
+    <text x="704" y="268" fill="#ffffff" font-size="16">Je transmets à un conseiller. »</text>
+    <text x="704" y="296" fill="#6f68a0" font-size="13">+1 au compteur : cette réponse reste à écrire</text>
+  </g>
+
+  <!-- curseur de progression -->
+  <rect x="48" y="368" width="1104" height="3" rx="2" fill="#ffffff" fill-opacity="0.08"/>
+  <rect y="368" width="140" height="3" rx="2" fill="#ffa500" fill-opacity="0.75">
+    <animate attributeName="x" values="48;1012;48" dur="12s" repeatCount="indefinite"/>
+  </rect>
+  <text x="48" y="398" fill="#5f5a8c" font-size="13">Le même système. Ce qui change, c'est ce qu'il a trouvé — pas sa technologie.</text>
+</svg>

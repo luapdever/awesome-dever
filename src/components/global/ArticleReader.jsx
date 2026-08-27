@@ -28,6 +28,53 @@ function lastIndexLE(arr, val) {
   return res;
 }
 
+/* Un paragraphe préfixé « ## » est un titre de section. Choix assumé : le
+   contenu reste un simple tableau de chaînes (bilingue, sérialisable), sans
+   moteur markdown à embarquer pour deux besoins. */
+export const HEADING = /^##\s+/;
+/* `**gras**` : seule autre marque reconnue.
+
+   Les marques sont retirées AVANT tout découpage. Les laisser cassait le
+   découpage en phrases dès qu'un `**` suivait un point (« …première.** ») :
+   la phrase ne matchait plus et le mot disparaissait de l'article, sans
+   erreur. On renvoie donc le texte nettoyé + les plages en gras, repérées
+   par position dans ce texte nettoyé. */
+function stripBold(src) {
+  const ranges = [];
+  let out = "";
+  let open = -1;
+  for (let i = 0; i < src.length; i++) {
+    if (src[i] === "*" && src[i + 1] === "*") {
+      if (open < 0) open = out.length;
+      else { ranges.push([open, out.length]); open = -1; }
+      i++;
+      continue;
+    }
+    out += src[i];
+  }
+  if (open >= 0) ranges.push([open, out.length]); // gras jamais refermé
+  return { text: out, ranges };
+}
+/* Découpe en phrases. L'ancienne version utilisait `match` sur un motif qui
+   exigeait une espace après la ponctuation : tout ce qui ne collait pas —
+   « Next.js », « (…) », « cold?” » — n'était capturé par AUCUN match et
+   disparaissait de l'article, silencieusement. 26 paragraphes du blog étaient
+   amputés. `split` avec groupe capturant renvoie TOUS les morceaux : la
+   recomposition est exacte par construction. */
+function splitSentences(text) {
+  const parts = text.split(/([.!?…]+["”»')\]]*\s+)/);
+  const out = [];
+  for (let i = 0; i < parts.length; i += 2) {
+    const s = (parts[i] || "") + (parts[i + 1] || "");
+    if (s) out.push(s);
+  }
+  return out.length ? out : [text];
+}
+
+export const slugify = (t) =>
+  (t || "").replace(HEADING, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 export default function ArticleReader({ paragraphs, lang }) {
   const L = lang === "en" ? "en" : "fr";
   const t = T[L];
@@ -49,17 +96,30 @@ export default function ArticleReader({ paragraphs, lang }) {
   const model = useMemo(() => {
     let si = 0;
     const paras = paragraphs.map((para) => {
-      const sentTexts = para.match(/[^.!?…]+[.!?…]*(\s+|$)/g) || [para];
-      return sentTexts.filter((s) => s.trim()).map((sentText) => {
-        const words = sentText.match(/\S+\s*/g) || [sentText];
+      // Figure ou citation : rendu tel quel, exclu de la lecture audio.
+      if (typeof para !== "string") return { block: para, sents: [] };
+      const { text: plain, ranges } = stripBold(para);
+      const heading = HEADING.test(plain);
+      const sentTexts = splitSentences(plain);
+      let abs = 0; // position dans `plain`, pour retrouver les plages en gras
+      const sents = [];
+      for (const sentText of sentTexts) {
+        const raw = sentText.match(/\S+\s*/g) || [sentText];
+        const words = raw.map((w) => {
+          const start = abs;
+          abs += w.length;
+          const end = start + w.replace(/\s+$/, "").length;
+          return { t: w, b: ranges.some(([a, z]) => start < z && end > a) };
+        });
+        if (!sentText.trim()) continue; // espace inter-phrases : compté, non affiché
         let off = 0;
-        const wordOffsets = words.map((w) => { const o = off; off += w.length; return o; });
-        const s = { index: si, text: sentText, words, wordOffsets };
+        const wordOffsets = words.map((w) => { const o = off; off += w.t.length; return o; });
+        sents.push({ index: si, text: words.map((w) => w.t).join(""), words, wordOffsets });
         si += 1;
-        return s;
-      });
+      }
+      return { heading, slug: heading ? slugify(para) : null, sents };
     });
-    return { paras, flat: paras.flat() };
+    return { paras, flat: paras.flatMap((p) => p.sents) };
   }, [paragraphs]);
 
   useEffect(() => {
@@ -170,7 +230,9 @@ export default function ArticleReader({ paragraphs, lang }) {
     speakFrom(Math.min(model.flat.length - 1, Math.floor(frac * model.flat.length)));
     ga("seek");
   };
-  // Cliquer une phrase → lire à partir de là (sauf si sélection de texte).
+  /* Cliquer une phrase → lire à partir de là. Uniquement pendant la lecture :
+     hors lecture, ce clic démarrait la synthèse sans que rien ne l'annonce, et
+     il volait au lecteur le simple fait de poser son curseur dans le texte. */
   const onBodyClick = (e) => {
     const sel = window.getSelection && window.getSelection();
     if (sel && !sel.isCollapsed) return;
@@ -179,6 +241,7 @@ export default function ArticleReader({ paragraphs, lang }) {
     speakFrom(parseInt(span.getAttribute("data-si"), 10));
   };
 
+  const reading = supported && status !== "idle";
   const pct = model.flat.length ? ((current + 1) / model.flat.length) * 100 : 0;
 
   return (
@@ -192,18 +255,50 @@ export default function ArticleReader({ paragraphs, lang }) {
         </div>
       )}
 
-      <div className={styles.body} ref={containerRef} onClick={supported ? onBodyClick : undefined}>
-        {model.paras.map((sents, pi) => (
-          <p key={pi}>
-            {sents.map((s) => (
-              <span key={s.index} data-si={s.index} className={styles.sentence}>
-                {s.words.map((w, wi) => (
-                  <span key={wi} data-si={s.index} data-wi={wi} className={styles.word}>{w}</span>
-                ))}
-              </span>
-            ))}
-          </p>
-        ))}
+      <div
+        className={`${styles.body} ${reading ? styles.seekable : ""}`}
+        ref={containerRef}
+        onClick={reading ? onBodyClick : undefined}
+      >
+        {model.paras.map((p, pi) => {
+          if (p.block?.fig) {
+            return (
+              <figure key={pi} className={styles.figure}>
+                <img src={p.block.fig} alt={p.block.alt} loading="lazy" decoding="async" />
+                {p.block.caption && <figcaption>{p.block.caption}</figcaption>}
+              </figure>
+            );
+          }
+          if (p.block?.quote) {
+            return (
+              <blockquote key={pi} className={styles.quote}>
+                <p>{p.block.quote}</p>
+                <cite>
+                  {p.block.href
+                    ? <a href={p.block.href} target="_blank" rel="noopener noreferrer">{p.block.source} ↗</a>
+                    : p.block.source}
+                </cite>
+              </blockquote>
+            );
+          }
+          const inner = p.sents.map((s) => (
+            <span key={s.index} data-si={s.index} className={styles.sentence}>
+              {s.words.map((w, wi) => (
+                <span
+                  key={wi}
+                  data-si={s.index}
+                  data-wi={wi}
+                  className={w.b ? `${styles.word} ${styles.strong}` : styles.word}
+                >
+                  {p.heading ? w.t.replace(HEADING, "") : w.t}
+                </span>
+              ))}
+            </span>
+          ));
+          return p.heading
+            ? <h2 key={pi} id={p.slug} className={styles.section}>{inner}</h2>
+            : <p key={pi}>{inner}</p>;
+        })}
       </div>
 
       {supported && status !== "idle" && (
