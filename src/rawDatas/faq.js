@@ -24,8 +24,8 @@ export const faqItems = [
   {
     q: L("Which technologies does he master?", "Quelles technologies maîtrise-t-il ?"),
     a: L(
-      "Core stack: NestJS and Node.js on the back end, Vue/Nuxt and React/Next.js on the front end, Flutter for mobile, Docker and CI/CD for delivery. Also AI/LLM integration, retrieval (BM25, vector search) and real-time systems.",
-      "Cœur de stack : NestJS et Node.js côté back-end, Vue/Nuxt et React/Next.js côté front-end, Flutter pour le mobile, Docker et CI/CD pour la livraison. Également intégration IA/LLM, recherche d'information (BM25, vectorielle) et systèmes temps réel."
+      "Core stack: NestJS and Node.js on the back end, Vue/Nuxt and React/Next.js on the front end, Flutter for mobile, Docker and Docker Swarm for delivery and orchestration. Also AI/LLM integration, retrieval (BM25, vector search), observability (Prometheus, Grafana, Sentry) and real-time systems.",
+      "Cœur de stack : NestJS et Node.js côté back-end, Vue/Nuxt et React/Next.js côté front-end, Flutter pour le mobile, Docker et Docker Swarm pour la livraison et l'orchestration. Également intégration IA/LLM, recherche d'information (BM25, vectorielle), observabilité (Prometheus, Grafana, Sentry) et systèmes temps réel."
     ),
   },
   {

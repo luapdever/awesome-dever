@@ -69,10 +69,10 @@ export const capabilities = [
     icon: ph("rocket-launch"),
     title: L("DevOps & Cloud", "DevOps & Cloud"),
     desc: L(
-      "Containerization, CI/CD and monitoring. I ship, I watch, I sleep at night.",
-      "Conteneurisation, CI/CD et supervision. Je livre, je surveille, je dors la nuit."
+      "Containers, orchestration and observability. I ship, I watch, I sleep at night.",
+      "Conteneurs, orchestration et observabilité. Je livre, je surveille, je dors la nuit."
     ),
-    tags: ["Docker", "GitLab CI", "Jenkins", "Nginx", "Grafana"],
+    tags: ["Docker Swarm", "Traefik", "GitLab CI", "Prometheus", "Grafana", "Sentry"],
   },
   {
     icon: ph("shield-check"),

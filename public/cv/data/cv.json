@@ -35,6 +35,7 @@
         "celtiis",
         "mtn-sites",
         "mymtn",
+        "vantia-beacon",
         "emilia",
         "paulbot",
         "portfolio",
@@ -57,18 +58,19 @@
       "fr": {
         "role": "Ingénieur Logiciel Full-Stack",
         "roleSub": "Web · Mobile · Realtime · DevOps",
-        "profile": "Ingénieur logiciel full-stack avec plus de 5 ans d'expérience dans la conception d'applications web, mobiles et realtime à fort trafic. J'architecture des plateformes de bout en bout, du backend distribué (NestJS, Node.js, PostgreSQL, WebSocket) aux interfaces réactives (Vue.js, Flutter), jusqu'au déploiement conteneurisé et aux pipelines CI/CD. Expertise reconnue en systèmes de paiement, streaming vidéo realtime, e-facturation gouvernementale, contrôle d'accès (RBAC/SSO) et écosystèmes WordPress d'entreprise multilingues."
+        "profile": "Ingénieur full-stack spécialisé dans les produits temps réel (5+ ans). J'architecture des plateformes de bout en bout — du backend distribué (NestJS, Node.js, PostgreSQL, WebSocket) aux interfaces réactives (Vue.js, Flutter), jusqu'au déploiement conteneurisé et aux pipelines CI/CD. Éprouvé sur les systèmes de paiement, le streaming vidéo temps réel, l'e-facturation gouvernementale, le contrôle d'accès (RBAC/SSO) et les écosystèmes WordPress d'entreprise multilingues. Large par l'étendue, profond là où ça compte."
       },
       "en": {
         "role": "Full-Stack Software Engineer",
         "roleSub": "Web · Mobile · Realtime · DevOps",
-        "profile": "Full-stack software engineer with 5+ years of experience designing high-traffic web, mobile and real-time applications. I architect end-to-end platforms, from distributed backends (NestJS, Node.js, PostgreSQL, WebSocket) to reactive interfaces (Vue.js, Flutter), through to containerized deployment and CI/CD pipelines. Proven expertise in payment systems, real-time video streaming, government e-invoicing, access control (RBAC/SSO) and multilingual enterprise WordPress ecosystems."
+        "profile": "Full-stack engineer specialized in real-time, product-grade apps (5+ years). I architect end-to-end platforms — from distributed backends (NestJS, Node.js, PostgreSQL, WebSocket) to reactive interfaces (Vue.js, Flutter) and containerized CI/CD deployment. Proven on payment systems, real-time video streaming, government e-invoicing, access control (RBAC/SSO) and multilingual enterprise WordPress. Broad in range, deep where it counts."
       }
     },
     "frontend": {
       "projectOrder": [
         "portfolio",
         "mymtn",
+        "vantia-beacon",
         "mtn-sites",
         "celtiis",
         "emilia",
@@ -110,6 +112,7 @@
         "emilia",
         "paulbot",
         "portfolio",
+        "vantia-beacon",
         "invoicepay",
         "celtiis",
         "mtn-sites",
@@ -152,6 +155,7 @@
         "invoicepay",
         "paulbot",
         "portfolio",
+        "vantia-beacon",
         "mtn-sites",
         "mymtn"
       ],
@@ -216,8 +220,8 @@
         },
         {
           "icon": "mail",
-          "text": "hi@paulzannou.com",
-          "href": "mailto:hi@paulzannou.com"
+          "text": "pzannou511@gmail.com",
+          "href": "mailto:pzannou511@gmail.com"
         },
         {
           "icon": "pin",
@@ -296,6 +300,7 @@
           "name": "Sites corporate MTN Bénin & MTN Congo",
           "year": "2022 – 2025",
           "role": "Développeur WordPress",
+          "impact": "Audience MTN : 1M+ abonnés",
           "client": "MTN Group (via KAMGOKO)",
           "desc": "Sites vitrines corporate pour deux opérateurs télécoms majeurs : construction de thèmes personnalisés, plugins sur mesure, gestion de contenus multilingue et optimisation des performances et du référencement.",
           "stack": [
@@ -320,6 +325,7 @@
           "name": "MyMTN Selfcare & MonRouteur",
           "year": "2022 – 2025",
           "role": "Développeur Frontend",
+          "impact": "1M+ abonnés MTN",
           "client": "MTN Bénin (via KAMGOKO)",
           "desc": "Application Selfcare abonnés (SPA) — consultation de forfaits, achats et gestion de compte — et page MonRouteur d'activation de forfaits/data en cas de solde ou de forfait épuisé. Intégration d'APIs RESTful, gestion d'état avancée et optimisation de l'expérience utilisateur.",
           "stack": [
@@ -341,10 +347,31 @@
           ]
         },
         {
+          "id": "vantia-beacon",
+          "name": "Beacon — Diffusion interne programmée (app desktop)",
+          "year": "2023",
+          "role": "Développeur Desktop (Electron)",
+          "client": "Client sous NDA",
+          "desc": "Application desktop multiplateforme (Electron) diffusant des messages internes programmés sur les postes des employés : composition et planification de publications (texte, vidéo, audio, message flash, bandeau défilant), affichage en fenêtres superposées always-on-top sans cadre (transparentes, mode kiosque bloquant Alt+F4, gestion multi-écrans), réception en temps réel via WebSocket (Socket.io) et report/rappel des publications persistés en base locale SQLite. Bridge IPC sécurisé (contextBridge + contextIsolation) entre le processus principal et le renderer, upload média multi-fichiers vers une API REST (multipart, auth Bearer), notifications sonores natives, et packaging/distribution via electron-builder.",
+          "stack": [
+            "Electron",
+            "electron-builder",
+            "Node.js",
+            "Vue.js",
+            "SQLite (sqlite3)",
+            "Socket.io",
+            "IPC · contextBridge",
+            "Axios / REST",
+            "Froala",
+            "Plyr"
+          ]
+        },
+        {
           "id": "emilia",
           "name": "Emilia Cross — App de rencontre en visio",
           "year": "2024 – 2025",
           "role": "Full-stack (Flutter + NestJS) & temps réel",
+          "impact": "2 000+ utilisateurs en temps réel",
           "client": "France Assist",
           "desc": "Application mobile (Flutter) + PWA où la relation se noue en visio facturée à la minute : streaming vidéo, KYC (Stripe Identity), paiements & reversements Stripe, découverte de partenaires et messagerie temps réel. Clients Flutter + backend NestJS multi-services (API + serveur WebSocket dédié), RBAC, 2FA et supervision. Système de parrainage (deep links natif & PWA) et back-office BI en Vue.js : KPIs par influenceur calculés en un seul query d'agrégats SQL (FILTER), endpoints gatés par permission et à projection sûre.",
           "stack": [
@@ -426,7 +453,7 @@
         {
           "key": "backend",
           "cat": "Backend",
-          "items": "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize"
+          "items": "NestJS, Node.js, Express, Laravel, Python/FastAPI, REST API, WebSocket, RabbitMQ (files quorum, dead-letter), outbox transactionnel, TypeORM, Sequelize"
         },
         {
           "key": "ai",
@@ -441,7 +468,7 @@
         {
           "key": "mobile",
           "cat": "Mobile & Desktop",
-          "items": "Flutter, GetX, Bloc, deep links (App / Universal Links, PWA), Electron (desktop cross-plateforme), PWA"
+          "items": "Flutter, GetX, Bloc, deep links (App / Universal Links, PWA), Electron (desktop cross-plateforme : IPC/contextBridge & contextIsolation, multi-fenêtres always-on-top / mode kiosque, SQLite hors-ligne, Socket.io temps réel, electron-builder), PWA"
         },
         {
           "key": "cms",
@@ -451,12 +478,12 @@
         {
           "key": "db",
           "cat": "Bases de données",
-          "items": "PostgreSQL (CTE, window & agrégats FILTER), MySQL / MariaDB"
+          "items": "PostgreSQL (CTE, window & agrégats FILTER, pgvector, recherche plein texte française, invariants par contraintes), PgBouncer, MySQL / MariaDB"
         },
         {
           "key": "devops",
-          "cat": "DevOps",
-          "items": "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS"
+          "cat": "DevOps & orchestration",
+          "items": "Docker, Docker Compose, Docker Swarm (services, réseaux overlay chiffrés, secrets, placement par labels, mises à jour progressives avec rollback), Traefik (reverse proxy, TLS automatisé ACME), Nginx, GitLab CI, Jenkins"
         },
         {
           "key": "tests",
@@ -471,7 +498,7 @@
         {
           "key": "obs",
           "cat": "Observabilité",
-          "items": "Prometheus, Grafana, Uptime Kuma, Swagger/OpenAPI"
+          "items": "Prometheus (métriques, règles d'alerte), Grafana, Loki & Promtail (logs structurés, masquage des données personnelles), Sentry / GlitchTip auto-hébergé (suivi d'erreurs), Uptime Kuma, Swagger/OpenAPI"
         },
         {
           "key": "vcs",
@@ -574,8 +601,8 @@
         },
         {
           "icon": "mail",
-          "text": "hi@paulzannou.com",
-          "href": "mailto:hi@paulzannou.com"
+          "text": "pzannou511@gmail.com",
+          "href": "mailto:pzannou511@gmail.com"
         },
         {
           "icon": "pin",
@@ -654,6 +681,7 @@
           "name": "MTN Benin & MTN Congo corporate websites",
           "year": "2022 – 2025",
           "role": "WordPress Developer",
+          "impact": "MTN audience: 1M+ subscribers",
           "client": "MTN Group (via KAMGOKO)",
           "desc": "Corporate showcase websites for two major telecom operators: custom themes, tailored plugins, multilingual content management and performance/SEO optimization.",
           "stack": [
@@ -678,6 +706,7 @@
           "name": "MyMTN Selfcare & MonRouteur",
           "year": "2022 – 2025",
           "role": "Frontend Developer",
+          "impact": "1M+ MTN subscribers",
           "client": "MTN Benin (via KAMGOKO)",
           "desc": "Subscriber Selfcare app (SPA) — plans, purchases and account management — and the MonRouteur page for activating plans/data when the balance or bundle is depleted. RESTful API integration, advanced state management and UX optimization.",
           "stack": [
@@ -699,10 +728,31 @@
           ]
         },
         {
+          "id": "vantia-beacon",
+          "name": "Beacon — Scheduled internal broadcast (desktop app)",
+          "year": "2023",
+          "role": "Desktop Developer (Electron)",
+          "client": "Client under NDA",
+          "desc": "Cross-platform Electron desktop app broadcasting scheduled internal messages onto employee workstations: composing and scheduling publications (text, video, audio, flash message, scrolling ticker), rendered as always-on-top frameless overlay windows (transparent, kiosk mode blocking Alt+F4, multi-monitor aware), real-time delivery over WebSocket (Socket.io), and defer/snooze of publications persisted in a local SQLite database. Secure IPC bridge (contextBridge + contextIsolation) between the main and renderer processes, multi-file media upload to a REST API (multipart, Bearer auth), native sound notifications, and packaging/distribution via electron-builder.",
+          "stack": [
+            "Electron",
+            "electron-builder",
+            "Node.js",
+            "Vue.js",
+            "SQLite (sqlite3)",
+            "Socket.io",
+            "IPC · contextBridge",
+            "Axios / REST",
+            "Froala",
+            "Plyr"
+          ]
+        },
+        {
           "id": "emilia",
           "name": "Emilia Cross — Live-video dating app",
           "year": "2024 – 2025",
           "role": "Full-stack (Flutter + NestJS) & real-time",
+          "impact": "2,000+ real-time users",
           "client": "France Assist",
           "desc": "A Flutter mobile app + PWA where connections are made over per-minute billed live video: video streaming, KYC (Stripe Identity), Stripe payments & payouts, partner discovery and real-time messaging. Flutter clients + multi-service NestJS backend (API + dedicated WebSocket server) with RBAC, 2FA and monitoring. Referral program (native & PWA deep links) and a Vue.js BI back-office: per-influencer KPIs computed in a single SQL aggregate query (FILTER clauses), through permission-gated, privacy-safe endpoints.",
           "stack": [
@@ -784,7 +834,7 @@
         {
           "key": "backend",
           "cat": "Backend",
-          "items": "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize"
+          "items": "NestJS, Node.js, Express, Laravel, Python/FastAPI, REST API, WebSocket, RabbitMQ (quorum queues, dead-letter), transactional outbox, TypeORM, Sequelize"
         },
         {
           "key": "ai",
@@ -799,7 +849,7 @@
         {
           "key": "mobile",
           "cat": "Mobile & Desktop",
-          "items": "Flutter, GetX, Bloc, deep links (App / Universal Links, PWA), Electron (cross-platform desktop), PWA"
+          "items": "Flutter, GetX, Bloc, deep links (App / Universal Links, PWA), Electron (cross-platform desktop: IPC/contextBridge & contextIsolation, always-on-top multi-window / kiosk mode, offline SQLite, real-time Socket.io, electron-builder), PWA"
         },
         {
           "key": "cms",
@@ -809,12 +859,12 @@
         {
           "key": "db",
           "cat": "Databases",
-          "items": "PostgreSQL (CTEs, window & FILTER aggregates), MySQL / MariaDB"
+          "items": "PostgreSQL (CTEs, window & FILTER aggregates, pgvector, French full-text search, invariants enforced by constraints), PgBouncer, MySQL / MariaDB"
         },
         {
           "key": "devops",
-          "cat": "DevOps",
-          "items": "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS"
+          "cat": "DevOps & orchestration",
+          "items": "Docker, Docker Compose, Docker Swarm (services, encrypted overlay networks, secrets, label-based placement, rolling updates with rollback), Traefik (reverse proxy, automated ACME TLS), Nginx, GitLab CI, Jenkins"
         },
         {
           "key": "tests",
@@ -829,7 +879,7 @@
         {
           "key": "obs",
           "cat": "Observability",
-          "items": "Prometheus, Grafana, Uptime Kuma, Swagger/OpenAPI"
+          "items": "Prometheus (metrics, alerting rules), Grafana, Loki & Promtail (structured logs, PII scrubbing), self-hosted Sentry / GlitchTip (error tracking), Uptime Kuma, Swagger/OpenAPI"
         },
         {
           "key": "vcs",

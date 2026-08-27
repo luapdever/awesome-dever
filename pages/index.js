@@ -12,7 +12,8 @@ const personJsonLd = {
   address: { "@type": "PostalAddress", addressLocality: "Cotonou", addressCountry: "BJ" },
   description:
     "Ingénieur logiciel full-stack : web, mobile, temps réel et DevOps. Backend distribué, interfaces réactives, paiements, streaming vidéo et écosystèmes WordPress d'entreprise.",
-  knowsAbout: ["JavaScript", "TypeScript", "Vue.js", "NestJS", "Node.js", "Flutter", "PHP", "Docker", "WordPress"],
+  knowsAbout: ["JavaScript", "TypeScript", "Vue.js", "NestJS", "Node.js", "Flutter", "PHP", "WordPress",
+    "Docker", "Docker Swarm", "Traefik", "PostgreSQL", "RabbitMQ", "Prometheus", "Grafana", "Retrieval-Augmented Generation"],
   sameAs: [
     "https://github.com/luapdever",
     "https://linkedin.com/in/paul-zannou",

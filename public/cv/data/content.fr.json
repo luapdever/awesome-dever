@@ -27,8 +27,8 @@
     },
     {
       "icon": "mail",
-      "text": "hi@paulzannou.com",
-      "href": "mailto:hi@paulzannou.com"
+      "text": "pzannou511@gmail.com",
+      "href": "mailto:pzannou511@gmail.com"
     },
     {
       "icon": "pin",
@@ -107,6 +107,7 @@
       "name": "Sites corporate MTN Bénin & MTN Congo",
       "year": "2022 – 2025",
       "role": "Développeur WordPress",
+      "impact": "Audience MTN : 1M+ abonnés",
       "client": "MTN Group (via KAMGOKO)",
       "desc": "Sites vitrines corporate pour deux opérateurs télécoms majeurs : construction de thèmes personnalisés, plugins sur mesure, gestion de contenus multilingue et optimisation des performances et du référencement.",
       "stack": [
@@ -131,6 +132,7 @@
       "name": "MyMTN Selfcare & MonRouteur",
       "year": "2022 – 2025",
       "role": "Développeur Frontend",
+      "impact": "1M+ abonnés MTN",
       "client": "MTN Bénin (via KAMGOKO)",
       "desc": "Application Selfcare abonnés (SPA) — consultation de forfaits, achats et gestion de compte — et page MonRouteur d'activation de forfaits/data en cas de solde ou de forfait épuisé. Intégration d'APIs RESTful, gestion d'état avancée et optimisation de l'expérience utilisateur.",
       "stack": [
@@ -152,10 +154,31 @@
       ]
     },
     {
+      "id": "vantia-beacon",
+      "name": "Beacon — Diffusion interne programmée (app desktop)",
+      "year": "2023",
+      "role": "Développeur Desktop (Electron)",
+      "client": "Client sous NDA",
+      "desc": "Application desktop multiplateforme (Electron) diffusant des messages internes programmés sur les postes des employés : composition et planification de publications (texte, vidéo, audio, message flash, bandeau défilant), affichage en fenêtres superposées always-on-top sans cadre (transparentes, mode kiosque bloquant Alt+F4, gestion multi-écrans), réception en temps réel via WebSocket (Socket.io) et report/rappel des publications persistés en base locale SQLite. Bridge IPC sécurisé (contextBridge + contextIsolation) entre le processus principal et le renderer, upload média multi-fichiers vers une API REST (multipart, auth Bearer), notifications sonores natives, et packaging/distribution via electron-builder.",
+      "stack": [
+        "Electron",
+        "electron-builder",
+        "Node.js",
+        "Vue.js",
+        "SQLite (sqlite3)",
+        "Socket.io",
+        "IPC · contextBridge",
+        "Axios / REST",
+        "Froala",
+        "Plyr"
+      ]
+    },
+    {
       "id": "emilia",
       "name": "Emilia Cross — App de rencontre en visio",
       "year": "2024 – 2025",
       "role": "Full-stack (Flutter + NestJS) & temps réel",
+      "impact": "2 000+ utilisateurs en temps réel",
       "client": "France Assist",
       "desc": "Application mobile (Flutter) + PWA où la relation se noue en visio facturée à la minute : streaming vidéo, KYC (Stripe Identity), paiements & reversements Stripe, découverte de partenaires et messagerie temps réel. Clients Flutter + backend NestJS multi-services (API + serveur WebSocket dédié), RBAC, 2FA et supervision. Système de parrainage (deep links natif & PWA) et back-office BI en Vue.js : KPIs par influenceur calculés en un seul query d'agrégats SQL (FILTER), endpoints gatés par permission et à projection sûre.",
       "stack": [
@@ -237,7 +260,7 @@
     {
       "key": "backend",
       "cat": "Backend",
-      "items": "NestJS, Node.js, Express, Laravel, REST API, WebSocket, TypeORM, Sequelize"
+      "items": "NestJS, Node.js, Express, Laravel, Python/FastAPI, REST API, WebSocket, RabbitMQ (files quorum, dead-letter), outbox transactionnel, TypeORM, Sequelize"
     },
     {
       "key": "ai",
@@ -252,7 +275,7 @@
     {
       "key": "mobile",
       "cat": "Mobile & Desktop",
-      "items": "Flutter, GetX, Bloc, deep links (App / Universal Links, PWA), Electron (desktop cross-plateforme), PWA"
+      "items": "Flutter, GetX, Bloc, deep links (App / Universal Links, PWA), Electron (desktop cross-plateforme : IPC/contextBridge & contextIsolation, multi-fenêtres always-on-top / mode kiosque, SQLite hors-ligne, Socket.io temps réel, electron-builder), PWA"
     },
     {
       "key": "cms",
@@ -262,12 +285,12 @@
     {
       "key": "db",
       "cat": "Bases de données",
-      "items": "PostgreSQL (CTE, window & agrégats FILTER), MySQL / MariaDB"
+      "items": "PostgreSQL (CTE, window & agrégats FILTER, pgvector, recherche plein texte française, invariants par contraintes), PgBouncer, MySQL / MariaDB"
     },
     {
       "key": "devops",
-      "cat": "DevOps",
-      "items": "Docker, Docker Compose, GitLab CI, Jenkins, Nginx, SSL/TLS"
+      "cat": "DevOps & orchestration",
+      "items": "Docker, Docker Compose, Docker Swarm (services, réseaux overlay chiffrés, secrets, placement par labels, mises à jour progressives avec rollback), Traefik (reverse proxy, TLS automatisé ACME), Nginx, GitLab CI, Jenkins"
     },
     {
       "key": "tests",
@@ -282,7 +305,7 @@
     {
       "key": "obs",
       "cat": "Observabilité",
-      "items": "Prometheus, Grafana, Uptime Kuma, Swagger/OpenAPI"
+      "items": "Prometheus (métriques, règles d'alerte), Grafana, Loki & Promtail (logs structurés, masquage des données personnelles), Sentry / GlitchTip auto-hébergé (suivi d'erreurs), Uptime Kuma, Swagger/OpenAPI"
     },
     {
       "key": "vcs",

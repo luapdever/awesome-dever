@@ -4,6 +4,7 @@
       "celtiis",
       "mtn-sites",
       "mymtn",
+      "vantia-beacon",
       "emilia",
       "paulbot",
       "portfolio",
@@ -26,18 +27,19 @@
     "fr": {
       "role": "Ingénieur Logiciel Full-Stack",
       "roleSub": "Web · Mobile · Realtime · DevOps",
-      "profile": "Ingénieur logiciel full-stack avec plus de 5 ans d'expérience dans la conception d'applications web, mobiles et realtime à fort trafic. J'architecture des plateformes de bout en bout, du backend distribué (NestJS, Node.js, PostgreSQL, WebSocket) aux interfaces réactives (Vue.js, Flutter), jusqu'au déploiement conteneurisé et aux pipelines CI/CD. Expertise reconnue en systèmes de paiement, streaming vidéo realtime, e-facturation gouvernementale, contrôle d'accès (RBAC/SSO) et écosystèmes WordPress d'entreprise multilingues."
+      "profile": "Ingénieur full-stack spécialisé dans les produits temps réel (5+ ans). J'architecture des plateformes de bout en bout — du backend distribué (NestJS, Node.js, PostgreSQL, WebSocket) aux interfaces réactives (Vue.js, Flutter), jusqu'au déploiement conteneurisé et aux pipelines CI/CD. Éprouvé sur les systèmes de paiement, le streaming vidéo temps réel, l'e-facturation gouvernementale, le contrôle d'accès (RBAC/SSO) et les écosystèmes WordPress d'entreprise multilingues. Large par l'étendue, profond là où ça compte."
     },
     "en": {
       "role": "Full-Stack Software Engineer",
       "roleSub": "Web · Mobile · Realtime · DevOps",
-      "profile": "Full-stack software engineer with 5+ years of experience designing high-traffic web, mobile and real-time applications. I architect end-to-end platforms, from distributed backends (NestJS, Node.js, PostgreSQL, WebSocket) to reactive interfaces (Vue.js, Flutter), through to containerized deployment and CI/CD pipelines. Proven expertise in payment systems, real-time video streaming, government e-invoicing, access control (RBAC/SSO) and multilingual enterprise WordPress ecosystems."
+      "profile": "Full-stack engineer specialized in real-time, product-grade apps (5+ years). I architect end-to-end platforms — from distributed backends (NestJS, Node.js, PostgreSQL, WebSocket) to reactive interfaces (Vue.js, Flutter) and containerized CI/CD deployment. Proven on payment systems, real-time video streaming, government e-invoicing, access control (RBAC/SSO) and multilingual enterprise WordPress. Broad in range, deep where it counts."
     }
   },
   "frontend": {
     "projectOrder": [
       "portfolio",
       "mymtn",
+      "vantia-beacon",
       "mtn-sites",
       "celtiis",
       "emilia",
@@ -79,6 +81,7 @@
       "emilia",
       "paulbot",
       "portfolio",
+      "vantia-beacon",
       "invoicepay",
       "celtiis",
       "mtn-sites",
@@ -121,6 +124,7 @@
       "invoicepay",
       "paulbot",
       "portfolio",
+      "vantia-beacon",
       "mtn-sites",
       "mymtn"
     ],
