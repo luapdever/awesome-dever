@@ -393,7 +393,7 @@ function HomePage() {
       {/* MARQUEE — casquettes / roles */}
       <div className={styles.marquee}>
         <div className={styles.marqueeTrack}>
-          {[...ui.casquettes, ...ui.casquettes].map((m, i) => (<span key={i}>{m}<i>✦</i></span>))}
+          {[...ui.casquettes, ...ui.casquettes].map((m, i) => (<span key={i}>{m}<i aria-hidden="true">·</i></span>))}
         </div>
       </div>
 

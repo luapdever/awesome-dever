@@ -31,8 +31,8 @@ export const faqItems = [
   {
     q: L("How many years of experience?", "Combien d'années d'expérience ?"),
     a: L(
-      "Five years and counting, some twenty projects across six companies and three countries — including telecom accounts such as MTN Benin and Moov Togo, delivered through KAMGOKO Technologies.",
-      "Cinq années et plus, une vingtaine de projets, six entreprises et trois pays — dont des comptes télécoms comme MTN Bénin et Moov Togo, réalisés via KAMGOKO Technologies."
+      "Five years and counting, some twenty projects across six companies and three countries, including telecom accounts such as MTN Benin and Moov Togo, delivered through KAMGOKO Technologies.",
+      "Cinq années et plus, une vingtaine de projets, six entreprises et trois pays, dont des comptes télécoms comme MTN Bénin et Moov Togo, réalisés via KAMGOKO Technologies."
     ),
   },
   {
@@ -45,8 +45,8 @@ export const faqItems = [
   {
     q: L("Does he work remotely?", "Travaille-t-il à distance ?"),
     a: L(
-      "Yes. He is based in Cotonou, Benin, and has delivered for clients in Benin, Togo and France — remote collaboration is his usual working mode.",
-      "Oui. Il est basé à Cotonou (Bénin) et a livré pour des clients au Bénin, au Togo et en France — la collaboration à distance est son mode de travail habituel."
+      "Yes. He is based in Cotonou, Benin, and has delivered for clients in Benin, Togo and France. Remote collaboration is his usual working mode.",
+      "Oui. Il est basé à Cotonou (Bénin) et a livré pour des clients au Bénin, au Togo et en France. La collaboration à distance est son mode de travail habituel."
     ),
   },
 ];

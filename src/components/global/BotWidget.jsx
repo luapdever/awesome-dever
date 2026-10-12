@@ -67,7 +67,7 @@ const UI = {
     ],
     placeholder: "Écris ton message…",
     placeholderRecruiter: "Colle une offre d'emploi — je te dis si Paul colle…",
-    offerCta: "📋 Préciser mon offre",
+    offerCta: "Préciser mon offre",
     error: "Je suis momentanément indisponible. Réessaie dans un instant, ou écris directement à Paul : hi@paulzannou.com.",
     suggestions: ["Il maîtrise quoi ?", "Montre-moi ses projets", "Est-il disponible ?"],
     open: "Discuter avec PaulBot",
@@ -135,7 +135,7 @@ const UI = {
     ],
     placeholder: "Type your message…",
     placeholderRecruiter: "Paste a job offer — I'll tell you if Paul fits…",
-    offerCta: "📋 Paste my offer",
+    offerCta: "Paste my offer",
     error: "I'm momentarily unavailable. Please try again shortly, or reach Paul directly at hi@paulzannou.com.",
     suggestions: ["What's his stack?", "Show me his projects", "Is he available?"],
     open: "Chat with PaulBot",
@@ -1101,7 +1101,10 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                     </p>
                     <div className={styles.suggest}>
                       {contact?.persona === "recruiter" && (
-                        <button type="button" className={styles.suggestCtx} onClick={promptForOffer}>{ui.offerCta}</button>
+                        <button type="button" className={styles.suggestCtx} onClick={promptForOffer}>
+                          <img src="/icons/ph/clipboard-text__2a1a00.svg" alt="" width={14} height={14} loading="lazy" decoding="async" />
+                          {ui.offerCta}
+                        </button>
                       )}
                       {ctxSuggest && (
                         <button type="button" className={styles.suggestCtx} onClick={() => send(ctxSuggest.prompt)}>{ctxSuggest.label}</button>

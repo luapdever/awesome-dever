@@ -72,7 +72,7 @@ const intro = {
   node: (
     <p>
       Hello, this is <b className="or">Dever Shell</b>. Type <b className="or">help</b> for the
-      manual — or chat with the bot: <b className="or">ask</b> &lt;your question&gt;. Try{" "}
+      manual, or chat with the bot: <b className="or">ask</b> &lt;your question&gt;. Try{" "}
       <b>neofetch</b>, <b>skills -v</b>, <b>open cv</b>.
     </p>
   ),

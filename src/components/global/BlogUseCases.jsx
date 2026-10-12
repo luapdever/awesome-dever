@@ -10,8 +10,8 @@ import styles from "../../../styles/specific/blog/blogUseCases.module.css";
    ============================================================ */
 
 const T = {
-  fr: { heading: "Cas d'usage — essaie les prompts", copy: "Copier le prompt", copied: "Copié ✅", copyQ: "Copier", edit: "Éditable — ajuste puis copie", you: "Toi", bot: "PaulBot" },
-  en: { heading: "Use cases — try the prompts", copy: "Copy prompt", copied: "Copied ✅", copyQ: "Copy", edit: "Editable — tweak then copy", you: "You", bot: "PaulBot" },
+  fr: { heading: "Cas d'usage — essaie les prompts", copy: "Copier le prompt", copied: "Copié", copyQ: "Copier", edit: "Éditable — ajuste puis copie", you: "Toi", bot: "PaulBot" },
+  en: { heading: "Use cases — try the prompts", copy: "Copy prompt", copied: "Copied", copyQ: "Copy", edit: "Editable — tweak then copy", you: "You", bot: "PaulBot" },
 };
 
 function copyText(text) {
@@ -30,6 +30,7 @@ function CopyBtn({ text, label, copiedLabel, className }) {
       className={className}
       onClick={() => copyText(text).then(() => { setOk(true); setTimeout(() => setOk(false), 1600); }, () => {})}
     >
+      {ok && <img src="/icons/ph/check-circle-fill__35d07f.svg" alt="" width={14} height={14} loading="lazy" decoding="async" />}
       {ok ? copiedLabel : label}
     </button>
   );
@@ -49,7 +50,10 @@ function EditablePrompt({ value, t }) {
       <textarea ref={ref} className={styles.promptArea} defaultValue={value} spellCheck={false} rows={rows} aria-label={t.copy} />
       <div className={styles.promptFoot}>
         <span className={styles.editHint}>{t.edit}</span>
-        <button type="button" className={styles.copyBtn} onClick={copy}>{ok ? t.copied : t.copy}</button>
+        <button type="button" className={styles.copyBtn} onClick={copy}>
+          {ok && <img src="/icons/ph/check-circle-fill__35d07f.svg" alt="" width={14} height={14} loading="lazy" decoding="async" />}
+          {ok ? t.copied : t.copy}
+        </button>
       </div>
     </div>
   );

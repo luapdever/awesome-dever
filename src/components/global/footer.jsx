@@ -15,7 +15,7 @@ function TheFooter() {
         <div className={styles.brand}>
           <h3>Paul <span>ZANNOU</span></h3>
           <p>
-            Ingénieur logiciel full-stack — web, mobile, temps réel &amp; DevOps.
+            Ingénieur logiciel full-stack : web, mobile, temps réel &amp; DevOps.
             Basé à Cotonou, Bénin. Ouvert aux missions et collaborations.
           </p>
           <div className={styles.socials}>
@@ -50,7 +50,7 @@ function TheFooter() {
             type="button"
             className={styles.linkBtn}
             onClick={openChooser}
-            title={lang === "fr" ? "Changer d'expérience — version classique ou PaulBrain OS" : "Change experience — classic version or PaulBrain OS"}
+            title={lang === "fr" ? "Changer d'expérience : version classique ou PaulBrain OS" : "Change experience — classic version or PaulBrain OS"}
           >
             {lang === "fr" ? "Changer d'expérience" : "Change experience"}
           </button>
@@ -65,7 +65,7 @@ function TheFooter() {
       </div>
 
       <div className={styles.bottom}>
-        <span>&copy; {year} Paul Mèdédji ZANNOU — Luap Dever. Tous droits réservés.</span>
+        <span>&copy; {year} Paul Mèdédji ZANNOU · Luap Dever. Tous droits réservés.</span>
         <span className={styles.made}>
           Conçu &amp; codé avec
           <img src="/icons/ph/coffee-fill__ffa500.svg" alt="café" className={styles.madeIcon}  loading="lazy" decoding="async"/>

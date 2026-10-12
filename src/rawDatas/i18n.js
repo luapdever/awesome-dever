@@ -54,7 +54,7 @@ export const STR = {
     wGreeting: "Hi, I'm",
     wRole: "Full-Stack Software Engineer · Web · Mobile · Real-Time",
     wIntro:
-      "This is my mind, booted as an operating system. Double-click any icon to explore — or jump straight in below. Confidential and enterprise work lives in Enterprise, and same-company apps are tucked into folders, just like on a phone.",
+      "This is my mind, booted as an operating system. Double-click any icon to explore, or jump straight in below. Confidential and enterprise work lives in Enterprise, and same-company apps are tucked into folders, just like on a phone.",
     wViewBlog: "View my blog",
     // Skills
     skTitle: "Skills", skSub: "What runs on this machine — technical stack & signature concepts", skConcepts: "Signature concepts",
@@ -86,11 +86,11 @@ export const STR = {
     wStats: [{ n: "5+", l: "Years exp." }, { n: "20+", l: "Projects" }, { n: "6+", l: "Companies" }, { n: "2", l: "Languages" }],
     wDoTitle: "What I build",
     wDo: [
-      "Web & mobile apps — Vue.js, React/Next.js, Flutter",
-      "Distributed & real-time backends — NestJS, Node.js, WebSocket",
-      "AI automation & agents — streaming LLMs, RAG, tool calling, prompt guardrails",
+      "Web & mobile apps : Vue.js, React/Next.js, Flutter",
+      "Distributed & real-time backends : NestJS, Node.js, WebSocket",
+      "AI automation & agents : streaming LLMs, RAG, tool calling, prompt guardrails",
       "Payments, KYC, RBAC/SSO & multilingual WordPress",
-      "Containerized DevOps — Docker Swarm, CI/CD, observability",
+      "Containerized DevOps : Docker Swarm, CI/CD, observability",
     ],
     wExplore: "Jump in",
     // Contact
@@ -117,7 +117,7 @@ export const STR = {
     wGreeting: "Salut, moi c'est",
     wRole: "Ingénieur logiciel full-stack · Web · Mobile · Temps réel",
     wIntro:
-      "Ceci est mon esprit, démarré comme un système d'exploitation. Double-cliquez sur une icône pour explorer — ou lancez-vous ci-dessous. Les projets confidentiels et d'entreprise sont dans Entreprise, et les apps d'une même société sont rangées dans des dossiers, comme sur un téléphone.",
+      "Ceci est mon esprit, démarré comme un système d'exploitation. Double-cliquez sur une icône pour explorer, ou lancez-vous ci-dessous. Les projets confidentiels et d'entreprise sont dans Entreprise, et les apps d'une même société sont rangées dans des dossiers, comme sur un téléphone.",
     wViewBlog: "Voir mon blog",
     skTitle: "Compétences", skSub: "Ce qui tourne sur cette machine — stack technique & concepts signatures", skConcepts: "Concepts clés",
     caTitle: "Parcours", caSub: "Uptime du système — plus de 5 ans d'expérience", caNow: "Actuel",
@@ -143,11 +143,11 @@ export const STR = {
     wStats: [{ n: "5+", l: "Ans d'exp." }, { n: "20+", l: "Projets" }, { n: "6+", l: "Entreprises" }, { n: "2", l: "Langues" }],
     wDoTitle: "Ce que je construis",
     wDo: [
-      "Apps web & mobiles — Vue.js, React/Next.js, Flutter",
-      "Backends distribués & temps réel — NestJS, Node.js, WebSocket",
-      "Automatisation & agents IA — LLM en streaming, RAG, tool calling, garde-fous de prompt",
+      "Apps web & mobiles : Vue.js, React/Next.js, Flutter",
+      "Backends distribués & temps réel : NestJS, Node.js, WebSocket",
+      "Automatisation & agents IA : LLM en streaming, RAG, tool calling, garde-fous de prompt",
       "Paiements, KYC, RBAC/SSO & WordPress multilingue",
-      "DevOps conteneurisé — Docker Swarm, CI/CD, observabilité",
+      "DevOps conteneurisé : Docker Swarm, CI/CD, observabilité",
     ],
     wExplore: "Explorer",
     cTitle: "Contactez-moi",

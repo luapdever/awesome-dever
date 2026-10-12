@@ -4,9 +4,15 @@ import styles from "../../../../../styles/specific/portfolio/windows/appStore.mo
 import { mobilePerformances } from "../../../../data";
 import { useLang } from "../lang";
 
-const stars = (r) => {
-  const full = Math.round(r || 0);
-  return "★".repeat(full) + "☆".repeat(5 - full);
+const Stars = ({ rating }) => {
+  const full = Math.round(rating || 0);
+  return Array.from({ length: 5 }, (_, i) => (
+    <img
+      key={i}
+      src={i < full ? "/icons/ph/star-fill__ffa500.svg" : "/icons/ph/star__ffa500.svg"}
+      alt="" width={12} height={12} loading="lazy" decoding="async"
+    />
+  ));
 };
 
 function AppStore() {
@@ -46,7 +52,7 @@ function AppStore() {
               </div>
               <p className={styles.desc}>{app.desc}</p>
               <div className={styles.meta}>
-                {app.rating != null && (<><span className={styles.stars}>{stars(app.rating)}</span><span>{app.rating}</span></>)}
+                {app.rating != null && (<><span className={styles.stars}><Stars rating={app.rating} /></span><span>{app.rating}</span></>)}
                 {meta.map((m, j) => (
                   <React.Fragment key={j}>
                     {(app.rating != null || j > 0) && <span>·</span>}

@@ -114,3 +114,6 @@
 @media (max-width: 560px) {
   .q { flex-direction: column; gap: 6px; }
 }
+
+/* Le bouton porte désormais une icône avant son libellé. */
+.copyBtn, .qCopy { display: inline-flex; align-items: center; gap: 6px; }

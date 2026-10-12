@@ -522,7 +522,11 @@ function Content() {
                   onChange={(e) => { const v = +e.target.value; setMuted(false); setVolume(v); beep(v); }}
                 />
                 <button className={styles.muteBtn} onClick={() => setMuted((m) => !m)}>
-                  {muted ? "🔈 " + t.volume : "🔇 " + t.mute}
+                  <img
+                    src={muted ? "/icons/ph/speaker-simple-x__ffffff.svg" : "/icons/ph/speaker-high__ffffff.svg"}
+                    alt="" width={14} height={14} loading="lazy" decoding="async"
+                  />
+                  {muted ? t.volume : t.mute}
                 </button>
               </div>
             )}

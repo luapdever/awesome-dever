@@ -237,7 +237,9 @@ export default function SmartNudge() {
 
   return (
     <div className={styles.nudge} role="dialog" aria-live="polite" aria-label={nudge.message}>
-      <button className={styles.close} onClick={() => close("dismissed")} aria-label={UI[L].dismiss}>✕</button>
+      <button className={styles.close} onClick={() => close("dismissed")} aria-label={UI[L].dismiss}>
+        <img src="/icons/ph/x__ffffff.svg" alt="" width={13} height={13} loading="lazy" decoding="async" />
+      </button>
       <p className={styles.msg}>{nudge.message}</p>
       <div className={styles.actions}>
         {nudge.suggestions.map((s) => (

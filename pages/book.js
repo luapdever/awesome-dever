@@ -456,7 +456,9 @@ function Book() {
       </Head>
 
       {/* Menu hamburger (mobile) */}
-      <button className={styles.hamburger} onClick={() => setMenuOpen((o) => !o)} aria-label={ui.menu} aria-expanded={menuOpen}>☰</button>
+      <button className={styles.hamburger} onClick={() => setMenuOpen((o) => !o)} aria-label={ui.menu} aria-expanded={menuOpen}>
+        <img src="/icons/ph/list__f2e9da.svg" alt="" width={20} height={20} loading="lazy" decoding="async" />
+      </button>
       {menuOpen && <div className={styles.scrim} onClick={() => setMenuOpen(false)} />}
 
       {/* Barre latérale — navigation chapitre par chapitre */}
@@ -478,7 +480,9 @@ function Book() {
         <Link href="/" className={styles.iconBtn} title={ui.home} aria-label={ui.home}>
           <img src="/icons/ph/house-fill__f2e9da.svg" alt="" width={18} height={18}  loading="lazy" decoding="async"/>
         </Link>
-        <button className={styles.iconBtn} onClick={() => setMuted((m) => !m)} title={ui.sound} aria-label={ui.sound}>{muted ? "🔇" : "🔊"}</button>
+        <button className={styles.iconBtn} onClick={() => setMuted((m) => !m)} title={ui.sound} aria-label={ui.sound}>
+          <img src={muted ? "/icons/ph/speaker-simple-x__f2e9da.svg" : "/icons/ph/speaker-high__f2e9da.svg"} alt="" width={18} height={18} loading="lazy" decoding="async" />
+        </button>
         <button className={styles.exportBtn} onClick={() => window.print()}>{ui.exportPdf}</button>
       </div>
 

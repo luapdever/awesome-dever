@@ -24,8 +24,8 @@ export const experiences = [
         "2026 · Celtiis (via KAMGOKO) : mission confidentielle sous accord de non-divulgation (NDA)."
       ),
       L(
-        "2022–2025 · MTN & Moov: corporate sites (MTN Benin, MTN Congo, Moov Africa Togo), MyMTN Selfcare (Vue.js) and the MonRouteur activation page — custom themes/plugins, RESTful APIs, performance.",
-        "2022–2025 · MTN & Moov : sites corporate (MTN Bénin, MTN Congo, Moov Africa Togo), MyMTN Selfcare (Vue.js) et la page d'activation MonRouteur — thèmes/plugins sur mesure, APIs RESTful, performance."
+        "2022–2025 · MTN & Moov: corporate sites (MTN Benin, MTN Congo, Moov Africa Togo), MyMTN Selfcare (Vue.js) and the MonRouteur activation page. Custom themes/plugins, RESTful APIs, performance.",
+        "2022–2025 · MTN & Moov : sites corporate (MTN Bénin, MTN Congo, Moov Africa Togo), MyMTN Selfcare (Vue.js) et la page d'activation MonRouteur. Thèmes/plugins sur mesure, APIs RESTful, performance."
       ),
     ],
     stack: ["WordPress", "PHP", "Vue.js", "Node.js", "Docker", "Jenkins", "Keycloak"],
@@ -42,7 +42,7 @@ export const experiences = [
     end: "2025-12",
     current: false,
     location: "Remote",
-    summary: L("Emilia Cross — a dating app (Flutter mobile + PWA) with per-minute billed live video.", "Emilia Cross — une application de rencontre (Flutter mobile + PWA) à visio facturée à la minute."),
+    summary: L("Emilia Cross : a dating app (Flutter mobile + PWA) with per-minute billed live video.", "Emilia Cross : une application de rencontre (Flutter mobile + PWA) à visio facturée à la minute."),
     highlights: [
       L(
         "Built end to end: Flutter clients (mobile + PWA) + a NestJS backend (multi-service API + dedicated WebSocket server).",
@@ -75,7 +75,7 @@ export const experiences = [
     end: "2023-12",
     current: false,
     location: "Cotonou, Benin",
-    summary: L("Confidential engagement for a public institution — under NDA.", "Prestation confidentielle pour une institution publique — sous NDA."),
+    summary: L("Confidential engagement for a public institution, under NDA.", "Prestation confidentielle pour une institution publique, sous NDA."),
     highlights: [
       L(
         "Project details are covered by a non-disclosure agreement (NDA).",
@@ -98,7 +98,7 @@ export const experiences = [
     location: "Cotonou, Benin",
     summary: L("Foundations in PHP, Vue.js and Nuxt.js; first steps in Node.js.", "Bases en PHP, Vue.js et Nuxt.js ; premiers pas en Node.js."),
     highlights: [
-      L("Consolidated foundations in PHP, Vue.js and Nuxt.js — reusable components, Webpack optimization, Agile collaboration.", "Consolidation des bases en PHP, Vue.js et Nuxt.js — composants réutilisables, optimisation Webpack, collaboration Agile."),
+      L("Consolidated foundations in PHP, Vue.js and Nuxt.js : reusable components, Webpack optimization, Agile collaboration.", "Consolidation des bases en PHP, Vue.js et Nuxt.js — composants réutilisables, optimisation Webpack, collaboration Agile."),
       L("Very first steps in Node.js, still learning the ropes.", "Tout premiers pas en Node.js, encore en apprentissage."),
     ],
     stack: ["PHP", "Vue.js", "Nuxt.js", "Node.js", "Webpack"],
@@ -106,7 +106,7 @@ export const experiences = [
   },
   {
     id: "web-marina",
-    role: L("Web & Mobile Developer — Internship", "Développeur web & mobile — Stage"),
+    role: L("Web & Mobile Developer (internship)", "Développeur web & mobile (stage)"),
     org: "Web Marina Agency",
     client: "Web Marina Agency",
     type: L("Internship", "Stage"),
@@ -115,7 +115,7 @@ export const experiences = [
     end: "2021-12",
     current: false,
     location: "Cotonou, Benin",
-    summary: L("First professional experience — mobile & web.", "Première expérience professionnelle — mobile & web."),
+    summary: L("First professional experience: mobile & web.", "Première expérience professionnelle : mobile & web."),
     highlights: [
       L("Contributed to iOS/Android mobile apps with Flutter.", "Participation à des apps mobiles iOS/Android avec Flutter."),
       L("Implemented intuitive interfaces and API integration.", "Implémentation d'interfaces intuitives et intégration d'API."),

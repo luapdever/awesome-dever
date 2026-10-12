@@ -199,7 +199,7 @@ export const skillSet = [
     icon: "/icons/ph/shield-check__ffa500.svg",
     skills: [
       { name: "RBAC · 2FA", level: 85, icon: "/icons/ph/shield-check__ffffff.svg" },
-      { name: "SSO — Keycloak / OIDC", level: 80, icon: "/icons/ph/lock-key__ffffff.svg" },
+      { name: "SSO · Keycloak / OIDC", level: 80, icon: "/icons/ph/lock-key__ffffff.svg" },
       { name: "ALTCHA (anti-bot PoW)", level: 82, icon: "/icons/ph/robot__ffffff.svg" },
       { name: "Input validation (DTO)", level: 85, icon: "/icons/ph/check__ffffff.svg" },
       { name: "Rate limiting", level: 84, icon: "/icons/ph/plugs-connected__ffffff.svg" },

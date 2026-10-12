@@ -16,11 +16,11 @@ const YEARS = yearsOfExperience();
    Chaque carte pointe vers le projet en ligne ; « Voir plus » ouvre l'OS. */
 export const collaborations = [
   { name: "Emilia Cross", client: "France Assist", url: "https://emiliacross.com/", icon: favicon("emiliacross.com"), tag: L("Dating app (Flutter) · per-minute video", "App de rencontre (Flutter) · visio facturée"), role: L("Full-stack developer", "Développeur full-stack"), impact: IMPACT.emilia },
-  { name: "My MTN · Selfcare", client: "MTN — via KAMGOKO", url: "https://my.mtn.bj/", icon: favicon("my.mtn.bj"), tag: L("Vue.js self-care portal", "Portail selfcare Vue.js"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: IMPACT.mtnAudience },
-  { name: "MTN Bénin", client: "MTN — via KAMGOKO", url: "https://www.mtn.bj/", icon: favicon("mtn.bj"), tag: L("Corporate WordPress", "Site corporate WordPress"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: IMPACT.mtnAudience },
-  { name: "Y'ello Market", client: "MTN — via KAMGOKO", url: "https://shop.mtn.bj/", icon: favicon("shop.mtn.bj"), tag: L("MTN e-commerce marketplace (WooCommerce)", "Marketplace e-commerce MTN (WooCommerce)"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: IMPACT.mtnAudience },
-  { name: "MTN Yello Connect", client: "MTN — via KAMGOKO", url: "https://auth.mtn.bj/", icon: favicon("auth.mtn.bj"), tag: L("Centralized SSO portal", "Portail SSO centralisé"), role: L("Frontend developer", "Développeur frontend"), impact: IMPACT.mtnSSO },
-  { name: "Mon Routeur", client: "MTN — via KAMGOKO", url: "https://monrouteur.mtn.bj/?ref=noref", icon: favicon("monrouteur.mtn.bj"), tag: L("Activation journey", "Parcours d'activation"), role: L("Frontend & DevOps developer", "Développeur frontend & DevOps"), impact: IMPACT.mtnRouter },
+  { name: "My MTN · Selfcare", client: "MTN · via KAMGOKO", url: "https://my.mtn.bj/", icon: favicon("my.mtn.bj"), tag: L("Vue.js self-care portal", "Portail selfcare Vue.js"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: IMPACT.mtnAudience },
+  { name: "MTN Bénin", client: "MTN · via KAMGOKO", url: "https://www.mtn.bj/", icon: favicon("mtn.bj"), tag: L("Corporate WordPress", "Site corporate WordPress"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: IMPACT.mtnAudience },
+  { name: "Y'ello Market", client: "MTN · via KAMGOKO", url: "https://shop.mtn.bj/", icon: favicon("shop.mtn.bj"), tag: L("MTN e-commerce marketplace (WooCommerce)", "Marketplace e-commerce MTN (WooCommerce)"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: IMPACT.mtnAudience },
+  { name: "MTN Yello Connect", client: "MTN · via KAMGOKO", url: "https://auth.mtn.bj/", icon: favicon("auth.mtn.bj"), tag: L("Centralized SSO portal", "Portail SSO centralisé"), role: L("Frontend developer", "Développeur frontend"), impact: IMPACT.mtnSSO },
+  { name: "Mon Routeur", client: "MTN · via KAMGOKO", url: "https://monrouteur.mtn.bj/?ref=noref", icon: favicon("monrouteur.mtn.bj"), tag: L("Activation journey", "Parcours d'activation"), role: L("Frontend & DevOps developer", "Développeur frontend & DevOps"), impact: IMPACT.mtnRouter },
   // `role` inféré prudemment (Paul est dev full-stack) — WAPIFY = fait réel (Laravel).
   // Pas de `impact`/métrique inventée : à compléter par Paul avec de vrais chiffres.
   { name: "WAPIFY", client: L("Studio · SaaS", "Studio · SaaS"), url: "https://wapify.co/", icon: favicon("wapify.co"), tag: L("WhatsApp AI marketing", "Marketing IA WhatsApp"), role: L("Full-stack developer (Laravel)", "Développeur full-stack (Laravel)") },
@@ -78,8 +78,8 @@ export const capabilities = [
     icon: ph("shield-check"),
     title: L("Security & Reliability", "Sécurité & fiabilité"),
     desc: L(
-      "Permission-gated APIs and hardened auth: RBAC, 2FA, SSO (Keycloak/OIDC), anti-bot (ALTCHA), rate limiting, input validation and safe DTO projections — plus provider failover and graceful degradation.",
-      "APIs gatées par permission et authentification durcie : RBAC, 2FA, SSO (Keycloak/OIDC), anti-bot (ALTCHA), rate limiting, validation des entrées et projections DTO sûres — plus failover fournisseurs et dégradation gracieuse."
+      "Permission-gated APIs and hardened auth: RBAC, 2FA, SSO (Keycloak/OIDC), anti-bot (ALTCHA), rate limiting, input validation and safe DTO projections. Provider failover and graceful degradation come with it.",
+      "APIs gatées par permission et authentification durcie : RBAC, 2FA, SSO (Keycloak/OIDC), anti-bot (ALTCHA), rate limiting, validation des entrées et projections DTO sûres. Le failover fournisseurs et la dégradation gracieuse viennent avec."
     ),
     tags: ["RBAC", "2FA / SSO", "ALTCHA", "Rate limiting", "Idempotency"],
   },
@@ -87,8 +87,8 @@ export const capabilities = [
     icon: ph("sparkle"),
     title: L("Creative & Motion", "Créatif & Motion"),
     desc: L(
-      "Award-style interfaces: GSAP/ScrollTrigger scrollytelling, synthesized UI sounds (Web Audio), voice (Web Speech) and immersive, OS-like experiences — accessible by default.",
-      "Interfaces primées : scrollytelling GSAP/ScrollTrigger, sons d'interface synthétisés (Web Audio), voix (Web Speech) et expériences immersives façon OS — accessibles par défaut."
+      "Award-style interfaces: GSAP/ScrollTrigger scrollytelling, synthesized UI sounds (Web Audio), voice (Web Speech) and immersive, OS-like experiences, accessible by default.",
+      "Interfaces primées : scrollytelling GSAP/ScrollTrigger, sons d'interface synthétisés (Web Audio), voix (Web Speech) et expériences immersives façon OS, accessibles par défaut."
     ),
     tags: ["GSAP", "ScrollTrigger", "Web Audio", "Web Speech", "a11y"],
   },
@@ -96,10 +96,10 @@ export const capabilities = [
 
 // "Mon parcours en images" — dossier public/history
 export const journey = [
-  { img: "/history/01-benevolat.webp", year: "2019", title: L("The beginnings", "Les débuts"), caption: L("Volunteering, lots of coffee, zero budget — but a hunger to learn worth selling.", "Bénévole, beaucoup de café, zéro budget — mais l'envie d'apprendre à revendre.") },
+  { img: "/history/01-benevolat.webp", year: "2019", title: L("The beginnings", "Les débuts"), caption: L("Volunteering, lots of coffee, zero budget. But a hunger to learn worth selling.", "Bénévole, beaucoup de café, zéro budget. Mais l'envie d'apprendre à revendre.") },
   { img: "/history/02-stage.webp", year: "2020", title: L("The internship", "Le stage"), caption: L("Where I learned that “works on my machine” is not an admissible line of defence.", "J'y ai appris que « ça marche sur ma machine » n'est pas une ligne de défense recevable.") },
   { img: "/history/03-premier-contrat.webp", year: "2021", title: L("First contract", "Premier contrat"), caption: L("Contract signed, impostor syndrome included. We both survived.", "Contrat signé, syndrome de l'imposteur offert avec. On a survécu tous les deux.") },
-  { img: "/history/04-concentration.webp", year: "2022", title: L("Focus", "Focus"), caption: L("Maximum focus. Do not disturb — except for coffee or a production on fire.", "Concentration maximale. Ne pas déranger — sauf pour un café ou une prod qui brûle.") },
+  { img: "/history/04-concentration.webp", year: "2022", title: L("Focus", "Focus"), caption: L("Maximum focus. Do not disturb, except for coffee or a production on fire.", "Concentration maximale. Ne pas déranger, sauf pour un café ou une prod qui brûle.") },
   { img: "/history/05-second-contrat.webp", year: "2023", title: L("Second contract", "Deuxième contrat"), caption: L("This time I (almost) knew what I was doing. The almost makes all the difference.", "Cette fois, je savais (presque) ce que je faisais. Le presque fait toute la nuance.") },
   { img: "/history/06.webp", year: "2024", title: L("The team", "L'équipe"), caption: L("The best code is sometimes thought up far from the keyboard, with the right people.", "Le meilleur code se pense parfois loin du clavier, entouré des bonnes personnes.") },
   { img: "/history/07-enjoy-trip.webp", year: "2025", title: L("The reward", "La récompense"), caption: L("You don't live on commits alone: a little rest before the next sprint.", "On ne vit pas que de commits : un peu de repos avant le prochain sprint.") },
@@ -143,9 +143,9 @@ export const HOME_UI = {
     headCollab: "Some collaborations.",
     collabSub: "A few live projects shipped with teams and clients.",
     collabMore: "See everything in PaulBrain OS",
-    aboutText: "Full-stack engineer focused on real-time, product-grade apps: I take problems others call complicated — per-minute video billing, live streaming, government e-invoicing — from prototype to stable, documented production. Broad in range, deep where it counts.",
+    aboutText: "Full-stack engineer focused on real-time, product-grade apps. I take on problems others call complicated: per-minute video billing, live streaming, government e-invoicing. From prototype to stable, documented production. Broad in range, deep where it counts.",
     bioLink: "My full bio",
-    headCaps: "A Swiss army knife — that compiles.",
+    headCaps: "A Swiss army knife, that compiles.",
     headJourney: "My journey in frames.",
     journeyIntro: "Seven snapshots, six years, one constant: learning faster than the coffee cools.",
     headExp: "Where I've left some code.",
@@ -166,7 +166,7 @@ export const HOME_UI = {
     headCollab: "Mes collaborations.",
     collabSub: "Quelques projets en ligne livrés avec des équipes et des clients.",
     collabMore: "Tout voir dans PaulBrain OS",
-    aboutText: "Ingénieur full-stack spécialisé dans les produits temps réel : je prends des problèmes réputés compliqués — facturation vidéo à la minute, streaming live, e-facturation gouvernementale — du prototype à une prod stable et documentée. Large par l'étendue, profond là où ça compte.",
+    aboutText: "Ingénieur full-stack spécialisé dans les produits temps réel. Je prends des problèmes réputés compliqués : facturation vidéo à la minute, streaming live, e-facturation gouvernementale. Du prototype à une prod stable et documentée. Large par l'étendue, profond là où ça compte.",
     bioLink: "Ma bio complète",
     headCaps: "Un couteau suisse, mais qui compile.",
     headJourney: "Mon parcours en images.",

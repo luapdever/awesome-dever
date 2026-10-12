@@ -54,12 +54,15 @@
   border: none;
   background: transparent;
   color: rgba(242, 237, 255, 0.55);
+  display: grid;
+  place-items: center;
+  opacity: 0.6;
   font-size: 0.9rem;
   cursor: pointer;
   border-radius: 6px;
   transition: color 0.15s ease, background 0.15s ease;
 }
-.close:hover { color: #fff; background: rgba(255, 255, 255, 0.1); }
+.close:hover { color: #fff; background: rgba(255, 255, 255, 0.1); opacity: 1; }
 
 .optout {
   margin-top: 10px;

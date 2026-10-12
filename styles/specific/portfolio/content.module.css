@@ -1033,3 +1033,8 @@
     .shutdownLogo { animation: none; opacity: 0.9; }
     .shutdownBar > span { animation-duration: 1.4s; }
 }
+
+/* Les étoiles de notation sont des images : sans alignement elles reposent sur
+   la ligne de base et flottent au-dessus du chiffre. */
+.stars { display: inline-flex; align-items: center; gap: 1px; vertical-align: middle; }
+.muteBtn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }

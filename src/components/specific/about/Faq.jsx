@@ -17,8 +17,8 @@ export default function Faq() {
       </h2>
       <p className={styles.intro}>
         {fr
-          ? "Les questions que les recruteurs posent le plus souvent — celles auxquelles PaulBot répond au quotidien."
-          : "The questions recruiters ask most often — the ones PaulBot answers every day."}
+          ? "Les questions que les recruteurs posent le plus souvent, celles auxquelles PaulBot répond au quotidien."
+          : "The questions recruiters ask most often, the ones PaulBot answers every day."}
       </p>
 
       <div className={styles.list}>

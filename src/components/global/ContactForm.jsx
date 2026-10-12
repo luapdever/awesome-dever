@@ -11,19 +11,19 @@ const T = {
   fr: {
     namePh: "Ton nom", emailPh: "ton@email.com", subjectPh: "Sujet (optionnel)", msgPh: "Décris ton projet ou ta question en quelques lignes…",
     send: "Envoyer le message", sending: "Envoi…",
-    ok: "Message envoyé — Paul te répondra vite. 🙌",
+    ok: "Message envoyé. Paul te répondra vite. 🙌",
     errRate: "Trop de messages, réessaie dans quelques minutes.",
     err: "Envoi impossible pour le moment, réessaie plus tard.",
-    altcha: "Protégé par ALTCHA — anti-spam open-source, aucune donnée envoyée à un tiers.",
+    altcha: "Protégé par ALTCHA, anti-spam open-source. Aucune donnée envoyée à un tiers.",
     name: "Nom", email: "Email", subject: "Sujet", message: "Message",
   },
   en: {
     namePh: "Your name", emailPh: "you@email.com", subjectPh: "Subject (optional)", msgPh: "Describe your project or question in a few lines…",
     send: "Send message", sending: "Sending…",
-    ok: "Message sent — Paul will reply shortly. 🙌",
+    ok: "Message sent. Paul will reply shortly. 🙌",
     errRate: "Too many messages, try again in a few minutes.",
     err: "Couldn't send right now, please try again later.",
-    altcha: "Protected by ALTCHA — open-source anti-spam, no data sent to any third party.",
+    altcha: "Protected by ALTCHA, open-source anti-spam. No data sent to any third party.",
     name: "Name", email: "Email", subject: "Subject", message: "Message",
   },
 };
