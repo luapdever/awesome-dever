@@ -2,12 +2,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { Cormorant_Garamond } from "next/font/google";
+import localFont from "next/font/local";
 import { useLandingLang } from "../src/context/landingLang";
 import styles from "../styles/specific/book/book.module.css";
 import { breadcrumbLd } from "../src/lib/seoSchema";
 
-const serif = Cormorant_Garamond({ subsets: ["latin"], weight: ["500", "600", "700"], style: ["normal", "italic"], variable: "--font-book" });
+const serif = localFont({
+  src: [
+    { path: "../src/assets/fonts/cormorant-garamond/CormorantGaramond-Variable.woff2", weight: "500 700", style: "normal" },
+    { path: "../src/assets/fonts/cormorant-garamond/CormorantGaramond-Italic-Variable.woff2", weight: "500 700", style: "italic" },
+  ],
+  variable: "--font-book",
+  display: "swap",
+  adjustFontFallback: "Times New Roman",
+});
 
 const T = (fr, en) => ({ fr, en });
 const ROMAN = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];

@@ -2,7 +2,7 @@ import { Suspense, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import TheFooter from "../src/components/global/footer";
 import NavBar from "../src/components/global/nav";
 import "../styles/keyframes.css";
@@ -18,10 +18,10 @@ import SmartNudge from "../src/components/global/SmartNudge";
 import TopProgress from "../src/components/global/TopProgress";
 import ErrorBoundary from "../src/components/global/ErrorBoundary";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
+const montserrat = localFont({
+  src: "../src/assets/fonts/montserrat/Montserrat-Variable.woff2",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: "400 800",
   variable: "--font-sans",
 });
 
