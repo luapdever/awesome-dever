@@ -53,7 +53,7 @@ function Vault() {
               <h2>{p.name}</h2>
               <span className={styles.tag}>{tx(p.tag, lang)}</span>
               <div className={styles.vRow}>{t.lblClient}&nbsp;: <b>{p.client}</b></div>
-              <div className={styles.vRow}>{t.lblRole}&nbsp;: <b>{tx(p.role, lang)}</b> · {p.year}</div>
+              {p.role && <div className={styles.vRow}>{t.lblRole}&nbsp;: <b>{tx(p.role, lang)}</b> · {p.year}</div>}
               <span className={`${styles.status} ${styles[p.status]}`}>{statusLabel(p.status)}</span>
               <p className={styles.desc}>{tx(p.desc, lang)}</p>
               {p.stack?.length > 0 && (

@@ -1,15 +1,5 @@
-/* ============================================================
-   SOURCE DE DONNÉES — Vault (projets privés / entreprise)
-   Projets non affichables publiquement (confidentiels, internes,
-   sous accord). Regroupés dans l'app "Vault".
-   Confidentialité : pour les projets sous NDA (`hidden: true`), on
-   n'expose QUE l'entreprise concernée (`company`) — aucun nom ni
-   détail de projet n'est stocké ici.
-   Champs publics : id, name, client, role, year, status, tag, desc,
-            stack[], link?{label,url}
-   status ∈ "Confidential" | "Enterprise" | "Government"
-   ============================================================ */
 import { L } from "./i18n";
+import { celtiisProjects } from "./celtiis";
 
 export const vaultProjects = [
   // Projets sous NDA :resumes VOLONTAIREMENT génériques et sans chiffres —
@@ -29,20 +19,7 @@ export const vaultProjects = [
     stack: ["JavaScript", "Node.js", "PostgreSQL"],
     hidden: true,
   },
-  {
-    id: "celtiis-corporate",
-    company: "Celtiis (via KAMGOKO)",
-    role: L("Full-stack Developer", "Développeur full-stack"),
-    year: "2026",
-    status: "Confidential",
-    tag: L("Telecom web ecosystem", "Écosystème web télécom"),
-    desc: L(
-      "Web platforms for a telecom operator (multilingual corporate portal, content management, integrations), delivered at KAMGOKO. Details under NDA.",
-      "Plateformes web pour un opérateur télécom (portail corporate multilingue, gestion de contenu, intégrations), réalisées chez KAMGOKO. Détails sous NDA."
-    ),
-    stack: ["WordPress", "PHP", "JavaScript", "SASS"],
-    hidden: true,
-  },
+  ...celtiisProjects,
   {
     id: "vantia-beacon",
     name: "Beacon — Diffusion interne programmée",

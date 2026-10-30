@@ -6,15 +6,18 @@
 import { yearsOfExperience } from "./xp";
 import { L } from "./i18n";
 import { IMPACT } from "./impact";
+import { celtiisProjects } from "./celtiis";
 
 const ph = (name, color = "ffa500") => `/icons/ph/${name}__${color}.svg`;
 const favicon = (domain) => `https://www.google.com/s2/favicons?sz=64&domain=${domain}`;
 
 const YEARS = yearsOfExperience();
 
-/* Mes collaborations — 10 projets clés, tirés du portfolio (PaulBrain OS).
-   Chaque carte pointe vers le projet en ligne ; « Voir plus » ouvre l'OS. */
 export const collaborations = [
+  ...celtiisProjects.map((p) => ({
+    name: p.name, client: p.client, url: p.link.url,
+    icon: favicon(new URL(p.link.url).hostname), tag: p.tag,
+  })),
   { name: "Emilia Cross", client: "France Assist", url: "https://emiliacross.com/", icon: favicon("emiliacross.com"), tag: L("Dating app (Flutter) · per-minute video", "App de rencontre (Flutter) · visio facturée"), role: L("Full-stack developer", "Développeur full-stack"), impact: IMPACT.emilia },
   { name: "My MTN · Selfcare", client: "MTN · via KAMGOKO", url: "https://my.mtn.bj/", icon: favicon("my.mtn.bj"), tag: L("Vue.js self-care portal", "Portail selfcare Vue.js"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: IMPACT.mtnAudience },
   { name: "MTN Bénin", client: "MTN · via KAMGOKO", url: "https://www.mtn.bj/", icon: favicon("mtn.bj"), tag: L("Corporate WordPress", "Site corporate WordPress"), role: L("Frontend & WordPress developer", "Développeur frontend & WordPress"), impact: IMPACT.mtnAudience },

@@ -33,7 +33,7 @@ const MILESTONES = [
   { y: "2021", t: L("IFRI/UAC & first contracts", "IFRI/UAC & premiers contrats"), d: L("Internet & Multimedia by day, client projects by night.", "Internet & Multimédia le jour, projets clients le soir.") },
   { y: "2022", t: L("KAMGOKO Technologies", "KAMGOKO Technologies"), d: L("Sites & apps for major accounts (MTN, Moov…).", "Sites & apps pour de grands comptes (MTN, Moov…).") },
   { y: "2024", t: L("Emilia Cross — France Assist", "Emilia Cross — France Assist"), d: L("End-to-end dating app (Flutter + PWA): per-minute video, KYC, payments & payouts.", "App de rencontre de bout en bout (Flutter + PWA) : visio facturée à la minute, KYC, paiements & payouts.") },
-  { y: "2026", t: L("Celtiis ecosystem — KAMGOKO", "Écosystème Celtiis — KAMGOKO"), d: L("Multilingual corporate portal & internal platforms, built at KAMGOKO Technologies.", "Portail corporate multilingue & plateformes internes, réalisés chez KAMGOKO Technologies.") },
+  { y: "2026", t: L("Celtiis ecosystem — KAMGOKO", "Écosystème Celtiis — KAMGOKO"), d: L("Public website, Business and Club Presse, delivered via KAMGOKO. Architecture and details of my role under NDA.", "Site grand public, Business et Club Presse, réalisés via KAMGOKO. Architecture et détails de mon rôle sous NDA.") },
 ];
 
 const ABOUT_UI = {

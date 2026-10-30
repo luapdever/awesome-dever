@@ -20,8 +20,8 @@ export const experiences = [
     summary: L("Broad skills acquired through projects for MTN, Moov, Celtiis, Orabank and other major accounts (telecom, media, banking).", "Nombreuses compétences acquises via des projets pour MTN, Moov, Celtiis, Orabank et d'autres grands comptes (télécoms, médias, banque)."),
     highlights: [
       L(
-        "2026 · Celtiis (via KAMGOKO): confidential engagement under a non-disclosure agreement (NDA).",
-        "2026 · Celtiis (via KAMGOKO) : mission confidentielle sous accord de non-divulgation (NDA)."
+        "2026 · Celtiis (via KAMGOKO): public website, Business and Club Presse. Architecture and details of my role are covered by an NDA.",
+        "2026 · Celtiis (via KAMGOKO) : site grand public, Business et Club Presse. Architecture et détails de mon rôle sous NDA."
       ),
       L(
         "2022–2025 · MTN & Moov: corporate sites (MTN Benin, MTN Congo, Moov Africa Togo), MyMTN Selfcare (Vue.js) and the MonRouteur activation page. Custom themes/plugins, RESTful APIs, performance.",
