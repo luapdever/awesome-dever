@@ -1,10 +1,5 @@
-/* ============================================================
-   Génère public/sitemap.xml au build (prebuild).
-   → Une seule liste de routes à maintenir ; `lastmod` = date du build
-     (plus de date figée à la main), et les nouvelles pages (ex. /book)
-     ne sont plus oubliées.
-   ============================================================ */
 import fs from "node:fs";
+import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -20,7 +15,21 @@ const blogArticles = [
   ...blogSrc.matchAll(/slug:\s*["']([a-z0-9-]+)["'],\s*date:\s*["'](\d{4}-\d{2}-\d{2})["']/g),
 ].map((m) => ({ slug: m[1], date: m[2] }));
 
-const lastmod = new Date().toISOString().slice(0, 10);
+const ROOT = path.join(__dirname, "..");
+const projects = JSON.parse(fs.readFileSync(path.join(ROOT, "src/data/projectRoutes.json"), "utf8"));
+function contentDate(route) {
+  const files = route.path.startsWith("/projects")
+    ? ["pages/projects", "src/data/projectRoutes.json", "src/data/projectPages.js", "src/rawDatas/celtiis.js", "src/rawDatas/vaultProjects.js", "src/rawDatas/home.js"]
+    : route.path === "/" ? ["pages/index.js", "src/rawDatas/home.js", "src/rawDatas/experiences.js"]
+    : route.path === "/about-me" ? ["pages/about-me.js", "src/components/specific/about", "src/rawDatas/faq.js"]
+    : route.path === "/cv" ? ["public/cv/index.html"]
+    : route.path === "/blog" ? ["src/rawDatas/blog.js"]
+    : [`pages${route.path}.js`, `pages${route.path}/index.js`];
+  try {
+    const date = execFileSync("git", ["log", "-1", "--format=%cs", "--", ...files], { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+    return /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : null;
+  } catch { return null; }
+}
 
 // Routes publiques indexables (chemins propres, sans slash fautif).
 const ROUTES = [
@@ -34,6 +43,8 @@ const ROUTES = [
   // locale (/en/cv renvoie 404). D'où `i18n: false` — sans quoi le sitemap
   // déclarerait une URL morte.
   { path: "/cv", priority: "0.6", changefreq: "monthly", i18n: false },
+  { path: "/projects", priority: "0.8", changefreq: "monthly" },
+  ...projects.map((project) => ({ path: `/projects/${project.slug}`, priority: "0.7", changefreq: "monthly" })),
   // Articles du blog (parsés depuis blog.js)
   ...blogArticles.map((p) => ({ path: `/blog/${p.slug}`, priority: "0.6", changefreq: "monthly", lastmod: p.date })),
 ];
@@ -46,6 +57,7 @@ const body = ROUTES.map(
     /* `/` en anglais s'écrit `/en`, jamais `/en/` : le canonique servi n'a pas
        de slash final, et deux formes pour une même page sèment le doute. */
     (r.i18n === false ? ["fr"] : ["fr", "en"]).map((loc) => {
+      const modified = r.lastmod || contentDate(r);
       const url = (l) => (l === "fr" ? `${ORIGIN}${r.path}` : `${ORIGIN}/en${r.path === "/" ? "" : r.path}`);
       const alts = r.i18n === false ? "" :
         `      <xhtml:link rel="alternate" hreflang="fr" href="${url("fr")}"/>\n` +
@@ -54,7 +66,7 @@ const body = ROUTES.map(
       return (
         `  <url>\n` +
         `    <loc>${url(loc)}</loc>\n` +
-        `    <lastmod>${r.lastmod || lastmod}</lastmod>\n` +
+        (modified ? `    <lastmod>${modified}</lastmod>\n` : "") +
         `    <changefreq>${r.changefreq}</changefreq>\n` +
         `    <priority>${r.priority}</priority>\n` +
         alts +
@@ -71,4 +83,4 @@ const xml =
 
 fs.writeFileSync(OUT, xml);
 const total = ROUTES.reduce((n, r) => n + (r.i18n === false ? 1 : 2), 0);
-console.log(`✓ sitemap.xml généré (${total} URLs — fr + en, lastmod ${lastmod})`);
+console.log(`✓ sitemap.xml généré (${total} URLs, dates issues des contenus)`);

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "../../../styles/global/cursor.module.css";
 
 function Cursor({ props }) {
@@ -8,21 +8,23 @@ function Cursor({ props }) {
 
   const location = useRouter();
 
-  const handleCursor = (event) => {
+  const handleCursor = useCallback((event) => {
     setMouse({ x: event.clientX, y: event.clientY });
     const el = event.target;
     setHovering(!!(el && el.closest && el.closest('a, button, [role="button"], [data-magnetic], label')));
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener("mousemove", handleCursor);
 
-    window.addEventListener("contextmenu", (e) => e.preventDefault());
+    const preventContextMenu = (event) => event.preventDefault();
+    window.addEventListener("contextmenu", preventContextMenu);
 
     return () => {
       window.removeEventListener("mousemove", handleCursor);
+      window.removeEventListener("contextmenu", preventContextMenu);
     };
-  }, [mouse]);
+  }, [handleCursor]);
 
   return (
     <>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLandingLang } from "../../context/landingLang";
 import styles from "../../../styles/specific/cookieConsent.module.css";
 
 /* Bannière de consentement sobre + Consent Mode v2.
@@ -21,11 +22,11 @@ const UI = {
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
-  const [fr, setFr] = useState(true);
+  const { lang } = useLandingLang();
+  const fr = lang === "fr";
 
   useEffect(() => {
     try {
-      setFr(!/^en/i.test(navigator.language || "fr"));
       if (!localStorage.getItem(KEY)) setVisible(true);
     } catch { /* stockage indisponible */ }
     // Permet de rouvrir le choix (ex. lien « Cookies » du pied de page).

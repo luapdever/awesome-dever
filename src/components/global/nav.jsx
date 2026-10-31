@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FiMaximize2 } from "react-icons/fi";
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap/dist/gsap";
 import dever from "../../assets/img/icons/DEVER.svg";
 import styles from "../../../styles/global/nav.module.css";
-import { socialMedias, L, tx } from "../../data";
+import { socialMedias, L, tx } from "../../data/identity";
 import { track } from "../../lib/analytics";
 import { useLandingLang } from "../../context/landingLang";
 import { useExperience } from "../../context/experience";
@@ -23,9 +24,8 @@ function NavBar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("top");
   const overlay = useRef();
-  const { lang, setLang } = useLandingLang();
+  const { lang, pendingLang, setLang, languageHref } = useLandingLang();
   const { openChooser } = useExperience();
-  const other = lang === "fr" ? "en" : "fr";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -83,9 +83,24 @@ function NavBar() {
         </nav>
 
         <div className={styles.right}>
-          <div className={styles.langSwitch}>
-            <button className={lang === "fr" ? styles.langActive : ""} onClick={() => setLang("fr")}>FR</button>
-            <button className={lang === "en" ? styles.langActive : ""} onClick={() => setLang("en")}>EN</button>
+          <div className={styles.langSwitch} data-language={pendingLang || lang} aria-busy={!!pendingLang}>
+            <span className={styles.langIndicator} aria-hidden="true" />
+            {["fr", "en"].map((locale) => (
+              <a
+                key={locale}
+                href={languageHref(locale)}
+                hrefLang={locale}
+                lang={locale}
+                className={(pendingLang || lang) === locale ? styles.langActive : ""}
+                aria-current={lang === locale ? "page" : undefined}
+                aria-label={locale === "fr" ? "Version française" : "English version"}
+                onClick={(event) => {
+                  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+                  event.preventDefault();
+                  setLang(locale).catch(() => { window.location.href = languageHref(locale); });
+                }}
+              >{locale.toUpperCase()}</a>
+            ))}
           </div>
           <a href="/cv" target="_blank" rel="noopener noreferrer" className={styles.cvLink} onClick={() => track("cv_open", { source: "nav" })}>{tx(L("CV", "CV"), lang)}</a>
           <Link href="/paulfolio" className={styles.cta}>PaulBrain&nbsp;OS</Link>
@@ -103,7 +118,7 @@ function NavBar() {
       <div ref={overlay} className={`${styles.overlay} ${open ? styles.overlayOpen : ""}`}>
         <nav className={styles.overlayNav}>
           {overlayLinks.map((l, i) => (
-            <Link key={l.id} href={l.href} className={styles.overlayLink} data-oitem onClick={() => setOpen(false)}>
+            <Link key={l.id} href={l.href} locale={l.id === "cv" ? false : undefined} className={styles.overlayLink} data-oitem onClick={() => setOpen(false)}>
               <span className={styles.oIndex}>{String(i + 1).padStart(2, "0")}</span>
               <span className={styles.oLabel}>{tx(l.label, lang)}</span>
             </Link>
@@ -114,7 +129,7 @@ function NavBar() {
           data-oitem
           onClick={() => { setOpen(false); openChooser(); }}
         >
-          <span className={styles.overlayExpIcon}>⤢</span>
+          <FiMaximize2 className={styles.overlayExpIcon} aria-hidden="true" focusable="false" />
           {lang === "fr" ? "Changer d'expérience" : "Change experience"}
         </button>
         <div className={styles.overlayFoot} data-oitem>

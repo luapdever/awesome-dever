@@ -1,5 +1,6 @@
 import { Suspense, useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import localFont from "next/font/local";
@@ -9,14 +10,20 @@ import "../styles/keyframes.css";
 import "../styles/globals.css";
 import Cursor from "../src/components/global/cursor";
 import { LandingLangProvider } from "../src/context/landingLang";
-import { ExperienceProvider } from "../src/context/experience";
-import ExperienceModal from "../src/components/specific/home/ExperienceModal";
+import { ExperienceProvider, useExperience } from "../src/context/experience";
 import ExperienceButton from "../src/components/global/ExperienceButton";
-import BotWidget from "../src/components/global/BotWidget";
 import CookieConsent from "../src/components/global/CookieConsent";
 import SmartNudge from "../src/components/global/SmartNudge";
 import TopProgress from "../src/components/global/TopProgress";
 import ErrorBoundary from "../src/components/global/ErrorBoundary";
+
+const BotWidget = dynamic(() => import("../src/components/global/BotWidget"), { ssr: false });
+const ExperienceModal = dynamic(() => import("../src/components/specific/home/ExperienceModal"), { ssr: false });
+
+function ExperienceOverlay() {
+  const { open } = useExperience();
+  return open ? <ExperienceModal /> : null;
+}
 
 const montserrat = localFont({
   src: "../src/assets/fonts/montserrat/Montserrat-Variable.woff2",
@@ -100,7 +107,7 @@ function MyApp({ Component, pageProps }) {
             {!isEmbed && <ErrorBoundary name="bot"><BotWidget /></ErrorBoundary>}
             {!isEmbed && <ErrorBoundary name="consent"><CookieConsent /></ErrorBoundary>}
             {!isEmbed && <ErrorBoundary name="nudge"><SmartNudge /></ErrorBoundary>}
-            {!bare && <ErrorBoundary name="expmodal"><ExperienceModal /></ErrorBoundary>}
+            {!bare && <ErrorBoundary name="expmodal"><ExperienceOverlay /></ErrorBoundary>}
           </ExperienceProvider>
         </LandingLangProvider>
       </Suspense>

@@ -67,7 +67,7 @@ export const experiences = [
     // garde le nom OFFICIEL français de l'institution béninoise, valable dans les
     // deux langues comme tout nom propre. Avant, la timeline FR affichait le
     // libellé anglais « Chamber of Commerce and Industry of Benin ».
-    org: "CCIB — Chambre de Commerce et d'Industrie du Bénin",
+    org: "CCIB (Chambre de Commerce et d'Industrie du Bénin)",
     client: "CCIB (Government)",
     type: L("Contract", "Prestation"),
     period: L("2022 – 2023", "2022 – 2023"),
@@ -98,7 +98,7 @@ export const experiences = [
     location: "Cotonou, Benin",
     summary: L("Foundations in PHP, Vue.js and Nuxt.js; first steps in Node.js.", "Bases en PHP, Vue.js et Nuxt.js ; premiers pas en Node.js."),
     highlights: [
-      L("Consolidated foundations in PHP, Vue.js and Nuxt.js : reusable components, Webpack optimization, Agile collaboration.", "Consolidation des bases en PHP, Vue.js et Nuxt.js — composants réutilisables, optimisation Webpack, collaboration Agile."),
+      L("Consolidated foundations in PHP, Vue.js and Nuxt.js : reusable components, Webpack optimization, Agile collaboration.", "Consolidation des bases en PHP, Vue.js et Nuxt.js : composants réutilisables, optimisation Webpack, collaboration Agile."),
       L("Very first steps in Node.js, still learning the ropes.", "Tout premiers pas en Node.js, encore en apprentissage."),
     ],
     stack: ["PHP", "Vue.js", "Nuxt.js", "Node.js", "Webpack"],

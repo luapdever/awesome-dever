@@ -12,8 +12,8 @@ function ExperienceButton() {
   const label = lang === "fr" ? "Changer d'expérience" : "Change experience";
   // Tooltip explicite : dit ce que fait le bouton avant le clic.
   const hint = lang === "fr"
-    ? "Changer d'expérience — version classique ou PaulBrain OS"
-    : "Change experience — classic version or PaulBrain OS";
+    ? "Changer d'expérience : version classique ou PaulBrain OS"
+    : "Change experience: classic version or PaulBrain OS";
   return (
     <button id="expSticky" className="expSticky" onClick={openChooser} aria-label={hint} title={hint}>
       <img src={ICON} alt="" width={26} height={26}  loading="lazy" decoding="async"/>

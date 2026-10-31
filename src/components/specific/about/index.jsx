@@ -4,7 +4,7 @@ import Link from "next/link";
 import gsap from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "../../../../styles/specific/about/about.module.css";
-import { socialMedias, L, tx } from "../../../data";
+import { socialMedias, L, tx } from "../../../data/identity";
 import { track } from "../../../lib/analytics";
 import { useLandingLang } from "../../../context/landingLang";
 import luap from "../../../assets/img/awesome/luap-thinking.png";
@@ -32,8 +32,8 @@ const MILESTONES = [
   { y: "2019", t: L("First steps in code", "Premiers pas en code"), d: L("Self-taught, between volunteering, tutorials and sleepless nights.", "Autodidacte, entre bénévolat, tutos et nuits blanches.") },
   { y: "2021", t: L("IFRI/UAC & first contracts", "IFRI/UAC & premiers contrats"), d: L("Internet & Multimedia by day, client projects by night.", "Internet & Multimédia le jour, projets clients le soir.") },
   { y: "2022", t: L("KAMGOKO Technologies", "KAMGOKO Technologies"), d: L("Sites & apps for major accounts (MTN, Moov…).", "Sites & apps pour de grands comptes (MTN, Moov…).") },
-  { y: "2024", t: L("Emilia Cross — France Assist", "Emilia Cross — France Assist"), d: L("End-to-end dating app (Flutter + PWA): per-minute video, KYC, payments & payouts.", "App de rencontre de bout en bout (Flutter + PWA) : visio facturée à la minute, KYC, paiements & payouts.") },
-  { y: "2026", t: L("Celtiis ecosystem — KAMGOKO", "Écosystème Celtiis — KAMGOKO"), d: L("Public website, Business and Club Presse, delivered via KAMGOKO. Architecture and details of my role under NDA.", "Site grand public, Business et Club Presse, réalisés via KAMGOKO. Architecture et détails de mon rôle sous NDA.") },
+  { y: "2024", t: L("Emilia Cross · France Assist", "Emilia Cross · France Assist"), d: L("End-to-end dating app (Flutter + PWA): per-minute video, KYC, payments & payouts.", "App de rencontre de bout en bout (Flutter + PWA) : visio facturée à la minute, KYC, paiements & payouts.") },
+  { y: "2026", t: L("Celtiis ecosystem · KAMGOKO", "Écosystème Celtiis · KAMGOKO"), d: L("Public website, Business and Club Presse, delivered via KAMGOKO. Architecture and details of my role under NDA.", "Site grand public, Business et Club Presse, réalisés via KAMGOKO. Architecture et détails de mon rôle sous NDA.") },
 ];
 
 const ABOUT_UI = {
@@ -43,8 +43,8 @@ const ABOUT_UI = {
     histTitle: "My story (the honest version)",
     story: [
       "It all started without a powerful computer, without a mentor and without a career plan. Just stubborn curiosity and an internet connection that tested my patience. I learned by breaking things, reading docs at ungodly hours, and redoing ten times what could have worked the first time.",
-      "From volunteer to intern, then to software engineer, I kept the same approach: understand the problem better than the solution. That's what let me tackle demanding topics — per-minute billing, real-time video streaming, government e-invoicing, multilingual enterprise WordPress ecosystems — without ever losing the thread (or my sense of humour).",
-      "I believe good software is recognized by its discretion: it does the job, wakes no one at night, and reads back without dread. And when I close the editor, I compose music — because after all, code and melody are the same quest for structure and emotion.",
+      "From volunteer to intern, then to software engineer, I kept the same approach: understand the problem better than the solution. That's what let me tackle demanding topics (per-minute billing, real-time video streaming, government e-invoicing, multilingual enterprise WordPress ecosystems) without ever losing the thread (or my sense of humour).",
+      "I believe good software is recognized by its discretion: it does the job, wakes no one at night, and reads back without dread. And when I close the editor, I compose music, because after all, code and melody are the same quest for structure and emotion.",
     ],
     princTitle: "My principles",
     milesTitle: "A few landmarks",
@@ -62,8 +62,8 @@ const ABOUT_UI = {
     histTitle: "Mon histoire (la version honnête)",
     story: [
       "Tout a commencé sans ordinateur puissant, sans mentor et sans plan de carrière. Juste une curiosité tenace et une connexion internet qui testait ma patience. J'ai appris en cassant des choses, en lisant de la doc à des heures indues, et en refaisant dix fois ce qui aurait pu marcher du premier coup.",
-      "De bénévole à stagiaire, puis à ingénieur logiciel, j'ai gardé la même approche : comprendre le problème mieux que la solution. C'est ce qui m'a permis de m'attaquer à des sujets exigeants — facturation à la minute, streaming vidéo temps réel, e-facturation gouvernementale, écosystèmes WordPress d'entreprise multilingues — sans jamais perdre le fil (ni le sens de l'humour).",
-      "Je crois qu'un bon logiciel se reconnaît à sa discrétion : il fait le travail, ne réveille personne la nuit, et se laisse relire sans angoisse. Et quand je referme l'éditeur, je compose de la musique — parce qu'après tout, le code et la mélodie, c'est la même quête de structure et d'émotion.",
+      "De bénévole à stagiaire, puis à ingénieur logiciel, j'ai gardé la même approche : comprendre le problème mieux que la solution. C'est ce qui m'a permis de m'attaquer à des sujets exigeants (facturation à la minute, streaming vidéo temps réel, e-facturation gouvernementale, écosystèmes WordPress d'entreprise multilingues) sans jamais perdre le fil (ni le sens de l'humour).",
+      "Je crois qu'un bon logiciel se reconnaît à sa discrétion : il fait le travail, ne réveille personne la nuit, et se laisse relire sans angoisse. Et quand je referme l'éditeur, je compose de la musique, parce qu'après tout, le code et la mélodie, c'est la même quête de structure et d'émotion.",
     ],
     princTitle: "Mes principes",
     milesTitle: "Quelques repères",

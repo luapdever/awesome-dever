@@ -1,26 +1,14 @@
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
+import { localizedPath } from "../lib/localeUrl.mjs";
+import { captureText, recomposeText } from "../lib/languageTransition";
 
-/* Langue des pages publiques. La source de vérité est l'URL (`/` = fr,
-   `/en/...` = en) : c'est la seule façon pour un moteur d'indexer les deux
-   versions. Le contexte n'a plus d'état propre, il lit le routeur — l'API
-   `{ lang, setLang }` reste identique pour les 17 composants qui l'utilisent.
+export const LandingLangContext = createContext({ lang: "fr", pendingLang: null, setLang: () => {}, languageHref: () => "/" });
+const norm = (locale) => locale === "en" ? "en" : "fr";
 
-   Pont avec PaulBrain OS : l'OS lit et écrit `os_lang` dans localStorage. On le
-   tient synchronisé — la locale de l'URL l'alimente à l'arrivée, le sélecteur
-   l'écrit avant de naviguer. Le cookie NEXT_LOCALE fait le chemin inverse :
-   Next s'en sert pour renvoyer vers la bonne langue un visiteur qui revient
-   sur `/` après avoir choisi l'anglais dans l'OS. */
-
-export const LandingLangContext = createContext({ lang: "fr", setLang: () => {} });
-
-const LOCALES = ["fr", "en"];
-const norm = (l) => (LOCALES.includes(l) ? l : "fr");
-
-/** Mémorise la préférence pour l'OS (localStorage) et pour Next (cookie). */
-export function rememberLang(l) {
+export function rememberLang(locale) {
   if (typeof window === "undefined") return;
-  const lang = norm(l);
+  const lang = norm(locale);
   try { localStorage.setItem("os_lang", lang); } catch {}
   document.cookie = `NEXT_LOCALE=${lang};path=/;max-age=31536000;samesite=lax`;
 }
@@ -28,28 +16,55 @@ export function rememberLang(l) {
 export function LandingLangProvider({ children }) {
   const router = useRouter();
   const lang = norm(router.locale);
+  const [pendingLang, setPendingLang] = useState(null);
+  // Les pages statiques ne connaissent ni la query ni le hash pendant le rendu serveur.
+  const [currentPath, setCurrentPath] = useState(() => router.asPath.split(/[?#]/)[0]);
+  const busy = useRef(false);
 
-  // L'URL fait foi : on aligne l'OS et le cookie sur elle, jamais l'inverse.
   useEffect(() => {
     document.documentElement.lang = lang;
     rememberLang(lang);
   }, [lang]);
 
-  /* Changer de langue = naviguer. `scroll: false` conserve la position de
-     lecture, sans quoi chaque bascule renverrait en haut de page. */
-  const setLang = (l) => {
-    const next = norm(l);
-    if (next === lang) return;
-    rememberLang(next);
-    router.push({ pathname: router.pathname, query: router.query }, undefined, {
-      locale: next,
-      scroll: false,
-    });
+  useEffect(() => {
+    const syncPath = () => setCurrentPath(`${window.location.pathname}${window.location.search}${window.location.hash}`);
+    syncPath();
+    window.addEventListener("hashchange", syncPath);
+    return () => window.removeEventListener("hashchange", syncPath);
+  }, [router.asPath, lang]);
+
+  const languageHref = (next) => localizedPath(currentPath, norm(next));
+  const setLang = async (locale) => {
+    const next = norm(locale);
+    if (next === lang || busy.current) return;
+    busy.current = true;
+    setPendingLang(next);
+    const before = captureText();
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.documentElement.dataset.languageTransition = "true";
+    try {
+      const current = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+      const changed = await router.push(localizedPath(current, next), undefined, { locale: false, scroll: false });
+      if (changed) {
+        setCurrentPath(localizedPath(current, next));
+        rememberLang(next);
+        await recomposeText(before, next === "en" ? 1 : -1, reduced);
+      }
+    } catch (error) {
+      if (!error.cancelled) throw error;
+    } finally {
+      delete document.documentElement.dataset.languageTransition;
+      busy.current = false;
+      setPendingLang(null);
+    }
   };
 
   return (
-    <LandingLangContext.Provider value={{ lang, setLang }}>
+    <LandingLangContext.Provider value={{ lang, pendingLang, setLang, languageHref }}>
       {children}
+      <span className="sr-only" role="status" aria-live="polite">
+        {pendingLang ? "" : lang === "fr" ? "Version française" : "English version"}
+      </span>
     </LandingLangContext.Provider>
   );
 }

@@ -15,8 +15,8 @@ module.exports = defineConfig({
     baseURL: process.env.E2E_BASE_URL || "http://localhost:3010",
     trace: "on-first-retry",
   },
-  webServer: {
-    command: "npm run dev",
+  webServer: process.env.E2E_BASE_URL ? undefined : {
+    command: "npm run dev -- --port 3010",
     url: "http://localhost:3010",
     reuseExistingServer: true,
     timeout: 120_000,

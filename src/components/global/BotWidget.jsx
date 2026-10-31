@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/router";
+import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import styles from "../../../styles/global/botwidget.module.css";
@@ -59,14 +60,14 @@ const UI = {
     title: "PaulBot",
     subtitle: "Assistant du portfolio",
     intros: [
-      (n) => `Salut${n ? ` ${n}` : ""} 👋 Moi c'est PaulBot. Pose-moi tes questions sur le parcours, les compétences ou les projets de Paul — je peux même t'emmener sur la bonne page.`,
+      (n) => `Salut${n ? ` ${n}` : ""} 👋 Moi c'est PaulBot. Pose-moi tes questions sur le parcours, les compétences ou les projets de Paul : je peux même t'emmener sur la bonne page.`,
       (n) => `Hey${n ? ` ${n}` : ""} ✨ Ravi de te voir ! Je suis PaulBot : parcours, compétences, projets de Paul… ou une petite visite guidée, comme tu préfères.`,
       (n) => `Bonjour${n ? ` ${n}` : ""} 🙂 PaulBot à ton service. Curieux du parcours, des compétences ou des projets de Paul ? Je t'explique et je peux te guider sur le site.`,
-      (n) => `Coucou${n ? ` ${n}` : ""} 👋 Ici PaulBot. Demande-moi ce que tu veux sur Paul — parcours, compétences, projets — je réponds et je t'oriente.`,
+      (n) => `Coucou${n ? ` ${n}` : ""} 👋 Ici PaulBot. Demande-moi ce que tu veux sur Paul (parcours, compétences, projets). Je réponds et je t'oriente.`,
       (n) => `Content de t'accueillir${n ? `, ${n}` : ""} ! 🚀 Je suis PaulBot. Parcours, compétences, projets de Paul : dis-moi juste ce qui t'intéresse.`,
     ],
     placeholder: "Écris ton message…",
-    placeholderRecruiter: "Colle une offre d'emploi — je te dis si Paul colle…",
+    placeholderRecruiter: "Colle une offre d'emploi : je te dis si Paul colle…",
     offerCta: "Préciser mon offre",
     error: "Je suis momentanément indisponible. Réessaie dans un instant, ou écris directement à Paul : hi@paulzannou.com.",
     suggestions: ["Il maîtrise quoi ?", "Montre-moi ses projets", "Est-il disponible ?"],
@@ -82,13 +83,13 @@ const UI = {
     emailPh: "ton@email.com",
     phonePh: "N° de téléphone",
     phoneConsent: "Ton numéro pourra être utilisé pour te recontacter.",
-    incognitoNote: "Mode anonyme — seul ton pseudo est conservé.",
+    incognitoNote: "Mode anonyme : seul ton pseudo est conservé.",
     invalidName: "Indique un pseudo.",
     invalidEmail: "Email invalide.",
     invalidPhone: "Numéro invalide.",
     start: "Commencer",
     slashTip: "Astuce : tape « / » pour des commandes rapides.",
-    botDeepDive: "Comment PaulBot est construit — étude de cas",
+    botDeepDive: "Comment PaulBot est construit : étude de cas",
     onePager: "⤓ Télécharger le one-pager d'adéquation (PDF)",
     goHint: "Choisis une section, ou tape un lien relatif (#section ou /page) puis Entrée.",
     options: "Options",
@@ -100,10 +101,10 @@ const UI = {
     personaVisitor: "Visiteur",
     personaRecruiter: "Je recrute",
     recruiterIntros: [
-      (n) => `Bonjour${n ? ` ${n}` : ""} 👋 Je suis PaulBot. Pose-moi tout sur la disponibilité de Paul, sa stack ou ses projets — ou récupère son CV en un clic.`,
+      (n) => `Bonjour${n ? ` ${n}` : ""} 👋 Je suis PaulBot. Pose-moi tout sur la disponibilité de Paul, sa stack ou ses projets, ou récupère son CV en un clic.`,
       (n) => `Ravi de t'accueillir${n ? `, ${n}` : ""} 🙂 PaulBot ici. Dispo, stack technique, réalisations… ou son CV directement : dis-moi ce qu'il te faut.`,
-      (n) => `Hey${n ? ` ${n}` : ""} ✨ Tu recrutes ? Parfait. Disponibilité, compétences, projets de Paul — je te réponds vite, et son CV est à un clic.`,
-      (n) => `Bienvenue${n ? `, ${n}` : ""} 🚀 Je suis PaulBot. Évalue Paul en deux minutes : dispo, stack, projets, contact — je te guide.`,
+      (n) => `Hey${n ? ` ${n}` : ""} ✨ Tu recrutes ? Parfait. Disponibilité, compétences, projets de Paul : je te réponds vite, et son CV est à un clic.`,
+      (n) => `Bienvenue${n ? `, ${n}` : ""} 🚀 Je suis PaulBot. Évalue Paul en deux minutes : dispo, stack, projets, contact : je te guide.`,
     ],
     recruiterSuggestions: ["Est-il disponible ?", "Sa stack technique ?", "Ouvre son CV", "Comment le contacter ?"],
     teaser: "Une question sur Paul ? 👋",
@@ -113,7 +114,7 @@ const UI = {
     stopReading: "Arrêter la lecture",
     retry: "Réessayer",
     escalatePrompt: "Tu veux que Paul te recontacte ? Laisse ton email 👇",
-    escalateOffer: "Laisse ton email — Paul te répond, ou propose un échange 👇",
+    escalateOffer: "Laisse ton email : Paul te répond, ou propose un échange 👇",
     escalateAck: "Bien reçu ! Paul a tous les détails, il revient vers toi (confirmation envoyée par email).",
     escalatePh: "ton@email.com",
     escalateSend: "OK",
@@ -127,14 +128,14 @@ const UI = {
     title: "PaulBot",
     subtitle: "Portfolio assistant",
     intros: [
-      (n) => `Hi${n ? ` ${n}` : ""} 👋 I'm PaulBot. Ask me anything about Paul's background, skills or projects — I can even take you to the right page.`,
+      (n) => `Hi${n ? ` ${n}` : ""} 👋 I'm PaulBot. Ask me anything about Paul's background, skills or projects: I can even take you to the right page.`,
       (n) => `Hey${n ? ` ${n}` : ""} ✨ Great to see you! I'm PaulBot: Paul's background, skills, projects… or a quick guided tour, your call.`,
       (n) => `Hello${n ? ` ${n}` : ""} 🙂 PaulBot here. Curious about Paul's journey, skills or projects? I'll explain and can guide you around.`,
-      (n) => `Welcome${n ? `, ${n}` : ""}! 🚀 I'm PaulBot. Background, skills, projects — just tell me what you'd like to explore.`,
-      (n) => `Hi there${n ? `, ${n}` : ""} 👋 PaulBot at your service. Anything about Paul — I'll answer and point you the right way.`,
+      (n) => `Welcome${n ? `, ${n}` : ""}! 🚀 I'm PaulBot. Background, skills, projects: just tell me what you'd like to explore.`,
+      (n) => `Hi there${n ? `, ${n}` : ""} 👋 PaulBot at your service. Anything about Paul: I'll answer and point you the right way.`,
     ],
     placeholder: "Type your message…",
-    placeholderRecruiter: "Paste a job offer — I'll tell you if Paul fits…",
+    placeholderRecruiter: "Paste a job offer: I'll tell you if Paul fits…",
     offerCta: "Paste my offer",
     error: "I'm momentarily unavailable. Please try again shortly, or reach Paul directly at hi@paulzannou.com.",
     suggestions: ["What's his stack?", "Show me his projects", "Is he available?"],
@@ -150,13 +151,13 @@ const UI = {
     emailPh: "you@email.com",
     phonePh: "Phone number",
     phoneConsent: "Your number may be used to get back to you.",
-    incognitoNote: "Anonymous mode — only your nickname is kept.",
+    incognitoNote: "Anonymous mode: only your nickname is kept.",
     invalidName: "Please enter a nickname.",
     invalidEmail: "Invalid email.",
     invalidPhone: "Invalid number.",
     start: "Start",
     slashTip: "Tip: type “/” for quick commands.",
-    botDeepDive: "How PaulBot is built — case study",
+    botDeepDive: "How PaulBot is built: case study",
     onePager: "⤓ Download the fit one-pager (PDF)",
     goHint: "Pick a section, or type a relative link (#section or /page) then Enter.",
     options: "Options",
@@ -168,10 +169,10 @@ const UI = {
     personaVisitor: "Visitor",
     personaRecruiter: "I'm hiring",
     recruiterIntros: [
-      (n) => `Hello${n ? ` ${n}` : ""} 👋 I'm PaulBot. Ask me anything about Paul's availability, stack or projects — or grab his resume in one click.`,
+      (n) => `Hello${n ? ` ${n}` : ""} 👋 I'm PaulBot. Ask me anything about Paul's availability, stack or projects: or grab his resume in one click.`,
       (n) => `Glad to have you${n ? `, ${n}` : ""} 🙂 PaulBot here. Availability, tech stack, shipped projects… or his resume directly: tell me what you need.`,
-      (n) => `Hey${n ? ` ${n}` : ""} ✨ Hiring? Perfect. Paul's availability, skills and projects — quick answers, and his resume is one click away.`,
-      (n) => `Welcome${n ? `, ${n}` : ""} 🚀 I'm PaulBot. Size Paul up in two minutes: availability, stack, projects, contact — I'll guide you.`,
+      (n) => `Hey${n ? ` ${n}` : ""} ✨ Hiring? Perfect. Paul's availability, skills and projects: quick answers, and his resume is one click away.`,
+      (n) => `Welcome${n ? `, ${n}` : ""} 🚀 I'm PaulBot. Size Paul up in two minutes: availability, stack, projects, contact: I'll guide you.`,
     ],
     recruiterSuggestions: ["Is he available?", "His tech stack?", "Open his resume", "How to reach him?"],
     teaser: "A question about Paul? 👋",
@@ -181,11 +182,11 @@ const UI = {
     stopReading: "Stop reading",
     retry: "Retry",
     escalatePrompt: "Want Paul to get back to you? Drop your email 👇",
-    escalateOffer: "Leave your email — Paul will reply, or propose a chat 👇",
-    escalateAck: "Got it ✅ — Paul has all the details and will get back to you (confirmation sent by email).",
+    escalateOffer: "Leave your email: Paul will reply, or propose a chat 👇",
+    escalateAck: "Got it ✅: Paul has all the details and will get back to you (confirmation sent by email).",
     escalatePh: "you@email.com",
     escalateSend: "OK",
-    escalateAgain: (n, max) => `Sent ✅ — you can add another (${n}/${max}).`,
+    escalateAgain: (n, max) => `Sent ✅: you can add another (${n}/${max}).`,
     escalateMax: "Thanks, that's the limit (5 max) 🙂",
     tourStepLabel: "Step",
     tourGoTo: "Go to",
@@ -505,8 +506,8 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
   const errorFallback = () => ({
     content:
       lang === "fr"
-        ? "Je n'ai pas réussi à répondre à l'instant — un souci côté modèle, pas côté question. Repose-la (ou reformule-la), ça repart généralement du premier coup."
-        : "I couldn't answer just now — a hiccup on the model side, not with your question. Ask it again (or rephrase); it usually works right away.",
+        ? "Je n'ai pas réussi à répondre à l'instant : un souci côté modèle, pas côté question. Repose-la (ou reformule-la), ça repart généralement du premier coup."
+        : "I couldn't answer just now: a hiccup on the model side, not with your question. Ask it again (or rephrase); it usually works right away.",
     widget: {
       type: "info",
       actions: [
@@ -1180,9 +1181,9 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                             {m.widget.actions && (
                               <div className={styles.infoActions}>
                                 {m.widget.actions.map((a, k) => a.nav ? (
-                                  <button key={k} type="button" className={styles.infoBtn} onClick={() => runNav(() => runNavAction(a.nav, router))}>{a.label} →</button>
+                                  <button key={k} type="button" className={styles.infoBtn} onClick={() => runNav(() => runNavAction(a.nav, router))}>{a.label} <FiArrowRight aria-hidden="true" focusable="false" /></button>
                                 ) : (
-                                  <a key={k} className={styles.infoBtn} href={a.href} target={/^(mailto|tel):/.test(a.href) ? undefined : "_blank"} rel="noopener noreferrer">{a.label} →</a>
+                                  <a key={k} className={styles.infoBtn} href={a.href} target={/^(mailto|tel):/.test(a.href) ? undefined : "_blank"} rel="noopener noreferrer">{a.label} <FiArrowRight aria-hidden="true" focusable="false" /></a>
                                 ))}
                               </div>
                             )}
@@ -1218,7 +1219,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                           return (
                             <div className={styles.tour}>
                               <span className={styles.tourProg}>{done ? ui.tourDone : `${ui.tourStepLabel} ${tourStep + 1}/${steps.length}`}</span>
-                              {!done && <button type="button" className={styles.tourBtn} onClick={tourNext}>{ui.tourGoTo} : {steps[tourStep].label} →</button>}
+                              {!done && <button type="button" className={styles.tourBtn} onClick={tourNext}>{ui.tourGoTo} : {steps[tourStep].label} <FiArrowRight aria-hidden="true" focusable="false" /></button>}
                             </div>
                           );
                         })()}
@@ -1232,7 +1233,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                             className={styles.navAction}
                             onClick={() => runNav(() => runNavAction(m.action, router))}
                           >
-                            {navLabel(m.action, lang)} →
+                            {navLabel(m.action, lang)} <FiArrowRight aria-hidden="true" focusable="false" />
                           </button>
                         )}
                         {!isUser && !streaming && m.content && detectProjects(m.content, lang).length > 0 && (
@@ -1244,7 +1245,7 @@ const [narrow, setNarrow] = useState(false); // viewport mobile (≤560px) — r
                                   <b>{p.name}</b>
                                   <span>{p.tag}</span>
                                 </span>
-                                <span className={styles.projArrow} aria-hidden="true">↗</span>
+                                <FiArrowUpRight className={styles.projArrow} aria-hidden="true" focusable="false" />
                               </a>
                             ))}
                           </div>

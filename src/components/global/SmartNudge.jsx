@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
 import { useRouter } from "next/router";
 import { useLandingLang } from "../../context/landingLang";
 import styles from "../../../styles/specific/smartNudge.module.css";
@@ -28,13 +29,13 @@ const EXP = {
 
 const UI = {
   fr: {
-    default: "Tu explores depuis un moment — je te montre par où continuer ?",
+    default: "Tu explores depuis un moment. Je te montre par où continuer ?",
     lost: "Tu cherches quelque chose de précis ? Voici des pistes 👇",
     dismiss: "Non merci",
     optout: "Ne plus proposer",
   },
   en: {
-    default: "You've been exploring a while — want a shortcut?",
+    default: "You've been exploring a while. Want a shortcut?",
     lost: "Looking for something specific? Here are a few paths 👇",
     dismiss: "No thanks",
     optout: "Don't show again",
@@ -244,7 +245,7 @@ export default function SmartNudge() {
       <div className={styles.actions}>
         {nudge.suggestions.map((s) => (
           <Link key={s.key} href={s.href} className={styles.pick} onClick={() => close("clicked", s.key)}>
-            {s.label} <span>→</span>
+            {s.label} <FiArrowRight aria-hidden="true" focusable="false" />
           </Link>
         ))}
       </div>

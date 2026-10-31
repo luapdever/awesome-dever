@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import Seo from "../src/components/global/seo";
 import HomePage from "../src/components/specific/home";
 
@@ -24,13 +25,17 @@ const personJsonLd = {
 };
 
 export default function Home() {
+  const en = useRouter().locale === "en";
+  const description = en
+    ? "Full-stack software engineer based in Cotonou, Benin: web, mobile, real-time applications and DevOps. Vue.js, NestJS, Flutter and Docker."
+    : "Ingénieur logiciel full-stack basé à Cotonou : web, mobile, temps réel et DevOps. Je transforme des idées ambitieuses en produits fiables : Vue.js, NestJS, Flutter, Docker.";
   return (
     <>
       <Seo
         path="/"
-        title="Paul Mèdédji ZANNOU — Ingénieur logiciel full-stack (Luap Dever)"
-        description="Ingénieur logiciel full-stack basé à Cotonou : web, mobile, temps réel et DevOps. Je transforme des idées ambitieuses en produits fiables — Vue.js, NestJS, Flutter, Docker."
-        jsonLd={personJsonLd}
+        title={`Paul Mèdédji ZANNOU | ${en ? "Full-Stack Software Engineer" : "Ingénieur logiciel full-stack"} (Luap Dever)`}
+        description={description}
+        jsonLd={{ ...personJsonLd, jobTitle: en ? "Full-Stack Software Engineer" : personJsonLd.jobTitle, description }}
       />
       <main>
         <HomePage />

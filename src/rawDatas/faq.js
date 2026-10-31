@@ -1,4 +1,4 @@
-import { L } from "../data";
+import { L } from "./i18n";
 
 /* Questions réellement posées à PaulBot par les visiteurs. Elles servent deux
    fois : bloc visible sur /about-me, et schéma FAQPage (Google exige que le

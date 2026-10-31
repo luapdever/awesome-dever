@@ -19,13 +19,15 @@ const jsonLd = {
 
 export default function ShopPage() {
   const { lang } = useLandingLang();
+  const en = lang === "en";
+  const prefix = en ? "/en" : "";
   return (
     <>
       <Seo
         path="/shop"
-        title="Services — Commander un projet | Luap Dever"
-        description="Commandez un site web sur mesure, une app mobile Flutter, un assistant IA, une boutique WooCommerce ou un back-office BI. Choisissez un service, répondez à quelques questions, et Paul revient vers vous."
-        jsonLd={[jsonLd, breadcrumbLd([{ name: "Accueil", path: "/" }, { name: "Boutique", path: "/shop" }])]}
+        title={en ? "Services | Start a project | Luap Dever" : "Services | Commander un projet | Luap Dever"}
+        description={en ? "Discuss a custom website, Flutter mobile app, AI assistant, WooCommerce shop or BI dashboard with Paul Zannou." : "Commandez un site web sur mesure, une app mobile Flutter, un assistant IA, une boutique WooCommerce ou un back-office BI. Choisissez un service, répondez à quelques questions, et Paul revient vers vous."}
+        jsonLd={[{ ...jsonLd, serviceType: en ? "Web, mobile and AI development" : jsonLd.serviceType, url: `https://paulzannou.com${prefix}/shop` }, breadcrumbLd([{ name: en ? "Home" : "Accueil", path: en ? "/en" : "/" }, { name: en ? "Services" : "Services", path: `${prefix}/shop` }])]}
       />
       <main>
         <MiniShop lang={lang} />

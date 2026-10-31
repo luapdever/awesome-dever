@@ -1,17 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { FiArrowUpRight, FiArrowRight } from "react-icons/fi";
 import gsap from "gsap/dist/gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import styles from "../../../../styles/specific/home/home.module.css";
 import {
   stats, capabilities, journey, testimonials, usefulLinks, collaborations, HERO_TITLE, HOME_UI,
   experiences, yearsOfExperience, tx, SKILL_CAT, skillSet,
-} from "../../../data";
+} from "../../../data/landing";
 import { useLandingLang } from "../../../context/landingLang";
 import { useExperience } from "../../../context/experience";
 import { track } from "../../../lib/analytics";
 import { localeHref } from "../../../lib/localeHref";
+import { projectHref } from "../../../lib/projectHref";
 import ContactForm from "../../global/ContactForm";
 
 const YEARS = yearsOfExperience();
@@ -95,9 +97,7 @@ function HomePage() {
     return () => handlers.forEach((h) => { h.el.removeEventListener("mousemove", h.move); h.el.removeEventListener("mouseleave", h.leave); });
   }, []);
 
-  /* Animations des trois sections denses. Rattaché à `[lang]` : après un
-     changement de langue les nœuds sont neufs, un tween créé au montage
-     pointerait dans le vide. */
+  // Les animations d’entrée ne se rejouent pas lors d’un changement de langue.
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -139,7 +139,7 @@ function HomePage() {
     const onLoad = () => ScrollTrigger.refresh();
     window.addEventListener("load", onLoad);
     return () => { clearTimeout(t); window.removeEventListener("load", onLoad); ctx.revert(); };
-  }, [lang]);
+  }, []);
 
   /* Le paragraphe « à propos » porte `key={lang}` : il REMONTE à chaque
      changement de langue, donc ses `.aboutWord` sont de nouveaux nœuds. Le tween
@@ -150,6 +150,10 @@ function HomePage() {
     gsap.registerPlugin(ScrollTrigger);
     const words = gsap.utils.toArray(".aboutWord");
     if (!words.length) return;
+    if (document.documentElement.dataset.languageTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.set(words, { opacity: 1 });
+      return;
+    }
     const tween = gsap.fromTo(
       words,
       { opacity: 0.16 },
@@ -469,15 +473,15 @@ function HomePage() {
         </div>
         <div className={styles.collabGrid}>
           {collaborations.map((c, i) => (
-            <a key={i} href={c.url} target="_blank" rel="noopener noreferrer" className={styles.collabCard}>
+            <Link key={i} href={projectHref(c.url) || c.url} target={projectHref(c.url) ? undefined : "_blank"} rel={projectHref(c.url) ? undefined : "noopener noreferrer"} className={styles.collabCard}>
               <span className={styles.collabIcon}><img src={c.icon} alt="" loading="lazy" /></span>
               <span className={styles.collabName}>{c.name}</span>
               <span className={styles.collabClient}>{tx(c.client, lang)}</span>
               {c.role && <span className={styles.collabRole}>{tx(c.role, lang)}</span>}
               <span className={styles.collabTag}>{tx(c.tag, lang)}</span>
               {c.impact && <span className={styles.collabImpact}>{tx(c.impact, lang)}</span>}
-              <b className={styles.collabArrow}>↗</b>
-            </a>
+              <FiArrowUpRight className={styles.collabArrow} aria-hidden="true" focusable="false" />
+            </Link>
           ))}
         </div>
         <div className={styles.collabMore} data-reveal>
@@ -559,7 +563,7 @@ function HomePage() {
             className={styles.btnGhost}
             onClick={openChooser}
             data-magnetic
-            title={lang === "fr" ? "Changer d'expérience — version classique ou PaulBrain OS" : "Change experience — classic version or PaulBrain OS"}
+            title={lang === "fr" ? "Changer d'expérience : version classique ou PaulBrain OS" : "Change experience: classic version or PaulBrain OS"}
           >{ui.ctaOther}</button>
         </div>
       </section>
@@ -572,7 +576,7 @@ function HomePage() {
             <a className={styles.linkCard} key={i} href={localeHref(l.href, lang)} target={l.target} rel={l.target ? "noopener noreferrer" : undefined}>
               <img src={l.icon} alt=""  loading="lazy" decoding="async"/>
               <span>{tx(l.label, lang)}</span>
-              <b className={styles.linkArrow}>→</b>
+              <FiArrowRight className={styles.linkArrow} aria-hidden="true" focusable="false" />
             </a>
           ))}
         </div>

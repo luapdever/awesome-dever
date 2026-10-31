@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { localizedPath } from "../../lib/localeUrl.mjs";
 
 const SITE_NAME = "Paul Mèdédji ZANNOU — Luap Dever";
 const DEFAULT_DESCRIPTION =
@@ -28,14 +29,16 @@ function Seo({
      serait pas indexée. Les `hreflang` réciproques relient les deux, et
      `x-default` désigne la version servie à un visiteur sans préférence. */
   const { locale = "fr" } = useRouter() || {};
-  const prefix = locale === "fr" ? "" : `/${locale}`;
+  const resolve = (value) => typeof value === "object" ? value[locale] || value.fr : value;
+  title = resolve(title);
+  description = resolve(description);
   // Open Graph attend la forme longue (fr_FR), pas le code court du routeur.
   const OG = { fr: "fr_FR", en: "en_US" };
   const ogLocale = localeOverride || OG[locale] || "fr_FR";
   const ogAlternate = ogLocale === "fr_FR" ? "en_US" : "fr_FR";
-  const url = `${ORIGIN}${prefix}${path}`;
-  const altFr = `${ORIGIN}${path}`;
-  const altEn = `${ORIGIN}/en${path}`;
+  const url = `${ORIGIN}${localizedPath(path, locale)}`;
+  const altFr = `${ORIGIN}${localizedPath(path, "fr")}`;
+  const altEn = `${ORIGIN}${localizedPath(path, "en")}`;
   const imageUrl = image?.startsWith("http") ? image : `${ORIGIN}/${image.replace(/^\/+/, "")}`;
   const imgType = /\.jpe?g($|\?)/i.test(imageUrl) ? "image/jpeg" : "image/png";
   const isDefaultImage = image === "awesome-dever.png"; // seule image dont on connaît les dims

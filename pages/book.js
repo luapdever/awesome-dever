@@ -460,7 +460,7 @@ function Book() {
         <meta property="og:description" content={desc} />
         <meta property="og:url" content={`${ORIGIN}${lang === "fr" ? "" : "/en"}/book`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLd, breadcrumbLd([{ name: "Accueil", path: "/" }, { name: "Le livre", path: "/book" }])]) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLd, breadcrumbLd([{ name: lang === "en" ? "Home" : "Accueil", path: lang === "en" ? "/en" : "/" }, { name: lang === "en" ? "The book" : "Le livre", path: `${lang === "en" ? "/en" : ""}/book` }])]) }} />
       </Head>
 
       {/* Menu hamburger (mobile) */}

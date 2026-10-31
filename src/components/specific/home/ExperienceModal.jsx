@@ -1,13 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import gsap from "gsap/dist/gsap";
 import styles from "../../../../styles/specific/home/home.module.css";
-import Terminal from "../portfolio/wndows/Terminal";
+import dynamic from "next/dynamic";
 import { L, tx } from "../../../rawDatas/i18n";
 import { track } from "../../../lib/analytics";
 import { useLandingLang } from "../../../context/landingLang";
 import { useExperience } from "../../../context/experience";
+
+const Terminal = dynamic(() => import("../portfolio/wndows/Terminal"), { ssr: false });
 
 const ph = (name, color = "ffa500") => `/icons/ph/${name}__${color}.svg`;
 
@@ -29,8 +32,8 @@ const MODAL_UI = {
   en: {
     badge: "Premium edition (free, promise)",
     title: "“Another page where I'll scroll… and scroll…”",
-    text: "Heard you. So before the big scroll, pick how you'd like to get to know me — I adapt, it's kind of my job.",
-    continue: "Or keep scrolling, your call →",
+    text: "Heard you. So before the big scroll, pick how you'd like to get to know me. I adapt, it's kind of my job.",
+    continue: "Or keep scrolling, your call",
     shell: "type",
     back: "Back",
     recommended: "Recommended",
@@ -39,8 +42,8 @@ const MODAL_UI = {
   fr: {
     badge: "Édition Premium (gratuite, promis)",
     title: "« Encore une page où je vais scroller… scroller… »",
-    text: "Je vous ai entendu. Alors avant le grand scroll, choisissez comment vous voulez faire connaissance — je m'adapte, c'est un peu mon métier.",
-    continue: "Ou continuer à scroller, c'est vous qui voyez →",
+    text: "Je vous ai entendu. Alors avant le grand scroll, choisissez comment vous voulez faire connaissance. Je m'adapte, c'est un peu mon métier.",
+    continue: "Ou continuer à scroller, c'est vous qui voyez",
     shell: "tapez",
     back: "Retour",
     recommended: "Recommandé",
@@ -161,13 +164,13 @@ function ExperienceModal() {
               </div>
             </div>
 
-            <button className={styles.modalContinue} onClick={keepScrolling}>{m.continue}</button>
+            <button className={styles.modalContinue} onClick={keepScrolling}>{m.continue} <FiArrowRight aria-hidden="true" focusable="false" /></button>
           </>
         ) : (
           <div className={styles.modalTerminal}>
             <div className={styles.modalTerminalTop}>
-              <button className={styles.modalBack} onClick={() => setMode("menu")}>← {m.back}</button>
-              <span className={styles.modalTerminalHint}>Dever Shell — {m.shell} <b>help</b></span>
+              <button className={styles.modalBack} onClick={() => setMode("menu")}><FiArrowLeft aria-hidden="true" focusable="false" /> {m.back}</button>
+              <span className={styles.modalTerminalHint}>Dever Shell · {m.shell} <b>help</b></span>
             </div>
             <div className={styles.modalTerminalBody}>
               <Terminal />

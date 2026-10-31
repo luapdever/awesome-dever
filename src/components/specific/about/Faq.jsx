@@ -1,5 +1,5 @@
 import { faqItems } from "../../../rawDatas/faq";
-import { tx } from "../../../data";
+import { tx } from "../../../data/identity";
 import { useLandingLang } from "../../../context/landingLang";
 import styles from "../../../../styles/specific/about/faq.module.css";
 

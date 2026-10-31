@@ -55,3 +55,9 @@ import { skillSet, experiences, testimonials } from "../../data";
 On ne perd **jamais** de donnée : chaque phase est réversible, vérifiée par
 parité de rendu, et ne supprime une ancienne source qu'**après** avoir confirmé
 que la nouvelle produit un résultat identique.
+
+## Points d’entrée publics légers
+
+`identity.js` et `landing.js` réexportent les mêmes sources sans importer les
+applications de PaulBrain OS. Les composants partagés et les pages publiques
+les utilisent pour conserver le code de l’OS dans ses propres chunks.
