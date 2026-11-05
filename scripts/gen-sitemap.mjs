@@ -40,7 +40,7 @@ const ROUTES = [
   { path: "/about-me", priority: "0.7", changefreq: "monthly" },
   { path: "/paulfolio", priority: "0.7", changefreq: "monthly" },
   // /cv est une app STATIQUE servie par rewrite : elle n'a pas de variante de
-  // locale (/en/cv renvoie 404). D'où `i18n: false` — sans quoi le sitemap
+  // locale. D'où `i18n: false` — sans quoi le sitemap
   // déclarerait une URL morte.
   { path: "/cv", priority: "0.6", changefreq: "monthly", i18n: false },
   { path: "/projects", priority: "0.8", changefreq: "monthly" },

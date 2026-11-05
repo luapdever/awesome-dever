@@ -93,3 +93,29 @@ test("mobile language switch remains usable without horizontal overflow", async 
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(overflow).toBeLessThanOrEqual(1);
 });
+
+
+test("legacy English CV redirects permanently and keeps the English selection", async ({ request }) => {
+  const response = await request.get("/en/cv?profile=backend", { maxRedirects: 0 });
+  expect(response.status()).toBe(308);
+  const target = new URL(response.headers().location, "http://localhost");
+  expect(target.pathname).toBe("/cv");
+  expect(target.searchParams.get("lang")).toBe("en");
+  expect(target.searchParams.get("profile")).toBe("backend");
+  const cv = await request.get(target.pathname + target.search);
+  expect(cv.status()).toBe(200);
+  expect(await cv.text()).toContain('_qs.get("lang")');
+});
+
+test("reported article and RSS remain crawlable", async ({ request }) => {
+  const path = "/blog/ce-portfolio-nouvelle-generation";
+  const article = await request.get(path);
+  expect(article.status()).toBe(200);
+  const html = await article.text();
+  expect(html).toContain(`rel="canonical" href="https://paulzannou.com${path}"`);
+  expect(html).toContain('content="index, follow,');
+  const feed = await request.get("/feed.xml");
+  expect(feed.status()).toBe(200);
+  expect(feed.headers()["content-type"]).toMatch(/application\/(?:rss\+)?xml/);
+  expect(await feed.text()).toContain(`https://paulzannou.com${path}</link>`);
+});

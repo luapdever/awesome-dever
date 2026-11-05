@@ -20,6 +20,11 @@ const nextConfig = {
   // API (dictée vocale).
   // /cv et /cv/ servent le CV statique (public/cv) — évite le 404
   // sur l'URL propre (celle du sitemap), en dev comme en prod. L'URL reste /cv.
+  async redirects() {
+    return [
+      { source: "/en/cv", destination: "/cv?lang=en", permanent: true, locale: false },
+    ];
+  },
   async rewrites() {
     return [
       { source: "/cv", destination: "/cv/index.html" },

@@ -7,7 +7,7 @@
 const ORIGIN = "https://paulzannou.com";
 
 /* `/cv` est une app STATIQUE servie par rewrite : elle n'a pas de variante de
-   locale et `/en/cv` renvoie 404. La préfixer casserait le lien. */
+   locale. Les anciennes URL `/en/cv` sont redirigées vers ce CV. */
 const NO_LOCALE = new Set(["/cv"]);
 
 export function localeHref(href, lang) {
